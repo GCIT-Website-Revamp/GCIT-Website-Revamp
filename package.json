@@ -1,0 +1,26 @@
+{
+  "name": "gcit-website-revamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GCIT-Website-Revamp/GCIT-Website-Revamp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GCIT-Website-Revamp/GCIT-Website-Revamp/issues"
+  },
+  "homepage": "https://github.com/GCIT-Website-Revamp/GCIT-Website-Revamp#readme",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.0",
+    "nodemon": "^3.1.10"
+  }
+}

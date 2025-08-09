@@ -5,7 +5,7 @@ const viewController = require('./../controllers/viewController')
 router.get('/login', viewController.getLoginForm)
 router.get('/signup', viewController.getSignupForm)
 router.get('/', viewController.getIndexPage)
-router.get('/products', viewController.getProductPage)
+router.get('/contact', viewController.getContactPage)
 router.get('/cart', viewController.getCartPage)
 
 router.get('/admin/login', viewController.getAdminLoginForm)

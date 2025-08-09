@@ -12,8 +12,8 @@ exports.getIndexPage=(req, res) => {
     res.sendFile(path.join(__dirname, '../', 'views', 'index.html'))
 }
 
-exports.getProductPage=(req, res) => {
-    res.sendFile(path.join(__dirname, '../', 'views', 'product.html'))
+exports.getContactPage=(req, res) => {
+    res.sendFile(path.join(__dirname, '../', 'views', 'contact.html'))
 }
 
 exports.getCartPage=(req, res) => {

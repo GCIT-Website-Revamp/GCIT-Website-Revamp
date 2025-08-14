@@ -1,6 +1,14 @@
 <?php
 
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\TenderController;
+use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\NewsController;
 
 Route::get('/', function () {
     return view('contact');
@@ -9,3 +17,60 @@ Route::get('/', function () {
 Route::get('/new', function () {
     return view('contact');
 });
+
+
+// Community API Routes
+Route::get('/community', [CommunityController::class, 'getAllCommunities'])->name('getAllCommunities');
+Route::get('/community/{community}', [CommunityController::class, 'getCommunity'])->name('getCommunity');
+Route::post('/community', [CommunityController::class, 'createCommunity'])->name('createCommunity');
+Route::delete('/community/{community}', [CommunityController::class, 'deleteCommunity'])->name('deleteCommunity');
+Route::put('/community/{community}', [CommunityController::class, 'updateCommunity'])->name('updateCommunity');
+
+// Project API Routes
+Route::get('/project', [ProjectController::class, 'getAllProjects'])->name('getAllProjects');
+Route::get('/project/{project}', [ProjectController::class, 'getProject'])->name('getProject');
+Route::post('/project', [ProjectController::class, 'createProject'])->name('createProject');
+Route::delete('/project/{project}', [ProjectController::class, 'deleteProject'])->name('deleteProject');
+Route::put('/project/{project}', [ProjectController::class, 'updateProject'])->name('updateProject');
+
+// Event API Routes
+Route::get('/event', [EventController::class, 'getAllEvents'])->name('getAllEvents');
+Route::get('/event/{event}', [EventController::class, 'getEvent'])->name('getEvent');
+Route::post('/event', [EventController::class, 'createEvent'])->name('createEvent');
+Route::delete('/event/{event}', [EventController::class, 'deleteEvent'])->name('deleteEvent');
+Route::put('/event/{event}', [EventController::class, 'updateEvent'])->name('updateEvent');
+
+// News API Routes
+Route::get('/news', [NewsController::class, 'getAllNews'])->name('getAllNews');
+Route::get('/news/{news}', [NewsController::class, 'getNews'])->name('getNews');
+Route::post('/news', [NewsController::class, 'createNews'])->name('createNews');
+Route::delete('/news/{news}', [NewsController::class, 'deleteNews'])->name('deleteNews');
+Route::put('/news/{news}', [NewsController::class, 'updateNews'])->name('updateNews');
+
+// Tender API Routes
+Route::get('/tender', [TenderController::class, 'getAllTenders'])->name('getAllTenders');
+Route::get('/tender/{tender}', [TenderController::class, 'getTender'])->name('getTender');
+Route::post('/tender', [TenderController::class, 'createTender'])->name('createTender');
+Route::delete('/tender/{tender}', [TenderController::class, 'deleteTender'])->name('deleteTender');
+Route::put('/tender/{tender}', [TenderController::class, 'updateTender'])->name('updateTender');
+
+// Vacancy API Routes
+Route::get('/vacancy', [VacancyController::class, 'getAllVacancies'])->name('getAllVacancies');
+Route::get('/vacancy/{vacancy}', [VacancyController::class, 'getVacancy'])->name('getVacancy');
+Route::post('/vacancy', [VacancyController::class, 'createVacancy'])->name('createVacancy');
+Route::delete('/vacancy/{vacancy}', [VacancyController::class, 'deleteVacancy'])->name('deleteVacancy');
+Route::put('/vacancy/{vacancy}', [VacancyController::class, 'updateVacancy'])->name('updateVacancy');
+
+// Course API Routes
+Route::get('/course', [CourseController::class, 'getAllCourses'])->name('getAllCourses');
+Route::get('/course/{course}', [CourseController::class, 'getCourse'])->name('getCourse');
+Route::post('/course', [CourseController::class, 'createCourse'])->name('createCourse');
+Route::delete('/course/{course}', [CourseController::class, 'deleteCourse'])->name('deleteCourse');
+Route::put('/course/{course}', [CourseController::class, 'updateCourse'])->name('updateCourse');
+
+// Course API Routes
+Route::get('/module', [ModuleController::class, 'getAllModules'])->name('getAllModules');
+Route::get('/module/{module}', [ModuleController::class, 'getModule'])->name('getModule');
+Route::post('/module', [ModuleController::class, 'createModule'])->name('createModule');
+Route::delete('/module/{module}', [ModuleController::class, 'deleteModule'])->name('deleteModule');
+Route::put('/module/{module}', [ModuleController::class, 'updateModule'])->name('updateModule');

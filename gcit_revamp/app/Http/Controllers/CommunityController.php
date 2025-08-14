@@ -8,6 +8,18 @@ use App\Models\Community;
 
 class CommunityController extends Controller
 {
+    public function getAllCommunities()
+    {
+        // Fetch all communities from DB
+        $communities = Community::all();
+        return response()->json($communities);
+    }
+
+    public function getCommunity(Community $community)
+    {
+        return response()->json($community);
+    }
+
     public function createCommunity(Request $request)
     {
         $rules = [

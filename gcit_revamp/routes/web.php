@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ClubController;
+use App\Http\Controllers\ClubRoleController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TenderController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +20,6 @@ Route::get('/', function () {
 Route::get('/new', function () {
     return view('contact');
 });
-
 
 // Community API Routes
 Route::get('/community', [CommunityController::class, 'getAllCommunities'])->name('getAllCommunities');
@@ -68,9 +70,30 @@ Route::post('/course', [CourseController::class, 'createCourse'])->name('createC
 Route::delete('/course/{course}', [CourseController::class, 'deleteCourse'])->name('deleteCourse');
 Route::put('/course/{course}', [CourseController::class, 'updateCourse'])->name('updateCourse');
 
-// Course API Routes
+// Module API Routes
 Route::get('/module', [ModuleController::class, 'getAllModules'])->name('getAllModules');
 Route::get('/module/{module}', [ModuleController::class, 'getModule'])->name('getModule');
 Route::post('/module', [ModuleController::class, 'createModule'])->name('createModule');
 Route::delete('/module/{module}', [ModuleController::class, 'deleteModule'])->name('deleteModule');
 Route::put('/module/{module}', [ModuleController::class, 'updateModule'])->name('updateModule');
+
+// Club API Routes
+Route::get('/club', [ClubController::class, 'getAllClubs'])->name('getAllClubs');
+Route::get('/club/{club}', [ClubController::class, 'getClub'])->name('getClub');
+Route::post('/club', [ClubController::class, 'createClub'])->name('createClub');
+Route::delete('/club/{club}', [ClubController::class, 'deleteClub'])->name('deleteClub');
+Route::put('/club/{club}', [ClubController::class, 'updateClub'])->name('updateClub');
+
+// ClubRoles API Routes
+Route::get('/croles', [ClubRoleController::class, 'getAllCRoles'])->name('getAllCRoles');
+Route::get('/croles/{croles}', [ClubRoleController::class, 'getCRole'])->name('getCRole');
+Route::post('/croles', [ClubRoleController::class, 'createCRoles'])->name('createCRoles');
+Route::delete('/croles/{croles}', [ClubRoleController::class, 'deleteCRoles'])->name('deleteCRoles');
+Route::put('/croles/{croles}', [ClubRoleController::class, 'updateCRoles'])->name('updateCRoles');
+
+// Service API Routes
+Route::get('/service', [ServiceController::class, 'getAllServices'])->name('getAllServices');
+Route::get('/service/{service}', [ServiceController::class, 'getService'])->name('getService');
+Route::post('/service', [ServiceController::class, 'createService'])->name('createService');
+Route::delete('/service/{service}', [ServiceController::class, 'deleteService'])->name('deleteService');
+Route::put('/service/{service}', [ServiceController::class, 'updateService'])->name('updateService');

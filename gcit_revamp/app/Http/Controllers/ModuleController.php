@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Module;
 use Illuminate\Http\Request;
-use illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class ModuleController extends Controller
 {
@@ -34,7 +34,6 @@ class ModuleController extends Controller
         if ($validator->fails()) {
             // Set the error messages in the session
             session()->flash('errors', $validator->errors()->all());
-            return redirect()->route('module')->withInput();
         }
 
         $module = new Module();
@@ -45,7 +44,7 @@ class ModuleController extends Controller
         $module->course_id = $request->course_id;
         $module->save();
         session()->flash('success', 'Added Successfully');
-        return redirect()->route('module');
+        return redirect('/admin/academics');
     }
 
     public function deleteModule($id)

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('rname');
             $table->string('pname');
             $table->text('image');
-            $table->foreign('club_id')->references('id')->on('clubs')->onDelete('cascade');
+            $table->foreignId('club_id')->constrained('id')->on('clubs')->cascadeOnDelete();
             $table->timestamps();
         });
     }

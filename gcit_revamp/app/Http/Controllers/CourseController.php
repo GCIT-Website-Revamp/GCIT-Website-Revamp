@@ -34,7 +34,6 @@ class CourseController extends Controller
         if ($validator->fails()) {
             // Set the error messages in the session
             session()->flash('errors', $validator->errors()->all());
-            return redirect()->route('course')->withInput();
         }
 
         $course = new Course();
@@ -45,7 +44,7 @@ class CourseController extends Controller
         $course->career = $request->career;
         $course->save();
         session()->flash('success', 'Added Successfully');
-        return redirect()->route('course');
+        return redirect('/admin/academics');
     }
 
     public function deleteCourse($id)

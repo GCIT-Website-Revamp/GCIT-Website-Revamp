@@ -68,11 +68,12 @@ class CommunityController extends Controller
             return redirect()->route('community', $community->id)->withInput()->withErrors($validator);
         }
 
-        $community->name = $request->name;
-        $community->description = $request->description;
+        $community->student = $request->student;
+        $community->acad = $request->acad;
+        $community->nAcad = $request->nAcad;
         $community->save();
 
         session()->flash('success', 'Updated Successfully');
-        return redirect()->route('community');
+        return redirect('/admin/users');
     }
 }

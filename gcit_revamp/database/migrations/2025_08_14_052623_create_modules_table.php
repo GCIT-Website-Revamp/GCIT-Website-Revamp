@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('year');
             $table->text('semester');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();              
             $table->timestamps();
         });
     }

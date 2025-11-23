@@ -107,3 +107,11 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 Route::get('/new', function () {
     return view('contact');
 });
+
+Route::get('/', function () {
+    return view('user.home');
+});
+
+Route::get('/about', function () {
+    return view('user.about');
+});

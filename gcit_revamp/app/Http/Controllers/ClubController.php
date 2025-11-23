@@ -10,70 +10,135 @@ class ClubController extends Controller
 {
     public function getAllClubs()
     {
-        // Fetch all clubs from DB
-        $clubs = Club::all();
-        return response()->json($clubs);
+        try {
+            $clubs = Club::all();
+            return response()->json([
+                'success' => true,
+                'data' => $clubs
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch clubs.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function getClub(Club $club)
     {
-        return response()->json($club);
+        try {
+            return response()->json([
+                'success' => true,
+                'data' => $club
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch club.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function createClub(Request $request)
     {
-        $rules = [
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-        ];
+        try {
+            $rules = [
+                'name' => 'required|string',
+                'description' => 'required|string',
+                'roles' => 'required|array', // must be an array
+            ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            // Set the error messages in the session
-            session()->flash('errors', $validator->errors()->all());
-            return redirect()->route('club')->withInput();
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $club = new Club();
+            $club->name = $request->name;
+            $club->description = $request->description;
+            $club->roles = $request->roles; // stored as JSON automatically
+
+            $club->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Club created successfully!',
+                'data' => $club
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create club.',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $club = new Club();
-        $club->name = $request->name;
-        $club->description = $request->description;
-        $club->image = $request->image;
-        $club->save();
-        session()->flash('success', 'Added Successfully');
-        return redirect()->route('club');
-    }
-
-    public function deleteClub($id)
-    {
-        $club = Club::findOrFail($id);
-
-        $club->delete();
-        session()->flash('success', 'Deleted Successfully');
-        return redirect()->route('club');
     }
 
     public function updateClub($id, Request $request)
     {
+        try {
+            $club = Club::findOrFail($id);
 
-        $club = Club::findOrFail($id);
-        $rules = [
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-        ];
+            $rules = [
+                'name' => 'required|string',
+                'description' => 'required|string',
+                'roles' => 'sometimes|array'
+            ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect()->route('club', $club->id)->withInput()->withErrors($validator);
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $club->name = $request->name;
+            $club->description = $request->description;
+
+            if ($request->has('roles')) {
+                $club->roles = $request->roles;
+            }
+
+            $club->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Club updated successfully!',
+                'data' => $club
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update club.',
+                'error' => $e->getMessage()
+            ], 500);
         }
+    }
 
-        $club->name = $request->name;
-        $club->description = $request->description;
-        $club->image = $request->image;
-        $club->save();
+    public function deleteClub($id)
+    {
+        try {
+            $club = Club::findOrFail($id);
+            $club->delete();
 
-        session()->flash('success', 'Updated Successfully');
-        return redirect()->route('club');
+            return response()->json([
+                'success' => true,
+                'message' => 'Club deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete club.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

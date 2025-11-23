@@ -1,19 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\ClubController;
-use App\Http\Controllers\ClubRoleController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\TenderController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\OverviewController;
+use App\Http\Controllers\ICTController;
+use App\Http\Controllers\WelfareController;
+use App\Http\Controllers\ContactController;
 
 
 // Auth
@@ -29,12 +32,6 @@ Route::put('/users/{user}', [UserController::class, 'updateUser'])->name('update
 Route::delete('/users/{user}', [UserController::class, 'deleteUser'])->name('deleteUser');
 Route::put('/users/{id}/toggle', [UserController::class, 'toggleEnabled'])->name('toggleUser');
 
-// Community API Routes
-Route::get('/community', [CommunityController::class, 'getAllCommunities'])->name('getAllCommunities');
-Route::get('/community/{community}', [CommunityController::class, 'getCommunity'])->name('getCommunity');
-Route::post('/community', [CommunityController::class, 'createCommunity'])->name('createCommunity');
-Route::delete('/community/{community}', [CommunityController::class, 'deleteCommunity'])->name('deleteCommunity');
-Route::put('/community/{community}', [CommunityController::class, 'updateCommunity'])->name('updateCommunity');
 
 // Project API Routes
 Route::get('/project', [ProjectController::class, 'getAllProjects'])->name('getAllProjects');
@@ -51,18 +48,11 @@ Route::delete('/event/{event}', [EventController::class, 'deleteEvent'])->name('
 Route::put('/event/{event}', [EventController::class, 'updateEvent'])->name('updateEvent');
 
 // News API Routes
-Route::get('/news', [NewsController::class, 'getAllNews'])->name('getAllNews');
-Route::get('/news/{news}', [NewsController::class, 'getNews'])->name('getNews');
-Route::post('/news', [NewsController::class, 'createNews'])->name('createNews');
-Route::delete('/news/{news}', [NewsController::class, 'deleteNews'])->name('deleteNews');
-Route::put('/news/{news}', [NewsController::class, 'updateNews'])->name('updateNews');
-
-// Tender API Routes
-Route::get('/tender', [TenderController::class, 'getAllTenders'])->name('getAllTenders');
-Route::get('/tender/{tender}', [TenderController::class, 'getTender'])->name('getTender');
-Route::post('/tender', [TenderController::class, 'createTender'])->name('createTender');
-Route::delete('/tender/{tender}', [TenderController::class, 'deleteTender'])->name('deleteTender');
-Route::put('/tender/{tender}', [TenderController::class, 'updateTender'])->name('updateTender');
+Route::get('/announcement', [AnnouncementController::class, 'getAllAnnouncement'])->name('getAllAnnouncement');
+Route::get('/announcement/{announcement}', [AnnouncementController::class, 'getAnnouncement'])->name('getAnnouncement');
+Route::post('/announcement', [AnnouncementController::class, 'createAnnouncement'])->name('createAnnouncement');
+Route::delete('/announcement/{announcement}', [AnnouncementController::class, 'deleteAnnouncement'])->name('deleteAnnouncement');
+Route::put('/announcement/{announcement}', [AnnouncementController::class, 'updateAnnouncement'])->name('updateAnnouncement');
 
 // Vacancy API Routes
 Route::get('/vacancy', [VacancyController::class, 'getAllVacancies'])->name('getAllVacancies');
@@ -92,16 +82,51 @@ Route::post('/club', [ClubController::class, 'createClub'])->name('createClub');
 Route::delete('/club/{club}', [ClubController::class, 'deleteClub'])->name('deleteClub');
 Route::put('/club/{club}', [ClubController::class, 'updateClub'])->name('updateClub');
 
-// ClubRoles API Routes
-Route::get('/croles', [ClubRoleController::class, 'getAllCRoles'])->name('getAllCRoles');
-Route::get('/croles/{croles}', [ClubRoleController::class, 'getCRole'])->name('getCRole');
-Route::post('/croles', [ClubRoleController::class, 'createCRoles'])->name('createCRoles');
-Route::delete('/croles/{croles}', [ClubRoleController::class, 'deleteCRoles'])->name('deleteCRoles');
-Route::put('/croles/{croles}', [ClubRoleController::class, 'updateCRoles'])->name('updateCRoles');
-
 // Service API Routes
 Route::get('/service', [ServiceController::class, 'getAllServices'])->name('getAllServices');
 Route::get('/service/{service}', [ServiceController::class, 'getService'])->name('getService');
 Route::post('/service', [ServiceController::class, 'createService'])->name('createService');
 Route::delete('/service/{service}', [ServiceController::class, 'deleteService'])->name('deleteService');
 Route::put('/service/{service}', [ServiceController::class, 'updateService'])->name('updateService');
+
+// Team API Routes
+Route::get('/team', [TeamController::class, 'getAllTeams'])->name('getAllTeams');
+Route::get('/team/{team}', [TeamController::class, 'getTeam'])->name('getTeam');
+Route::post('/team', [TeamController::class, 'createTeam'])->name('createTeam');
+Route::delete('/team/{team}', [TeamController::class, 'deleteTeam'])->name('deleteTeam');
+Route::put('/team/{team}', [TeamController::class, 'updateTeam'])->name('updateTeam');
+
+// Overview API Routes
+Route::get('/overview', [OverviewController::class, 'getAllOverviews'])->name('getAllOverviews');
+Route::get('/overview/{overview}', [OverviewController::class, 'getOverview'])->name('getOverview');
+Route::post('/overview', [OverviewController::class, 'createOverview'])->name('createOverview');
+Route::delete('/overview/{overview}', [OverviewController::class, 'deleteOverview'])->name('deleteOverview');
+Route::put('/overview/{overview}', [OverviewController::class, 'updateOverview'])->name('updateOverview');
+
+// Admisison API Routes
+Route::get('/admission', [AdmissionController::class, 'getAllAdmissions'])->name('getAllAdmissions');
+Route::get('/admission/{admission}', [AdmissionController::class, 'getAdmission'])->name('getAdmission');
+Route::post('/admission', [AdmissionController::class, 'createAdmission'])->name('createAdmission');
+Route::delete('/admission/{admission}', [AdmissionController::class, 'deleteAdmission'])->name('deleteAdmission');
+Route::put('/admission/{admission}', [AdmissionController::class, 'updateAdmission'])->name('updateAdmission');
+
+// ICT API Routes
+Route::get('/ict', [ICTController::class, 'getAllICT'])->name('getAllICT');
+Route::get('/ict/{ict}', [ICTController::class, 'getICT'])->name('getICT');
+Route::post('/ict', [ICTController::class, 'createICT'])->name('createICT');
+Route::delete('/ict/{ict}', [ICTController::class, 'deleteICT'])->name('deleteICT');
+Route::put('/ict/{ict}', [ICTController::class, 'updateICT'])->name('updateICT');
+
+// Welfare API Routes
+Route::get('/welfare', [WelfareController::class, 'getAllWelfare'])->name('getAllWelfare');
+Route::get('/welfare/{welfare}', [WelfareController::class, 'getWelfare'])->name('getWelfare');
+Route::post('/welfare', [WelfareController::class, 'createWelfare'])->name('createWelfare');
+Route::delete('/welfare/{welfare}', [WelfareController::class, 'deleteWelfare'])->name('deleteWelfare');
+Route::put('/welfare/{welfare}', [WelfareController::class, 'updateWelfare'])->name('updateWelfare');
+
+// Contacts API Routes
+Route::get('/contact', [ContactController::class, 'getAllContacts'])->name('getAllContacts');
+Route::get('/contact/{contact}', [ContactController::class, 'getContact'])->name('getContact');
+Route::post('/contact', [ContactController::class, 'createContact'])->name('createContact');
+Route::delete('/contact/{contact}', [ContactController::class, 'deleteContact'])->name('deleteContact');
+Route::put('/contact/{contact}', [ContactController::class, 'updateContact'])->name('updateContact');

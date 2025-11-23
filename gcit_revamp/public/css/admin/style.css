@@ -114,6 +114,17 @@ body.demos .container-fluid {
     max-width: 1080px
 }
 
+/* Limit dropdown height */
+.select2-results__options {
+    height: 100px !important; /* choose the height you want */
+    overflow-y: auto !important;
+}
+
+/* Make search bar always visible */
+.select2-search--dropdown {
+    padding: 5px !important;
+}
+
 a {
     color: #1f1f1f;
     text-decoration: none !important;
@@ -216,8 +227,14 @@ a,
 
 .btn-success {
     color: #fff;
-    background-color: #1ed085;
-    border-color: #1ed085;
+    background-color: #349901;
+    border-color: #349901;
+}
+
+.btn-orange {
+    color: #fff;
+    background-color: #F48423;
+    border-color: #F48423;
 }
 
 ul {
@@ -367,7 +384,7 @@ h5 {
 }
 
 p {
-    color: #58718a;
+    color: black;
     font-size: 14px;
     line-height: 21px;
 }
@@ -1121,10 +1138,10 @@ a[data-toggle="collapse"] {
 }
 
 .couter_icon span {
-    width: 100%;
+    width: 50%;
     text-align: center;
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 5px;
     padding: 0 5px;
     font-weight: 500;
@@ -1136,7 +1153,7 @@ a[data-toggle="collapse"] {
 
 .couter_icon i {
     color: #fff;
-    font-size: 50px;
+    font-size: 30px;
     line-height: normal;
     width: 100%;
     float: left;
@@ -1588,7 +1605,7 @@ a[data-toggle="collapse"] {
 }
 
 #testimonial_slider.carousel .img-box img {
-    width: 100%;
+    width: 95%;
     height: 100%;
     display: block;
     border-radius: 50%;
@@ -1683,7 +1700,7 @@ a[data-toggle="collapse"] {
     font-weight: normal;
     height: auto;
     border-radius: 5px 5px 0 0;
-    padding: 35px 45px 32px;
+    padding: 15px 30px 15px;
     background-size: cover;
     background-color: #214162;
     position: relative;
@@ -1697,7 +1714,7 @@ a[data-toggle="collapse"] {
 }
 
 .dash_blog {
-    min-height: 650px;
+    min-height: 355px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
@@ -1730,8 +1747,8 @@ a[data-toggle="collapse"] {
     padding: 25px 40px;
 }
 
-.dash_blog_inner .list_cont p {
-    margin: 2px 0 0 0;
+.dash_blog_inner .task_list_main strong {
+    margin: 10px 0 0 0;
     font-size: 16px;
     color: #455a64;
 }
@@ -1744,7 +1761,7 @@ a[data-toggle="collapse"] {
 }
 
 .task_list li {
-    padding: 20px 40px;
+    padding: 15px 40px;
     border-bottom: solid #eee 1px;
     line-height: normal;
     font-size: 16px;

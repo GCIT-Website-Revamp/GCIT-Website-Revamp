@@ -11,100 +11,153 @@ class UserController extends Controller
 {
     public function getAllUsers()
     {
-        // Fetch all Projects from DB
-        $users = User::all();
-        return response()->json($users);
+        try {
+            $users = User::all();
+            return response()->json([
+                'success' => true,
+                'data' => $users
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch users.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function getUser(User $user)
     {
-        return response()->json($user);
+        try {
+            return response()->json([
+                'success' => true,
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch user.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function createUser(Request $request)
     {
-        $rules = [
-            'name' => 'required|string|max:255',
-            'email' => ['required','email','max:255','unique:users'],
-            'password' => 'required',
-            'contact_no' => 'nullable|string|max:30',
-            'enabled'=>'required'
-        ];
+        try {
+            $rules = [
+                'name' => 'required|string|max:255',
+                'email' => ['required','email','max:255','unique:users'],
+                'password' => 'required',
+                'contact_no' => 'nullable|string|max:30',
+                'enabled' => 'required|boolean'
+            ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            // Set the error messages in the session
-            session()->flash('errors', $validator->errors()->all());
-            return redirect()->route('user')->withInput();
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->contact_no = $request->contact_no;
+            $user->enabled = $request->enabled;
+            $user->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User created successfully!',
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create user.',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->contact_no = $request->contact_no;
-        $user->enabled = $request->enabled;
-        $user->save();
-        session()->flash('success', 'Added Successfully');
-        return redirect('/admin/users')->with('success', 'Admin Added Successfully');
     }
-    // Update user
+
     public function updateUser(Request $request, User $user)
     {
+        try {
+            $rules = [
+                'name' => 'required|string|max:255',
+                'email' => ['required','email','max:255'],
+                'contact_no' => 'nullable|string|max:30',
+            ];
 
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => ['required','email','max:255'],
-            'contact_no' => 'nullable|string|max:30',
-        ]);
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
 
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->contact_no = $data['contact_no'] ?? null;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->contact_no = $request->contact_no ?? null;
+            $user->save();
 
-        $user->save();
-
-        return redirect('/admin/profile')->with('success', 'Profile updated.');
+            return response()->json([
+                'success' => true,
+                'message' => 'User updated successfully!',
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update user.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
-    //enable or disable user
+
     public function toggleEnabled($id)
     {
-        $user = User::findOrFail($id);
+        try {
+            $user = User::findOrFail($id);
+            $user->enabled = !$user->enabled;
+            $user->save();
 
-        // Toggle the enabled status
-        $user->enabled = !$user->enabled;
+            $status = $user->enabled ? 'enabled' : 'disabled';
 
-        $user->save();
-
-        $status = $user->enabled ? 'enabled' : 'disabled';
-
-        return redirect()->back()->with('success', "User has been {$status} successfully!");
-    }
-
-    // Delete user
-    public function deleteUser(User $user)
-    {
-        $this->authorizeUserOrAdmin($user);
-
-        // if you want soft deletes: use SoftDeletes trait in model and call $user->delete()
-        $user->delete();
-
-        // if the currently authenticated user deleted themself, log them out
-        if (auth()->check() && auth()->id() === $user->id) {
-            auth()->logout();
-            request()->session()->invalidate();
-            request()->session()->regenerateToken();
-            return redirect('/')->with('success', 'Account deleted.');
+            return response()->json([
+                'success' => true,
+                'message' => "User has been {$status} successfully!",
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to toggle user status.',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        return redirect()->route('home')->with('success', 'User deleted.');
     }
 
-    private function authorizeUserOrAdmin(User $user)
+    public function deleteUser($id)
     {
-        // Basic authorization check: allow if owner or has is_admin flag
-        if (auth()->id() !== $user->id && !(auth()->user()->is_admin ?? false)) {
-            abort(403, 'Unauthorized');
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete user.',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }

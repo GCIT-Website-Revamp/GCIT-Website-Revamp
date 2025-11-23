@@ -10,78 +10,136 @@ class VacancyController extends Controller
 {
     public function getAllVacancies()
     {
-        // Fetch all Events from DB
-        $vacancies = Vacancy::all();
-        return response()->json($vacancies);
+        try {
+            $vacancies = Vacancy::all();
+            return response()->json([
+                'success' => true,
+                'data' => $vacancies
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch vacancies.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function getVacancy(Vacancy $vacancy)
     {
-        return response()->json($vacancy);
+        try {
+            return response()->json([
+                'success' => true,
+                'data' => $vacancy
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch vacancy.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function createVacancy(Request $request)
     {
-        $rules = [
-            'name' => 'required',
-            'date' => 'required',
-            'candidates' => 'required',
-            'documents' => 'required',
-            'tor' => 'required',
-        ];
+        try {
+            $rules = [
+                'name' => 'required',
+                'date' => 'required|date',
+                'candidates' => 'required',
+                'documents' => 'required',
+                'tor' => 'required',
+            ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            // Set the error messages in the session
-            session()->flash('errors', $validator->errors()->all());
-            return redirect()->route('vacancy')->withInput();
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $vacancy = new Vacancy();
+            $vacancy->name = $request->name;
+            $vacancy->date = $request->date;
+            $vacancy->documents = $request->documents;
+            $vacancy->candidates = $request->candidates;
+            $vacancy->tor = $request->tor;
+            $vacancy->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Vacancy created successfully!',
+                'data' => $vacancy
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create vacancy.',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $vacancy = new Vacancy();
-        $vacancy->name = $request->name;
-        $vacancy->date = $request->date;
-        $vacancy->documents = $request->documents;
-        $vacancy->candidates = $request->candidates;
-        $vacancy->tor = $request->tor;
-        $vacancy->save();
-        session()->flash('success', 'Added Successfully');
-        return redirect()->route('vacancy');
     }
 
     public function deleteVacancy($id)
     {
-        $vacancy = Vacancy::findOrFail($id);
+        try {
+            $vacancy = Vacancy::findOrFail($id);
+            $vacancy->delete();
 
-        $vacancy->delete();
-        session()->flash('success', 'Deleted Successfully');
-        return redirect()->route('vacancy');
+            return response()->json([
+                'success' => true,
+                'message' => 'Vacancy deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete vacancy.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function updateVacancy($id, Request $request)
     {
+        try {
+            $vacancy = Vacancy::findOrFail($id);
 
-        $vacancy = Vacancy::findOrFail($id);
-        $rules = [
-            'name' => 'required',
-            'date' => 'required',
-            'candidates' => 'required',
-            'documents' => 'required',
-            'tor' => 'required',
-        ];
+            $rules = [
+                'name' => 'required',
+                'date' => 'required|date',
+                'candidates' => 'required',
+                'documents' => 'required',
+                'tor' => 'required',
+            ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect()->route('vacancy', $vacancy->id)->withInput()->withErrors($validator);
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $vacancy->name = $request->name;
+            $vacancy->date = $request->date;
+            $vacancy->documents = $request->documents;
+            $vacancy->candidates = $request->candidates;
+            $vacancy->tor = $request->tor;
+            $vacancy->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Vacancy updated successfully!',
+                'data' => $vacancy
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update vacancy.',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-         $vacancy->name = $request->name;
-        $vacancy->date = $request->date;
-        $vacancy->documents = $request->documents;
-        $vacancy->candidates = $request->candidates;
-        $vacancy->tor = $request->tor;
-        $vacancy->save();
-
-        session()->flash('success', 'Updated Successfully');
-        return redirect()->route('vacancy');
     }
 }

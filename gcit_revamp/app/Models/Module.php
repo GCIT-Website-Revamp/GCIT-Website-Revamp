@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Module extends Model
 {
     //
+    protected $casts = [
+        'course_id' => 'array',
+    ];
 }

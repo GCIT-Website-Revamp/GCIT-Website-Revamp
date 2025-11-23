@@ -12,32 +12,39 @@ class AuthController extends Controller
 {
 
     public function login(Request $request)
-        {
-            $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required'],
-            ]);
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-            if (Auth::attempt($credentials)) {
-                // Regenerate session ID to prevent fixation
-                $request->session()->regenerate();
-
-                // ✅ User is now stored in session automatically
-                return redirect()->intended('/admin/dashboard');
-            }
-
-            return back()->withErrors([
-                'email' => 'Invalid credentials.',
+        if (Auth::attempt($credentials)) {
+            // Regenerate session ID to prevent fixation
+            $request->session()->regenerate();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Login successful!',
+                'redirect' => '/admin/dashboard'
             ]);
         }
 
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid credentials.'
+        ], 401);
+    }
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/admin')->with('success', 'Logged out.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Logged out successfully.',
+            'redirect' => '/admin'
+        ]);
     }
 
     public function updatePassword(Request $request)
@@ -48,15 +55,24 @@ class AuthController extends Controller
         ]);
 
         $user = Auth::user();
+
         if (!Hash::check($request->current_password, $user->password)) {
-            throw ValidationException::withMessages([
-                'current_password' => 'Your current password is incorrect.',
-            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Your current password is incorrect.'
+            ], 422);
         }
+
         $user->password = Hash::make($request->new_password);
         $user->save();
+
+        // Regenerate session for security
         $request->session()->regenerate();
 
-        return back()->with('success', 'Password updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Password updated successfully.',
+            'redirect' => '/admin/profile'
+        ]);
     }
 }

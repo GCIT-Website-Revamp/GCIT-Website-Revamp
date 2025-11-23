@@ -31,7 +31,7 @@
                 <div class="sidebar_blog_1">
                     <div class="sidebar-header">
                         <div class="logo_section">
-                            <a href="index.html"><img class="logo_icon img-responsive" src="{{ asset('images/logo/logo1.png') }}"
+                            <a href="dashboard"><img class="logo_icon img-responsive" src="{{ asset('images/logo/logo1.png') }}"
                                     alt="#" /></a>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                         <div class="icon_setting"></div>
                         <div class="user_profle_side">
                             <div class="logo_section">
-                                <a href="index.html"><img class="img-responsive" src="{{ asset('images/logo/logo2.png') }}"
+                                <a href="dashboard"><img class="img-responsive" src="{{ asset('images/logo/logo2.png') }}"
                                         alt="#" /></a>
                             </div>
                         </div>
@@ -49,66 +49,47 @@
                     <ul class="list-unstyled components">
                         <li class="active">
                             <a href="dashboard"><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
-                            <!-- <ul class="collapse list-unstyled" id="dashboard">
-                                <li>
-                                    <a href="dashboard1">> <span>Default Dashboard</span></a>
-                                </li>
-                                <li>
-                                    <a href="dashboard2">> <span>Dashboard style 2</span></a>
-                                </li>
-                            </ul> -->
                         </li>
-                        <li><a href="widgets"><i class="fa fa-clock-o white_color"></i> <span>Widgets</span></a>
+                        <li><a href="projects"><i class="fa fa-folder-open white_color"></i> <span>Projects</span></a>
                         </li>
                         <li>
                             <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                                    class="fa fa-diamond white_color"></i> <span>Elements</span></a>
+                                    class="fa fa-graduation-cap white_color"></i> <span>Student Services</span></a>
                             <ul class="collapse list-unstyled" id="element">
-                                <li><a href="general_elements.html">> <span>General Elements</span></a></li>
-                                <li><a href="media_gallery.html">> <span>Media Gallery</span></a></li>
-                                <li><a href="icons.html">> <span>Icons</span></a></li>
-                                <li><a href="invoice.html">> <span>Invoice</span></a></li>
+                                <li><a href="admission">> <span>Admission</span></a></li>
+                                <li><a href="clubs">> <span>Clubs</span></a></li>
+                                <li><a href="ict">> <span>ICT</span></a></li>
+                                <li><a href="student-welfare">> <span>Student Welfare</span></a></li>
                             </ul>
                         </li>
-                        <li><a href="academics"><i class="fa fa-graduation-cap white_color"></i> <span>Academics</span></a></li>
+                        <li><a href="academics"><i class="fa fa-book white_color"></i> <span>Academics</span></a></li>
                         <li>
-                            <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                                    class="fa fa-object-group white_color"></i> <span>Apps</span></a>
-                            <ul class="collapse list-unstyled" id="apps">
-                                <li><a href="email.html">> <span>Email</span></a></li>
-                                <li><a href="calendar.html">> <span>Calendar</span></a></li>
-                                <li><a href="media_gallery.html">> <span>Media Gallery</span></a></li>
-                            </ul>
+                            <a href="teams"><i
+                                    class="fa fa-users white_color"></i> <span>Teams</span></a>
                         </li>
-                        <li><a href="price.html"><i class="fa fa-briefcase white_color"></i> <span>Pricing
-                                    Tables</span></a></li>
                         <li>
-                            <a href="contact.html">
-                                <i class="fa fa-paper-plane white_color"></i> <span>Contact</span></a>
+                            <a href="contact">
+                                <i class="fa fa-paper-plane white_color"></i> <span>Contacts</span></a>
                         </li>
                         <li class="active">
                             <a href="#additional_page" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle"><i class="fa fa-clone white_color"></i> <span>Additional
-                                    Pages</span></a>
+                                class="dropdown-toggle"><i class="fa fa-briefcase white_color"></i> <span>Non-Academic</span></a>
                             <ul class="collapse list-unstyled" id="additional_page">
                                 <li>
-                                    <a href="profile.html">> <span>Profile</span></a>
+                                    <a href="overview">> <span>Institutional Overview</span></a>
                                 </li>
                                 <li>
-                                    <a href="project.html">> <span>Projects</span></a>
+                                    <a href="services">> <span>Other Services</span></a>
                                 </li>
                                 <li>
-                                    <a href="login.html">> <span>Login</span></a>
-                                </li>
-                                <li>
-                                    <a href="404_error.html">> <span>404 Error</span></a>
+                                    <a href="calendar">> <span>Calendar</span></a>
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="map.html"><i class="fa fa-map white_color"></i> <span>Map</span></a></li>
-                        <li><a href="charts.html"><i class="fa fa-bar-chart-o white_color"></i> <span>Charts</span></a>
                         </li>
-                        <li><a href="users"><i class="fa fa-users white_color"></i> <span>Users</span></a>
+                        <li><a href="users"><i class="fa fa-user white_color"></i> <span>Users</span></a>
+                        </li>
+                        <li><a href="updates"><i class="fa fa-calendar white_color"></i> <span>Updates</span></a>
                         </li>
                     </ul>
                 </div>
@@ -130,9 +111,8 @@
                                                     class="name_user">{{ Auth::user()->name }}</span></a>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="profile">My Profile</a>
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                <span>Log Out</span> <i class="fa fa-sign-out mx-3"></i>
+                                                <a class="dropdown-item logout-btn" href="#">
+                                                    <span>Log Out</span> <i class="fa fa-sign-out"></i>
                                                 </a>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                     @csrf
@@ -161,13 +141,75 @@
                                 <div class="full counter_section margin_bottom_30">
                                     <div class="couter_icon">
                                         <div>
-                                            <i class="fa fa-user dark_blue_color"></i>
+                                            <i class="fa fa-users dark_blue_color"></i>
                                         </div>
                                     </div>
                                     <div class="counter_no">
                                         <div>
                                             <p class="total_no">{{ $userCount }}</p>
                                             <p class="head_couter">Users</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="full counter_section margin_bottom_30">
+                                    <div class="couter_icon">
+                                        <div>
+                                            <i class="fa fa-clock-o dark_blue_color"></i>
+                                        </div>
+                                    </div>
+                                    <div class="counter_no">
+                                        <div>
+                                            <p class="total_no">{{ $clubCount }}</p>
+                                            <p class="head_couter">Clubs</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="full counter_section margin_bottom_30">
+                                    <div class="couter_icon">
+                                        <div>
+                                            <i class="fa fa-cloud-download dark_blue_color"></i>
+                                        </div>
+                                    </div>
+                                    <div class="counter_no">
+                                        <div>
+                                            <p class="total_no">{{ $courseCount }}</p>
+                                            <p class="head_couter">Courses</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="full counter_section margin_bottom_30">
+                                    <div class="couter_icon">
+                                        <div>
+                                            <i class="fa fa-comments-o dark_blue_color"></i>
+                                        </div>
+                                    </div>
+                                    <div class="counter_no">
+                                        <div>
+                                            <p class="total_no">{{ $moduleCount }}</p>
+                                            <p class="head_couter">Modules</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row column1">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="full counter_section margin_bottom_30">
+                                    <div class="couter_icon">
+                                        <div>
+                                            <i class="fa fa-user dark_blue_color"></i>
+                                        </div>
+                                    </div>
+                                    <div class="counter_no">
+                                        <div>
+                                            <p class="total_no">{{ $projectCount }}</p>
+                                            <p class="head_couter">Projects</p>
                                         </div>
                                     </div>
                                 </div>
@@ -219,7 +261,7 @@
                             </div>
                         </div>
                         <!-- graph -->
-                        <div class="row column2 graph margin_bottom_30">
+                        <!-- <div class="row column2 graph margin_bottom_30">
                             <div class="col-md-l2 col-lg-12">
                                 <div class="white_shd full">
                                     <div class="full graph_head">
@@ -240,7 +282,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- end graph -->
                         <div class="row column3">
                             <!-- testimonial -->
@@ -248,7 +290,7 @@
                                 <div class="dark_bg full margin_bottom_30">
                                     <div class="full graph_head">
                                         <div class="heading1 margin_0">
-                                            <h2>Testimonial</h2>
+                                            <h2>Teams</h2>
                                         </div>
                                     </div>
                                     <div class="full graph_revenue">
@@ -259,36 +301,21 @@
                                                         data-ride="carousel">
                                                         <!-- Wrapper for carousel items -->
                                                         <div class="carousel-inner">
-                                                            <div class="item carousel-item active">
-                                                                <div class="img-box"><img
-                                                                        src="{{ asset('images/layout_img/user_img.jpg') }}" alt="">
+                                                            @foreach ($teams as $index => $team)
+                                                                <div class="item carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                    <div class="img-box">
+                                                                        <img src="{{ asset('storage/' . $team->image) }}" alt="{{ $team->name }}">
+                                                                    </div>
+
+                                                                    <p class="testimonial">
+                                                                        {{ $team->description }}
+                                                                    </p>
+
+                                                                    <p class="overview">
+                                                                        <b>{{ $team->name }}</b>
+                                                                    </p>
                                                                 </div>
-                                                                <p class="testimonial">Sed ut perspiciatis unde omnis
-                                                                    iste natus error sit voluptatem accusantium
-                                                                    doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                                    quae..</p>
-                                                                <p class="overview"><b>Michael Stuart</b>Seo Founder</p>
-                                                            </div>
-                                                            <div class="item carousel-item">
-                                                                <div class="img-box"><img
-                                                                        src="{{ asset('images/layout_img/user_img.jpg') }}" alt="">
-                                                                </div>
-                                                                <p class="testimonial">Sed ut perspiciatis unde omnis
-                                                                    iste natus error sit voluptatem accusantium
-                                                                    doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                                    quae..</p>
-                                                                <p class="overview"><b>Michael Stuart</b>Seo Founder</p>
-                                                            </div>
-                                                            <div class="item carousel-item">
-                                                                <div class="img-box"><img
-                                                                        src="{{ asset('images/layout_img/user_img.jpg') }}" alt="">
-                                                                </div>
-                                                                <p class="testimonial">Sed ut perspiciatis unde omnis
-                                                                    iste natus error sit voluptatem accusantium
-                                                                    doloremque laudantium, totam rem aperiam, eaque ipsa
-                                                                    quae..</p>
-                                                                <p class="overview"><b>Michael Stuart</b>Seo Founder</p>
-                                                            </div>
+                                                            @endforeach
                                                         </div>
                                                         <!-- Carousel controls -->
                                                         <a class="carousel-control left carousel-control-prev"
@@ -309,148 +336,20 @@
                             <!-- end testimonial -->
                             <!-- progress bar -->
                             <div class="col-md-6">
-                                <div class="white_shd full margin_bottom_30">
-                                    <div class="full graph_head">
-                                        <div class="heading1 margin_0">
-                                            <h2>Progress Bar</h2>
-                                        </div>
-                                    </div>
-                                    <div class="full progress_bar_inner">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="progress_bar">
-                                                    <!-- Skill Bars -->
-                                                    <span class="skill" style="width:73%;">Facebook <span
-                                                            class="info_valume">73%</span></span>
-                                                    <div class="progress skill-bar ">
-                                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                                            role="progressbar" aria-valuenow="73" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width: 73%;">
-                                                        </div>
-                                                    </div>
-                                                    <span class="skill" style="width:62%;">Twitter <span
-                                                            class="info_valume">62%</span></span>
-                                                    <div class="progress skill-bar">
-                                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                                            role="progressbar" aria-valuenow="62" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width: 62%;">
-                                                        </div>
-                                                    </div>
-                                                    <span class="skill" style="width:54%;">Instagram <span
-                                                            class="info_valume">54%</span></span>
-                                                    <div class="progress skill-bar">
-                                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                                            role="progressbar" aria-valuenow="54" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width: 54%;">
-                                                        </div>
-                                                    </div>
-                                                    <span class="skill" style="width:82%;">Google plus <span
-                                                            class="info_valume">82%</span></span>
-                                                    <div class="progress skill-bar">
-                                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                                            role="progressbar" aria-valuenow="82" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width: 82%;">
-                                                        </div>
-                                                    </div>
-                                                    <span class="skill" style="width:48%;">Other <span
-                                                            class="info_valume">48%</span></span>
-                                                    <div class="progress skill-bar">
-                                                        <div class="progress-bar progress-bar-animated progress-bar-striped"
-                                                            role="progressbar" aria-valuenow="48" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width: 48%;">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end progress bar -->
-                        </div>
-                        <div class="row column4 graph">
-                            <div class="col-md-6 margin_bottom_30">
                                 <div class="dash_blog">
                                     <div class="dash_blog_inner">
                                         <div class="dash_head">
-                                            <h3><span><i class="fa fa-calendar"></i> 6 July 2018</span><span
-                                                    class="plus_green_bt"><a href="#">+</a></span></h3>
-                                        </div>
-                                        <div class="list_cont">
-                                            <p>Today Tasks for Ronney Jack</p>
+                                            <h3>Updates</h3>
                                         </div>
                                         <div class="task_list_main">
                                             <ul class="task_list">
-                                                <li><a href="#">Meeting about plan for Admin Template
-                                                        2018</a><br><strong>10:00 AM</strong></li>
-                                                <li><a href="#">Create new task for Dashboard</a><br><strong>10:00
-                                                        AM</strong></li>
-                                                <li><a href="#">Meeting about plan for Admin Template
-                                                        2018</a><br><strong>11:00 AM</strong></li>
-                                                <li><a href="#">Create new task for Dashboard</a><br><strong>10:00
-                                                        AM</strong></li>
-                                                <li><a href="#">Meeting about plan for Admin Template
-                                                        2018</a><br><strong>02:00 PM</strong></li>
+                                                @foreach ($events as $update)
+                                                    <li>
+                                                        <a href="#">{{ $update->name }}</a><br>
+                                                        <strong>{{ $update->date }}</strong>
+                                                    </li>
+                                                @endforeach
                                             </ul>
-                                        </div>
-                                        <div class="read_more">
-                                            <div class="center"><a class="main_bt read_bt" href="#">Read More</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="dash_blog">
-                                    <div class="dash_blog_inner">
-                                        <div class="dash_head">
-                                            <h3><span><i class="fa fa-comments-o"></i> Updates</span><span
-                                                    class="plus_green_bt"><a href="#">+</a></span></h3>
-                                        </div>
-                                        <div class="list_cont">
-                                            <p>User confirmation</p>
-                                        </div>
-                                        <div class="msg_list_main">
-                                            <ul class="msg_list">
-                                                <li>
-                                                    <span><img src="{{ asset('images/layout_img/msg2.png') }}" class="img-responsive"
-                                                            alt="#" /></span>
-                                                    <span>
-                                                        <span class="name_user">Herman Beck</span>
-                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                        <span class="time_ago">12 min ago</span>
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span><img src="{{ asset('images/layout_img/msg3.png') }}" class="img-responsive"
-                                                            alt="#" /></span>
-                                                    <span>
-                                                        <span class="name_user">John Smith</span>
-                                                        <span class="msg_user">On the other hand, we denounce.</span>
-                                                        <span class="time_ago">12 min ago</span>
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span><img src="{{ asset('images/layout_img/msg2.png') }}" class="img-responsive"
-                                                            alt="#" /></span>
-                                                    <span>
-                                                        <span class="name_user">John Smith</span>
-                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                        <span class="time_ago">12 min ago</span>
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span><img src="{{ asset('images/layout_img/msg3.png') }}" class="img-responsive"
-                                                            alt="#" /></span>
-                                                    <span>
-                                                        <span class="name_user">John Smith</span>
-                                                        <span class="msg_user">On the other hand, we denounce.</span>
-                                                        <span class="time_ago">12 min ago</span>
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="read_more">
-                                            <div class="center"><a class="main_bt read_bt" href="#">Read More</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -461,6 +360,7 @@
         </div>
     </div>
     <!-- jQuery -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
     <script src="{{ asset('js/admin/popper.min.js') }}"></script>
     <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
@@ -483,6 +383,7 @@
     <!-- custom js -->
     <script src="{{ asset('js/admin/custom.js') }}"></script>
     <script src="{{ asset('js/admin/chart_custom_style1.js') }}"></script>
+    <script src="{{ asset('js/admin/logout.js') }}"></script>
 </body>
 
 </html>

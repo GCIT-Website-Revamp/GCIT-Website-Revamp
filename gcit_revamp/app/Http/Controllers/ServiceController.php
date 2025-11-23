@@ -4,76 +4,134 @@ namespace App\Http\Controllers;
 
 use App\Models\Services;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator; 
+use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
     public function getAllServices()
     {
-        // Fetch all Services from DB
-        $services = Services::all();
-        return response()->json($services);
+        try {
+            $services = Services::all();
+            return response()->json([
+                'success' => true,
+                'data' => $services
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch services.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function getService(Services $service)
     {
-        return response()->json($service);
+        try {
+            return response()->json([
+                'success' => true,
+                'data' => $service
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch service.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function createService(Request $request)
     {
-        $rules = [
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-        ];
+        try {
+            $rules = [
+                'name' => 'required',
+                'description' => 'required'
+            ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            // Set the error messages in the session
-            session()->flash('errors', $validator->errors()->all());
-            return redirect()->route('service')->withInput();
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $service = new Services();
+            $service->name = $request->name;
+            $service->description = $request->description;
+            $service->roles = $request->roles;
+
+            $service->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Service created successfully!',
+                'data' => $service
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create service.',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $service = new Services();
-        $service->name = $request->name;
-        $service->description = $request->description;
-        $service->image = $request->image;
-        $service->save();
-        session()->flash('success', 'Added Successfully');
-        return redirect()->route('service');
     }
 
     public function deleteService($id)
     {
-        $service = Services::findOrFail($id);
+        try {
+            $service = Services::findOrFail($id);
+            $service->delete();
 
-        $service->delete();
-        session()->flash('success', 'Deleted Successfully');
-        return redirect()->route('service');
+            return response()->json([
+                'success' => true,
+                'message' => 'Service deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete service.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function updateService($id, Request $request)
     {
+        try {
+            $service = Services::findOrFail($id);
 
-        $service = Services::findOrFail($id);
-        $rules = [
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-        ];
+            $rules = [
+                'name' => 'required',
+                'description' => 'required'
+            ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect()->route('service', $service->id)->withInput()->withErrors($validator);
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $service->name = $request->name;
+            $service->description = $request->description;
+            $service->roles = $request->roles;
+
+            $service->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Service updated successfully!',
+                'data' => $service
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update service.',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $service->name = $request->name;
-        $service->description = $request->description;
-        $service->image = $request->image;
-        $service->save();
-
-        session()->flash('success', 'Updated Successfully');
-        return redirect()->route('service');
     }
 }

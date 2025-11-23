@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Services extends Model
 {
     //
+    protected $casts = [
+        'roles' => 'array',
+    ];
 }

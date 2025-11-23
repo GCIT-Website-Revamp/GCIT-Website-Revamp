@@ -23,6 +23,46 @@
    <link rel="stylesheet" href="{{ asset('css/admin/font-awesome.min.css') }}" />
    <link rel="stylesheet" href="{{ asset('css/admin/flaticon.css') }}" />
    <link rel="stylesheet" href="{{ asset('css/admin/semantic.min.css') }}" />
+
+   <style>
+      .password-wrapper {
+         position: relative;
+      }
+
+      .toggle-eye {
+         position: absolute;
+         right: 12px;
+         top: 50%;
+         transform: translateY(-50%);
+         cursor: pointer;
+         width: 22px;
+         height: 22px;
+         opacity: 0.6;
+         transition: opacity 0.2s;
+         margin-top: 1rem; /* Adjusted for better positioning */
+         z-index: 10; /* Ensure it's above the input */
+      }
+
+      .toggle-eye:hover {
+         opacity: 1;
+      }
+
+      .eye-open,
+      .eye-closed {
+         display: none;
+      }
+
+      .eye-open.active,
+      .eye-closed.active {
+         display: block;
+      }
+
+      /* Ensure form groups have proper spacing */
+      .form-group {
+         position: relative;
+         margin-bottom: 1rem;
+      }
+   </style>
 </head>
 
 <body class="inner_page profile_page">
@@ -30,84 +70,72 @@
       <div class="inner_container">
          <!-- Sidebar  -->
          <nav id="sidebar">
-            <div class="sidebar_blog_1">
-               <div class="sidebar-header">
-                  <div class="logo_section">
-                     <a href="dashboard"><img class="logo_icon img-responsive"
-                           src="{{ asset('images/logo/logo1.png') }}" alt="#" /></a>
-                  </div>
-               </div>
-               <div class="sidebar_user_info">
-                  <div class="icon_setting"></div>
-                  <div class="user_profle_side">
-                     <div class="logo_section">
-                        <a href="dashboard"><img class="img-responsive" src="{{ asset('images/logo/logo2.png') }}"
-                              alt="#" /></a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="sidebar_blog_2">
-               <h4>General</h4>
-               <ul class="list-unstyled components">
-                  <li class="active">
-                     <a href="dashboard"><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
-                  </li>
-                  <li><a href="widgets"><i class="fa fa-clock-o white_color"></i> <span>Widgets</span></a>
-                  </li>
-                  <li>
-                     <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                           class="fa fa-diamond white_color"></i> <span>Elements</span></a>
-                     <ul class="collapse list-unstyled" id="element">
-                        <li><a href="general_elements.html">> <span>General Elements</span></a></li>
-                        <li><a href="media_gallery.html">> <span>Media Gallery</span></a></li>
-                        <li><a href="icons.html">> <span>Icons</span></a></li>
-                        <li><a href="invoice.html">> <span>Invoice</span></a></li>
-                     </ul>
-                  </li>
-                  <li><a href="academics"><i class="fa fa-graduation-cap white_color"></i> <span>Academics</span></a></li>
-                  <li>
-                     <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                           class="fa fa-object-group white_color"></i> <span>Apps</span></a>
-                     <ul class="collapse list-unstyled" id="apps">
-                        <li><a href="email.html">> <span>Email</span></a></li>
-                        <li><a href="calendar.html">> <span>Calendar</span></a></li>
-                        <li><a href="media_gallery.html">> <span>Media Gallery</span></a></li>
-                     </ul>
-                  </li>
-                  <li><a href="price.html"><i class="fa fa-briefcase white_color"></i> <span>Pricing
-                           Tables</span></a></li>
-                  <li>
-                     <a href="contact.html">
-                        <i class="fa fa-paper-plane white_color"></i> <span>Contact</span></a>
-                  </li>
-                  <li class="active">
-                     <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                           class="fa fa-clone white_color"></i> <span>Additional
-                           Pages</span></a>
-                     <ul class="collapse list-unstyled" id="additional_page">
-                        <li>
-                           <a href="profile.html">> <span>Profile</span></a>
+                <div class="sidebar_blog_1">
+                    <div class="sidebar-header">
+                        <div class="logo_section">
+                            <a href="dashboard"><img class="logo_icon img-responsive" src="{{ asset('images/logo/logo1.png') }}"
+                                    alt="#" /></a>
+                        </div>
+                    </div>
+                    <div class="sidebar_user_info">
+                        <div class="icon_setting"></div>
+                        <div class="user_profle_side">
+                            <div class="logo_section">
+                                <a href="dashboard"><img class="img-responsive" src="{{ asset('images/logo/logo2.png') }}"
+                                        alt="#" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_blog_2">
+                    <ul class="list-unstyled components">
+                        <li class="active">
+                            <a href="dashboard"><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li><a href="projects"><i class="fa fa-folder-open white_color"></i> <span>Projects</span></a>
                         </li>
                         <li>
-                           <a href="project.html">> <span>Projects</span></a>
+                            <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                                    class="fa fa-graduation-cap white_color"></i> <span>Student Services</span></a>
+                            <ul class="collapse list-unstyled" id="element">
+                                <li><a href="admission">> <span>Admission</span></a></li>
+                                <li><a href="clubs">> <span>Clubs</span></a></li>
+                                <li><a href="ict">> <span>ICT</span></a></li>
+                                <li><a href="student-welfare">> <span>Student Welfare</span></a></li>
+                            </ul>
+                        </li>
+                        <li><a href="academics"><i class="fa fa-book white_color"></i> <span>Academics</span></a></li>
+                        <li>
+                            <a href="teams"><i
+                                    class="fa fa-users white_color"></i> <span>Teams</span></a>
                         </li>
                         <li>
-                           <a href="login.html">> <span>Login</span></a>
+                            <a href="contact">
+                                <i class="fa fa-paper-plane white_color"></i> <span>Contacts</span></a>
                         </li>
-                        <li>
-                           <a href="404_error.html">> <span>404 Error</span></a>
+                        <li class="active">
+                            <a href="#additional_page" data-toggle="collapse" aria-expanded="false"
+                                class="dropdown-toggle"><i class="fa fa-briefcase white_color"></i> <span>Non-Academic</span></a>
+                            <ul class="collapse list-unstyled" id="additional_page">
+                                <li>
+                                    <a href="overview">> <span>Institutional Overview</span></a>
+                                </li>
+                                <li>
+                                    <a href="services">> <span>Other Services</span></a>
+                                </li>
+                                <li>
+                                    <a href="calendar">> <span>Calendar</span></a>
+                                </li>
+                            </ul>
                         </li>
-                     </ul>
-                  </li>
-                  <li><a href="map.html"><i class="fa fa-map white_color"></i> <span>Map</span></a></li>
-                  <li><a href="charts.html"><i class="fa fa-bar-chart-o white_color"></i> <span>Charts</span></a>
-                  </li>
-                  <li><a href="users"><i class="fa fa-users white_color"></i> <span>Users</span></a>
-                  </li>
-               </ul>
-            </div>
-         </nav>
+                        </li>
+                        <li><a href="users"><i class="fa fa-user white_color"></i> <span>Users</span></a>
+                        </li>
+                        <li><a href="updates"><i class="fa fa-calendar white_color"></i> <span>Updates</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
          <!-- end sidebar -->
          <!-- right content -->
          <div id="content">
@@ -125,8 +153,7 @@
                                        class="name_user">{{ Auth::user()->name }}</span></a>
                                  <div class="dropdown-menu">
                                     <a class="dropdown-item" href="profile">My Profile</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item logout-btn" href="#">
                                        <span>Log Out</span> <i class="fa fa-sign-out"></i>
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -200,7 +227,7 @@
                                                       <div class="col-md-8 offset-md-2">
                                                          <form
                                                             action="{{ route('updateUser', ['user' => Auth::user()->id]) }}"
-                                                            method="POST">
+                                                            method="POST" class="updateUserForm">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="form-group">
@@ -232,28 +259,84 @@
                                                    aria-labelledby="nav-password-tab">
                                                    <div class="full dis_flex center_text">
                                                       <div class="col-md-8 offset-md-2">
-                                                         <form
-                                                            action="{{ route('updatePassword') }}"
-                                                            method="POST">
+                                                         <form action="{{ route('updatePassword') }}" method="POST"
+                                                            class="updatePasswordForm">
                                                             @csrf
-                                                            <div class="form-group">
+
+                                                            <!-- Current Password -->
+                                                            <div class="form-group password-wrapper">
                                                                <label for="current_password">Current Password</label>
                                                                <input type="password" class="form-control"
                                                                   id="current_password" name="current_password"
                                                                   required>
+                                                               <div class="toggle-eye toggle-password">
+                                                                  <!-- Open eye SVG -->
+                                                                  <svg class="eye-open active" fill="none"
+                                                                     viewBox="0 0 24 24" width="100%" height="100%">
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
+                                                                     <circle cx="12" cy="12" r="3" stroke="#000"
+                                                                        stroke-width="1.5" />
+                                                                  </svg>
+                                                                  <!-- Closed eye SVG -->
+                                                                  <svg class="eye-closed" fill="none"
+                                                                     viewBox="0 0 24 24" width="100%" height="100%">
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M4 4l16 16" />
+                                                                  </svg>
+                                                               </div>
                                                             </div>
-                                                            <div class="form-group">
+
+                                                            <!-- New Password -->
+                                                            <div class="form-group password-wrapper">
                                                                <label for="new_password">New Password</label>
                                                                <input type="password" class="form-control"
                                                                   id="new_password" name="new_password" required>
+                                                               <div class="toggle-eye toggle-password">
+                                                                  <svg class="eye-open active" fill="none"
+                                                                     viewBox="0 0 24 24" width="100%" height="100%">
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
+                                                                     <circle cx="12" cy="12" r="3" stroke="#000"
+                                                                        stroke-width="1.5" />
+                                                                  </svg>
+                                                                  <svg class="eye-closed" fill="none"
+                                                                     viewBox="0 0 24 24" width="100%" height="100%">
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M4 4l16 16" />
+                                                                  </svg>
+                                                               </div>
                                                             </div>
-                                                            <div class="form-group">
+
+                                                            <!-- Confirm New Password -->
+                                                            <div class="form-group password-wrapper">
                                                                <label for="confirm_password">Confirm New
                                                                   Password</label>
                                                                <input type="password" class="form-control"
                                                                   id="confirm_password" name="new_password_confirmation"
                                                                   required>
+                                                               <div class="toggle-eye toggle-password">
+                                                                  <svg class="eye-open active" fill="none"
+                                                                     viewBox="0 0 24 24" width="100%" height="100%">
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
+                                                                     <circle cx="12" cy="12" r="3" stroke="#000"
+                                                                        stroke-width="1.5" />
+                                                                  </svg>
+                                                                  <svg class="eye-closed" fill="none"
+                                                                     viewBox="0 0 24 24" width="100%" height="100%">
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
+                                                                     <path stroke="#000" stroke-width="1.5"
+                                                                        d="M4 4l16 16" />
+                                                                  </svg>
+                                                               </div>
                                                             </div>
+
                                                             <button type="submit" class="btn btn-success mt-2">Update
                                                                Password</button>
                                                          </form>
@@ -280,6 +363,7 @@
       </div>
    </div>
    <!-- jQuery -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
    <script src="{{ asset('js/admin/popper.min.js') }}"></script>
    <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
@@ -302,6 +386,8 @@
    <!-- custom js -->
    <script src="{{ asset('js/admin/custom.js') }}"></script>
    <script src="{{ asset('js/admin/semantic.min.js') }}"></script>
+   <script src="{{ asset('js/admin/logout.js') }}"></script>
+   <script src="{{ asset('js/admin/profile.js') }}"></script>
 </body>
 
 </html>

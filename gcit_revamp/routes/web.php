@@ -40,9 +40,12 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
         $moduleCount = Module::count();
         $projectCount = Project::count();
         $clubCount = Club::count();
+        $serviceCount = Services::count();
+        $acadTeamCount = Team::where('type', 'Academic')->count();
+        $nacadTeamCount = Team::where('type', 'Non-Academic')->count();
         $teams = Team::all();
         $events = Event::latest()->take(4)->get();
-        return view('admin.dashboard', compact('userCount','moduleCount', 'courseCount', 'projectCount', 'clubCount', 'teams', 'events'));
+        return view('admin.dashboard', compact('userCount','moduleCount', 'courseCount', 'projectCount', 'clubCount', 'teams', 'events', 'serviceCount','acadTeamCount', 'nacadTeamCount'));
     });
 
     Route::get('/profile', function () {

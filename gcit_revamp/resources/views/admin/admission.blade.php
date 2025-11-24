@@ -220,7 +220,7 @@
                                  <div class="dropdown-menu">
                                     <a class="dropdown-item" href="profile">My Profile</a>
                                     <a class="dropdown-item logout-btn" href="#">
-                                       <span>Log Out</span> <i class="fa fa-sign-out"></i>
+                                       Log Out
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                        @csrf

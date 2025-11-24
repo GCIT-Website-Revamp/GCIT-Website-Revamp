@@ -31,7 +31,9 @@ Route::get('/users/{user}', [UserController::class, 'getUser'])->name('getUser')
 Route::put('/users/{user}', [UserController::class, 'updateUser'])->name('updateUser');
 Route::delete('/users/{user}', [UserController::class, 'deleteUser'])->name('deleteUser');
 Route::put('/users/{id}/toggle', [UserController::class, 'toggleEnabled'])->name('toggleUser');
-
+Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('resetPassword');
+Route::post('/verify-otp', [UserController::class, 'verifyOtp'])->name('verifyOTP');
+Route::post('/send-otp-email', [UserController::class, 'sendOtpEmail'])->name('sendOTP');
 
 // Project API Routes
 Route::get('/project', [ProjectController::class, 'getAllProjects'])->name('getAllProjects');

@@ -21,6 +21,18 @@ Route::get('/admin', function () {
     return view('admin.login');
 });
 
+Route::get('/reset-email', function () {
+    return view('admin.email');
+});
+
+Route::get('/reset-password', function () {
+    return view('admin.resetpassword');
+});
+
+Route::get('/verify-otp', function () {
+    return view('admin.verifyotp');
+});
+
 Route::middleware(['web','auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         $userCount = User::count();

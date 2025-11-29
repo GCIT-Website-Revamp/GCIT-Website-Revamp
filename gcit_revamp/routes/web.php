@@ -135,7 +135,31 @@ Route::get('/news&events', function () {
     $events = Event::orderBy('created_at', 'desc')->get();
     return view('user.eventsTemplate', compact('events'));
 });
+
 Route::get('/announcements', function () {
     $announcements = Announcement::orderBy('created_at', 'desc')->get();
     return view('user.announcementTemplate', compact('announcements'));
+});
+
+Route::get('/course', function () {
+    $courses = Course::orderBy('created_at', 'desc')->get();
+    return view('user.courseList', compact('courses'));
+});
+
+Route::get('/post/{type}/{id}', function ($type, $id) {
+    $event = null;
+    $announcement = null;
+    $latestEvents = null;
+    $latestAnnouncements = null;
+
+    if ($type === 'events') {
+        $event = Event::findOrFail($id);
+        $latestEvents = Event::orderBy('created_at', 'desc')->take(4)->get();
+    }
+    if ($type === 'announcement') {
+        $announcement = Announcement::findOrFail($id);
+        $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->take(4)->get();
+    }
+
+    return view('user.postDetailsTemplate', compact('event', 'announcement', 'latestAnnouncements', 'latestEvents'));
 });

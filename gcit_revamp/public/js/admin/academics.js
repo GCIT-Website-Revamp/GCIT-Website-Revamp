@@ -14,29 +14,48 @@ function formatErrors(errors) {
 // Add Course Modal Logic
 // =====================
 document.getElementById('addCourseBtn').addEventListener('click', function () {
+
     document.querySelector('#myModal .modal-title').textContent = 'Add New Course';
 
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addCourseForm">
+        <form id="addCourseForm" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <label>Name</label>
+                <input type="text" class="form-control" id="name" required>
             </div>
+
             <div class="form-group">
-                <label for="why">Description (Why)</label>
-                <textarea class="form-control" id="why" name="why" rows="3" placeholder="Enter course description..." required></textarea>
+                <label for="courseType">Type</label>
+                <select class="form-control" id="courseType">
+                    <option value="" disabled selected>Select Degree</option>
+                    <option value="Bachelors of Computer Science">Bachelors of Computer Science</option>
+                    <option value="School of Interactive Design and Development">School of Interactive Design and Development</option>
+                </select>
             </div>
+
             <div class="form-group">
-                <label for="what">Description (What)</label>
-                <textarea class="form-control" id="what" name="what" rows="3" placeholder="Enter course description..." required></textarea>
+                <label>Description (Why)</label>
+                <textarea class="form-control" id="why" rows="3" required></textarea>
             </div>
+
             <div class="form-group">
-                <label for="structure">Structure</label>
-                <textarea class="form-control" id="structure" name="structure" rows="3" placeholder="Enter course structure..." required></textarea>
+                <label>Description (What)</label>
+                <textarea class="form-control" id="what" rows="3" required></textarea>
             </div>
+
             <div class="form-group">
-                <label for="career">Career</label>
-                <textarea class="form-control" id="career" name="career" rows="3" placeholder="Enter career opportunities..." required></textarea>
+                <label>Structure</label>
+                <textarea class="form-control" id="structure" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Career</label>
+                <textarea class="form-control" id="career" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" class="form-control" id="courseImage" accept="image/*" required>
             </div>
         </form>
     `;
@@ -46,68 +65,52 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
         <button type="submit" class="btn btn-success" id="addCourse">Add Course</button>
     `;
 
-    // Handle Add Course with JSON
+    // HANDLE SUBMIT
     document.getElementById('addCourse').addEventListener('click', function () {
-        const payload = {
-            name: document.getElementById('name').value,
-            why: document.getElementById('why').value,
-            what: document.getElementById('what').value,
-            structure: document.getElementById('structure').value,
-            career: document.getElementById('career').value
-        };
+
+        let formData = new FormData();
+        formData.append("name", document.getElementById('name').value);
+        formData.append("why", document.getElementById('why').value);
+        formData.append("what", document.getElementById('what').value);
+        formData.append("structure", document.getElementById('structure').value);
+        formData.append("career", document.getElementById('career').value);
+        formData.append("type", document.getElementById("courseType").value);
+        let imageFile = document.getElementById('courseImage').files[0];
+        formData.append("image", imageFile);
 
         Swal.fire({
             title: "Add Course?",
             text: "Do you want to create this new course?",
             icon: "question",
-            showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, create"
+            showCancelButton: true
         }).then(result => {
             if (result.isConfirmed) {
+
                 fetch('/api/course', {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
                         "X-CSRF-TOKEN": csrf,
                         "Accept": "application/json"
                     },
-                    body: JSON.stringify(payload)
+                    body: formData
                 })
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
-                            Swal.fire({
-                                icon: "success",
-                                title: "Course Added",
-                                text: data.message || "Course Added successfully!"
-                            });
+                            Swal.fire("Success", "Course Added Successfully!", "success");
                             setTimeout(() => location.reload(), 1500);
                         } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Failed",
-                                text: formatErrors(data.errors || data.message)
-                            });
+                            Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
                         }
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Something went wrong!"
-                        });
-                    });
+                    .catch(() => Swal.fire("Error", "Something went wrong!", "error"));
             }
         });
     });
 
-    // Show modal
-    var modalEl = document.getElementById('myModal');
-    var bsModal = new bootstrap.Modal(modalEl);
-    bsModal.show();
+    new bootstrap.Modal(document.getElementById('myModal')).show();
 });
 
 // =====================
@@ -242,36 +245,51 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
 // =============================
 document.querySelectorAll('.edit-course-btn').forEach(button => {
     button.addEventListener('click', function () {
+
         const courseId = this.dataset.courseId;
-        const courseName = this.dataset.courseName;
-        const courseWhy = this.dataset.courseWhy;
-        const courseWhat = this.dataset.courseWhat;
-        const courseStructure = this.dataset.courseStructure;
-        const courseCareer = this.dataset.courseCareer;
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Course';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editCourseForm">
+            <form id="editCourseForm" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="${courseName}" required>
+                    <label>Name</label>
+                    <input type="text" class="form-control" id="name" value="${this.dataset.courseName}" required>
                 </div>
+
                 <div class="form-group">
-                    <label for="why">Description (Why)</label>
-                    <textarea class="form-control" id="why" name="why" rows="3" required>${courseWhy}</textarea>
+                    <label for="courseType">Type</label>
+                    <select class="form-control" id="courseType">
+                        <option value="" disabled selected>Select Degree</option>
+                        <option value="Bachelors of Computer Science"  ${this.dataset.courseType === "Bachelors of Computer Science" ? "selected" : ""}>Bachelors of Computer Science</option>
+                        <option value="School of Interactive Design and Development" ${this.dataset.courseType === "School of Interactive Design and Development" ? "selected" : ""}>School of Interactive Design and Development</option>
+                    </select>
                 </div>
+
                 <div class="form-group">
-                    <label for="what">Description (What)</label>
-                    <textarea class="form-control" id="what" name="what" rows="3" required>${courseWhat}</textarea>
+                    <label>Description (Why)</label>
+                    <textarea class="form-control" id="why" rows="3" required>${this.dataset.courseWhy}</textarea>
                 </div>
+
                 <div class="form-group">
-                    <label for="structure">Structure</label>
-                    <textarea class="form-control" id="structure" name="structure" rows="3" required>${courseStructure}</textarea>
+                    <label>Description (What)</label>
+                    <textarea class="form-control" id="what" rows="3" required>${this.dataset.courseWhat}</textarea>
                 </div>
+
                 <div class="form-group">
-                    <label for="career">Career</label>
-                    <textarea class="form-control" id="career" name="career" rows="3" required>${courseCareer}</textarea>
+                    <label>Structure</label>
+                    <textarea class="form-control" id="structure" rows="3" required>${this.dataset.courseStructure}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Career</label>
+                    <textarea class="form-control" id="career" rows="3" required>${this.dataset.courseCareer}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Current Image</label><br>
+                    <img src="${this.dataset.courseImage}" width="50" class="mb-2">
+                    <input type="file" class="form-control" id="courseImage" accept="image/*">
                 </div>
             </form>
         `;
@@ -281,70 +299,61 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
             <button type="submit" class="btn btn-success" id="updateCourse">Update Course</button>
         `;
 
-        // Handle Update Course with JSON
+        // Handle Update
         document.getElementById('updateCourse').addEventListener('click', function () {
-            const payload = {
-                name: document.getElementById('name').value,
-                why: document.getElementById('why').value,
-                what: document.getElementById('what').value,
-                structure: document.getElementById('structure').value,
-                career: document.getElementById('career').value
-            };
+
+            let formData = new FormData();
+            formData.append("name", document.getElementById('name').value);
+            formData.append("why", document.getElementById('why').value);
+            formData.append("what", document.getElementById('what').value);
+            formData.append("structure", document.getElementById('structure').value);
+            formData.append("career", document.getElementById('career').value);
+            formData.append("type", document.getElementById("courseType").value);
+            let newImage = document.getElementById('courseImage').files[0];
+            if (newImage) {
+                formData.append("image", newImage);
+            }
+            formData.append("_method", "PUT");
 
             Swal.fire({
                 title: "Update Course?",
                 text: "Do you want to update this course?",
                 icon: "question",
-                showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, update"
+                showCancelButton: true
             }).then(result => {
                 if (result.isConfirmed) {
+
                     fetch(`/api/course/${courseId}`, {
-                        method: "PUT",
+                        method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
                             "X-CSRF-TOKEN": csrf,
                             "Accept": "application/json"
                         },
-                        body: JSON.stringify(payload)
+                        body: formData
                     })
                         .then(res => res.json())
                         .then(data => {
+
                             if (data.success) {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Updated",
-                                    text: data.message || "Course Updated successfully!"
-                                });
+                                Swal.fire("Updated", "Course Updated Successfully!", "success");
                                 setTimeout(() => location.reload(), 1200);
                             } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Failed",
-                                    text: formatErrors(data.errors || data.message)
-                                });
+                                Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
                             }
                         })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "Something went wrong!"
-                            });
-                        });
+                        .catch(() => Swal.fire("Error", "Something went wrong!", "error"));
+
                 }
             });
+
         });
 
-        // Show modal
-        var modalEl = document.getElementById('myModal');
-        var bsModal = new bootstrap.Modal(modalEl);
-        bsModal.show();
+        new bootstrap.Modal(document.getElementById('myModal')).show();
     });
 });
+
 
 // =============================
 // Delete Course Button

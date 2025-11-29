@@ -16,29 +16,26 @@
             <a href="">Updates</a>
         </div>
         <div class="contentWrapper">
-            <h1>News & Events</h1>
-            <p>Explore the latest stories and milestones from GCIT — from campus events and student achievements to research highlights and industry collaborations. Stay connected with the people and projects shaping Bhutan’s innovation and technology landscape.</p>
+            <h1>Courses</h1>
+            <p>GCIT offers future-focused programs that combine strong technical foundations with creative problem-solving. Each course is designed to bridge theory with practice, preparing students to innovate in fields such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity, and Interactive Design & Development — empowering them to drive Bhutan’s digital transformation.</p>
         </div>
     </div>
 </div>
 <div class="pageContentWrapper">
     <div class="section">
-        <div class="mainContent">
-            @forelse ($events as $index => $event)
-                <div class="card">
-                    <img src="{{ asset('storage/' . $event->image) }}" alt="">
-                    <div class="cardContent">
-                        <span class="date">{{ \Carbon\Carbon::parse($event->date)->format('F d, Y') }}</span>
-                        <h1>{{ $event->name }}</h1>
-                        <p class="multi-truncate">{{ $event->description ?? '—' }}</p>
-                        <a href="/post/events/{{ $event->id }}">
-                            <span class="material-symbols-outlined">expand_circle_right</span>
-                            Read More
-                        </a>
-                    </div>
+        <div class="mainContent courseContent">
+            @forelse ($courses as $index => $course)
+            <div class="card">
+                <img src="{{ asset('storage/' . $course->image) }}" alt="">
+                <div class="cardContent">
+                    <span class="coursePreHeader">{{ $course->type }}</span>
+                    <h1>{{ $course->name }}</h1>
+                    <p class = "multi-truncate">{{ $course->why }}</p>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                 </div>
+            </div>
             @empty
-            <p>No Events Yet</p>
+                <p>No courses found.</p>
             @endforelse
         </div>
         <div class="filterWrapper">
@@ -47,21 +44,21 @@
             </div>
             <div class="filterContent">
                 <div class="filterHeader">
-                    <h1>Categories</h1>
+                    <h1>Courses by Schools</h1>
                 </div>
                 <div class="filterContainer">
 
                     <div class="filter">
                         <input type="checkbox">
-                        <p>All News & Events</p>
+                        <p>All Courses</p>
                     </div>
                     <div class="filter">
                         <input type="checkbox">
-                        <p>Events</p>
+                        <p>School of Computer Science</p>
                     </div>
                     <div class="filter">
                         <input type="checkbox">
-                        <p>News</p>
+                        <p>Interactive Design & Development</p>
                     </div>
                 </div>
             </div>

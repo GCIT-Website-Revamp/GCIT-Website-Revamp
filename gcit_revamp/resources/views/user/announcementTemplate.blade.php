@@ -31,12 +31,12 @@
                     <p class = "multi-truncate">{{ $announcement->description}}</p>
                     <div class="subContentContainer">
                         <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($announcement->date)->format('F d, Y') }}</span>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                        <a href="/post/announcement/{{ $announcement->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                     </div>
                 </div>
             </div>
             @empty
-                <p>No Announcements found.</p>
+                <p>No Announcements Yet</p>
             @endforelse
         </div>
         <div class="filterWrapper">

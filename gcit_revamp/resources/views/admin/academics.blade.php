@@ -229,10 +229,12 @@
                                                 <button type="button" class="btn btn-success edit-course-btn"
                                                    data-course-id="{{ $course->id }}"
                                                    data-course-name="{{ $course->name }}"
+                                                   data-course-type="{{ $course->type }}"
                                                    data-course-why="{{ $course->why }}"
                                                    data-course-what="{{ $course->what }}"
                                                    data-course-structure="{{ $course->structure }}"
-                                                   data-course-career="{{ $course->career }}">
+                                                   data-course-career="{{ $course->career }}"
+                                                   data-course-image="{{ asset('storage/' . $course->image) }}">
                                                    Edit
                                                 </button>
                                                 <button type="button" class="btn btn-danger delete-course-btn"

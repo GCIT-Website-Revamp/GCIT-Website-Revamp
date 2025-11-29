@@ -24,46 +24,20 @@
 <div class="pageContentWrapper">
     <div class="section">
         <div class="mainContent announcementContent">
+            @forelse ($announcements as $index => $announcement)
             <div class="card">
                 <div class="cardContent">
-                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
+                    <h1>{{ $announcement->name }}</h1>
+                    <p class = "multi-truncate">{{ $announcement->description}}</p>
                     <div class="subContentContainer">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($announcement->date)->format('F d, Y') }}</span>
                         <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="cardContent">
-                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <div class="subContentContainer">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="cardContent">
-                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <div class="subContentContainer">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="cardContent">
-                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <div class="subContentContainer">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
-                </div>
-            </div>
+            @empty
+                <p>No Announcements found.</p>
+            @endforelse
         </div>
         <div class="filterWrapper">
             <div class="headerWrapper">

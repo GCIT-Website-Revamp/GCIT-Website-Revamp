@@ -132,8 +132,10 @@ Route::get('/about', function () {
 });
 
 Route::get('/news&events', function () {
-    return view('user.eventsTemplate');
+    $events = Event::orderBy('created_at', 'desc')->get();
+    return view('user.eventsTemplate', compact('events'));
 });
 Route::get('/announcements', function () {
-    return view('user.announcementTemplate');
+    $announcements = Announcement::orderBy('created_at', 'desc')->get();
+    return view('user.announcementTemplate', compact('announcements'));
 });

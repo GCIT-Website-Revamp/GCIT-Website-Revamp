@@ -24,42 +24,22 @@
 <div class="pageContentWrapper">
     <div class="section">
         <div class="mainContent">
-            <div class="card">
-                <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">
-                <div class="cardContent">
-                    <span class="date">June 24, 2025</span>
-                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+            @forelse ($events as $index => $event)
+                <div class="card">
+                    <img src="{{ asset('storage/' . $event->image) }}" alt="">
+                    <div class="cardContent">
+                        <span class="date">{{ \Carbon\Carbon::parse($event->date)->format('F d, Y') }}</span>
+                        <h1>{{ $event->name }}</h1>
+                        <p class="multi-truncate">{{ $event->description ?? '—' }}</p>
+                        <a href="">
+                            <span class="material-symbols-outlined">expand_circle_right</span>
+                            Read More
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">
-                <div class="cardContent">
-                    <span class="date">June 24, 2025</span>
-                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">
-                <div class="cardContent">
-                    <span class="date">June 24, 2025</span>
-                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">
-                <div class="cardContent">
-                    <span class="date">June 24, 2025</span>
-                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
+            @empty
+                <p>No events found.</p>
+            @endforelse
         </div>
         <div class="filterWrapper">
             <div class="headerWrapper">

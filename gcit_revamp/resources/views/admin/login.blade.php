@@ -85,7 +85,7 @@
          <span>Sign In</span>
       </button>
 
-      <p class="note">Forgot Password?</p>
+      <a class="note" href="reset-email">Forgot Password?</a>
    </form>
 
    <script>

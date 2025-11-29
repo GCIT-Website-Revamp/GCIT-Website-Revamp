@@ -46,14 +46,17 @@
          opacity: 1;
       }
 
-      .eye-open, .eye-closed {
+      .eye-open,
+      .eye-closed {
          display: none;
       }
 
-      .eye-open.active, .eye-closed.active {
+      .eye-open.active,
+      .eye-closed.active {
          display: block;
       }
-       /* Additional custom styles for academics page */
+
+      /* Additional custom styles for academics page */
       .table-responsive-sm {
          overflow-x: auto;
       }
@@ -110,72 +113,71 @@
       <div class="inner_container">
          <!-- Sidebar  -->
          <nav id="sidebar">
-                <div class="sidebar_blog_1">
-                    <div class="sidebar-header">
-                        <div class="logo_section">
-                            <a href="dashboard"><img class="logo_icon img-responsive" src="{{ asset('images/logo/logo1.png') }}"
-                                    alt="#" /></a>
-                        </div>
-                    </div>
-                    <div class="sidebar_user_info">
-                        <div class="icon_setting"></div>
-                        <div class="user_profle_side">
-                            <div class="logo_section">
-                                <a href="dashboard"><img class="img-responsive" src="{{ asset('images/logo/logo2.png') }}"
-                                        alt="#" /></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar_blog_2">
-                    <ul class="list-unstyled components">
-                        <li class="active">
-                            <a href="dashboard"><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li><a href="projects"><i class="fa fa-folder-open white_color"></i> <span>Projects</span></a>
+            <div class="sidebar_blog_1">
+               <div class="sidebar-header">
+                  <div class="logo_section">
+                     <a href="dashboard"><img class="logo_icon img-responsive"
+                           src="{{ asset('images/logo/logo1.png') }}" alt="#" /></a>
+                  </div>
+               </div>
+               <div class="sidebar_user_info">
+                  <div class="icon_setting"></div>
+                  <div class="user_profle_side">
+                     <div class="logo_section">
+                        <a href="dashboard"><img class="img-responsive" src="{{ asset('images/logo/logo2.png') }}"
+                              alt="#" /></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="sidebar_blog_2">
+               <ul class="list-unstyled components">
+                  <li class="active">
+                     <a href="dashboard"><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
+                  </li>
+                  <li><a href="projects"><i class="fa fa-folder-open white_color"></i> <span>Projects</span></a>
+                  </li>
+                  <li>
+                     <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                           class="fa fa-graduation-cap white_color"></i> <span>Student Services</span></a>
+                     <ul class="collapse list-unstyled" id="element">
+                        <li><a href="admission">> <span>Admission</span></a></li>
+                        <li><a href="clubs">> <span>Clubs</span></a></li>
+                        <li><a href="ict">> <span>ICT</span></a></li>
+                        <li><a href="student-welfare">> <span>Student Welfare</span></a></li>
+                     </ul>
+                  </li>
+                  <li><a href="academics"><i class="fa fa-book white_color"></i> <span>Academics</span></a></li>
+                  <li>
+                     <a href="teams"><i class="fa fa-users white_color"></i> <span>Teams</span></a>
+                  </li>
+                  <li>
+                     <a href="contact">
+                        <i class="fa fa-paper-plane white_color"></i> <span>Contacts</span></a>
+                  </li>
+                  <li class="active">
+                     <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                           class="fa fa-briefcase white_color"></i> <span>Non-Academic</span></a>
+                     <ul class="collapse list-unstyled" id="additional_page">
+                        <li>
+                           <a href="overview">> <span>Institutional Overview</span></a>
                         </li>
                         <li>
-                            <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                                    class="fa fa-graduation-cap white_color"></i> <span>Student Services</span></a>
-                            <ul class="collapse list-unstyled" id="element">
-                                <li><a href="admission">> <span>Admission</span></a></li>
-                                <li><a href="clubs">> <span>Clubs</span></a></li>
-                                <li><a href="ict">> <span>ICT</span></a></li>
-                                <li><a href="student-welfare">> <span>Student Welfare</span></a></li>
-                            </ul>
-                        </li>
-                        <li><a href="academics"><i class="fa fa-book white_color"></i> <span>Academics</span></a></li>
-                        <li>
-                            <a href="teams"><i
-                                    class="fa fa-users white_color"></i> <span>Teams</span></a>
+                           <a href="services">> <span>Other Services</span></a>
                         </li>
                         <li>
-                            <a href="contact">
-                                <i class="fa fa-paper-plane white_color"></i> <span>Contacts</span></a>
+                           <a href="calendar">> <span>Calendar</span></a>
                         </li>
-                        <li class="active">
-                            <a href="#additional_page" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle"><i class="fa fa-briefcase white_color"></i> <span>Non-Academic</span></a>
-                            <ul class="collapse list-unstyled" id="additional_page">
-                                <li>
-                                    <a href="overview">> <span>Institutional Overview</span></a>
-                                </li>
-                                <li>
-                                    <a href="services">> <span>Other Services</span></a>
-                                </li>
-                                <li>
-                                    <a href="calendar">> <span>Calendar</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        </li>
-                        <li><a href="users"><i class="fa fa-user white_color"></i> <span>Users</span></a>
-                        </li>
-                        <li><a href="updates"><i class="fa fa-calendar white_color"></i> <span>Updates</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                     </ul>
+                  </li>
+                  </li>
+                  <li><a href="users"><i class="fa fa-user white_color"></i> <span>Users</span></a>
+                  </li>
+                  <li><a href="updates"><i class="fa fa-calendar white_color"></i> <span>Updates</span></a>
+                  </li>
+               </ul>
+            </div>
+         </nav>
          <!-- end sidebar -->
          <!-- right content -->
          <div id="content">
@@ -194,7 +196,7 @@
                                  <div class="dropdown-menu">
                                     <a class="dropdown-item" href="profile">My Profile</a>
                                     <a class="dropdown-item logout-btn" href="#">
-                                       <span>Log Out</span> <i class="fa fa-sign-out"></i>
+                                       Log Out
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                        @csrf
@@ -254,10 +256,12 @@
                                           <td>{{ $user->email }}</td>
                                           <td>{{ $user->contact_no ?? '—' }}</td>
                                           <td style="max-width:80px;">
-                                             <form action="{{ route('toggleUser', $user->id) }}" method="POST" class="toggle-user-form" data-username="{{ $user->name }}">
+                                             <form action="{{ route('toggleUser', $user->id) }}" method="POST"
+                                                class="toggle-user-form" data-username="{{ $user->name }}">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit" class="btn btn-{{ $user->enabled ? 'orange' : 'success' }}">
+                                                <button type="submit"
+                                                   class="btn btn-{{ $user->enabled ? 'orange' : 'success' }}">
                                                    {{ $user->enabled ? 'Disable' : 'Enable' }}
                                                 </button>
                                              </form>

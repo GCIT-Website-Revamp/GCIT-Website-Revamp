@@ -16,48 +16,52 @@
             <a href="">Updates</a>
         </div>
         <div class="contentWrapper">
-            <h1>News & Events</h1>
-            <p>Explore the latest stories and milestones from GCIT — from campus events and student achievements to research highlights and industry collaborations. Stay connected with the people and projects shaping Bhutan’s innovation and technology landscape.</p>
+            <h1>Announcements</h1>
+            <p>Stay informed about GCIT’s latest news, milestones, and community initiatives. From student achievements and academic advancements to research projects and institutional collaborations, explore how GCIT continues to drive innovation and excellence in Bhutan’s digital education landscape.</p>
         </div>
     </div>
 </div>
 <div class="pageContentWrapper">
     <div class="section">
-        <div class="mainContent">
+        <div class="mainContent announcementContent">
             <div class="card">
-                <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">
                 <div class="cardContent">
-                    <span class="date">June 24, 2025</span>
                     <h1>GCIT Graduation Day 2025</h1>
                     <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    <div class="subContentContainer">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">
                 <div class="cardContent">
-                    <span class="date">June 24, 2025</span>
                     <h1>GCIT Graduation Day 2025</h1>
                     <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    <div class="subContentContainer">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">
                 <div class="cardContent">
-                    <span class="date">June 24, 2025</span>
                     <h1>GCIT Graduation Day 2025</h1>
                     <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    <div class="subContentContainer">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">
                 <div class="cardContent">
-                    <span class="date">June 24, 2025</span>
                     <h1>GCIT Graduation Day 2025</h1>
                     <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    <div class="subContentContainer">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,15 +77,19 @@
 
                     <div class="filter">
                         <input type="checkbox">
-                        <p>All News & Events</p>
+                        <p>All Updates</p>
                     </div>
                     <div class="filter">
                         <input type="checkbox">
-                        <p>Events</p>
+                        <p>Announcements</p>
                     </div>
                     <div class="filter">
                         <input type="checkbox">
-                        <p>News</p>
+                        <p>Tender</p>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox">
+                        <p>Vacancy</p>
                     </div>
                 </div>
             </div>

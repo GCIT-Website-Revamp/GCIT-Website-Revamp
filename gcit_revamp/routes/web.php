@@ -115,3 +115,7 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('user.about');
 });
+
+Route::get('/news&events', function () {
+    return view('user.contentTemplate');
+});

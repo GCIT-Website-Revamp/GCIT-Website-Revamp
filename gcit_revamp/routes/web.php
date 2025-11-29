@@ -134,6 +134,6 @@ Route::get('/about', function () {
 Route::get('/news&events', function () {
     return view('user.eventsTemplate');
 });
-Route::get('/news&events', function () {
+Route::get('/announcements', function () {
     return view('user.announcementTemplate');
 });

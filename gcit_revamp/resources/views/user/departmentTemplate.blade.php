@@ -24,12 +24,39 @@
     <div class="section">
         <div class="postWrapper departmentWrapper">
             <div class="post">
-                <p><span>Internet</span>
-As the academic programme at the Gyalpozhing College of Information Technology focuses on IT, the campus is equipped with an optical fiber backbone and WiFi connection. The IT infrastructure includes servers for centrally hosted services, network-accessed shared storage, and a Virtual Learning Environment (VLE). The college maintains a 58 Mbps internet connection via a fiber backbone, and all the specified equipment supports external connectivity to the National Research and Education Network (DrukREN), which enhances accessibility and supports research.
-<span>ICT Labs</span>
-The Gyalpozhing College of Information Technology provides two fully-equipped computer labs with projectors, furniture, computers, and internet connections. The labs are used during scheduled classes as well as open hours, and come equipped with standard office productivity software.
-<span>Maintenance & Support</span>
-Students will be provided with access to necessary technological resources and support. These services may include troubleshooting technical issues with computers and printers. ICT services may also provide guidance and training to students on how to use various software and hardware tools effectively. This ensures students have a positive learning experience and can focus on their studies without worrying about technology issues</p>
+                <p>
+                <span>Internet</span>
+                As the academic programme at the Gyalpozhing College of Information Technology focuses on IT, the campus is equipped with an optical fiber backbone and WiFi connection. The IT infrastructure includes servers for centrally hosted services, network-accessed shared storage, and a Virtual Learning Environment (VLE). The college maintains a 58 Mbps internet connection via a fiber backbone, and all the specified equipment supports external connectivity to the National Research and Education Network (DrukREN), which enhances accessibility and supports research.
+                <span>ICT Labs</span>
+                The Gyalpozhing College of Information Technology provides two fully-equipped computer labs with projectors, furniture, computers, and internet connections. The labs are used during scheduled classes as well as open hours, and come equipped with standard office productivity software.
+                <span>Maintenance & Support</span>
+                Students will be provided with access to necessary technological resources and support. These services may include troubleshooting technical issues with computers and printers. ICT services may also provide guidance and training to students on how to use various software and hardware tools effectively. This ensures students have a positive learning experience and can focus on their studies without worrying about technology issues
+                </p>
+                <div class="staffProfileWrapper">
+                    <div class="staff">
+                        <img src="{{ asset('images/staff/bishal.png') }}" alt="">
+                        <div class="staffDescription">
+                            <h1>Bishal Limbu</h1>
+                            <p>Finance Officer</p>
+                        </div>
+                    </div>
+                    <div class="staff">
+                        <img src="{{ asset('images/staff/bishal.png') }}" alt="">
+                        <div class="staffDescription">
+                            <h1>Bishal Limbu</h1>
+                            <p>Finance Officer</p>
+                        </div>
+                    </div>
+                    <div class="staff">
+                        <img src="{{ asset('images/staff/bishal.png') }}" alt="">
+                        <div class="staffDescription">
+                            <h1>Bishal Limbu</h1>
+                            <p>Finance Officer</p>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
             
             <div class="otherCourseContainer otherDepartment">

@@ -27,6 +27,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis/dist/lenis.min.js"></script>
+<script src="https://kit.fontawesome.com/8d21368d12.js" crossorigin="anonymous"></script>
 
 <script type = "module" src = "{{ asset('js/website/animation.icon.js') }}"></script>
 <script type = "module" src = "{{ asset('js/website/animation.smoothscroll.js') }}"></script>

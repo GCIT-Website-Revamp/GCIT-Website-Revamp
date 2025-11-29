@@ -137,3 +137,6 @@ Route::get('/news&events', function () {
 Route::get('/announcements', function () {
     return view('user.announcementTemplate');
 });
+Route::get('/course', function () {
+    return view('user.courseList');
+});

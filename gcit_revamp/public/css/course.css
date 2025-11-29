@@ -1,0 +1,11 @@
+.courseContent .card img{
+    width: 40% !important;
+}
+
+.courseContent .coursePreHeader{
+    font-size: clamp(16px, 2vw, 20px);
+}
+
+.courseContent .cardContent{
+    padding-top: 2.5rem !important;
+}

@@ -143,3 +143,6 @@ Route::get('/course', function () {
 Route::get('/post', function () {
     return view('user.postDetailsTemplate');
 });
+Route::get('/courseDetails', function () {
+    return view('user.courseDetails');
+});

@@ -140,3 +140,6 @@ Route::get('/announcements', function () {
 Route::get('/course', function () {
     return view('user.courseList');
 });
+Route::get('/post', function () {
+    return view('user.postDetailsTemplate');
+});

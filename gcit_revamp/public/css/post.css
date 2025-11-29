@@ -1,0 +1,86 @@
+.postWrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(20px, 4vw, 60px);
+}
+
+.post{
+    width: 65%;
+}
+
+.post img{
+    width: 100%;
+    height: clamp(350px, 40vw, 500px);
+    object-fit: cover;
+    margin-bottom: 40px;
+}
+
+.post .btnWrapper{
+    width: 100%;
+    display: flex;
+    margin-top: 3rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post p{
+    font-weight: 300;
+}
+
+.btnWrapper button{
+    height: 50px; 
+    width: clamp(150px, 5vw, 200px);
+    display: flex;
+    font-weight: 600;
+    align-items: center;
+    border: none;
+    gap: 1rem;
+    justify-content: center;
+    border-radius: 100px;
+    color: white;
+    background-color: var(--color-primary);
+}
+
+.btnWrapper .left span{
+    transform: rotate(180deg);
+
+}
+
+.suggestionWrapper{
+    display: flex;
+    width: 35%;
+    flex-direction: column;
+}
+
+.suggestionWrapper > *{
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc; /* divider */
+}
+
+.suggestionWrapper > *:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.suggestion{
+    width: 100%;
+    padding-top: 1rem;
+}
+.suggestion h1{
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 600;
+    padding: 1rem 0;
+}
+
+.suggestion a{
+    text-decoration: none;
+    color: #9A9A9A;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem
+}
+
+.suggestion a:hover{
+    color: var(--color-secondary)
+}

@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // -------------------------------------------------------------------------
-    // SLIDE DATA (only one media file; thumbnail auto-generated)
+    // SLIDE DATA
     // -------------------------------------------------------------------------
     const heroSlides = [
         {
             title: "Empowering the Next Generation of Innovators",
             subtitle: "Driving Bhutan’s digital transformation.",
             media: "/videos/gcit-MPH.mp4",
-            label: "Playing"
+            label: "Learn"
         },
         {
             title: "Where Ideas Evolve into Innovation",
@@ -21,55 +21,44 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Strong foundations for future leaders.",
             media: "/videos/gcit-MPH.mp4",
             label: "Excellence"
-        },
-        {
-            title: "A Fourth Slide Example",
-            subtitle: "This shows how the peek works.",
-            media: "/images/sample-image.jpg",
-            label: "More"
         }
     ];
 
-    // -------------------------------------------------------------------------
-    // ELEMENTS
-    // -------------------------------------------------------------------------
+    // DOM references
     const sliderTrack = document.querySelector(".sliderTrack");
     const heroTitle = document.querySelector(".hero-header");
     const heroSubtitle = document.querySelector(".subtitle");
     const heroVideo = document.querySelector(".hero-video");
+
     const leftBtn = document.querySelector(".leftBtn");
     const rightBtn = document.querySelector(".rightBtn");
 
-    let logicalIndex = 0;                  // ALWAYS controls hero banner
-    let loopMode = heroSlides.length > 3;  // >3 = loop mode
-    let slideWidth = 0;
+    let activeIndex = 0;  // controls hero
+    let viewStart = 0;    // controls slider position (0,1)
+
+    const VISIBLE = 3;    // exactly 3 items visible
 
 
     // -------------------------------------------------------------------------
-    // STEP 1: Render Slider Items
+    // Render slider tabs
     // -------------------------------------------------------------------------
     function renderSlides() {
         sliderTrack.innerHTML = "";
-
-        heroSlides.forEach(s => {
+        heroSlides.forEach((s, i) => {
             const div = document.createElement("div");
             div.className = "slide";
-
-            const text = document.createElement("span");
-            text.innerText = s.label;
-
-            div.appendChild(text);
+            div.textContent = s.label;
+            div.addEventListener("click", () => jumpToSlide(i));
             sliderTrack.appendChild(div);
         });
     }
-
     renderSlides();
 
     let slides = document.querySelectorAll(".slide");
 
 
     // -------------------------------------------------------------------------
-    // STEP 2: Auto-generate preview images from media (image or video)
+    // Generate video thumbnails
     // -------------------------------------------------------------------------
     function generateVideoThumbnail(videoUrl, callback) {
         const video = document.createElement("video");
@@ -85,57 +74,41 @@ document.addEventListener("DOMContentLoaded", () => {
             const canvas = document.createElement("canvas");
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
-
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
+            canvas.getContext("2d").drawImage(video, 0, 0);
             callback(canvas.toDataURL("image/jpeg"));
         });
     }
 
+    heroSlides.forEach((slide, i) => {
+        const el = slides[i];
 
-    function loadSlidePreviews() {
-        heroSlides.forEach((slide, i) => {
-            const el = slides[i];
-
-            if (!slide.media) return;
-
-            if (slide.media.endsWith(".mp4")) {
-                generateVideoThumbnail(slide.media, (thumb) => {
-                    el.style.backgroundImage = `url(${thumb})`;
-                });
-            } else {
-                el.style.backgroundImage = `url(${slide.media})`;
-            }
-        });
-    }
-
-    loadSlidePreviews();
-
-
-    // -------------------------------------------------------------------------
-    // STEP 3: Apply Width Logic
-    // -------------------------------------------------------------------------
-    function applyWidths() {
-        if (!loopMode) {
-            const w = 100 / heroSlides.length;
-            slides.forEach(s => s.style.width = `${w}%`);
+        if (slide.media.endsWith(".mp4")) {
+            generateVideoThumbnail(slide.media, thumb => {
+                el.style.backgroundImage = `url(${thumb})`;
+            });
         } else {
-            slides.forEach(s => s.style.width = "30%");
+            el.style.backgroundImage = `url(${slide.media})`;
         }
-
-        slideWidth = slides[0].offsetWidth + 16; // gap = 1rem
-    }
-
-    applyWidths();
+    });
 
 
     // -------------------------------------------------------------------------
-    // STEP 4: Hero Banner Update
+    // Apply width (3 visible)
     // -------------------------------------------------------------------------
-    function updateHeroBanner(i) {
+function applyWidths() {
+    slides.forEach(s => {
+        s.style.flex = `0 0 calc(100% / ${VISIBLE})`;
+    });
+}
+applyWidths();
+
+
+
+    // -------------------------------------------------------------------------
+    // Update Hero Banner
+    // -------------------------------------------------------------------------
+    function updateHero(i) {
         const s = heroSlides[i];
-
         heroTitle.textContent = s.title;
         heroSubtitle.textContent = s.subtitle;
 
@@ -147,111 +120,87 @@ document.addEventListener("DOMContentLoaded", () => {
             heroVideo.classList.remove("fade");
         }, 150);
     }
+    updateHero(0);
 
 
     // -------------------------------------------------------------------------
-    // STEP 5: Update Active Nav Highlight
+    // Active state
     // -------------------------------------------------------------------------
-    function updateActiveNav(i) {
-        slides.forEach(s => s.classList.remove("active"));
-        slides[i].classList.add("active");
+function updateActive() {
+    // Reset all labels to original
+    slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        slide.textContent = heroSlides[i].label;
+    });
+
+    // Activate current one
+    slides[activeIndex].classList.add("active");
+    slides[activeIndex].textContent = "Playing";
+}
+
+    updateActive();
+
+
+    // -------------------------------------------------------------------------
+    // Move viewport of slider (non-loop)
+    // -------------------------------------------------------------------------
+    function updateSliderPosition() {
+        const shift = -(viewStart * (100 / VISIBLE));
+        sliderTrack.style.transform = `translateX(${shift}%)`;
     }
-
-    updateActiveNav(0);
-    updateHeroBanner(0);
+    updateSliderPosition();
 
 
     // -------------------------------------------------------------------------
-    // STEP 6: TRUE Circular Looping (DOM Reordering)
-    // -------------------------------------------------------------------------
-
-    // Move first → end
-    function moveRight() {
-        sliderTrack.style.transition = "transform .35s ease";
-        sliderTrack.style.transform = `translateX(-${slideWidth}px)`;
-
-        sliderTrack.addEventListener("transitionend", function handler() {
-            sliderTrack.style.transition = "none";
-            sliderTrack.appendChild(sliderTrack.firstElementChild);
-            sliderTrack.style.transform = "translateX(0)";
-            sliderTrack.removeEventListener("transitionend", handler);
-            slides = document.querySelectorAll(".slide");
-        });
-    }
-
-    // Move last → start
-    function moveLeft() {
-        sliderTrack.style.transition = "none";
-        sliderTrack.prepend(sliderTrack.lastElementChild);
-        sliderTrack.style.transform = `translateX(-${slideWidth}px)`;
-
-        requestAnimationFrame(() => {
-            sliderTrack.style.transition = "transform .35s ease";
-            sliderTrack.style.transform = "translateX(0)";
-            slides = document.querySelectorAll(".slide");
-        });
-    }
-
-
-    // -------------------------------------------------------------------------
-    // STEP 7: BUTTON CONTROLS
+    // Button Controls
     // -------------------------------------------------------------------------
     rightBtn.onclick = () => {
-        logicalIndex = (logicalIndex + 1) % heroSlides.length;
-        updateHeroBanner(logicalIndex);
-        updateActiveNav(logicalIndex);
+        if (activeIndex < heroSlides.length - 1) {
+            activeIndex++;
+            updateHero(activeIndex);
+            updateActive();
 
-        if (loopMode) moveRight();
+            // shift slider if needed
+            if (activeIndex >= viewStart + VISIBLE) {
+                viewStart++;
+                updateSliderPosition();
+            }
+        }
     };
 
     leftBtn.onclick = () => {
-        logicalIndex = (logicalIndex - 1 + heroSlides.length) % heroSlides.length;
-        updateHeroBanner(logicalIndex);
-        updateActiveNav(logicalIndex);
+        if (activeIndex > 0) {
+            activeIndex--;
+            updateHero(activeIndex);
+            updateActive();
 
-        if (loopMode) moveLeft();
+            if (activeIndex < viewStart) {
+                viewStart--;
+                updateSliderPosition();
+            }
+        }
     };
 
 
     // -------------------------------------------------------------------------
-    // STEP 8: CLICK ANY SLIDE
+    // Clicking any slide tab
     // -------------------------------------------------------------------------
-    slides.forEach((slide, i) => {
-        slide.addEventListener("click", () => {
+    function jumpToSlide(i) {
+        activeIndex = i;
+        updateHero(i);
+        updateActive();
 
-            if (!loopMode) {
-                logicalIndex = i;
-                updateHeroBanner(i);
-                updateActiveNav(i);
-                return;
-            }
-
-            const currentLabel = slides[0].innerText;
-            const clickedLabel = slide.innerText;
-
-            if (currentLabel === clickedLabel) return;
-
-            // clicking one to the RIGHT
-            if (slide === slides[1]) {
-                logicalIndex = (logicalIndex + 1) % heroSlides.length;
-                updateHeroBanner(logicalIndex);
-                updateActiveNav(logicalIndex);
-                moveRight();
-            }
-
-            // clicking one to the LEFT (peek last)
-            if (slide === slides[slides.length - 1]) {
-                logicalIndex = (logicalIndex - 1 + heroSlides.length) % heroSlides.length;
-                updateHeroBanner(logicalIndex);
-                updateActiveNav(logicalIndex);
-                moveLeft();
-            }
-        });
-    });
-
+        // adjust viewport to keep clicked item visible
+        if (i < viewStart) {
+            viewStart = i;
+        } else if (i >= viewStart + VISIBLE) {
+            viewStart = i - (VISIBLE - 1);
+        }
+        updateSliderPosition();
+    }
 
     // -------------------------------------------------------------------------
-    // STEP 9: Resize Handler
+    // Resize
     // -------------------------------------------------------------------------
     window.addEventListener("resize", applyWidths);
 

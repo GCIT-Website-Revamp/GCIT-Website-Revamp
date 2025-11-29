@@ -22,7 +22,7 @@
     </div>
 </div>
 <div class="pageContentWrapper">
-    <div class="section">
+    <div class="section eventsWrapper">
         <div class="mainContent">
             <div class="card">
                 <img src="{{ asset('images/events/dummyEventImg.png') }}" alt="">

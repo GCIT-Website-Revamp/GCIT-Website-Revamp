@@ -20,7 +20,7 @@ document.getElementById('addAdminBtn').addEventListener('click', function () {
 
     // NO @csrf here — JS handles CSRF
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addAdminForm">
+        <form id="addAdminForm" autocomplete="off">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>

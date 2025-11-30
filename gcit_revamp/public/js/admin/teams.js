@@ -20,32 +20,39 @@ document.getElementById('addTeamBtn').addEventListener('click', function () {
     document.querySelector('#myModal .modal-title').textContent = 'Add New Team';
 
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="teamForm">
-            <div class="form-group">
-                <label for="teamName">Name</label>
-                <input type="text" class="form-control" id="teamName" required>
-            </div>
+    <form id="teamForm" autocomplete="off">
+        <div class="form-group">
+            <label for="teamName">Name</label>
+            <input type="text" class="form-control" id="teamName" required>
+        </div>
 
-            <div class="form-group">
-                <label for="teamDescription">Description</label>
-                <textarea class="form-control" id="teamDescription" rows="2"></textarea>
-            </div>
+        <div class="form-group">
+            <label for="teamDescription">Description</label>
+            <textarea class="form-control" id="teamDescription" rows="2"></textarea>
+        </div>
 
-            <div class="form-group">
-                <label for="teamType">Type</label>
-                <select class="form-control" id="teamType">
-                    <option value="" disabled selected>Select type</option>
-                    <option value="Academic">Academic</option>
-                    <option value="Non-Academic">Non-Academic</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="teamType">Type</label>
+            <select class="form-control" id="teamType">
+                <option value="" disabled selected>Select type</option>
+                <option value="Academic">Academic</option>
+                <option value="Non-Academic">Non-Academic</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="teamImage">Image</label>
-                <input type="file" class="form-control" id="teamImage" accept="image/*" required>
-            </div>
-        </form>
-    `;
+        <!-- Title field (hidden initially) -->
+        <div class="form-group" id="titleGroup" style="display:none;">
+            <label for="teamTitle">Title</label>
+            <input type="text" class="form-control" id="teamTitle">
+        </div>
+
+        <div class="form-group">
+            <label for="teamImage">Image</label>
+            <input type="file" class="form-control" id="teamImage" accept="image/*" required>
+        </div>
+    </form>
+`;
+
 
     document.querySelector('#myModal .modal-footer').innerHTML = `
         <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -54,7 +61,7 @@ document.getElementById('addTeamBtn').addEventListener('click', function () {
 
     const modal = new bootstrap.Modal(document.getElementById('myModal'));
     modal.show();
-
+    attachTypeToggle();
     // SAVE TEAM
     document.getElementById('saveTeamBtn').addEventListener('click', () => saveOrUpdateTeam(false));
 });
@@ -73,32 +80,38 @@ document.querySelectorAll('.edit-btn').forEach(btn => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Team';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="teamForm">
-                <div class="form-group">
-                    <label>Team Name</label>
-                    <input type="text" class="form-control" id="teamName" value="${name}">
-                </div>
+    <form id="teamForm" autocomplete="off">
+        <div class="form-group">
+            <label>Team Name</label>
+            <input type="text" class="form-control" id="teamName" value="${name}">
+        </div>
 
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea class="form-control" id="teamDescription">${description}</textarea>
-                </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" id="teamDescription">${description}</textarea>
+        </div>
 
-                <div class="form-group">
-                    <label>Type</label>
-                    <select class="form-control" id="teamType">
-                        <option value="Academic" ${type === "Academic" ? "selected" : ""}>Academic</option>
-                        <option value="Non-Academic" ${type === "Non-Academic" ? "selected" : ""}>Non-Academic</option>
-                    </select>
-                </div>
+        <div class="form-group">
+            <label>Type</label>
+            <select class="form-control" id="teamType">
+                <option value="Academic" ${type === "Academic" ? "selected" : ""}>Academic</option>
+                <option value="Non-Academic" ${type === "Non-Academic" ? "selected" : ""}>Non-Academic</option>
+            </select>
+        </div>
 
-                <div class="form-group">
-                    <label>Current Image</label><br>
-                    <img src="${image}" width="50" class="mb-2">
-                    <input type="file" class="form-control" id="teamImage" accept="image/*">
-                </div>
-            </form>
-        `;
+        <div class="form-group" id="titleGroup" style="display:${type === "Academic" ? "block" : "none"};">
+            <label>Title</label>
+            <input type="text" class="form-control" id="teamTitle" value="${this.dataset.title || ''}">
+        </div>
+
+        <div class="form-group">
+            <label>Current Image</label><br>
+            <img src="${image}" width="50" class="mb-2">
+            <input type="file" class="form-control" id="teamImage" accept="image/*">
+        </div>
+    </form>
+`;
+
 
         document.querySelector('#myModal .modal-footer').innerHTML = `
             <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -107,7 +120,7 @@ document.querySelectorAll('.edit-btn').forEach(btn => {
 
         const modal = new bootstrap.Modal(document.getElementById('myModal'));
         modal.show();
-
+        attachTypeToggle();
         document.getElementById('updateTeamBtn').addEventListener('click', () => saveOrUpdateTeam(true, `${id}`));
     });
 });
@@ -120,6 +133,7 @@ function saveOrUpdateTeam(isEdit = false, id = null) {
     formData.append("name", document.getElementById("teamName").value);
     formData.append("description", document.getElementById("teamDescription").value);
     formData.append("type", document.getElementById("teamType").value);
+    formData.append("title", document.getElementById("teamTitle").value);
     if (isEdit) {
         formData.append("_method", "PUT");
     }
@@ -222,3 +236,19 @@ document.querySelectorAll('.delete-btn').forEach(btn => {
         });
     });
 });
+
+function attachTypeToggle() {
+    const typeSelect = document.getElementById("teamType");
+    const titleGroup = document.getElementById("titleGroup");
+
+    if (!typeSelect) return; // safety
+
+    typeSelect.addEventListener("change", function () {
+        if (this.value === "Academic") {
+            titleGroup.style.display = "block";
+        } else {
+            titleGroup.style.display = "none";
+            document.getElementById("teamTitle").value = "";
+        }
+    });
+}

@@ -17,7 +17,7 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
     document.querySelector('#myModal .modal-title').textContent = 'Add New Service';
 
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addServiceForm" enctype="multipart/form-data">
+        <form id="addServiceForm" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
                 <label for="name">Service Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -47,7 +47,7 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
     fetch('/api/team')
         .then(res => res.json())
         .then(data => {
-            teams = data.data || [];
+            teams = (data.data || []).filter(team => team.type === "Non-Academic");
             // Add initial role row after fetching teams
             addRoleRow();
         })
@@ -165,7 +165,7 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Service';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editServiceForm" enctype="multipart/form-data">
+            <form id="editServiceForm" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     <label for="name">Service Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="${serviceName}" required>

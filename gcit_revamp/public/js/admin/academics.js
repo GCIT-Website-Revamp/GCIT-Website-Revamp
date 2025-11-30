@@ -18,7 +18,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
     document.querySelector('#myModal .modal-title').textContent = 'Add New Course';
 
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addCourseForm" enctype="multipart/form-data">
+        <form id="addCourseForm" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control" id="name" required>
@@ -34,22 +34,27 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
             </div>
 
             <div class="form-group">
-                <label>Description (Why)</label>
+                <label>Short Description</label>
+                <textarea class="form-control" id="description" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Description (Why This Program?)</label>
                 <textarea class="form-control" id="why" rows="3" required></textarea>
             </div>
 
             <div class="form-group">
-                <label>Description (What)</label>
+                <label>Description (What Would I Learn?)</label>
                 <textarea class="form-control" id="what" rows="3" required></textarea>
             </div>
 
             <div class="form-group">
-                <label>Structure</label>
+                <label>Program Structure</label>
                 <textarea class="form-control" id="structure" rows="3" required></textarea>
             </div>
 
             <div class="form-group">
-                <label>Career</label>
+                <label>Career Prospects</label>
                 <textarea class="form-control" id="career" rows="3" required></textarea>
             </div>
 
@@ -70,6 +75,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
 
         let formData = new FormData();
         formData.append("name", document.getElementById('name').value);
+        formData.append("description", document.getElementById('description').value);
         formData.append("why", document.getElementById('why').value);
         formData.append("what", document.getElementById('what').value);
         formData.append("structure", document.getElementById('structure').value);
@@ -120,7 +126,7 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
     document.querySelector('#myModal .modal-title').textContent = 'Add New Module';
 
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="moduleForm">
+        <form id="moduleForm" autocomplete="off">
             <div class="form-group">
                 <label for="name">Module Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -134,12 +140,22 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
 
             <div class="form-group">
                 <label for="year">Year of Module</label>
-                <input type="text" class="form-control" id="year" name="year" required>
+                <select class="form-control" id="year" name="year" required>
+                    <option value="" disabled selected>Select Year</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="semester">Semester of Module</label>
-                <input type="text" class="form-control" id="semester" name="semester" required>
+                <select class="form-control" id="semester" name="semester" required>
+                    <option value="" disabled selected>Select Semester</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
             </div>
 
             <div class="form-group">
@@ -251,7 +267,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Course';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editCourseForm" enctype="multipart/form-data">
+            <form id="editCourseForm" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" id="name" value="${this.dataset.courseName}" required>
@@ -267,22 +283,27 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                 </div>
 
                 <div class="form-group">
-                    <label>Description (Why)</label>
+                    <label>Short Description</label>
+                    <textarea class="form-control" id="description" rows="3" required>${this.dataset.courseDescription}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Description (Why This Program?)</label>
                     <textarea class="form-control" id="why" rows="3" required>${this.dataset.courseWhy}</textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Description (What)</label>
+                    <label>Description (What Would I Learn?)</label>
                     <textarea class="form-control" id="what" rows="3" required>${this.dataset.courseWhat}</textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Structure</label>
+                    <label>Program Structure</label>
                     <textarea class="form-control" id="structure" rows="3" required>${this.dataset.courseStructure}</textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Career</label>
+                    <label>Career Prospects</label>
                     <textarea class="form-control" id="career" rows="3" required>${this.dataset.courseCareer}</textarea>
                 </div>
 
@@ -304,6 +325,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
 
             let formData = new FormData();
             formData.append("name", document.getElementById('name').value);
+            formData.append("description", document.getElementById('description').value);
             formData.append("why", document.getElementById('why').value);
             formData.append("what", document.getElementById('what').value);
             formData.append("structure", document.getElementById('structure').value);
@@ -425,7 +447,7 @@ document.querySelectorAll('.edit-module-btn').forEach(button => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Module';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editModuleForm">
+            <form id="editModuleForm" autocomplete="off">
                 <div class="form-group">
                     <label for="name">Module Name</label>
                     <input type="text" class="form-control" id="name" value="${moduleName}" required>
@@ -439,12 +461,22 @@ document.querySelectorAll('.edit-module-btn').forEach(button => {
 
                 <div class="form-group">
                     <label for="year">Year of Module</label>
-                    <input type="text" class="form-control" id="year" value="${moduleYear}" required>
+                    <select class="form-control" id="year" name="year" required>
+                        <option value="" disabled selected>Select Year</option>
+                        <option value="1" ${moduleYear === "1" ? "selected" : ""}>1</option>
+                        <option value="2" ${moduleYear === "2" ? "selected" : ""}>2</option>
+                        <option value="3" ${moduleYear === "3" ? "selected" : ""}>3</option>
+                        <option value="4" ${moduleYear === "4" ? "selected" : ""}>4</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="semester">Semester of Module</label>
-                    <input type="text" class="form-control" id="semester" value="${moduleSemester}" required>
+                    <select class="form-control" id="semester" name="semester" required>
+                        <option value="" disabled selected>Select Semester</option>
+                        <option value="1" ${moduleSemester === "1" ? "selected" : ""}>1</option>
+                        <option value="2" ${moduleSemester === "2" ? "selected" : ""}>2</option>
+                    </select>
                 </div>
 
                 <div class="form-group">

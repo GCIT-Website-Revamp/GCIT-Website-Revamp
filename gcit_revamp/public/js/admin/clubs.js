@@ -17,7 +17,7 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
 
     // Modal body
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addClubForm" enctype="multipart/form-data">
+        <form id="addClubForm" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
                 <label for="club_name">Club Name</label>
                 <input type="text" class="form-control" id="club_name" name="club_name" required>
@@ -163,7 +163,7 @@ document.querySelectorAll('.edit-club-btn').forEach(button => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Club';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editClubForm" enctype="multipart/form-data">
+            <form id="editClubForm" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     <label>Club Name</label>
                     <input type="text" class="form-control" id="edit_club_name" value="${clubName}" required>

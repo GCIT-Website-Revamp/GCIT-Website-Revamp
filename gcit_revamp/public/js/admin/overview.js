@@ -51,7 +51,7 @@ function setupOverviewModal(data) {
         data.isEdit ? "Edit Overview" : "Add Overview";
 
     document.querySelector("#myModal .modal-body").innerHTML = `
-        <form id="overviewForm" enctype="multipart/form-data">
+        <form id="overviewForm" enctype="multipart/form-data" autocomplete="off">
 
             <label><b>Image</b></label>
             <input type="file" class="form-control mb-3" id="overviewImage">

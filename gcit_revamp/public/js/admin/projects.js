@@ -18,7 +18,7 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
     document.querySelector('#myModal .modal-title').textContent = 'Add New Project';
 
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addProjectForm" enctype="multipart/form-data">
+        <form id="addProjectForm" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
                 <label for="name">Project Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -117,7 +117,7 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Project';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editProjectForm" enctype="multipart/form-data">
+            <form id="editProjectForm" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     <label>Project Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="${name}" required>

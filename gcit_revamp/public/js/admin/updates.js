@@ -65,7 +65,7 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
     openModal(
         "Add News & Event",
         `
-            <form id="eventForm">
+            <form id="eventForm" autocomplete="off">
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" id="event_name" class="form-control" required>
@@ -120,7 +120,7 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
         openModal(
             "Edit Event",
             `
-                <form id="editEventForm">
+                <form id="editEventForm" autocomplete="off">
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" id="event_name" class="form-control" value="${btn.dataset.eventName}" required>
@@ -192,7 +192,7 @@ document.getElementById('addAnnouncementBtn').addEventListener('click', () => {
     openModal(
         "Add Announcement",
         `
-            <form id="announcementForm">
+            <form id="announcementForm" autocomplete="off">
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" id="announcement_name" class="form-control" required>
@@ -245,7 +245,7 @@ document.querySelectorAll('.edit-announcemnet-btn').forEach(btn => {
         openModal(
             "Edit Announcement",
             `
-                <form>
+                <form autocomplete="off">
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" id="announcement_name" class="form-control" value="${btn.dataset.announcemnetName}">

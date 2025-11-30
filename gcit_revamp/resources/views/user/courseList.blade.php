@@ -31,7 +31,7 @@
                     <span class="coursePreHeader">{{ $course->type }}</span>
                     <h1>{{ $course->name }}</h1>
                     <p class = "multi-truncate">{{ $course->why }}</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    <a href="/courseDetails/{{ $course->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                 </div>
             </div>
             @empty

@@ -227,6 +227,7 @@
                                                 <button class="btn btn-success edit-btn" data-id="{{ $team->id }}"
                                                    data-name="{{ $team->name }}" data-service-id="{{ $team->service_id }}"
                                                    data-type="{{ $team->type }}"
+                                                   data-title="{{ $team->title }}"
                                                    data-description="{{ $team->description }}"
                                                    data-image="{{ asset('storage/' . $team->image) }}">Edit</button>
                                                 <button type="button" class="btn btn-danger delete-btn"

@@ -1,0 +1,182 @@
+.pageBannerWrapper .bannerContent h2{
+    font-family: var(--font-Header);
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 400;
+}
+
+
+.courseDetailsContainer{
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(20px, 4vw, 60px);
+}
+
+.courseDetailsContainer .sideMenu{
+    background-color: #F3F3F3;
+    width: 20%;
+    padding: clamp(20px, 5vw, 50px) clamp(10px, 3vw, 20px);
+    height: fit-content;
+    
+    position: sticky;
+    top: calc(141px + 3rem);
+}
+
+.courseDetailsContainer .sideMenu h1{
+    font-size: 16px;
+    font-weight: 700;
+    color: #4D4D4D;
+}
+
+.courseDetailsContainer .sideMenu .header{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.courseDetailsContainer .sideMenu .circle{
+    width: 7px;
+    height: 7px; 
+    border-radius: 10px;
+    background-color: var(--color-secondary);
+}
+
+.courseDetailsContainer .sideMenu a{
+    text-decoration: none;
+    color: #4D4D4D;
+    margin-left: calc(1rem + 7px);
+}
+.courseDetailsContainer .sideMenu a:hover{
+    color: var(--color-secondary);
+}
+
+.courseDetailsContainer .menuSection{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.courseDetailsContainer .courseDetails{
+    width: 50%;
+}
+
+.courseDetailsContainer .otherCourseContainer{
+    width: 30%;
+}
+
+.courseDetailsWrapper .courseHeaderWrapper{
+    margin-bottom: 2rem;
+}
+.courseDetailsWrapper .courseHeaderWrapper h1{
+    font-size: clamp(22px, 7vw, 58px);
+    color: var(--color-secondary);
+    width: 80%;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.courseDetailsWrapper p{
+    line-height: 150%;
+}
+.courseDetailsWrapper{
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.courseDetailContent{
+    border: 1px solid #CECECE;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.courseDetailContent p{
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.courseDetailContent h1{
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 700;
+    color: var(--color-primary);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d4d4d400;
+    align-items: center;
+}
+.courseDetailContent span{
+    transform: rotate(90deg)
+}
+
+.courseDetailContent:hover{
+    cursor: pointer;
+}
+
+.courseDetailContent input{
+    display: none;
+}
+
+#structure:checked ~ p, #career:checked ~ p, #learn:checked ~ p,  #whyProgram:checked ~ p{
+    height: fit-content;
+    opacity: 1;
+    transform: translateY(0)
+}
+
+#structure:checked ~  label h1, #career:checked ~  label h1, #learn:checked ~  label h1,  #whyProgram:checked ~ label  h1{
+   padding-bottom: 1rem;
+   border-bottom: 1px solid #d4d4d4;
+   margin-bottom: 1rem;
+}
+
+.mt-3 .courseHeaderWrapper h1{
+    font-size: clamp(20px, 4vw, 40px);
+}
+
+.courseDetailContent input:checked ~ p{
+     height: fit-content;
+    opacity: 1;
+    transform: translateY(0)
+}
+
+.courseDetailContent input:checked ~ label h1{
+   padding-bottom: 1rem;
+   border-bottom: 1px solid #d4d4d4;
+   margin-bottom: 1rem;
+}
+
+.otherCourseContainer{
+     position: sticky;
+    top: calc(141px + 3rem);
+    height: 50vh;
+}
+.otherCourseContainer .header h1{
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 400;
+    color: #4D4D4D;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #4D4D4D;
+}
+
+.otherCourseContainer .otherContent h1{
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 500;
+
+}
+
+.otherContent{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+   
+}
+
+.otherContent a{
+    text-decoration: none;
+    color: black;
+}
+.otherContent a:hover{
+    color: var(--color-secondary);
+}
+

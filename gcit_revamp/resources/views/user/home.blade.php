@@ -117,12 +117,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                             <a href="">Learn More</a>
                         </div>
                     </div>    
-                      <div class="courseLinkWrapper">
-                        <a href="">Full Stack Development <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">Blockchain Development <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">AI Development & Data Science <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">Cybersecurity <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                    </div>    
+                     
                 </div>
                 <div class="course overlayWrapper">
                     <div class="courseBG bgRight backgroundWrapper">
@@ -136,13 +131,21 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                             <a href="">Learn More</a>
                         </div>
                     </div>
+                       
+                </div>
+            </div>
+            <div class="courseLinkContainer">
+                 <div class="courseLinkWrapper">
+                        <a href="">Full Stack Development <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                        <a href="">Blockchain Development <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                        <a href="">AI Development & Data Science <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                        <a href="">Cybersecurity <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                    </div>    
                     <div class="courseLinkWrapper">
                         <a href="">User Interface Design <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
                         <a href="">User Experience Design <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
                         <a href="">Frontend Engineer <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">Cybersecurity <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                    </div>    
-                </div>
+                    </div> 
             </div>
         </div>
         <div class="messageWrapper sectionPadding">
@@ -151,22 +154,175 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
             </div>
             <div class="messageContainer">
                 <div class="message">
-                    <div class="quote"></div>
-                    <div class="message">
+                    <div class="quote">
+                        <x-icons.quote class="circuit-icon" />
+                    </div>
+                    <div class="messageContent">
                         <span>Kuzuzangpo la!</span>
                         <p>Welcome to GCIT campus and thank you for your interest in Gyalpozhing College of Information Technology. We are a leading institution that specialises in modern education and we offer both the Computer Science and Interactive Design & Development Degree.
- 
-The uniqueness of GCIT is the way we have fun in teaching and nurturing future-ready students. We embrace disruptions and challenges through a transformative education experience that champions: Code, Hack, Develop, Design, Innovate and Gamify.
+                        <br><br>
+                        The uniqueness of GCIT is the way we have fun in teaching and nurturing future-ready students. We embrace disruptions and challenges through a transformative education experience that champions: Code, Hack, Develop, Design, Innovate and Gamify.
+                        <br><br>
+                        
+                        As you navigate through our website, you will find detailed information about our courses, admission requirements, student development, personas of our faculty members and, among many other interesting highlights. Certainly, if you are our prospective student, parent or community stakeholder, we invite you to further explore and discover what GCIT has to offer.
+                        <br><br>
 
-As you navigate through our website, you will find detailed information about our courses, admission requirements, student development, personas of our faculty members and, among many other interesting highlights. Certainly, if you are our prospective student, parent or community stakeholder, we invite you to further explore and discover what GCIT has to offer.
-
-Add a tab or bookmark our website or if you have any questions and would like to connect with us, please do not hesitate to reach out to us.</p>
-                        <span>Audrey Low</span>
-                        <span>President, Gyalpozhing College of Information Technology</span>
+                        Add a tab or bookmark our website or if you have any questions and would like to connect with us, please do not hesitate to reach out to us.</p>
+                        <span class = "presidentName">Audrey Low</span>
+                        <span class = "presidentTitle">President, Gyalpozhing College of Information Technology</span>
                     </div>
                 </div>
                 <div class="presidentImg">
-                    <img src="" alt="">
+                    <img src="{{ asset('images/staff/president.png') }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="homeProjectWrapper">
+            <div class="homeProjectDetails">
+                <div class="projectMessage">
+                    <h1>Creating <span>Impact</span> Through Innovation</h1>
+                    <p>We work with leading organizations to drive innovation and create meaningful technological solutions for Bhutan and beyond</p>
+                    <a href="">Connect <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                </div>
+                <div class="projectName">
+                    <div class="prjSlider">
+                        <span class="material-symbols-outlined left">expand_circle_right</span>
+                        <h1>Start Up Investment</h1>
+                        <span class="material-symbols-outlined">expand_circle_right</span>
+                    </div>
+                    <div class="prjLink ctaWrapper">
+                        <a href="">Explore More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="projectBanner">
+                <img src="{{ asset('Images/projects/dummyImg.png') }}" alt="" class="background">
+                <img src="{{ asset('Images/projects/dummyImg.png') }}" alt="">
+            </div>
+        </div>
+        <div class="homeAnnouncementWrapper">
+            <div class="homeAnnouncementHeader">
+                <div class="headerContent">
+                    <h1>Announcements</h1>
+                    <p>Explore announcements that showcase GCIT’s commitment to learning, research, and community engagement.</p>
+                </div>
+                <div class="headerLink">
+                    <a href="">View More</a>
+                </div>
+            </div>
+            <div class="homeAnnouncementContent">
+                <div class="cardAnnouncement">
+                    <div class="card">
+                    <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>                    <h1>GCIT Graduation Day 2025</h1>
+                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
+                    <div class="card">
+                    <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>                    <h1>GCIT Graduation Day 2025</h1>
+                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
+                </div>
+                <div class="suggestionWrapper">
+                    <div class="suggestion">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <h1>GCIT Innovation Week 2025</h1>
+                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
+                    <div class="suggestion">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <h1>GCIT Innovation Week 2025</h1>
+                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
+                    <div class="suggestion">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <h1>GCIT Innovation Week 2025</h1>
+                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
+                    <div class="suggestion">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
+                        <h1>GCIT Innovation Week 2025</h1>
+                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="homeEventWrapper">
+            <div class="eventMessage">
+                <h1>News & Events</h1>
+                <p>Stay up to date with the latest happenings at GCIT — from student achievements and research showcases to innovation challenges, collaborations, and campus celebrations. Discover how our community continues to shape Bhutan’s digital future.</p>
+                <a href="">Explore More</a>
+            </div>
+            <div class="event overlayWrapper">
+                <div class="overlay"></div>
+                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
+                <div class="eventContent">
+                    <p class="date">June 25, 2025</p>
+                    <h1>Bhutan Red Cross Society</h1>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                </div>
+            </div>
+            <div class="event">
+                <div class="overlay"></div>
+                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
+                <div class="eventContent">
+                    <p class="date">June 25, 2025</p>
+                    <h1>Bhutan Red Cross Society</h1>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                </div>
+            </div>
+            <div class="event overlayWrapper">
+                <div class="overlay"></div>
+                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
+                <div class="eventContent">
+                    <p class="date">June 25, 2025</p>
+                    <h1>Bhutan Red Cross Society</h1>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                </div>
+            </div>
+            <div class="event">
+                <div class="overlay"></div>
+                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
+                <div class="eventContent">
+                    <p class="date">June 25, 2025</p>
+                    <h1>Bhutan Red Cross Society</h1>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                </div>
+            </div>
+            <div class="event">
+                <div class="overlay"></div>
+                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
+                <div class="eventContent">
+                    <p class="date">June 25, 2025</p>
+                    <h1>Bhutan Red Cross Society</h1>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                </div>
+            </div>
+            <div class="event overlayWrapper">
+                <div class="overlay"></div>
+                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
+                <div class="eventContent">
+                    <p class="date">June 25, 2025</p>
+                    <h1>Bhutan Red Cross Society</h1>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                </div>
+            </div>
+            <div class="event">
+                <div class="overlay"></div>
+                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
+                <div class="eventContent">
+                    <p class="date">June 25, 2025</p>
+                    <h1>Bhutan Red Cross Society</h1>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                </div>
+            </div>
+            <div class="event">
+                <div class="overlay"></div>
+                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
+                <div class="eventContent">
+                    <p class="date">June 25, 2025</p>
+                    <h1>Bhutan Red Cross Society</h1>
+                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                 </div>
             </div>
         </div>

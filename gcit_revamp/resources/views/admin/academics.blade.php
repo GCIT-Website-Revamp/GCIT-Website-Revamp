@@ -222,7 +222,7 @@
                                        <tr>
                                           <td>{{ $courses->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $course->name }}</td>
-                                          <td style="max-width: 340px;">{{ $course->why }}</td>
+                                          <td style="max-width: 340px;">{{ $course->description }}</td>
                                           <td style="max-width: 340px;">{{ $course->structure ?? '—' }}</td>
                                           <td>
                                              <div class="action-buttons">
@@ -234,6 +234,7 @@
                                                    data-course-what="{{ $course->what }}"
                                                    data-course-structure="{{ $course->structure }}"
                                                    data-course-career="{{ $course->career }}"
+                                                   data-course-description="{{ $course->description }}"
                                                    data-course-image="{{ asset('storage/' . $course->image) }}">
                                                    Edit
                                                 </button>

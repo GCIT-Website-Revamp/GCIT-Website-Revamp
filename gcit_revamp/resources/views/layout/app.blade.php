@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="{{ asset('css/announcement.css') }}">
   <link rel="stylesheet" href="{{ asset('css/course.css') }}">
   <link rel="stylesheet" href="{{ asset('css/post.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/courseDetails.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/department.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/staff.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/about.css') }}">
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <title>@yield('title')</title>

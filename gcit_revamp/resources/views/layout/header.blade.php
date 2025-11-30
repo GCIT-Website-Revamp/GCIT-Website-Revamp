@@ -34,7 +34,7 @@
                 <div class="dropDownContent">
                     <a href="">Institutional Overview</a>
                     <label>Non Academics</label>
-                    <a class = "subLink" href="">Finance</a>
+                    <a class = "subLink" href="/department/Finance">Finance</a>
                     <a class = "subLink" href="">Human Resources & Administration</a>
                     <a class = "subLink" href="">Information & Communication Technology</a>
                     <a class = "subLink" href="">School Affairs</a>
@@ -43,8 +43,8 @@
             <div class="dropDownWrapper">
                 <label class = "dropDownLink" for="academicToggle">Updates<span class="material-symbols-outlined">arrow_drop_down</span></label>
                 <div class="dropDownContent">
-                    <a href="">News & Events</a>
-                    <a href="">Announcements</a>
+                    <a href="/news&events">News & Events</a>
+                    <a href="/announcements">Announcements</a>
                 </div>
                     
             </div>
@@ -55,7 +55,7 @@
     <div class="wrapper subNav">
     <div class="subLinkWrapper font-xs">
         <a href="">CETA</a>
-        <a href="">Faculty</a>
+        <a href="/faculty">Faculty</a>
         <a href="">Alumini</a>
     </div>
     </div>

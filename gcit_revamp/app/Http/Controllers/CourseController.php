@@ -47,6 +47,7 @@ class CourseController extends Controller
             $rules = [
                 'name' => 'required',
                 'type' => 'required',
+                'description' => 'required',
                 'image' => 'required',
                 'why' => 'required',
                 'what' => 'required',
@@ -65,6 +66,7 @@ class CourseController extends Controller
             $course = new Course();
             $course->name = $request->name;
             $course->why = $request->why;
+            $course->description = $request->description;
             $course->type = $request->type;
             $course->what = $request->what;
             $course->structure = $request->structure;
@@ -120,6 +122,7 @@ class CourseController extends Controller
             $rules = [
                 'name' => 'required',
                 'type' => 'required',
+                'description' => 'required',
                 'why' => 'required',
                 'what' => 'required',
                 'structure' => 'required',
@@ -137,6 +140,7 @@ class CourseController extends Controller
 
             $course->name = $request->name;
             $course->why = $request->why;
+            $course->description = $request->description;
             $course->type = $request->type;
             $course->what = $request->what;
             $course->structure = $request->structure;

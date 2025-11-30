@@ -127,10 +127,6 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('/about', function () {
-    return view('user.about');
-});
-
 Route::get('/news&events', function () {
     $events = Event::orderBy('created_at', 'desc')->get();
     return view('user.eventsTemplate', compact('events'));
@@ -162,4 +158,39 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
     }
 
     return view('user.postDetailsTemplate', compact('event', 'announcement', 'latestAnnouncements', 'latestEvents'));
+});
+
+Route::get('/courseDetails/{id}', function ($id) {
+    $course = Course::findOrFail($id);
+    $modules = Module::whereJsonContains('course_id', $id)->get();
+    $otherCourses = Course::where('id', '!=', $id)->get();
+    return view('user.courseDetails', compact('course', 'modules', 'otherCourses'));
+});
+Route::get('/department/{type}', function ($type) {
+    $courses = Course::orderBy('created_at', 'desc')->get();
+    $service = Services::where('name', '=', $type)->first();
+    if ($service) {
+    $service->roles = collect($service->roles)->map(function ($role) {
+        $team = Team::find($role['team_id']);
+        if ($team) {
+            $role['team_name'] = $team->name;
+            $role['image'] = $team->image;
+        } else {
+            $role['team_name'] = null;
+            $role['users'] = [];
+        }
+        return $role;
+    });
+}
+
+    return view('user.departmentTemplate', compact('service', 'courses'));
+});
+Route::get('/faculty', function () {
+    $faculties = Team::where('type', '=', 'Academic')->get();
+    return view('user.faculty', compact('faculties'));
+});
+Route::get('/about', function () {
+    $overview = Overview::orderBy('created_at', 'desc')->first();
+    $courses = Course::orderBy('created_at', 'desc')->get();
+    return view('user.about', compact('overview', 'courses'));
 });

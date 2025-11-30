@@ -155,3 +155,6 @@ Route::get('/faculty', function () {
 Route::get('/about', function () {
     return view('user.about');
 });
+Route::get('/project', function () {
+    return view('user.project');
+});

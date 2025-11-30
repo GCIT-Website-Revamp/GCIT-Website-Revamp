@@ -16,7 +16,7 @@
             <div class="dropDownWrapper">
                 <label class = "dropDownLink" for="academicToggle">Tech Impact<span class="material-symbols-outlined">arrow_drop_down</span></label>
                 <div class="dropDownContent">
-                    <a href="">Industry Projects</a>
+                    <a href="/project">Industry Projects</a>
                     <a href="">Partners & Collaboration</a>
                     <a href="">Research</a>
                 </div>
@@ -26,7 +26,7 @@
                  <div class="dropDownContent">
                     <a href="/resources/Admission">Admissions</a>
                     <label>Student Services</label>
-                    <a class = "subLink" href="">Clubs</a>
+                    <a class = "subLink" href="/clubs">Clubs</a>
                     <a class = "subLink" href="/resources/ICT">ICT</a>
                     <a class = "subLink" href="/resources/Student-Welfare">Student Welfare</a>
                 </div>

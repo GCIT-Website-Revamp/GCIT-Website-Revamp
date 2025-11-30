@@ -25,6 +25,11 @@
                 <h1>{{ $announcement->name }}</h1>
             </div>
         @endif
+         @if($project)
+            <div class="contentWrapper">
+                <h1>{{ $project->name }}</h1>
+            </div>
+        @endif
     </div>
 </div>
 <div class="pageContentWrapper">
@@ -37,6 +42,13 @@
                 @endif
                 @if($announcement)
                 <p>{!! $announcement->description !!}</p>
+                @endif
+                @if($project)
+                <img src="{{ asset('storage/' . $project->image) }}" alt="">
+                <p>{!! $project->description !!}</p>
+                <p>Year of Completion: {{ $project->year }}</p>
+                <p>Project Guide: {{ $project->guide }}</p>
+                <p>Developers: <br> {!! nl2br(e($project->developers)) !!}</p>
                 @endif
                     <div class="btnWrapper">
                         <button class="left"><span class="material-symbols-outlined">keyboard_arrow_right</span>Previous

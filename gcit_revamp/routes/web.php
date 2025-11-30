@@ -129,12 +129,12 @@ Route::get('/', function () {
 });
 
 Route::get('/news&events', function () {
-    $events = Event::orderBy('created_at', 'desc')->get();
+    $events = Event::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
     return view('user.eventsTemplate', compact('events'));
 });
 
 Route::get('/announcements', function () {
-    $announcements = Announcement::orderBy('created_at', 'desc')->get();
+    $announcements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
     return view('user.announcementTemplate', compact('announcements'));
 });
 
@@ -148,17 +148,23 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
     $announcement = null;
     $latestEvents = null;
     $latestAnnouncements = null;
+    $project = null;
+    $latestProjects = null;
 
     if ($type === 'events') {
         $event = Event::findOrFail($id);
-        $latestEvents = Event::orderBy('created_at', 'desc')->take(4)->get();
+        $latestEvents = Event::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
     }
     if ($type === 'announcement') {
         $announcement = Announcement::findOrFail($id);
-        $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->take(4)->get();
+        $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
+    }
+    if ($type === 'project') {
+        $project = Project::findOrFail($id);
+        $latestProjects = Project::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
     }
 
-    return view('user.postDetailsTemplate', compact('event', 'announcement', 'latestAnnouncements', 'latestEvents'));
+    return view('user.postDetailsTemplate', compact('event', 'announcement', 'latestAnnouncements', 'latestEvents','project', 'latestProjects'));
 });
 
 Route::get('/courseDetails/{id}', function ($id) {
@@ -191,17 +197,23 @@ Route::get('/faculty', function () {
     $faculties = Team::where('type', '=', 'Academic')->get();
     return view('user.faculty', compact('faculties'));
 });
+
 Route::get('/about', function () {
     $overview = Overview::orderBy('created_at', 'desc')->first();
     $courses = Course::orderBy('created_at', 'desc')->get();
     return view('user.about', compact('overview', 'courses'));
 });
 
-Route::get('/clubs/{type}', function ($type) {
+Route::get('/clubs', function () {
+    $clubs = Club::orderBy('created_at', 'desc')->get();
+    return view('user.club', compact('clubs'));
+});
+
+Route::get('/clubDetails/{id}', function ($id) {
     $courses = Course::orderBy('created_at', 'desc')->get();
-    $service = Services::where('name', '=', $type)->first();
-    if ($service) {
-        $service->roles = collect($service->roles)->map(function ($role) {
+    $club = Club::where('id', '=', $id)->first();
+    if ($club) {
+        $club->roles = collect($club->roles)->map(function ($role) {
             $team = Team::find($role['team_id']);
             if ($team) {
                 $role['team_name'] = $team->name;
@@ -214,7 +226,7 @@ Route::get('/clubs/{type}', function ($type) {
         });
     }
 
-    return view('user.departmentTemplate', compact('service', 'courses'));
+    return view('user.clubDetails', compact('club','courses'));
 });
 
 Route::get('/resources/{type}', function ($type) {
@@ -231,4 +243,8 @@ Route::get('/resources/{type}', function ($type) {
         $resources->name = $type;
     }
     return view('user.resources', compact('resources', 'courses'));
+});
+Route::get('/project', function () {
+    $projects = Project::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
+    return view('user.project', compact('projects'));
 });

@@ -22,7 +22,7 @@
     </div>
 </div>
 <div class="pageContentWrapper">
-    <div class="section">
+    <div class="section eventsWrapper">
         <div class="mainContent courseContent">
             @forelse ($courses as $index => $course)
             <div class="card">

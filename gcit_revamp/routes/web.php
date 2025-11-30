@@ -119,10 +119,6 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
     });
 });
 
-Route::get('/new', function () {
-    return view('contact');
-});
-
 Route::get('/', function () {
     return view('user.home');
 });
@@ -166,22 +162,23 @@ Route::get('/courseDetails/{id}', function ($id) {
     $otherCourses = Course::where('id', '!=', $id)->get();
     return view('user.courseDetails', compact('course', 'modules', 'otherCourses'));
 });
+
 Route::get('/department/{type}', function ($type) {
     $courses = Course::orderBy('created_at', 'desc')->get();
     $service = Services::where('name', '=', $type)->first();
     if ($service) {
-    $service->roles = collect($service->roles)->map(function ($role) {
-        $team = Team::find($role['team_id']);
-        if ($team) {
-            $role['team_name'] = $team->name;
-            $role['image'] = $team->image;
-        } else {
-            $role['team_name'] = null;
-            $role['users'] = [];
-        }
-        return $role;
-    });
-}
+        $service->roles = collect($service->roles)->map(function ($role) {
+            $team = Team::find($role['team_id']);
+            if ($team) {
+                $role['team_name'] = $team->name;
+                $role['image'] = $team->image;
+            } else {
+                $role['team_name'] = null;
+                $role['users'] = [];
+            }
+            return $role;
+        });
+    }
 
     return view('user.departmentTemplate', compact('service', 'courses'));
 });
@@ -193,4 +190,40 @@ Route::get('/about', function () {
     $overview = Overview::orderBy('created_at', 'desc')->first();
     $courses = Course::orderBy('created_at', 'desc')->get();
     return view('user.about', compact('overview', 'courses'));
+});
+
+Route::get('/clubs/{type}', function ($type) {
+    $courses = Course::orderBy('created_at', 'desc')->get();
+    $service = Services::where('name', '=', $type)->first();
+    if ($service) {
+        $service->roles = collect($service->roles)->map(function ($role) {
+            $team = Team::find($role['team_id']);
+            if ($team) {
+                $role['team_name'] = $team->name;
+                $role['image'] = $team->image;
+            } else {
+                $role['team_name'] = null;
+                $role['users'] = [];
+            }
+            return $role;
+        });
+    }
+
+    return view('user.departmentTemplate', compact('service', 'courses'));
+});
+
+Route::get('/resources/{type}', function ($type) {
+    $resources = null;
+    $courses = Course::orderBy('created_at', 'desc')->get();
+    if ($type === 'Admission') {
+        $resources = Admission::orderBy('created_at', 'desc')->first();
+    }elseif($type === 'ICT'){
+        $resources = ICT::orderBy('created_at', 'desc')->first();
+    }elseif($type === 'Student-Welfare'){
+        $resources = Welfare::orderBy('created_at', 'desc')->first();
+    }
+    if ($resources) {
+        $resources->name = $type;
+    }
+    return view('user.resources', compact('resources', 'courses'));
 });

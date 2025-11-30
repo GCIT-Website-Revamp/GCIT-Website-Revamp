@@ -16,8 +16,8 @@
             <a href="">Updates</a>
         </div>
         <div class="contentWrapper">
-            @if($service)
-            <h1>{{ $service->name }}</h1>
+            @if($resources)
+            <h1>{{ $resources->name }}</h1>
             @endif
         </div>
     </div>
@@ -26,19 +26,8 @@
     <div class="section">
         <div class="postWrapper departmentWrapper">
             <div class="post">
-                @if($service)
-                <p>{!! nl2br(e($service->description)) !!}</p>
-                <div class="staffProfileWrapper">
-                    @foreach ($service->roles as $role)
-                        <div class="staff">
-                        <img src="{{ asset('storage/' . $role['image']) }}" alt="">
-                        <div class="staffDescription">
-                            <h1>{{ $role['team_name'] }}</h1>
-                            <p>{{ $role['name'] }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
+                @if($resources)
+                <p>{!! $resources->description !!}</p>
                 @endif
 
             </div>

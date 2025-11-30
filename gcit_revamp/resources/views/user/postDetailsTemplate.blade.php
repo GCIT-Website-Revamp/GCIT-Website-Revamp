@@ -33,10 +33,10 @@
             <div class="post">
                 @if($event)
                 <img src="{{ asset('storage/' . $event->image) }}" alt="">
-                <p>{!! $event->description !!}</p>
+                <p>{!! nl2br(e($event->description)) !!}</p>
                 @endif
                 @if($announcement)
-                <p>{!! $announcement->description !!}</p>
+                <p>{!! nl2br(e($announcement->description)) !!}</p>
                 @endif
                     <div class="btnWrapper">
                         <button class="left"><span class="material-symbols-outlined">keyboard_arrow_right</span>Previous

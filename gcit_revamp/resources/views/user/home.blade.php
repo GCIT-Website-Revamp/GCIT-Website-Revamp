@@ -60,7 +60,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                 <div class="ctaBtn">
                     <a href="">Learn More</a>
                 </div>
-                <a href="" class = "secondaryCta">
+                <a href="/resources/Admission" class = "secondaryCta">
                     Admissions
                     <span class="material-symbols-outlined">
                     keyboard_arrow_right

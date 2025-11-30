@@ -1,0 +1,126 @@
+.preAboutHeader .breadCrumbs a,
+.preAboutHeader .breadCrumbs span{
+    color: #A9A9A9;
+}
+
+.preAboutHeader{
+    padding: 100px var(--padding-sides) 
+}
+
+.aboutContentWrapper{
+    display: flex;
+    gap: clamp(20px, 4vw, 60px);
+}
+.aboutHeader h1{
+    font-size: clamp(40px, 7vw, 96px);
+    font-weight: 400;
+    font-family: var(--font-Header);
+    color: var(--color-primary);
+    width: 90%;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #E0E0E0;
+}
+.aboutHeader{
+    margin-bottom: 2rem;
+    padding: 0 var(--padding-sides)
+
+}
+
+.aboutHeader p{
+    font-weight: 300;
+    width: 100%;
+    color: #4D4D4D;
+    width: 90%;
+    line-height: 150%s;
+}
+.aboutContent{
+    width: 80%;
+
+}
+.aboutContentWrapper .otherCourseContainer{
+    width: 30%;
+}
+.aboutDetailsWrapper{
+    position: relative;
+    padding: 0 var(--padding-sides)
+}
+.bgColorUnderlay{
+    position: absolute;
+    left: 0;
+    top: 20%;
+    z-index: 0;
+    height: 90%;
+    width: 100vw;
+    background-color: #F3F3F3;
+}
+
+.aboutDetails{
+    position: relative;
+    z-index: 10;;
+}
+
+.aboutDetails img{
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+.aboutDetails p{
+    line-height: 150%;
+    margin-top: 2rem;
+    font-weight: 300;
+    width: 90%;
+}
+.mottoWrapper{
+
+    margin: 150px 0;
+    padding: 0 var(--padding-sides);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+
+}
+.mottoWrapper .underlay{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80%;
+    width: auto;
+    z-index: 0;
+}
+
+.mottoWrapper .visionWrapper h1,
+.mottoWrapper .missionWrapper h1{
+    font-family: var(--font-Header);
+    font-weight: 400;
+    font-size: clamp(48px, 10vw, 128px);
+    width: 100%;
+    text-align: center;
+}
+.visionWrapper, .missionWrapper {
+    display: flex;
+    position: relative;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.mottoWrapper .visionWrapper p,
+.mottoWrapper .missionWrapper p{
+    font-weight: 300;
+line-height: 150%;
+width: 80%;
+text-align: center;
+}
+
+.mottoWrapper .visionWrapper h1{
+    color: var(--color-secondary)
+}
+.mottoWrapper .missionWrapper h1{
+    color: var(--color-primary)
+}

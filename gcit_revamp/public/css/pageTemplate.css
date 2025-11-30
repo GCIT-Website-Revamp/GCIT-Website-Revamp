@@ -37,12 +37,12 @@
     font-weight: 300;
 }
 
-.pageBannerWrapper .breadCrumbs a{
+ .breadCrumbs a{
     text-decoration: none;
     color: white;
    
 }
-.pageBannerWrapper .breadCrumbs{
+ .breadCrumbs{
     align-items: center;
     display: flex;
     gap:.5rem;

@@ -152,3 +152,6 @@ Route::get('/department', function () {
 Route::get('/faculty', function () {
     return view('user.faculty');
 });
+Route::get('/about', function () {
+    return view('user.about');
+});

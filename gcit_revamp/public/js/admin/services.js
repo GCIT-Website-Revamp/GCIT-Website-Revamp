@@ -36,6 +36,11 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
         </form>
     `;
 
+    ClassicEditor
+        .create(document.querySelector('#description'))
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
+
     document.querySelector('#myModal .modal-footer').innerHTML = `
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-success" id="addService">Add Service</button>
@@ -94,7 +99,7 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
 
         const payload = {
             name: document.getElementById('name').value,
-            description: document.getElementById('description').value,
+            description: window.ictEditorInstance.getData(),
             roles
         };
 
@@ -182,6 +187,11 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
             </form>
         `;
 
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .then(editor => window.ictEditorInstance = editor)
+            .catch(err => console.error(err));
+
         document.querySelector('#myModal .modal-footer').innerHTML = `
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-success" id="updateService">Update Service</button>
@@ -239,7 +249,7 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
                     }));
                     const payload = {
                         name: document.getElementById('name').value,
-                        description: document.getElementById('description').value,
+                        description: window.ictEditorInstance.getData(),
                         roles
                     };
 

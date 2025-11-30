@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="cardContent">
                     <h1>{{ $announcement->name }}</h1>
-                    <p class = "multi-truncate">{{ $announcement->description}}</p>
+                    <p class = "multi-truncate">{!! Str::limit($announcement->description, 400) !!}</p>
                     <div class="subContentContainer">
                         <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($announcement->date)->format('F d, Y') }}</span>
                         <a href="/post/announcement/{{ $announcement->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>

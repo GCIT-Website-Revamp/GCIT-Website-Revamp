@@ -226,7 +226,7 @@
                                              <div class="action-buttons">
                                                 <button class="btn btn-success edit-btn" data-id="{{ $team->id }}"
                                                    data-name="{{ $team->name }}" data-service-id="{{ $team->service_id }}"
-                                                   data-type="{{ $team->type }}"
+                                                   data-type="{{ $team->type }}" data-department="{{ $team->category }}"
                                                    data-title="{{ $team->title }}"
                                                    data-description="{{ $team->description }}"
                                                    data-image="{{ asset('storage/' . $team->image) }}">Edit</button>

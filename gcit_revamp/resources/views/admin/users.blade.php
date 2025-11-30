@@ -228,12 +228,14 @@
                               <div class="heading1 margin_0">
                                  <h2>Admin List</h2>
                               </div>
-                              <div>
-                                 <button id="addAdminBtn" type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#myModal" aria-haspopup="true" aria-controls="myModal">
-                                    <i class="fa fa-user-plus mx-2 mb-2 mt-2"></i> Add Admin
-                                 </button>
-                              </div>
+                              @if (Auth::user()->role == 'Super Admin')
+                                 <div>
+                                    <button id="addAdminBtn" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                       data-bs-target="#myModal" aria-haspopup="true" aria-controls="myModal">
+                                       <i class="fa fa-user-plus mx-2 mb-2 mt-2"></i> Add Admin
+                                    </button>
+                                 </div>
+                              @endif
                            </div>
                         </div>
                         <div class="table_section padding_infor_info">
@@ -245,7 +247,9 @@
                                        <th>Full Name</th>
                                        <th>Email</th>
                                        <th>Contact No.</th>
-                                       <th>Action</th>
+                                       @if (Auth::user()->role == 'Super Admin')
+                                          <th>Action</th>
+                                       @endif
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -255,17 +259,19 @@
                                           <td>{{ $user->name }}</td>
                                           <td>{{ $user->email }}</td>
                                           <td>{{ $user->contact_no ?? '—' }}</td>
-                                          <td style="max-width:80px;">
-                                             <form action="{{ route('toggleUser', $user->id) }}" method="POST"
-                                                class="toggle-user-form" data-username="{{ $user->name }}">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit"
-                                                   class="btn btn-{{ $user->enabled ? 'orange' : 'success' }}">
-                                                   {{ $user->enabled ? 'Disable' : 'Enable' }}
-                                                </button>
-                                             </form>
-                                          </td>
+                                          @if (Auth::user()->role == 'Super Admin')
+                                             <td style="max-width:80px;">
+                                                <form action="{{ route('toggleUser', $user->id) }}" method="POST"
+                                                   class="toggle-user-form" data-username="{{ $user->name }}">
+                                                   @csrf
+                                                   @method('PUT')
+                                                   <button type="submit"
+                                                      class="btn btn-{{ $user->enabled ? 'orange' : 'success' }}">
+                                                      {{ $user->enabled ? 'Disable' : 'Enable' }}
+                                                   </button>
+                                                </form>
+                                             </td>
+                                          @endif
                                        </tr>
                                     @empty
                                        <tr>

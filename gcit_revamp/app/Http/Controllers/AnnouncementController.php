@@ -48,6 +48,8 @@ class AnnouncementController extends Controller
                 'name' => 'required',
                 'date' => 'required|date',
                 'description' => 'required',
+                'category' => 'required',
+                'display' => 'sometimes'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -61,6 +63,8 @@ class AnnouncementController extends Controller
             $announcement = new Announcement();
             $announcement->name = $request->name;
             $announcement->date = $request->date;
+            $announcement->display = $request->display;
+            $announcement->category = $request->category;
             $announcement->description = $request->description;
             $announcement->save();
 
@@ -106,6 +110,8 @@ class AnnouncementController extends Controller
                 'name' => 'required',
                 'date' => 'required|date',
                 'description' => 'required',
+                'category' => 'required',
+                'display' => 'sometimes'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -119,6 +125,8 @@ class AnnouncementController extends Controller
             $announcement->name = $request->name;
             $announcement->date = $request->date;
             $announcement->description = $request->description;
+            $announcement->display = $request->display;
+            $announcement->category = $request->category;
             $announcement->save();
 
             return response()->json([

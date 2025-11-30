@@ -28,7 +28,7 @@
                     <label>Student Services</label>
                     <a class = "subLink" href="">Clubs</a>
                     <a class = "subLink" href="/resources/ICT">ICT</a>
-                    <a class = "subLink" href="/resources/Student-welfare">Student Welfare</a>
+                    <a class = "subLink" href="/resources/Student-Welfare">Student Welfare</a>
                 </div>
             </div>
             <div class="dropDownWrapper">
@@ -37,9 +37,10 @@
                     <a href="/about">Institutional Overview</a>
                     <label>Non Academics</label>
                     <a class = "subLink" href="/department/Finance">Finance</a>
-                    <a class = "subLink" href="/department/Finance">Human Resources & Administration</a>
-                    <a class = "subLink" href="/department/Finance">Information & Communication Technology</a>
-                    <a class = "subLink" href="/department/Finance">School Affairs</a>
+                    <a class = "subLink" href="/department/Human Resources & Administration">Human Resources & Administration</a>
+                    <a class = "subLink" href="/department/Information & Communication Technology">Information & Communication Technology</a>
+                    <a class = "subLink" href="/department/School Affairs">School Affairs</a>
+                    <a class = "subLink" href="/department/Student Affairs">Student Affairs</a>
                 </div>
             </div>
             <div class="dropDownWrapper">

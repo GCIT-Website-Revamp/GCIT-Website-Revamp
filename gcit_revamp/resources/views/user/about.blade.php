@@ -15,15 +15,14 @@
     <div class="aboutContent">
         <div class="aboutHeader">
             <h1>Institutional Overview</h1>
-            <p>At the Gyalpozhing College of Information Technology (GCIT), we are dedicated to shaping Bhutan’s digital future through innovation, education, and research. Our mission is to cultivate creative problem solvers and ethical leaders who use technology to drive positive change in society.
-            </p>
+            <br>
         </div>
         <div class="aboutDetailsWrapper">
             <div class="bgColorUnderlay"></div>
             <div class="aboutDetails">
                 @if($overview)
                 <img src="{{ asset('storage/' . $overview->image) }}" alt="">
-                <p>{!! nl2br(e($overview->description)) !!}</p>
+                <p>{!! $overview->description !!}</p>
                 @endif
                 </div>
             </div>

@@ -36,6 +36,11 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
         </form>
     `;
 
+    ClassicEditor
+        .create(document.querySelector('#club_description'))
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
+
     // Modal footer
     document.querySelector('#myModal .modal-footer').innerHTML = `
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -89,7 +94,7 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
     // Handle Add Club submission
     document.getElementById('addClub').addEventListener('click', function () {
         const clubName = document.getElementById('club_name').value;
-        const clubDescription = document.getElementById('club_description').value;
+        const clubDescription = window.ictEditorInstance.getData();
 
         // Gather roles
         const roles = Array.from(document.querySelectorAll('.role-row')).map(row => ({
@@ -181,6 +186,12 @@ document.querySelectorAll('.edit-club-btn').forEach(button => {
             </form>
         `;
 
+        // Init CKEditor
+        ClassicEditor
+            .create(document.querySelector('#edit_club_description'))
+            .then(editor => window.ictEditorInstance = editor)
+            .catch(err => console.error(err));
+
         document.querySelector('#myModal .modal-footer').innerHTML = `
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-success" id="updateClubBtn">Update Club</button>
@@ -233,7 +244,7 @@ document.querySelectorAll('.edit-club-btn').forEach(button => {
                 // Submit Update
                 document.getElementById('updateClubBtn').addEventListener('click', () => {
                     const updatedName = document.getElementById('edit_club_name').value;
-                    const updatedDescription = document.getElementById('edit_club_description').value;
+                    const updatedDescription = window.ictEditorInstance.getData();
 
                     const roles = [...document.querySelectorAll('#edit-roles-container .role-row')].map(row => ({
                         name: row.querySelector('.role-name').value,

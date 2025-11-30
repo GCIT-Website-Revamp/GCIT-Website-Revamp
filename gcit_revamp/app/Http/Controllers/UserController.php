@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\GCITMail;
+use App\Mail\AdminPasswordMail;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -48,13 +49,19 @@ class UserController extends Controller
         }
     }
 
+    private function generateRandomPassword($length = 10)
+    {
+        return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()'), 0, $length);
+    }
+
     public function createUser(Request $request)
     {
         try {
             $rules = [
                 'name' => 'required|string|max:255',
                 'email' => ['required', 'email', 'max:255', 'unique:users'],
-                'password' => 'required',
+                'password' => 'sometimes',
+                'role' => 'required',
                 'contact_no' => 'nullable|string|max:30',
                 'enabled' => 'required|boolean'
             ];
@@ -70,16 +77,31 @@ class UserController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = Hash::make($request->password);
+            $user->role = $request->role;
             $user->contact_no = $request->contact_no;
             $user->enabled = $request->enabled;
             $user->otp = $this->generateOtp();
-            $user->save();
+            if ($request->role === 'Admin') {
+                $randomPassword = $this->generateRandomPassword();
+                $user->password = Hash::make($randomPassword);
+                try {
+                    Mail::to($user->email)->send(new AdminPasswordMail($randomPassword));
+                } catch (\Exception $e) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Failed to send admin password email.',
+                        'error' => $e->getMessage()
+                    ], 500);
+                }
+                $user->save();
+            } else {
+                $user->password = Hash::make($request->password);
+                $user->save();
+            }
 
             return response()->json([
                 'success' => true,
-                'message' => 'User created successfully!',
-                'data' => $user
+                'message' => 'User created successfully!'
             ]);
         } catch (\Exception $e) {
             return response()->json([

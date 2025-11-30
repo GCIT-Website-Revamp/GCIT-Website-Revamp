@@ -40,6 +40,18 @@ document.getElementById('addTeamBtn').addEventListener('click', function () {
             </select>
         </div>
 
+        <div class="form-group" id="department" style="display:none;">
+            <label for="teamDepartment">Department</label>
+            <select class="form-control" id="teamDepartment">
+                <option value="" disabled selected>Select Department</option>
+                <option value="Blockchain Department">Blockchain Department</option>
+                <option value="Fullstack Department">Fullstack Department</option>
+                <option value="AI Department">AI Department</option>
+                <option value="Cyber Department">Cyber Department</option>
+                <option value="Interactive Design & Development">Interactive Design & Development</option>
+            </select>
+        </div>
+
         <!-- Title field (hidden initially) -->
         <div class="form-group" id="titleGroup" style="display:none;">
             <label for="teamTitle">Title</label>
@@ -76,6 +88,7 @@ document.querySelectorAll('.edit-btn').forEach(btn => {
         const type = this.dataset.type;
         const description = this.dataset.description;
         const image = this.dataset.image;
+        const department = this.dataset.department;
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Team';
 
@@ -96,6 +109,17 @@ document.querySelectorAll('.edit-btn').forEach(btn => {
             <select class="form-control" id="teamType">
                 <option value="Academic" ${type === "Academic" ? "selected" : ""}>Academic</option>
                 <option value="Non-Academic" ${type === "Non-Academic" ? "selected" : ""}>Non-Academic</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="department" style="display:${type === "Academic" ? "block" : "none"};">
+            <label for="teamDepartment">Department</label>
+            <select class="form-control" id="teamDepartment">
+                <option value="Blockchain Department" ${department === "Blockchain Department" ? "selected" : ""}>Blockchain Department</option>
+                <option value="Fullstack Department" ${department === "Fullstack Department" ? "selected" : ""}>Fullstack Department</option>
+                <option value="AI Department" ${department === "AI Department" ? "selected" : ""}>AI Department</option>
+                <option value="Cyber Department" ${department === "Cyber Department" ? "selected" : ""}>Cyber Department</option>
+                <option value="Interactive Design & Development" ${department === "Interactive Design & Development" ? "selected" : ""}>Interactive Design & Development</option>
             </select>
         </div>
 
@@ -133,6 +157,7 @@ function saveOrUpdateTeam(isEdit = false, id = null) {
     formData.append("name", document.getElementById("teamName").value);
     formData.append("description", document.getElementById("teamDescription").value);
     formData.append("type", document.getElementById("teamType").value);
+    formData.append("category", document.getElementById("teamDepartment").value);
     formData.append("title", document.getElementById("teamTitle").value);
     if (isEdit) {
         formData.append("_method", "PUT");
@@ -240,15 +265,19 @@ document.querySelectorAll('.delete-btn').forEach(btn => {
 function attachTypeToggle() {
     const typeSelect = document.getElementById("teamType");
     const titleGroup = document.getElementById("titleGroup");
+    const department = document.getElementById("department");
 
     if (!typeSelect) return; // safety
 
     typeSelect.addEventListener("change", function () {
         if (this.value === "Academic") {
             titleGroup.style.display = "block";
+            department.style.display = "block";
         } else {
             titleGroup.style.display = "none";
             document.getElementById("teamTitle").value = "";
+             department.style.display = "none";
+            document.getElementById("teamDepartment").value = "";
         }
     });
 }

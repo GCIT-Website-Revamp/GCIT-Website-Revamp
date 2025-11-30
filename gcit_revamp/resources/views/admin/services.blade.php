@@ -221,7 +221,7 @@
                                        <tr>
                                           <td>{{ $services->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $service->name }}</td>
-                                          <td style="max-width: 300px;">{{ $service->description ?? '—' }}</td>
+                                          <td style="max-width: 300px;">{!! Str::limit($service->description, 450) !!}</td>
                                           <td style="max-width: 80px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-service-btn"
@@ -282,6 +282,7 @@
    </div>
    <!-- jQuery -->
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
    <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
    <script src="{{ asset('js/admin/popper.min.js') }}"></script>
    <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>

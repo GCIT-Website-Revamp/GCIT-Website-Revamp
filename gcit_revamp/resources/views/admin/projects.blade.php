@@ -224,13 +224,14 @@
                                           <td style="max-width: 40px;">{{ $project->name }}</td>
                                           <td style="max-width: 80px;"><img src="{{ asset('storage/' . $project->image) }}"
                                                 alt="Project Image" width="80"></td>
-                                          <td style="max-width: 340px;">{{ $project->description ?? '—' }}</td>
+                                          <td style="max-width: 340px;">{!! Str::limit($project->description, 450) !!}</td>
                                           <td style="max-width: 40px;">{{ $project->year }}</td>
                                           <td style="max-width: 80px;">
                                              <div class="action-buttons">
                                                 <button class="btn btn-success edit-project-btn"
                                                    data-id="{{ $project->id }}" data-name="{{ $project->name }}"
                                                    data-year="{{ $project->year }}" data-guide="{{ $project->guide }}"
+                                                   data-display="{{ $project->display }}"
                                                    data-developers="{{ $project->developers }}"
                                                    data-description="{{ $project->description }}"
                                                    data-image="{{ asset('storage/' . $project->image) }}">Edit</button>
@@ -281,6 +282,7 @@
    </div>
    <!-- jQuery -->
    <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
+   <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
    <script src="{{ asset('js/admin/popper.min.js') }}"></script>
    <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
    <script src="{{ asset('js/admin/animate.js') }}"></script>

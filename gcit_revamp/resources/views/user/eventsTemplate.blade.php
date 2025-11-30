@@ -30,7 +30,7 @@
                     <div class="cardContent">
                         <span class="date">{{ \Carbon\Carbon::parse($event->date)->format('F d, Y') }}</span>
                         <h1>{{ $event->name }}</h1>
-                        <p class="multi-truncate">{{ $event->description ?? '—' }}</p>
+                        <p class="multi-truncate">{!! Str::limit($event->description, 200) !!}</p>
                         <a href="/post/events/{{ $event->id }}">
                             <span class="material-symbols-outlined">expand_circle_right</span>
                             Read More

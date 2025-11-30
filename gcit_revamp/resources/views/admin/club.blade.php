@@ -222,7 +222,7 @@
                                        <tr>
                                           <td>{{ $clubs->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $club->name }}</td>
-                                          <td style="max-width: 340px;">{{ $club->description ?? '—' }}</td>
+                                          <td style="max-width: 340px;">{!! Str::limit($club->description, 450) !!}</td>
                                           <td style="max-width: 60px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-club-btn"
@@ -282,6 +282,7 @@
    </div>
    <!-- jQuery -->
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
    <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
    <script src="{{ asset('js/admin/popper.min.js') }}"></script>

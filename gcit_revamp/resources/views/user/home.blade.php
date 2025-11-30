@@ -136,15 +136,14 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
             </div>
             <div class="courseLinkContainer">
                  <div class="courseLinkWrapper">
-                        <a href="">Full Stack Development <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">Blockchain Development <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">AI Development & Data Science <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">Cybersecurity <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                    @foreach ($bsc as $item)
+                        <a href="/courseDetails/{{ $item->id }}">{{ $item->name }} <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                    @endforeach
                     </div>    
                     <div class="courseLinkWrapper">
-                        <a href="">User Interface Design <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">User Experience Design <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="">Frontend Engineer <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                        @foreach ($sidd as $item)
+                            <a href="/courseDetails/{{ $item->id }}">{{ $item->name }} <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                        @endforeach
                     </div> 
             </div>
         </div>
@@ -207,43 +206,27 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                     <p>Explore announcements that showcase GCIT’s commitment to learning, research, and community engagement.</p>
                 </div>
                 <div class="headerLink">
-                    <a href="">View More</a>
+                    <a href="/announcements">View More</a>
                 </div>
             </div>
             <div class="homeAnnouncementContent">
                 <div class="cardAnnouncement">
-                    <div class="card">
-                    <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
-                    <div class="card">
-                    <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>                    <h1>GCIT Graduation Day 2025</h1>
-                    <p class = "multi-truncate">GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity,</p>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
+                    @foreach ($announcements as $item)
+                        <div class="card">
+                            <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span> <br>                   <h1>{{$item->name}}</h1>
+                            <br><p class = "multi-truncate">{!! Str::limit($item->description, 250) !!}</p>
+                            <a href="/post/announcement/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="suggestionWrapper">
-                    <div class="suggestion">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
-                        <h1>GCIT Innovation Week 2025</h1>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    @foreach ($latestAnnouncements as $item)
+                        <div class="suggestion">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
+                        <h1>{{$item->name}}</h1>
+                        <a href="/post/announcement/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                     </div>
-                    <div class="suggestion">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
-                        <h1>GCIT Innovation Week 2025</h1>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
-                    <div class="suggestion">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
-                        <h1>GCIT Innovation Week 2025</h1>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
-                    <div class="suggestion">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>June 24, 2025</span>
-                        <h1>GCIT Innovation Week 2025</h1>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -251,80 +234,19 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
             <div class="eventMessage">
                 <h1>News & Events</h1>
                 <p>Stay up to date with the latest happenings at GCIT — from student achievements and research showcases to innovation challenges, collaborations, and campus celebrations. Discover how our community continues to shape Bhutan’s digital future.</p>
-                <a href="">Explore More</a>
+                <a href="/news&events">Explore More</a>
             </div>
-            <div class="event overlayWrapper">
-                <div class="overlay"></div>
-                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
-                <div class="eventContent">
-                    <p class="date">June 25, 2025</p>
-                    <h1>Bhutan Red Cross Society</h1>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+            @foreach ($events as $item)
+                <div class="event overlayWrapper">
+                    <div class="overlay"></div>
+                    <img src="{{ asset('storage/' . $item->image) }}" alt="">
+                    <div class="eventContent">
+                        <p class="date">{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</p>
+                        <h1>{{$item->name}}</h1>
+                        <a href="/post/events/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
                 </div>
-            </div>
-            <div class="event">
-                <div class="overlay"></div>
-                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
-                <div class="eventContent">
-                    <p class="date">June 25, 2025</p>
-                    <h1>Bhutan Red Cross Society</h1>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
-            <div class="event overlayWrapper">
-                <div class="overlay"></div>
-                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
-                <div class="eventContent">
-                    <p class="date">June 25, 2025</p>
-                    <h1>Bhutan Red Cross Society</h1>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
-            <div class="event">
-                <div class="overlay"></div>
-                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
-                <div class="eventContent">
-                    <p class="date">June 25, 2025</p>
-                    <h1>Bhutan Red Cross Society</h1>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
-            <div class="event">
-                <div class="overlay"></div>
-                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
-                <div class="eventContent">
-                    <p class="date">June 25, 2025</p>
-                    <h1>Bhutan Red Cross Society</h1>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
-            <div class="event overlayWrapper">
-                <div class="overlay"></div>
-                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
-                <div class="eventContent">
-                    <p class="date">June 25, 2025</p>
-                    <h1>Bhutan Red Cross Society</h1>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
-            <div class="event">
-                <div class="overlay"></div>
-                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
-                <div class="eventContent">
-                    <p class="date">June 25, 2025</p>
-                    <h1>Bhutan Red Cross Society</h1>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
-            <div class="event">
-                <div class="overlay"></div>
-                <img src="{{ asset('Images/events/dummyEventImg.png') }}" alt="">
-                <div class="eventContent">
-                    <p class="date">June 25, 2025</p>
-                    <h1>Bhutan Red Cross Society</h1>
-                    <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection

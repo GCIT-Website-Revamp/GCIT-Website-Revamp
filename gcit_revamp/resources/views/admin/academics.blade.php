@@ -222,8 +222,8 @@
                                        <tr>
                                           <td>{{ $courses->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $course->name }}</td>
-                                          <td style="max-width: 340px;">{{ $course->description }}</td>
-                                          <td style="max-width: 340px;">{{ $course->structure ?? '—' }}</td>
+                                          <td style="max-width: 340px;">{!! nl2br(e(Str::limit($course->description, 200))) !!}</td>
+                                          <td style="max-width: 340px;">{!! nl2br(e(Str::limit($course->structure, 200))) !!}</td>
                                           <td>
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-course-btn"
@@ -283,9 +283,9 @@
                                     <tr>
                                        <th>#</th>
                                        <th>Module</th>
-                                       <th>Description</th>
                                        <th>Year</th>
                                        <th>Semester</th>
+                                       <th>Description</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
@@ -294,9 +294,9 @@
                                        <tr>
                                           <td>{{ $modules->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $module->name }}</td>
-                                          <td style="max-width: 440px;">{{ $module->description }}</td>
                                           <td>{{ $module->year ?? '—' }}</td>
                                           <td>{{ $module->semester ?? '—' }}</td>
+                                          <td style="max-width: 440px;">{!! nl2br(e(Str::limit($module->description, 200))) !!}</td>
                                           <td>
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-module-btn"

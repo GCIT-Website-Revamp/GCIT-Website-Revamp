@@ -81,10 +81,26 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
                     <input type="date" id="event_date" class="form-control" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" id="category">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="Events">Events</option>
+                        <option value="News">News</option>
+                    </select>
+                </div>
+
                 <div class="form-group mt-2">
                     <label>Description</label>
                     <textarea id="event_description" class="form-control" rows="5"></textarea>
                 </div>
+
+                <div class="form-group" style="margin-left:19px;">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
+                    Display in the site
+                </label>
+            </div>
             </form>
         `,
         `
@@ -93,12 +109,19 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
         `
     );
 
+    ClassicEditor
+        .create(document.querySelector('#event_description'))
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
+
     document.getElementById('saveEvent').addEventListener('click', () => {
         const formData = new FormData();
         formData.append("name", document.getElementById('event_name').value);
         formData.append("date", document.getElementById('event_date').value);
-        formData.append("description", document.getElementById('event_description').value);
+        formData.append("category", document.getElementById('category').value);
+        formData.append("description", window.ictEditorInstance.getData());
         formData.append("image", document.getElementById('event_image').files[0]);
+        formData.append("display", document.getElementById('display').checked ? "true" : "false");
 
         confirmAction("Add Event?", "Do you want to add this event?", () =>
             fetch("/api/event", {
@@ -137,10 +160,27 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
                         <input type="date" id="event_date" class="form-control" value="${btn.dataset.eventDate}" required>
                     </div>
 
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category">
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Events" ${btn.dataset.eventCategory === "Events" ? "selected" : ""}>Events</option>
+                            <option value="News" ${btn.dataset.eventCategory === "News" ? "selected" : ""}>News</option>
+                        </select>
+                    </div>
+
                     <div class="form-group mt-2">
                         <label>Description</label>
                         <textarea id="event_description" class="form-control" rows="5">${btn.dataset.eventDescription || ""}</textarea>
                     </div>
+
+                    <div class="form-group" style="margin-left:19px;">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true" 
+                            ${btn.dataset.eventDisplay == "true" ? "checked" : ""}>
+                        Display in the site
+                    </label>
+                </div>
                 </form>
             `,
             `
@@ -149,11 +189,18 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
             `
         );
 
+        ClassicEditor
+            .create(document.querySelector('#event_description'))
+            .then(editor => window.ictEditorInstance = editor)
+            .catch(err => console.error(err));
+
         document.getElementById('updateEvent').addEventListener('click', () => {
             const formData = new FormData();
             formData.append("name", document.getElementById('event_name').value);
             formData.append("date", document.getElementById('event_date').value);
-            formData.append("description", document.getElementById('event_description').value);
+            formData.append("description", window.ictEditorInstance.getData());
+            formData.append("category", document.getElementById('category').value);
+            formData.append("display", document.getElementById('display').checked ? "true" : "false");
 
             const img = document.getElementById('event_image').files[0];
             if (img) formData.append("image", img);
@@ -203,10 +250,26 @@ document.getElementById('addAnnouncementBtn').addEventListener('click', () => {
                     <input type="date" id="announcement_date" class="form-control" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" id="category">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="Announcements">Announcements</option>
+                        <option value="Tender">Tender</option>
+                        <option value="Vacancy">Vacancy</option>
+                    </select>
+                </div>
+
                 <div class="form-group mt-2">
                     <label>Description</label>
                     <textarea id="announcement_description" class="form-control" rows="5"></textarea>
                 </div>
+
+                <div class="form-group" style="margin-left:19px;">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
+                    Display in the site
+                </label>
             </form>
         `,
         `
@@ -215,11 +278,18 @@ document.getElementById('addAnnouncementBtn').addEventListener('click', () => {
         `
     );
 
+    ClassicEditor
+        .create(document.querySelector('#announcement_description'))
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
+
     document.getElementById('saveAnnouncement').addEventListener('click', () => {
         const payload = {
             name: document.getElementById('announcement_name').value,
             date: document.getElementById('announcement_date').value,
-            description: document.getElementById('announcement_description').value,
+            description:  window.ictEditorInstance.getData(),
+            category: document.getElementById('category').value,
+            display: document.getElementById('display').checked ? 1 : 0
         };
 
         confirmAction("Add Announcement?", "Do you want to add this announcement?", () =>
@@ -256,10 +326,27 @@ document.querySelectorAll('.edit-announcemnet-btn').forEach(btn => {
                         <input type="date" id="announcement_date" class="form-control" value="${btn.dataset.announcemnetDate}">
                     </div>
 
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category">
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Announcements" ${btn.dataset.announcemnetCategory === "Announcements" ? "selected" : ""}>Announcements</option>
+                            <option value="Tender" ${btn.dataset.announcemnetCategory === "Tender" ? "selected" : ""}>Tender</option>
+                            <option value="Vacancy" ${btn.dataset.announcemnetCategory === "Vacancy" ? "selected" : ""}>Vacancy</option>
+                        </select>
+                    </div>
+
                     <div class="form-group mt-2">
                         <label>Description</label>
                         <textarea id="announcement_description" class="form-control" rows="5">${btn.dataset.announcemnetDescription}</textarea>
                     </div>
+
+                    <div class="form-group" style="margin-left:19px;">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true"
+                        ${btn.dataset.announcemnetDisplay == "true" ? "checked" : ""}>
+                        Display in the site
+                    </label>
                 </form>
             `,
             `
@@ -268,11 +355,18 @@ document.querySelectorAll('.edit-announcemnet-btn').forEach(btn => {
             `
         );
 
+        ClassicEditor
+            .create(document.querySelector('#announcement_description'))
+            .then(editor => window.ictEditorInstance = editor)
+            .catch(err => console.error(err));
+
         document.getElementById('updateAnnouncement').addEventListener('click', () => {
             const payload = {
                 name: document.getElementById('announcement_name').value,
                 date: document.getElementById('announcement_date').value,
-                description: document.getElementById('announcement_description').value,
+                description:  window.ictEditorInstance.getData(),
+                category: document.getElementById('category').value,
+                display: document.getElementById('display').checked ? "true" : "false"
             };
 
             confirmAction("Update Announcement?", "Do you want to save changes?", () =>

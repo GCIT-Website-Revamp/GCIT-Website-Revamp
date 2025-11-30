@@ -27,7 +27,7 @@
         <div class="postWrapper departmentWrapper">
             <div class="post">
                 @if($service)
-                <p>{!! nl2br(e($service->description)) !!}</p>
+                <p>{!! $service->description !!}</p>
                 <div class="staffProfileWrapper">
                     @foreach ($service->roles as $role)
                         <div class="staff">

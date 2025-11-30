@@ -120,7 +120,12 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('user.home');
+    $bsc = Course::where('type', '=', 'Bachelors of Computer Science')->get();
+    $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->get();
+    $announcements = Announcement::orderBy('created_at', 'asc')->where('display', '=', "true")->get();
+    $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
+    $events = Event::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
+    return view('user.home', compact('bsc','sidd', 'announcements', 'latestAnnouncements', 'events'));
 });
 
 Route::get('/news&events', function () {

@@ -108,7 +108,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                 <div class="course overlayWrapper socWrapper">
                     <div class="courseBG bgLeft backgroundWrapper">
                         <div class="overlay"></div>
-                        <img src="{{ asset('images/courseBG.png') }}" alt="">
+                        <img src="{{ asset('images/soc.png') }}" alt="">
                     </div>
                     <div class="courseCoverTitle">
                         <h1>School of Computer Science</h1>
@@ -122,7 +122,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                 <div class="course overlayWrapper siddWrapper">
                     <div class="courseBG bgRight backgroundWrapper ">
                         <div class="overlay"></div>
-                        <img src="{{ asset('images/sidd.jpg') }}" alt="">
+                        <img src="{{ asset('images/sidd.png') }}" alt="">
                     </div>
                     <div class="courseCoverTitle">
                         <h1>School of Interactive Design and Development</h1>

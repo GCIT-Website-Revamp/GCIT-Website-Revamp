@@ -23,7 +23,7 @@
     justify-content: space-between;
 }
 
-.post p, .post ol, .post li{
+.post p,  ol,  li{
     font-weight: 300;
     margin-bottom: 2rem;
 }

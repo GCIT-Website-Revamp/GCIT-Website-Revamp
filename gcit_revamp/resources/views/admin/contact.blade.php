@@ -217,10 +217,10 @@
                                        <tr>
                                           <td style="max-width: 10px;">
                                              {{ $contacts->firstItem() + $index ?? $loop->iteration }}</td>
-                                          <td style="max-width: 20px;">{{ $contact->name }}</td>
-                                          <td style="max-width: 20px;">{{ $contact->email }}</td>
-                                          <td>{{ $contact->message }}</td>
-                                          <td style="max-width: 20px;">{{ $contact->status }}</td>
+                                          <td style="max-width: 10px;">{{ $contact->name }}</td>
+                                          <td style="max-width: 10px;">{{ $contact->email }}</td>
+                                          <td style="max-width: 210px;">{{ $contact->message }}</td>
+                                          <td style="max-width: 10px;">{{ $contact->status }}</td>
                                           <td style="max-width: 80px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-contact-btn"

@@ -1,0 +1,133 @@
+
+.wrapper {
+    padding: 1rem var(--padding-sides);
+}
+
+
+nav {
+    position: sticky;
+    top: -5px;
+    background-color: var(--color-bg);
+    width: 100%;
+    min-height: 141px;
+    z-index: 9999;
+}
+
+.navContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* needed for dropdowns */
+}
+
+.linkWrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.dropDownWrapper {
+    display: flex;
+    padding-top: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative; /* absolute dropdown anchor */
+}
+
+.dropDownContent {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* background: white; */
+    z-index: 999;
+    flex-direction: column;
+    padding: 1rem 0;
+    width: max-content;      /* ⬅ allows it to grow as wide as needed */
+    white-space: nowrap;   
+}
+
+
+.subNav {
+    height: 25px;
+    background-color: var(--color-primary);
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.logoWrapper img {
+    height: 80px;
+    width: auto;
+}
+
+.dropDownLink {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-light);
+    cursor: pointer;
+}
+
+.dropDownLink:hover {
+    color: var(--color-secondary);
+}
+
+
+.activeNav .dropDownLink {
+    color: var(--color-secondary); 
+}
+
+.search {
+    height: 36px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    border-radius: 6px;
+    background-color: var(--color-secondary);
+}
+
+.subLinkWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    gap: 2rem;
+}
+
+.subLinkWrapper a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-xs);
+}
+
+.subLinkWrapper a:hover {
+    color: var(--color-secondary-light);
+}
+
+.dropDownContent a {
+    text-decoration: none;
+    color: var(--color-text-light);
+}
+
+.dropDownContent a:hover {
+    color: var(--color-secondary);
+}
+
+.subLink{
+    position: relative;
+    right: -2rem;   
+}
+
+.dropDownContent label{
+    color: var(--color-primary-light);
+}

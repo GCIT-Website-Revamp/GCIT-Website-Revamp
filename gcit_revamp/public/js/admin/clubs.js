@@ -17,7 +17,7 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
 
     // Modal body
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addClubForm" enctype="multipart/form-data">
+        <form id="addClubForm" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
                 <label for="club_name">Club Name</label>
                 <input type="text" class="form-control" id="club_name" name="club_name" required>
@@ -35,6 +35,11 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
             </div>
         </form>
     `;
+
+    ClassicEditor
+        .create(document.querySelector('#club_description'))
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
 
     // Modal footer
     document.querySelector('#myModal .modal-footer').innerHTML = `
@@ -89,7 +94,7 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
     // Handle Add Club submission
     document.getElementById('addClub').addEventListener('click', function () {
         const clubName = document.getElementById('club_name').value;
-        const clubDescription = document.getElementById('club_description').value;
+        const clubDescription = window.ictEditorInstance.getData();
 
         // Gather roles
         const roles = Array.from(document.querySelectorAll('.role-row')).map(row => ({
@@ -163,7 +168,7 @@ document.querySelectorAll('.edit-club-btn').forEach(button => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Club';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editClubForm" enctype="multipart/form-data">
+            <form id="editClubForm" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     <label>Club Name</label>
                     <input type="text" class="form-control" id="edit_club_name" value="${clubName}" required>
@@ -180,6 +185,12 @@ document.querySelectorAll('.edit-club-btn').forEach(button => {
                 </div>
             </form>
         `;
+
+        // Init CKEditor
+        ClassicEditor
+            .create(document.querySelector('#edit_club_description'))
+            .then(editor => window.ictEditorInstance = editor)
+            .catch(err => console.error(err));
 
         document.querySelector('#myModal .modal-footer').innerHTML = `
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -233,7 +244,7 @@ document.querySelectorAll('.edit-club-btn').forEach(button => {
                 // Submit Update
                 document.getElementById('updateClubBtn').addEventListener('click', () => {
                     const updatedName = document.getElementById('edit_club_name').value;
-                    const updatedDescription = document.getElementById('edit_club_description').value;
+                    const updatedDescription = window.ictEditorInstance.getData();
 
                     const roles = [...document.querySelectorAll('#edit-roles-container .role-row')].map(row => ({
                         name: row.querySelector('.role-name').value,

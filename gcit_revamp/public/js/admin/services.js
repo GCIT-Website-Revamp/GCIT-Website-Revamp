@@ -17,7 +17,7 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
     document.querySelector('#myModal .modal-title').textContent = 'Add New Service';
 
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addServiceForm" enctype="multipart/form-data">
+        <form id="addServiceForm" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
                 <label for="name">Service Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -36,6 +36,11 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
         </form>
     `;
 
+    ClassicEditor
+        .create(document.querySelector('#description'))
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
+
     document.querySelector('#myModal .modal-footer').innerHTML = `
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-success" id="addService">Add Service</button>
@@ -47,7 +52,7 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
     fetch('/api/team')
         .then(res => res.json())
         .then(data => {
-            teams = data.data || [];
+            teams = (data.data || []).filter(team => team.type === "Non-Academic");
             // Add initial role row after fetching teams
             addRoleRow();
         })
@@ -94,7 +99,7 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
 
         const payload = {
             name: document.getElementById('name').value,
-            description: document.getElementById('description').value,
+            description: window.ictEditorInstance.getData(),
             roles
         };
 
@@ -165,7 +170,7 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Service';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editServiceForm" enctype="multipart/form-data">
+            <form id="editServiceForm" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     <label for="name">Service Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="${serviceName}" required>
@@ -181,6 +186,11 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
                 </div>
             </form>
         `;
+
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .then(editor => window.ictEditorInstance = editor)
+            .catch(err => console.error(err));
 
         document.querySelector('#myModal .modal-footer').innerHTML = `
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -239,7 +249,7 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
                     }));
                     const payload = {
                         name: document.getElementById('name').value,
-                        description: document.getElementById('description').value,
+                        description: window.ictEditorInstance.getData(),
                         roles
                     };
 

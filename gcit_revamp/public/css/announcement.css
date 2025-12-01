@@ -1,0 +1,29 @@
+.announcementContent a{
+    position:static !important;
+}
+
+.announcementContent .multi-truncate{
+    -webkit-line-clamp: 3 !important; 
+    overflow:visible;
+    height: fit-content;
+
+}
+.announcementContent .cardContent{
+    padding-top: 2.5rem !important;
+}
+
+.announcementContent .subContentContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.date span{
+    color: var(--color-primary);
+}

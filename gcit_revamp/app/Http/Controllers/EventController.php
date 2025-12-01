@@ -48,6 +48,8 @@ class EventController extends Controller
                 'name' => 'required',
                 'date' => 'required|date',
                 'description' => 'required',
+                'display' => 'sometimes',
+                'category' => 'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
             ];
 
@@ -62,6 +64,8 @@ class EventController extends Controller
             $event = new Event();
             $event->name = $request->name;
             $event->date = $request->date;
+            $event->display = $request->display;
+            $event->category = $request->category;
             $event->description = $request->description;
 
             if ($request->hasFile('image')) {
@@ -115,6 +119,8 @@ class EventController extends Controller
                 'name' => 'required',
                 'date' => 'required|date',
                 'description' => 'required',
+                'display' => 'sometimes',
+                'category' => 'required',
                 'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120'
             ];
 
@@ -129,6 +135,8 @@ class EventController extends Controller
             $event->name = $request->name;
             $event->date = $request->date;
             $event->description = $request->description;
+            $event->category = $request->category;
+            $event->display = $request->display;
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');

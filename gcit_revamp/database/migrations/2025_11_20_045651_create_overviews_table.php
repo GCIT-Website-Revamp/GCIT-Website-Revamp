@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('mission');
             $table->text('vision');
             $table->text('description');
-            $table->json('timeline');
             $table->timestamps();
         });
     }

@@ -15,7 +15,9 @@ return new class extends Migration
         $table->id();
 
         $table->string('name');
-        $table->string('image')->nullable();   // if you want image optional
+        $table->string('title')->nullable();
+        $table->string('category')->nullable();
+        $table->string('image');
         $table->string('type');
         $table->string('description');
 

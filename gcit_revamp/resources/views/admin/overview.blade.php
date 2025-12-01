@@ -209,7 +209,6 @@
                                           data-overview-mission="{{ $overview->mission }}"
                                           data-overview-vision="{{ $overview->vision }}"
                                           data-overview-description="{{ $overview->description }}"
-                                          data-overview-timeline='@json($overview->timeline)'
                                     >
                                           <i class="fa fa-pencil mx-2"></i> Edit Overview
                                     </button>
@@ -236,29 +235,7 @@
                                  <p>{!! nl2br(e($overview->vision)) !!}</p>
 
                                  <h4>Description</h4>
-                                 <p>{!! nl2br(e($overview->description)) !!}</p>
-
-                                 <h4>Timeline</h4>
-                                 <ul>
-                                       @php
-                                       $timeline = is_string($overview->timeline) ? json_decode($overview->timeline, true) : $overview->timeline;
-
-                                       // Sort ascending by year
-                                       usort($timeline, function($a, $b) {
-                                          return $a['year'] <=> $b['year'];
-                                       });
-                                       @endphp
-
-                                       @if($timeline)
-                                          <ul>
-                                             @foreach($timeline as $item)
-                                                   <li class="mb-2"><strong>{{ $item['year'] }}</strong>
-                                                   <br>
-                                                    {!! nl2br(e($item['event'])) !!}</li>
-                                             @endforeach
-                                          </ul>
-                                       @endif
-                                 </ul>
+                                 <p>{!! $overview->description !!}</p>
                               @else
                                  <p>No overview added yet.</p>
                               @endif
@@ -296,6 +273,7 @@
    </div>
    <!-- jQuery -->
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
    <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
    <script src="{{ asset('js/admin/popper.min.js') }}"></script>
    <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>

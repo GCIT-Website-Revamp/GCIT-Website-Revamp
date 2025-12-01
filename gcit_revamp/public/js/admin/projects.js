@@ -18,7 +18,7 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
     document.querySelector('#myModal .modal-title').textContent = 'Add New Project';
 
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addProjectForm" enctype="multipart/form-data">
+        <form id="addProjectForm" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
                 <label for="name">Project Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -48,8 +48,21 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
                 <label for="image">Project Image</label>
                 <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
             </div>
+
+            <div class="form-group" style="margin-left:19px;">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
+                    Display in the site
+                </label>
+            </div>
         </form>
     `;
+
+    // Init CKEditor
+    ClassicEditor
+        .create(document.querySelector('#description'))
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
 
     document.querySelector('#myModal .modal-footer').innerHTML = `
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -59,6 +72,7 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
     document.getElementById('addProject').addEventListener('click', function () {
         const form = document.getElementById('addProjectForm');
         const formData = new FormData(form);
+        formData.append('description', window.ictEditorInstance.getData());
 
         Swal.fire({
             title: "Add Project?",
@@ -117,7 +131,7 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
         document.querySelector('#myModal .modal-title').textContent = 'Edit Project';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editProjectForm" enctype="multipart/form-data">
+            <form id="editProjectForm" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     <label>Project Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="${name}" required>
@@ -152,8 +166,22 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
                     <label>Replace Image (optional)</label>
                     <input type="file" class="form-control" id="image" name="image" accept="image/*">
                 </div>
+
+                <div class="form-group" style="margin-left:19px;">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true" 
+                            ${this.dataset.display == "true" ? "checked" : ""}>
+                        Display in the site
+                    </label>
+                </div>
             </form>
         `;
+
+        // Init CKEditor
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .then(editor => window.ictEditorInstance = editor)
+            .catch(err => console.error(err));
 
         document.querySelector('#myModal .modal-footer').innerHTML = `
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -163,6 +191,7 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
         document.getElementById('updateProject').addEventListener('click', function () {
             const form = document.getElementById('editProjectForm');
             const formData = new FormData(form);
+            formData.append('description', window.ictEditorInstance.getData());
             formData.append("_method", 'PUT');
 
             Swal.fire({

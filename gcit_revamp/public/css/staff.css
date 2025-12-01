@@ -1,0 +1,49 @@
+.staffProfileWrapper{
+    display: flex;
+    row-gap: 20px;
+    column-gap:20px;
+    flex-wrap: wrap;
+    height: fit-content;
+}
+
+.staffProfileWrapper .staff{
+    width: 30%;
+    min-width: 180px;
+    background-color: #FAFAFA;
+    height: 30vw;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.staffProfileWrapper .staff img{
+    height: 80%;
+    margin-bottom: 0;
+    width: 100%;
+    object-fit: cover;
+}
+.staffProfileWrapper .staffDescription{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 20%;
+    padding: 0.5rem 1rem;
+    padding-bottom: 1rem;
+    background-color: #FAFAFA;
+}
+.staffProfileWrapper .staffDescription h1{
+    font-size: clamp(16px, 4vw, 22px);
+    font-weight: 500;
+    color: black
+}
+.staffProfileWrapper .staffDescription p{
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--color-primary);
+}
+
+.facultyWrapper{
+    display: flex;
+    gap: clamp(20px, 4vw, 60px);
+}

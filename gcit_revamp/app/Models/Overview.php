@@ -8,6 +8,5 @@ class Overview extends Model
 {
     //
     protected $casts = [
-        'timeline' => 'array',
     ];
 }

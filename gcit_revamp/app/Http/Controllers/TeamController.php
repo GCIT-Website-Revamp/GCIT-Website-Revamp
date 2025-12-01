@@ -46,7 +46,9 @@ class TeamController extends Controller
         try {
             $rules = [
                 'name' => 'required|string',
+                'title' => 'sometimes',
                 'type' => 'required|string',
+                'category' => 'sometimes',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'description' => 'required'
             ];
@@ -62,6 +64,8 @@ class TeamController extends Controller
             $team = new Team();
             $team->name = $request->name;
             $team->type = $request->type;
+            $team->category = $request->category;
+            $team->title = $request->title;
             $team->description = $request->description;
 
             if ($request->hasFile('image')) {
@@ -114,6 +118,8 @@ class TeamController extends Controller
             $rules = [
                 'name' => 'required|string',
                 'type' => 'required|string',
+                'title' => 'sometimes',
+                'category' => 'sometimes',
                 'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'description' => 'required'
             ];
@@ -128,6 +134,8 @@ class TeamController extends Controller
 
             $team->name = $request->name;
             $team->type = $request->type;
+            $team->category = $request->category;
+            $team->title = $request->title;
             $team->description = $request->description;
 
             if ($request->hasFile('image')) {

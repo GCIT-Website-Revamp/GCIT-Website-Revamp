@@ -222,17 +222,20 @@
                                        <tr>
                                           <td>{{ $courses->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $course->name }}</td>
-                                          <td style="max-width: 340px;">{{ $course->why }}</td>
-                                          <td style="max-width: 340px;">{{ $course->structure ?? '—' }}</td>
+                                          <td style="max-width: 340px;">{!! nl2br(e(Str::limit($course->description, 200))) !!}</td>
+                                          <td style="max-width: 340px;">{!! nl2br(e(Str::limit($course->structure, 200))) !!}</td>
                                           <td>
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-course-btn"
                                                    data-course-id="{{ $course->id }}"
                                                    data-course-name="{{ $course->name }}"
+                                                   data-course-type="{{ $course->type }}"
                                                    data-course-why="{{ $course->why }}"
                                                    data-course-what="{{ $course->what }}"
                                                    data-course-structure="{{ $course->structure }}"
-                                                   data-course-career="{{ $course->career }}">
+                                                   data-course-career="{{ $course->career }}"
+                                                   data-course-description="{{ $course->description }}"
+                                                   data-course-image="{{ asset('storage/' . $course->image) }}">
                                                    Edit
                                                 </button>
                                                 <button type="button" class="btn btn-danger delete-course-btn"
@@ -280,9 +283,9 @@
                                     <tr>
                                        <th>#</th>
                                        <th>Module</th>
-                                       <th>Description</th>
                                        <th>Year</th>
                                        <th>Semester</th>
+                                       <th>Description</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
@@ -291,9 +294,9 @@
                                        <tr>
                                           <td>{{ $modules->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $module->name }}</td>
-                                          <td style="max-width: 440px;">{{ $module->description }}</td>
                                           <td>{{ $module->year ?? '—' }}</td>
                                           <td>{{ $module->semester ?? '—' }}</td>
+                                          <td style="max-width: 440px;">{!! nl2br(e(Str::limit($module->description, 200))) !!}</td>
                                           <td>
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-module-btn"

@@ -224,13 +224,14 @@
                                           <td style="max-width: 80px;">{{ $event->name }}</td>
                                           <td style="max-width: 80px;"><img src="{{ asset('storage/' . $event->image) }}"
                                                 alt="Event Image" width="80"></td>
-                                          <td style="max-width: 250px;">{{ $event->description ?? '—' }}</td>
+                                          <td style="max-width: 250px;">{!! Str::limit($event->description, 450) !!}</td>
                                           <td style="max-width: 60px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-event-btn"
                                                    data-event-id="{{ $event->id }}" data-event-name="{{ $event->name }}"
                                                    data-event-image="{{ asset('storage/' . $event->image) }}"
-                                                   data-event-date="{{ $event->date }}"
+                                                   data-event-date="{{ $event->date }}" data-event-display="{{ $event->display }}"
+                                                   data-event-category="{{ $event->category }}"
                                                    data-event-description="{{ $event->description }}">
                                                    Edit
                                                 </button>
@@ -290,14 +291,16 @@
                                           <td>{{ $announcements->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td style="max-width:100px;">{{ $announcemnet->name }}</td>
                                           <td style="max-width:80px;">{{ $announcemnet->date }}</td>
-                                          <td style="max-width:340px;">{{ $announcemnet->description}}</td>
+                                          <td style="max-width:340px;">{!! Str::limit($announcemnet->description, 450) !!}</td>
                                           <td style="max-width:80px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-announcemnet-btn"
                                                    data-announcemnet-id="{{ $announcemnet->id }}"
                                                    data-announcemnet-name="{{ $announcemnet->name }}"
                                                    data-announcemnet-description="{{ $announcemnet->description }}"
-                                                   data-announcemnet-date="{{ $announcemnet->date }}">
+                                                   data-announcemnet-date="{{ $announcemnet->date }}"
+                                                   data-announcemnet-category="{{ $announcemnet->category }}"
+                                                   data-announcemnet-display="{{ $announcemnet->display }}">
                                                    Edit
                                                 </button>
                                                 <button type="button" class="btn btn-danger delete-announcemnet-btn"
@@ -351,6 +354,7 @@
    </div>
    <!-- jQuery -->
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
    <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
    <script src="{{ asset('js/admin/popper.min.js') }}"></script>
    <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>

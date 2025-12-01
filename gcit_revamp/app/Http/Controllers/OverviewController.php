@@ -49,7 +49,6 @@ class OverviewController extends Controller
                 'vision' => 'required',
                 'description' => 'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
-                'timeline' => 'required',
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -64,7 +63,6 @@ class OverviewController extends Controller
             $overview = new Overview();
             $overview->mission = $request->mission;
             $overview->vision = $request->vision;
-            $overview->timeline = json_decode($request->timeline, true);
             $overview->description = $request->description;
 
             if ($request->hasFile('image')) {
@@ -100,7 +98,6 @@ class OverviewController extends Controller
                 'vision' => 'required',
                 'description' => 'required',
                 'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120',
-                'timeline' => 'required', // must be an array
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -114,7 +111,6 @@ class OverviewController extends Controller
 
             $overview->mission = $request->mission;
             $overview->vision = $request->vision;
-            $overview->timeline = json_decode($request->timeline, true);
             $overview->description = $request->description;
 
             if ($request->hasFile('image')) {

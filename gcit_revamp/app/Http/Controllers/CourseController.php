@@ -46,6 +46,9 @@ class CourseController extends Controller
         try {
             $rules = [
                 'name' => 'required',
+                'type' => 'required',
+                'description' => 'required',
+                'image' => 'required',
                 'why' => 'required',
                 'what' => 'required',
                 'structure' => 'required',
@@ -63,9 +66,19 @@ class CourseController extends Controller
             $course = new Course();
             $course->name = $request->name;
             $course->why = $request->why;
+            $course->description = $request->description;
+            $course->type = $request->type;
             $course->what = $request->what;
             $course->structure = $request->structure;
             $course->career = $request->career;
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imagePath = $image->storeAs('course', $imageName, 'public');
+                $course->image = $imagePath;
+            }
+
             $course->save();
 
             return response()->json([
@@ -108,9 +121,12 @@ class CourseController extends Controller
 
             $rules = [
                 'name' => 'required',
+                'type' => 'required',
+                'description' => 'required',
                 'why' => 'required',
                 'what' => 'required',
                 'structure' => 'required',
+                'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'career' => 'required',
             ];
 
@@ -124,9 +140,18 @@ class CourseController extends Controller
 
             $course->name = $request->name;
             $course->why = $request->why;
+            $course->description = $request->description;
+            $course->type = $request->type;
             $course->what = $request->what;
             $course->structure = $request->structure;
             $course->career = $request->career;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imagePath = $image->storeAs('course', $imageName, 'public');
+                $course->image = $imagePath;
+            }
+
             $course->save();
 
             return response()->json([

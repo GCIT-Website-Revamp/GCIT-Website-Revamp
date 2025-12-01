@@ -20,8 +20,7 @@ document.getElementById("addOverviewBtn")?.addEventListener("click", function ()
         image: "",
         mission: "",
         vision: "",
-        description: "",
-        timeline: []
+        description: ""
     });
 });
 
@@ -29,17 +28,13 @@ document.getElementById("addOverviewBtn")?.addEventListener("click", function ()
 // Edit Overview
 // ===============================
 document.getElementById("editOverviewBtn")?.addEventListener("click", function () {
-
-    const timelineData = JSON.parse(this.dataset.overviewTimeline || "[]");
-
     setupOverviewModal({
         isEdit: true,
         overviewId: this.dataset.overviewId,
         image: this.dataset.overviewImage,
         mission: this.dataset.overviewMission,
         vision: this.dataset.overviewVision,
-        description: this.dataset.overviewDescription,
-        timeline: timelineData
+        description: this.dataset.overviewDescription
     });
 });
 
@@ -51,10 +46,10 @@ function setupOverviewModal(data) {
         data.isEdit ? "Edit Overview" : "Add Overview";
 
     document.querySelector("#myModal .modal-body").innerHTML = `
-        <form id="overviewForm" enctype="multipart/form-data">
+        <form id="overviewForm" enctype="multipart/form-data" autocomplete="off">
 
             <label><b>Image</b></label>
-            <input type="file" class="form-control mb-3" id="overviewImage">
+            <input type="file" class="form-control mb-3" id="overviewImage" accept="image/*">
 
             ${data.image
             ? `<p>Current Image:</p><img src="/storage/${data.image}" width="120" class="mb-3">`
@@ -69,50 +64,14 @@ function setupOverviewModal(data) {
             <label><b>Description</b></label>
             <textarea class="form-control mb-3" id="overviewDescription" rows="4">${data.description || ""}</textarea>
 
-            <hr>
-
-            <div class="d-flex justify-content-between align-items-center">
-                <h5><b>Timeline</b></h5>
-                <button type="button" class="btn btn-primary btn-sm" id="addTimelineRowBtn">+ Add Year</button>
-            </div>
-
             <div id="timeline-container" class="mt-3"></div>
         </form>
     `;
-
-    // Load timeline if editing
-    const container = document.getElementById("timeline-container");
-
-    const createTimelineRow = (item = { year: "", description: "" }) => `
-        <div class="timeline-row border p-3 mb-3 rounded">
-
-            <label class="fw-bold">Year</label>
-            <input type="text" class="form-control mb-2 year-input" value="${item.year}" placeholder="Enter Year">
-
-            <label class="fw-bold">Description</label>
-            <textarea class="form-control mb-2 desc-input" rows="2" placeholder="Write details...">${item.event || ""}</textarea>
-
-            <button type="button" class="btn btn-danger btn-sm remove-timeline-row">Remove</button>
-        </div>
-    `;
-
-    // If editing: load items
-    data.timeline.forEach(item => {
-        container.insertAdjacentHTML("beforeend", createTimelineRow(item));
-    });
-
-    // Clicking: Add new timeline row
-    document.getElementById("addTimelineRowBtn").addEventListener("click", () => {
-        container.insertAdjacentHTML("beforeend", createTimelineRow());
-    });
-
-    // Clicking: Remove timeline row
-    container.addEventListener("click", (e) => {
-        if (e.target.classList.contains("remove-timeline-row")) {
-            e.target.closest(".timeline-row").remove();
-        }
-    });
-
+    ClassicEditor
+        .create(document.querySelector('#overviewDescription'))
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
+    
     // Build Footer Button
     document.querySelector("#myModal .modal-footer").innerHTML = `
         ${data.isEdit
@@ -158,18 +117,11 @@ function submitOverviewForm(data) {
 
     formData.append("mission", document.getElementById("overviewMission").value);
     formData.append("vision", document.getElementById("overviewVision").value);
-    formData.append("description", document.getElementById("overviewDescription").value);
+    formData.append('description', window.ictEditorInstance.getData());
 
     const imageFile = document.getElementById("overviewImage").files[0];
     if (imageFile) formData.append("image", imageFile);
 
-    // Collect timeline rows
-    const timelineItems = [...document.querySelectorAll(".timeline-row")].map(row => ({
-        year: row.querySelector(".year-input").value,
-        event: row.querySelector(".desc-input").value
-    }));
-
-    formData.append("timeline", JSON.stringify(timelineItems));
     if (data.isEdit) {
         formData.append("_method", "PUT");
     }

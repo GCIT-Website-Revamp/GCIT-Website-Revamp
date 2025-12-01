@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('category');
+            $table->string('display')->nullable();
             $table->string('date');
             $table->text('description');
             $table->timestamps();

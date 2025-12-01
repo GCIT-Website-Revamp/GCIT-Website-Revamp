@@ -20,7 +20,7 @@ document.getElementById('addAdminBtn').addEventListener('click', function () {
 
     // NO @csrf here — JS handles CSRF
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addAdminForm">
+        <form id="addAdminForm" autocomplete="off">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -28,31 +28,12 @@ document.getElementById('addAdminBtn').addEventListener('click', function () {
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
 
             <div class="form-group">
                 <label for="contact_no">Contact Number</label>
                 <input type="text" class="form-control" id="contact_no" name="contact_no" required>
-            </div>
-
-            <div class="form-group password-wrapper">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-                <div class="toggle-eye" id="togglePassword">
-                    <!-- Open eye SVG -->
-                    <svg class="eye-open active" fill="none" viewBox="0 0 24 24" width="100%" height="100%">
-                    <path stroke="#000" stroke-width="1.5"
-                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
-                    <circle cx="12" cy="12" r="3" stroke="#000" stroke-width="1.5" />
-                    </svg>
-                    <!-- Closed eye SVG -->
-                    <svg class="eye-closed" fill="none" viewBox="0 0 24 24" width="100%" height="100%">
-                    <path stroke="#000" stroke-width="1.5"
-                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
-                    <path stroke="#000" stroke-width="1.5" d="M4 4l16 16" />
-                    </svg>
-                </div>
             </div>
 
             <input type="hidden" name="enabled" value="true">
@@ -64,25 +45,6 @@ document.getElementById('addAdminBtn').addEventListener('click', function () {
     <button type="submit" class="btn btn-success" id="addAdmin">Register</button>
     `;
 
-    const passwordField = document.getElementById("password_field");
-    const togglePassword = document.getElementById("togglePassword");
-
-    const eyeOpen = document.querySelector(".eye-open");
-    const eyeClosed = document.querySelector(".eye-closed");
-
-    togglePassword.addEventListener("click", () => {
-        const type = passwordField.type === "password" ? "text" : "password";
-        passwordField.type = type;
-
-        if (type === "text") {
-            eyeOpen.classList.remove("active");
-            eyeClosed.classList.add("active");
-        } else {
-            eyeOpen.classList.add("active");
-            eyeClosed.classList.remove("active");
-        }
-    });
-
     // Handle Add admin with JSON
     document.getElementById('addAdmin').addEventListener('click', function () {
 
@@ -92,8 +54,8 @@ document.getElementById('addAdminBtn').addEventListener('click', function () {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             contact_no: document.getElementById('contact_no').value,
-            password: document.getElementById('password').value,
-            enabled: true
+            enabled: true,
+            role: 'Admin'
         };
         Swal.fire({
             title: "Register Admin?",
@@ -106,13 +68,13 @@ document.getElementById('addAdminBtn').addEventListener('click', function () {
         }).then(result => {
             if (result.isConfirmed) {
                 fetch('/api/users', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": csrf,
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify(payload)
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": csrf,
+                                "Accept": "application/json"
+                            },
+                            body: JSON.stringify(payload)
                 })
                     .then(res => res.json())
                     .then(data => {

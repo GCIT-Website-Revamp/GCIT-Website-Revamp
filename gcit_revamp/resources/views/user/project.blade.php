@@ -29,29 +29,41 @@
                         <a href="">Explore More</a>
                     </div>
                     <div class="highlightSliderTrack">
-                        <div class="highlightSlider">
+                        <div class="highlightSlider"
+                        data-title="Gyalsung Allocation System"
+                        data-desc="Enabling rapid and smart allocation for all gyalsung related activities.">
                             <div class="activeHighlight"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('Images/projects/dummyImg2.png')}}" alt="">
                         </div>
-                        <div class="highlightSlider">
+                        <div class="highlightSlider"
+                        data-title="Parking.bt"
+                        data-desc="Transforming the parking sector of Bhutan, one city at a time.">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('Images/projects/dummyImg3.png')}}" alt="">
                         </div>
-                        <div class="highlightSlider">
+                        <div class="highlightSlider"
+                         data-title="Gyalsung Allocation System"
+                        data-desc="Enabling rapid and smart allocation for all gyalsung related activities.">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('Images/projects/dummyImg2.png')}}" alt="">
                         </div>
-                        <div class="highlightSlider">
+                        <div class="highlightSlider"
+                        data-title="Parking.bt"
+                        data-desc="Transforming the parking sector of Bhutan, one city at a time.">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('Images/projects/dummyImg3.png')}}" alt="">
                         </div>
-                        <div class="highlightSlider">
+                        <div class="highlightSlider"
+                         data-title="Gyalsung Allocation System"
+                        data-desc="Enabling rapid and smart allocation for all gyalsung related activities.">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('Images/projects/dummyImg2.png')}}" alt="">
                         </div>
-                        <div class="highlightSlider">
+                        <div class="highlightSlider"
+                        data-title="Parking.bt"
+                        data-desc="Transforming the parking sector of Bhutan, one city at a time.">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('Images/projects/dummyImg3.png')}}" alt="">
                         </div>
                     </div>
                 </div>

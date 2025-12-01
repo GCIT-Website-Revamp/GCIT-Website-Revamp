@@ -51,7 +51,8 @@
 .sliderWrapper{
     /* background-color: white; */
     width: 100%;
-    height: 50px;
+    align-items: center;
+    height: fit-content;
     width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)))
 }
 
@@ -82,6 +83,7 @@
     display: flex;
     transition: transform 0.35s ease;
     will-change: transform;
+    align-items: center;
     width: 100%;  /* IMPORTANT */
 
 }
@@ -274,15 +276,17 @@
     overflow: hidden;
 }
 .courseBG .overlay{
-    background: linear-gradient(
-        to top,
-        rgba(244, 132, 35, 0.20) 0%,
-        rgba(164, 80, 7, 0.50) 42%,
-        rgba(166, 90, 24, 0.45) 71%,
-        rgba(244, 132, 35, 0.50) 100%
-    ) !important;
+   background: linear-gradient(
+    to top,
+    rgba(244, 132, 35, 0.35) 0%,    /* darker base orange */
+    rgba(189, 96, 15, 0.7) 42%,     /* deeper brown */
+    rgba(166, 90, 24, 0.65) 71%,    /* richer mid tone */
+    rgba(244, 132, 35, 0.65) 100%   /* stronger top orange */
+) !important;
     height: 100%;
 }
+
+
 
 .bgRight .overlay{
     background: linear-gradient(
@@ -295,13 +299,25 @@
     height: 100%;
 
 }
+.socWrapper:hover{
+    width: 70% !important;
+}
+.socWrapper:hover~.siddWrapper{
+    width: 30% !important;
+}
+.siddWrapper:hover {
+    width: 70% !important;
+}
 
+.courseContent:hover .socWrapper:not(:hover) {
+    width: 30% !important;
+}
 .courseCoverTitle{
     position: absolute;
     z-index: 20;
     left: 30%;
     width: 50%;
-    top: 50%;
+    bottom: 20%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -328,7 +344,7 @@
 
 .course:hover .courseCoverTitle{
     left: 10%;
-    top: 30%;
+    bottom: 40%;
     width: 85%
 }
 
@@ -657,8 +673,16 @@ font-size: 32px;}
     border-radius: 100px;
 }
 
+.eventMessage a:hover{
+    background-color: var(--color-primary-hover)
+}
+
 .event{
     position: relative;
+    overflow: hidden;
+}
+.event:hover img{
+    transform: scale(1.05);
 }
 .event img,
 .event .overlay{

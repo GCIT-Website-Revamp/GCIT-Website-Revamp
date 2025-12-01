@@ -22,7 +22,7 @@
             <div class="projectHighlight">
                 <div class="highlight backgroundWrapper">
                     <div class="overlay"></div>
-                    <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                    <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
                     <div class="content">
                         <h1>Finance Application</h1>
                         <p>Driving Bhutan’s digital transformation through excellence in education, research, and technology.</p>
@@ -31,27 +31,27 @@
                     <div class="highlightSliderTrack">
                         <div class="highlightSlider">
                             <div class="activeHighlight"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
                         </div>
                         <div class="highlightSlider">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
                         </div>
                         <div class="highlightSlider">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
                         </div>
                         <div class="highlightSlider">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
                         </div>
                         <div class="highlightSlider">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
                         </div>
                         <div class="highlightSlider">
                             <div class="sliderImgOverlay"></div>
-                            <img src="{{asset('Images/projects/dummyImg.png')}}" alt="">
+                            <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
                         </div>
                     </div>
                 </div>

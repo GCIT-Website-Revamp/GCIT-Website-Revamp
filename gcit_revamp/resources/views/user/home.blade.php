@@ -195,8 +195,8 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                 </div>
             </div>
             <div class="projectBanner">
-                <img src="{{ asset('Images/projects/dummyImg.png') }}" alt="" class="background">
-                <img src="{{ asset('Images/projects/dummyImg.png') }}" alt="">
+                <img src="{{ asset('images/projects/dummyImg.png') }}" alt="" class="background">
+                <img src="{{ asset('images/projects/dummyImg.png') }}" alt="">
             </div>
         </div>
         <div class="homeAnnouncementWrapper">

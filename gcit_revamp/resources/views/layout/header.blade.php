@@ -17,8 +17,8 @@
                 <label class = "dropDownLink" for="academicToggle">Tech Impact<span class="material-symbols-outlined">arrow_drop_down</span></label>
                 <div class="dropDownContent">
                     <a href="/project">Industry Projects</a>
-                    <a href="">Partners & Collaboration</a>
-                    <a href="">Research</a>
+                    <!-- <a href="">Partners & Collaboration</a>
+                    <a href="">Research</a> -->
                 </div>
             </div>
             <div class="dropDownWrapper">

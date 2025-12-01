@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="mottoWrapper">
-                <img src="{{asset('Images/&.png')}}" alt="" class="underlay">
+                <img src="{{asset('images/&.png')}}" alt="" class="underlay">
                 <div class="visionWrapper">
                     <h1>Vision</h1>
                     <p>Our vision is to be a leading institution in software technology and interactive design that produces future ready graduates with commitment to academic excellence, innovation, and social responsibility.</p>

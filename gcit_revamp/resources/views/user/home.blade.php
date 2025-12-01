@@ -108,7 +108,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                 <div class="course overlayWrapper socWrapper">
                     <div class="courseBG bgLeft backgroundWrapper">
                         <div class="overlay"></div>
-                        <img src="{{ asset('images/courseBG.png') }}" alt="">
+                        <img src="{{ asset('images/soc.png') }}" alt="">
                     </div>
                     <div class="courseCoverTitle">
                         <h1>School of Computer Science</h1>
@@ -122,7 +122,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                 <div class="course overlayWrapper siddWrapper">
                     <div class="courseBG bgRight backgroundWrapper ">
                         <div class="overlay"></div>
-                        <img src="{{ asset('images/sidd.jpg') }}" alt="">
+                        <img src="{{ asset('images/sidd.png') }}" alt="">
                     </div>
                     <div class="courseCoverTitle">
                         <h1>School of Interactive Design and Development</h1>
@@ -177,28 +177,42 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
             </div>
         </div>
         <div class="homeProjectWrapper">
-            <div class="homeProjectDetails">
-                <div class="projectMessage">
-                    <h1>Creating <span>Impact</span> Through Innovation</h1>
-                    <p>We work with leading organizations to drive innovation and create meaningful technological solutions for Bhutan and beyond</p>
-                    <a href="">Connect <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+
+    <div class="homeProjectDetails">
+        <div class="projectMessage">
+            <h1>Creating <span>Impact</span> Through Innovation</h1>
+            <p>We work with leading organizations to drive innovation and create meaningful technological solutions for Bhutan and beyond</p>
+            <a href="">Connect <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+        </div>
+
+        <!-- PROJECT NAME SLIDER -->
+        <div class="projectName">
+            <div class="prjSlider">
+
+                <span class="material-symbols-outlined left">expand_circle_right</span>
+
+                <div class="homeSliderTrack">
+                    <h1 class="homeSlide">Start Up Investment</h1>
                 </div>
-                <div class="projectName">
-                    <div class="prjSlider">
-                        <span class="material-symbols-outlined left">expand_circle_right</span>
-                        <h1>Start Up Investment</h1>
-                        <span class="material-symbols-outlined">expand_circle_right</span>
-                    </div>
-                    <div class="prjLink ctaWrapper">
-                        <a href="">Explore More</a>
-                    </div>
-                </div>
+
+                <span class="material-symbols-outlined right">expand_circle_right</span>
+
             </div>
-            <div class="projectBanner">
-                <img src="{{ asset('images/projects/dummyImg.png') }}" alt="" class="background">
-                <img src="{{ asset('images/projects/dummyImg.png') }}" alt="">
+
+            <div class="prjLink ctaWrapper">
+                <a href="">Explore More</a>
             </div>
         </div>
+    </div>
+
+    <div class="projectBanner" data-bg0="{{ asset('images/projects/dummyImg.png') }}"
+     data-bg1="{{ asset('images/projects/dummyImg2.png') }}"
+     data-bg2="{{ asset('images/projects/dummyImg3.png') }}">
+        <img src="{{ asset('images/projects/dummyImg.png') }}" alt="" class="background">
+        <img id="activeBanner" src="{{ asset('images/projects/dummyImg.png') }}" alt="">
+    </div>
+</div>
+
         <div class="homeAnnouncementWrapper">
             <div class="homeAnnouncementHeader">
                 <div class="headerContent">

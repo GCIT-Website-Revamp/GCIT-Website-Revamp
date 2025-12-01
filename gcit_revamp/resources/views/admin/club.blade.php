@@ -135,9 +135,9 @@
                         <li>
                            <a href="services">> <span>Other Services</span></a>
                         </li>
-                        <li>
+                        <!-- <li>
                            <a href="calendar">> <span>Calendar</span></a>
-                        </li>
+                        </li> -->
                      </ul>
                   </li>
                   </li>

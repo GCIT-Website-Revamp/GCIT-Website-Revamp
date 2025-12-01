@@ -122,7 +122,8 @@
 /* Slide text above overlay */
 .slide span {
     position: relative;
-    z-index: 2;
+    z-index: 20;
+
 }
 
 /* ACTIVE STATE */
@@ -343,9 +344,9 @@
 }
 
 .course:hover .courseCoverTitle{
-    left: 10%;
+    left: var(--padding-sides);
     bottom: 40%;
-    width: 85%
+    width: 80%
 }
 
 .courseCoverTitle .ctaBtn{
@@ -381,7 +382,11 @@
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
-    width: 400px;
+    width: 350px;
+}
+.courseLinkWrapper a:hover{
+    color: var(--color-secondary);
+    width: 360px;
 }
 
 
@@ -416,16 +421,24 @@
 
 .messageContainer{
     display: flex;
+    align-items: flex-start; /* needed */
+    position: relative;
+    justify-content: center;
     gap: 20px;
 }
 .messageWrapper .message{
     background-color: white;
     padding: 2rem;
+    width: 50%;
     display: flex;
     justify-content: space-between; 
 }
 
-
+.messageContainer .presidentImg{
+    padding-top: 3rem;
+    position: sticky;
+    top: calc(141px);
+}
 .messageContainer .presidentImg img{
     height: 450px;
     width: 400px;
@@ -462,7 +475,7 @@
 
 .homeProjectWrapper{
     display: flex;
-    height: 100vh;
+    height: 80vh;
     width: 100%;
     margin-top: 150px;
 }
@@ -475,6 +488,9 @@
 .homeProjectDetails .projectMessage{
     height: 50%;
     background-color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .homeProjectDetails .projectMessage,
 .homeProjectDetails .projectName{
@@ -500,7 +516,7 @@
 
 .homeProjectDetails .projectMessage a{
     text-decoration: none;
-    color: rgb(56, 56, 56);
+    color: rgb(255, 255, 255);
     width: 100%;
     text-align: end;
     display: flex;
@@ -509,7 +525,42 @@
     margin-top: 2rem;
 }
 .homeProjectDetails .projectMessage a:hover{
-    color: rgb(238, 238, 238);
+    color: var(--color-secondary-light);
+}
+
+.homeProjectWrapper .prjSlider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.homeProjectWrapper .homeSliderTrack {
+    display: flex;
+    overflow: hidden;
+    width: 400px; /* adjust as needed */
+    position: relative;
+}
+
+.homeProjectWrapper .homeSliderTrack .homeSlide.active {
+    opacity: 1;
+}
+.homeProjectWrapper .homeSliderTrack .homeSlide {
+    min-width: 250px;
+    transition: transform 0.4s ease;
+     opacity: 0.25;
+    white-space: nowrap;
+}
+/* Fade banners */
+.projectBanner img {
+    transition: opacity 0.4s ease;
+}
+
+
+.homeProjectWrapper .material-symbols-outlined.left,
+.homeProjectWrapper .material-symbols-outlined.right {
+    cursor: pointer;
+    font-size: 32px;
+    transition: opacity 0.2s;
 }
 
 .projectName .prjSlider{
@@ -520,9 +571,10 @@
 }
 .projectName .prjSlider h1{
     font-weight: 700;
-    color: #4D4D4D;
+    color: #222222;
     width: 70%;
     padding: 0 1rem;
+    font-size: 24px;
     text-align: left;
     gap: 1rem;
 }
@@ -565,7 +617,7 @@ font-size: 32px;}
     height: 100%;
     top: 0;
     left: 0;
-        filter: blur(8px) saturate(120%) hue-rotate(180deg);
+        filter: blur(8px) saturate(120%) hue-rotate(20deg);
 
     /* z-index: -1;  */
 }
@@ -607,11 +659,53 @@ font-size: 32px;}
     flex-direction: column;
     gap: 20px;
 }
-.homeAnnouncementContent .cardAnnouncement .card{
+.homeAnnouncementContent .cardAnnouncement .card {
+    position: relative;
     padding: 1.5rem;
+    flex-direction: column;
     height: 50%;
-    background-color: #FAFAFA;
+    background: #FAFAFA;
+    overflow: hidden;
 }
+.homeAnnouncementContent .cardAnnouncement .card *{
+    position: relative;
+    z-index: 10;
+}
+
+/* TOP-LEFT light glow */
+.homeAnnouncementContent .cardAnnouncement .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0) 40%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* BOTTOM-RIGHT dark shadow */
+.homeAnnouncementContent .cardAnnouncement .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        315deg,
+        rgba(0, 0, 0, 0.12) 0%,
+        rgba(0, 0, 0, 0) 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Hover activates both smooth overlays */
+.homeAnnouncementContent .cardAnnouncement .card:hover::before,
+.homeAnnouncementContent .cardAnnouncement .card:hover::after {
+    opacity: 1;
+}
+
 .homeAnnouncementContent .cardAnnouncement .card h1{
     height: 35%;
     font-size: clamp(24px, 5vw, 32px);

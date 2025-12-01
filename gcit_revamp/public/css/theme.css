@@ -83,6 +83,7 @@ html, body {
     color: var(--color-text);
     font-family: var(--font-text);
     font-size: var(--font-size-md);
+    /* overflow-x: hidden; */
 }
 
 /* Container */
@@ -92,6 +93,9 @@ html, body {
     margin: auto;
 }
 
+p{
+    text-align: justify;
+}
 
 /* ================================
    BUTTONS

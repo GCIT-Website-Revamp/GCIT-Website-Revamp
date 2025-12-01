@@ -161,6 +161,7 @@
 
 .otherCourseContainer .otherContent h1{
     font-size: clamp(16px, 2vw, 18px);
+    color: #585858;
     font-weight: 500;
 
 }
@@ -174,9 +175,31 @@
 
 .otherContent a{
     text-decoration: none;
-    color: black;
+    font-weight: 300;
+    color: #585858;
 }
 .otherContent a:hover{
     color: var(--color-secondary);
 }
 
+
+
+/* 
+.sideMenu a.active {
+    color: #F48423; 
+    font-weight: 600;
+} */
+/* 
+[id] {
+    scroll-margin-top: 170px;
+} */
+
+.courseDetailContent input[type="checkbox"] + label h1 span.material-symbols-outlined {
+    display: inline-block;
+    transition: transform 0.25s ease-in-out;
+}
+
+/* When accordion is open */
+.courseDetailContent input[type="checkbox"]:checked + label h1 span.material-symbols-outlined {
+    transform: rotate(270deg); /* rotate UP */
+}

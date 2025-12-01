@@ -131,3 +131,13 @@ nav {
 .dropDownContent label{
     color: var(--color-primary-light);
 }
+
+.dropDownWrapper .dropDownLink span.material-symbols-outlined {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+/* Rotate when active */
+.dropDownWrapper.activeNav .dropDownLink span.material-symbols-outlined {
+    transform: rotate(180deg);
+}

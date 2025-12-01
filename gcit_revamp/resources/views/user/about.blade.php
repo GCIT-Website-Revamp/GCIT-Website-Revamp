@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="mottoWrapper">
-                <img src="{{asset('Images/&.png')}}" alt="" class="underlay">
+                <img src="{{asset('images/&.png')}}" alt="" class="underlay">
                 <div class="visionWrapper">
                     @if($overview)
                     <h1>Vision</h1>

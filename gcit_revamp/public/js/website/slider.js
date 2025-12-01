@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     renderSlides();
 
-    let slides = document.querySelectorAll(".slide");
+    let slides = Array.from(document.querySelectorAll(".sliderTrack .slide"));
 
 
     // -------------------------------------------------------------------------
@@ -101,13 +101,30 @@ function applyWidths() {
     });
 }
 applyWidths();
+function updateActive() {
+    // reset only the first 3 slides
+    for (let i = 0; i < 3; i++) {
+        if (slides[i]) {
+            slides[i].classList.remove("active");
+            slides[i].textContent = heroSlides[i].label;
+        }
+    }
 
+    // set active state
+    if (slides[activeIndex]) {
+        slides[activeIndex].classList.add("active");
+        slides[activeIndex].textContent = "Playing";
+    }
+}
+
+updateActive();
 
 
     // -------------------------------------------------------------------------
     // Update Hero Banner
     // -------------------------------------------------------------------------
     function updateHero(i) {
+
         const s = heroSlides[i];
         heroTitle.textContent = s.title;
         heroSubtitle.textContent = s.subtitle;
@@ -126,19 +143,7 @@ applyWidths();
     // -------------------------------------------------------------------------
     // Active state
     // -------------------------------------------------------------------------
-function updateActive() {
-    // Reset all labels to original
-    slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        slide.textContent = heroSlides[i].label;
-    });
 
-    // Activate current one
-    slides[activeIndex].classList.add("active");
-    slides[activeIndex].textContent = "Playing";
-}
-
-    updateActive();
 
 
     // -------------------------------------------------------------------------

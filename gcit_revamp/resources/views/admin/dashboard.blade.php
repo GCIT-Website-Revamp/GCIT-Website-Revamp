@@ -138,7 +138,7 @@
                 <div class="col-md-6">
                     <div class="full counter_section margin_bottom_30">
                         <div class="couter_icon">
-                            <div><i class="fa fa-gears dark_blue_color"></i></div>
+                            <div><i class="fa fa-calendar dark_blue_color"></i></div>
                         </div>
                         <div class="counter_no">
                             <div>
@@ -152,7 +152,7 @@
                 <div class="col-md-6">
                     <div class="full counter_section margin_bottom_30">
                         <div class="couter_icon">
-                            <div><i class="fa fa-gear dark_blue_color"></i></div>
+                            <div><i class="fa fa-gears dark_blue_color"></i></div>
                         </div>
                         <div class="counter_no">
                             <div>

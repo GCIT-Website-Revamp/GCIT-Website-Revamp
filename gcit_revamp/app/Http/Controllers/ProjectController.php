@@ -50,6 +50,7 @@ class ProjectController extends Controller
                 'guide' => 'required',
                 'description' => 'required',
                 'display' => 'sometimes',
+                'highlight' => 'sometimes',
                 'developers' => 'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'year' => 'required',
@@ -66,6 +67,7 @@ class ProjectController extends Controller
             $project = new Project();
             $project->name = $request->name;
             $project->display = $request->display;
+            $project->highlight = $request->highlight;
             $project->guide = $request->guide;
             $project->description = $request->description;
             $project->developers = $request->developers;
@@ -141,6 +143,7 @@ class ProjectController extends Controller
                 'guide' => 'required',
                 'description' => 'required',
                 'display' => 'sometimes',
+                'highlight' => 'sometimes',
                 'developers' => 'required',
                 'year' => 'required',
                 'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120'
@@ -156,6 +159,7 @@ class ProjectController extends Controller
 
             $project->name = $request->name;
             $project->display = $request->display;
+            $project->highlight = $request->highlight;
             $project->guide = $request->guide;
             $project->description = $request->description;
             $project->developers = $request->developers;

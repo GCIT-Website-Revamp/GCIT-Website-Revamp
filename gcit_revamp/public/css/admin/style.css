@@ -1215,6 +1215,10 @@ a[data-toggle="collapse"] {
          min-width: 70px;
       }
 
+      .ck-balloon-panel {
+            z-index: 999999 !important;
+        }
+
       .modal-content {
          border-radius: 8px;
          overflow: hidden;

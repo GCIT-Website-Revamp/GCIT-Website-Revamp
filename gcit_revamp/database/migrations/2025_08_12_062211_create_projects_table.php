@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('display')->nullable();
+            $table->string('highlight')->nullable();
             $table->string('guide');
             $table->text('description');
             $table->text('developers');

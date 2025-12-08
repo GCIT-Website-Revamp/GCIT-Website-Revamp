@@ -87,6 +87,7 @@
                                                 <button type="button" class="btn btn-success edit-course-btn"
                                                    data-course-id="{{ $course->id }}"
                                                    data-course-name="{{ $course->name }}"
+                                                   data-course-header="{{ $course->header }}"
                                                    data-course-type="{{ $course->type }}"
                                                    data-course-why="{{ $course->why }}"
                                                    data-course-what="{{ $course->what }}"

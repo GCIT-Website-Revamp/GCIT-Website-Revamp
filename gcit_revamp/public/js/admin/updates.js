@@ -96,11 +96,17 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
                 </div>
 
                 <div class="form-group" style="margin-left:19px;">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
-                    Display in the site
-                </label>
-            </div>
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
+                        Display in the site (News and Events Page)
+                    </label>
+                </div>
+                <div class="form-group" style="margin-left:19px;">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="true">
+                        Display in highlights (Home Page)
+                    </label>
+                </div>
             </form>
         `,
         `
@@ -122,6 +128,7 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
         formData.append("description", window.ictEditorInstance.getData());
         formData.append("image", document.getElementById('event_image').files[0]);
         formData.append("display", document.getElementById('display').checked ? "true" : "false");
+        formData.append("highlight", document.getElementById('highlight').checked ? "true" : "false");
 
         confirmAction("Add Event?", "Do you want to add this event?", () =>
             fetch("/api/event", {
@@ -175,12 +182,19 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
                     </div>
 
                     <div class="form-group" style="margin-left:19px;">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true" 
-                            ${btn.dataset.eventDisplay == "true" ? "checked" : ""}>
-                        Display in the site
-                    </label>
-                </div>
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="display" name="display" value="true" 
+                                ${btn.dataset.eventDisplay == "true" ? "checked" : ""}>
+                            Display in the site (News and Events Page)
+                        </label>
+                    </div>
+                    <div class="form-group" style="margin-left:19px;">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="true" 
+                                ${btn.dataset.eventHighlight == "true" ? "checked" : ""}>
+                            Display in highlights (Home Page)
+                        </label>
+                    </div>
                 </form>
             `,
             `
@@ -201,6 +215,7 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
             formData.append("description", window.ictEditorInstance.getData());
             formData.append("category", document.getElementById('category').value);
             formData.append("display", document.getElementById('display').checked ? "true" : "false");
+            formData.append("highlight", document.getElementById('highlight').checked ? "true" : "false");
 
             const img = document.getElementById('event_image').files[0];
             if (img) formData.append("image", img);

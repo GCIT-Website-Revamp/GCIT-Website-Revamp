@@ -57,8 +57,7 @@
                     <div class="courseDetailsWrapper">
 
                         <div class="courseHeaderWrapper">
-                            <h1>Ready to become
-                                a {{ $course->name }} Wizard? </h1>
+                            <h1>{{ $course->header }}</h1>
                             <p>{!! nl2br(e($course->description)) !!}</p>
 
                         </div>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('category');
             $table->string('display')->nullable();
+            $table->string('highlight')->nullable();
             $table->string('date');
             $table->text('description');
             $table->text('image');

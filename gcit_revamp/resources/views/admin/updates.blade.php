@@ -140,7 +140,7 @@
                                                    data-event-id="{{ $event->id }}" data-event-name="{{ $event->name }}"
                                                    data-event-image="{{ asset('storage/' . $event->image) }}"
                                                    data-event-date="{{ $event->date }}" data-event-display="{{ $event->display }}"
-                                                   data-event-category="{{ $event->category }}"
+                                                   data-event-category="{{ $event->category }}" data-event-highlight="{{ $event->highlight }}"
                                                    data-event-description="{{ $event->description }}">
                                                    Edit
                                                 </button>

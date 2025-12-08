@@ -31,12 +31,14 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
 
             <div class="form-group">
                 <label for="guide">Guide</label>
-                <input type="text" class="form-control" id="guide" name="guide" required>
+                <select class="form-control" id="guide" name="guide" required>
+                    <option value="">-- Select guide --</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="developers">Developers</label>
-                <textarea class="form-control" id="developers" name="developers" rows="3" required></textarea>
+                <label for="developers">Developers (Add developers separated by comma)</label>
+                <textarea class="form-control" id="developers" name="developers" rows="2" required></textarea>
             </div>
 
             <div class="form-group">
@@ -52,7 +54,13 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
             <div class="form-group" style="margin-left:19px;">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
-                    Display in the site
+                    Display in the site (Project Page)
+                </label>
+            </div>
+            <div class="form-group" style="margin-left:19px;">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="true">
+                    Display in highlights (Home Page)
                 </label>
             </div>
         </form>
@@ -69,6 +77,30 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
         <button type="submit" class="btn btn-success" id="addProject">Add Project</button>
     `;
 
+    let teams = [];
+
+    // Fetch teams from API
+    fetch('/api/team')
+        .then(res => res.json())
+        .then(data => {
+            teams = (data.data || []).filter(team => team.type === "Academic");
+
+            const guideSelect = document.getElementById('guide');
+            if (guideSelect) {
+                guideSelect.innerHTML = '<option value="">-- Select guide --</option>';
+                teams.forEach(team => {
+                    const opt = document.createElement('option');
+                    opt.value = team.id;
+                    opt.textContent = team.name;
+                    guideSelect.appendChild(opt);
+                });
+            }
+        })
+        .catch(err => {
+            console.error('Error fetching teams:', err);
+            Swal.fire({ icon: "error", title: "Error", text: "Failed to load teams." });
+        });
+    
     document.getElementById('addProject').addEventListener('click', function () {
         const form = document.getElementById('addProjectForm');
         const formData = new FormData(form);
@@ -143,8 +175,10 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
                 </div>
 
                 <div class="form-group">
-                    <label>Guide</label>
-                    <input type="text" class="form-control" id="guide" name="guide" value="${guide ?? ""}" required>
+                    <label for="guide">Guide</label>
+                    <select class="form-control" id="guide" name="guide" required>
+                        <option value="">-- Select guide --</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -169,9 +203,14 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
 
                 <div class="form-group" style="margin-left:19px;">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true" 
-                            ${this.dataset.display == "true" ? "checked" : ""}>
-                        Display in the site
+                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true" ${this.dataset.display == "true" ? "checked" : ""}>
+                        Display in the site (Project Page)
+                    </label>
+                </div>
+                <div class="form-group" style="margin-left:19px;">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="true" ${this.dataset.highlight == "true" ? "checked" : ""}>
+                        Display in highlights (Home Page)
                     </label>
                 </div>
             </form>
@@ -187,6 +226,35 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-success" id="updateProject">Update</button>
         `;
+
+        // Fetch teams and populate guide select, pre-select current guide
+        fetch('/api/team')
+            .then(res => res.json())
+            .then(data => {
+                const teams = (data.data || []).filter(team => team.type === "Academic");
+                const guideSelect = document.getElementById('guide');
+
+                if (!guideSelect) return;
+
+                guideSelect.innerHTML = '<option value="">-- Select guide --</option>';
+
+                teams.forEach(team => {
+                    const opt = document.createElement('option');
+                    opt.value = team.id;       // or team.id
+                    opt.textContent = team.name;
+
+                    // preselect if matches current guide
+                    if (guide && guide == team.id) {
+                        opt.selected = true;
+                    }
+
+                    guideSelect.appendChild(opt);
+                });
+            })
+            .catch(err => {
+                console.error('Error fetching teams:', err);
+                Swal.fire({ icon: "error", title: "Error", text: "Failed to load teams." });
+            });
 
         document.getElementById('updateProject').addEventListener('click', function () {
             const form = document.getElementById('editProjectForm');

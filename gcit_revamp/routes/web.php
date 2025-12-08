@@ -134,12 +134,13 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 });
 
 Route::get('/', function () {
-    $bsc = Course::where('type', '=', 'Bachelors of Computer Science')->get();
-    $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->get();
+    $bsc = Course::where('type', '=', 'School of Computing')->orderBy('name', 'ASC')->get();
+    $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->orderBy('name', 'ASC')->get();
     $announcements = Announcement::orderBy('created_at', 'asc')->where('display', '=', "true")->get();
     $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
-    $events = Event::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
-    return view('user.home', compact('bsc','sidd', 'announcements', 'latestAnnouncements', 'events'));
+    $events = Event::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
+    $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
+    return view('user.home', compact('bsc','sidd', 'announcements', 'latestAnnouncements', 'events', 'projects'));
 });
 
 Route::get('/news&events', function () {
@@ -153,7 +154,7 @@ Route::get('/announcements', function () {
 });
 
 Route::get('/course', function () {
-    $courses = Course::orderBy('created_at', 'desc')->get();
+    $courses = Course::orderBy('name', 'ASC')->get();
     return view('user.courseList', compact('courses'));
 });
 
@@ -174,11 +175,13 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
         $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
     }
     if ($type === 'project') {
-        $project = Project::findOrFail($id);
+        $project = Project::with('guideTeam')->findOrFail($id);
+        $previous = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
+        $next = Project::where('id', '>', $project->id)->orderBy('id', 'asc')->first();
         $latestProjects = Project::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
     }
 
-    return view('user.postDetailsTemplate', compact('event', 'announcement', 'latestAnnouncements', 'latestEvents','project', 'latestProjects'));
+    return view('user.postDetailsTemplate', compact('event', 'announcement', 'latestAnnouncements', 'latestEvents','project', 'latestProjects', 'next', 'previous'));
 });
 
 Route::get('/courseDetails/{id}', function ($id) {
@@ -189,7 +192,7 @@ Route::get('/courseDetails/{id}', function ($id) {
 });
 
 Route::get('/department/{type}', function ($type) {
-    $courses = Course::orderBy('created_at', 'desc')->get();
+    $courses = Course::orderBy('name', 'ASC')->get();
     $service = Services::where('name', '=', $type)->first();
     if ($service) {
         $service->roles = collect($service->roles)->map(function ($role) {
@@ -214,17 +217,17 @@ Route::get('/faculty', function () {
 
 Route::get('/about', function () {
     $overview = Overview::orderBy('created_at', 'desc')->first();
-    $courses = Course::orderBy('created_at', 'desc')->get();
+    $courses = Course::orderBy('name', 'asc')->get();
     return view('user.about', compact('overview', 'courses'));
 });
 
 Route::get('/clubs', function () {
-    $clubs = Club::orderBy('created_at', 'desc')->get();
+    $clubs = Club::orderBy('name', 'asc')->get();
     return view('user.club', compact('clubs'));
 });
 
 Route::get('/clubDetails/{id}', function ($id) {
-    $courses = Course::orderBy('created_at', 'desc')->get();
+    $courses = Course::orderBy('name', 'asc')->get();
     $club = Club::where('id', '=', $id)->first();
     if ($club) {
         $club->roles = collect($club->roles)->map(function ($role) {
@@ -245,7 +248,7 @@ Route::get('/clubDetails/{id}', function ($id) {
 
 Route::get('/resources/{type}', function ($type) {
     $resources = null;
-    $courses = Course::orderBy('created_at', 'desc')->get();
+    $courses = Course::orderBy('name', 'asc')->get();
     if ($type === 'Admission') {
         $resources = Admission::orderBy('created_at', 'desc')->first();
     }elseif($type === 'ICT'){

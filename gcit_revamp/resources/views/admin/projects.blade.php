@@ -139,7 +139,7 @@
                                                 <button class="btn btn-success edit-project-btn"
                                                    data-id="{{ $project->id }}" data-name="{{ $project->name }}"
                                                    data-year="{{ $project->year }}" data-guide="{{ $project->guide }}"
-                                                   data-display="{{ $project->display }}"
+                                                   data-display="{{ $project->display }}" data-highlight="{{ $project->highlight }}"
                                                    data-developers="{{ $project->developers }}"
                                                    data-description="{{ $project->description }}"
                                                    data-image="{{ asset('storage/' . $project->image) }}">Edit</button>

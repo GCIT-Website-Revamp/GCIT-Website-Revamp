@@ -54,6 +54,7 @@ class CourseController extends Controller
                 'what' => 'required',
                 'structure' => 'required',
                 'career' => 'required',
+                'header' => 'required'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -72,6 +73,7 @@ class CourseController extends Controller
             $course->what = $request->what;
             $course->structure = $request->structure;
             $course->career = $request->career;
+            $course->header = $request->header;
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -143,6 +145,7 @@ class CourseController extends Controller
                 'structure' => 'required',
                 'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'career' => 'required',
+                'header' => 'required'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -160,6 +163,7 @@ class CourseController extends Controller
             $course->what = $request->what;
             $course->structure = $request->structure;
             $course->career = $request->career;
+            $course->header = $request->header;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '_' . $image->getClientOriginalName();

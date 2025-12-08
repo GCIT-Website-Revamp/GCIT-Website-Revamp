@@ -25,6 +25,11 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
             </div>
 
             <div class="form-group">
+                <label>Header</label>
+                <textarea class="form-control" id="header" rows="2" required></textarea>
+            </div>
+
+            <div class="form-group">
                 <label for="courseType">Type</label>
                 <select class="form-control" id="courseType">
                     <option value="" disabled selected>Select Degree</option>
@@ -81,6 +86,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
         formData.append("structure", document.getElementById('structure').value);
         formData.append("career", document.getElementById('career').value);
         formData.append("type", document.getElementById("courseType").value);
+        formData.append("header", document.getElementById("header").value);
         let imageFile = document.getElementById('courseImage').files[0];
         formData.append("image", imageFile);
 
@@ -271,6 +277,11 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" id="name" value="${this.dataset.courseName}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Header</label>
+                    <textarea class="form-control" id="header" rows="2" required>${this.dataset.courseHeader}</textarea>
                 </div>
 
                 <div class="form-group">

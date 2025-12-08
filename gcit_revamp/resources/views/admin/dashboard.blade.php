@@ -27,350 +27,180 @@
     <div class="full_container">
         <div class="inner_container">
             <!-- Sidebar  -->
-            <nav id="sidebar">
-                <div class="sidebar_blog_1">
-                    <div class="sidebar-header">
-                        <div class="logo_section">
-                            <a href="dashboard"><img class="logo_icon img-responsive"
-                                    src="{{ asset('images/logo/logo1.png') }}" alt="#" /></a>
-                        </div>
-                    </div>
-                    <div class="sidebar_user_info">
-                        <div class="icon_setting"></div>
-                        <div class="user_profle_side">
-                            <div class="logo_section">
-                                <a href="dashboard"><img class="img-responsive"
-                                        src="{{ asset('images/logo/logo2.png') }}" alt="#" /></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar_blog_2">
-                    <ul class="list-unstyled components">
-                        <li class="active">
-                            <a href="dashboard"><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li><a href="projects"><i class="fa fa-folder-open white_color"></i> <span>Projects</span></a>
-                        </li>
-                        <li>
-                            <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                                    class="fa fa-graduation-cap white_color"></i> <span>Student Services</span></a>
-                            <ul class="collapse list-unstyled" id="element">
-                                <li><a href="admission">> <span>Admission</span></a></li>
-                                <li><a href="clubs">> <span>Clubs</span></a></li>
-                                <li><a href="ict">> <span>ICT</span></a></li>
-                                <li><a href="student-welfare">> <span>Student Welfare</span></a></li>
-                            </ul>
-                        </li>
-                        <li><a href="academics"><i class="fa fa-book white_color"></i> <span>Academics</span></a></li>
-                        <li>
-                            <a href="teams"><i class="fa fa-users white_color"></i> <span>Teams</span></a>
-                        </li>
-                        <li>
-                            <a href="contact">
-                                <i class="fa fa-paper-plane white_color"></i> <span>Contacts</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="#additional_page" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle"><i class="fa fa-briefcase white_color"></i>
-                                <span>Non-Academic</span></a>
-                            <ul class="collapse list-unstyled" id="additional_page">
-                                <li>
-                                    <a href="overview">> <span>Institutional Overview</span></a>
-                                </li>
-                                <li>
-                                    <a href="services">> <span>Other Services</span></a>
-                                </li>
-                                <li>
-                                    <a href="calendar">> <span>Calendar</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        </li>
-                        <li><a href="users"><i class="fa fa-user white_color"></i> <span>Users</span></a>
-                        </li>
-                        <li><a href="updates"><i class="fa fa-calendar white_color"></i> <span>Updates</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            @include('layout.sidebar')
             <!-- end sidebar -->
             <!-- right content -->
             <div id="content">
                 <!-- topbar -->
-                <div class="topbar">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <div class="full">
-                            <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i
-                                    class="fa fa-bars"></i></button>
-                            <div class="right_topbar">
-                                <div class="icon_info">
-                                    <ul class="user_profile_dd">
-                                        <li>
-                                            <a class="dropdown-toggle" data-toggle="dropdown"><span
-                                                    class="name_user">{{ Auth::user()->name }}</span></a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="profile">My Profile</a>
-                                                <a class="dropdown-item logout-btn" href="#">
-                                                    Log Out
-                                                </a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                    class="d-none">
-                                                    @csrf
-                                                </form>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
+                @include('layout.topbar')
                 <!-- end topbar -->
                 <!-- dashboard inner -->
                 <div class="midde_cont">
                     <div class="container-fluid">
-                        <div class="row column_title">
-                            <div class="col-md-12">
-                                <div class="page_title">
-                                    <h2>Dashboard</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row column1">
-                            <div class="col-md-6 col-lg-3">
-                                <div class="full counter_section margin_bottom_30">
-                                    <div class="couter_icon">
-                                        <div>
-                                            <i class="fa fa-users dark_blue_color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="counter_no">
-                                        <div>
-                                            <p class="total_no">{{ $userCount }}</p>
-                                            <p class="head_couter">Users</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="full counter_section margin_bottom_30">
-                                    <div class="couter_icon">
-                                        <div>
-                                            <i class="fa fa-clock-o dark_blue_color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="counter_no">
-                                        <div>
-                                            <p class="total_no">{{ $clubCount }}</p>
-                                            <p class="head_couter">Clubs</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="full counter_section margin_bottom_30">
-                                    <div class="couter_icon">
-                                        <div>
-                                            <i class="fa fa-cloud-download dark_blue_color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="counter_no">
-                                        <div>
-                                            <p class="total_no">{{ $courseCount }}</p>
-                                            <p class="head_couter">Courses</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="full counter_section margin_bottom_30">
-                                    <div class="couter_icon">
-                                        <div>
-                                            <i class="fa fa-comments-o dark_blue_color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="counter_no">
-                                        <div>
-                                            <p class="total_no">{{ $moduleCount }}</p>
-                                            <p class="head_couter">Modules</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row column1">
-                            <div class="col-md-6 col-lg-3">
-                                <div class="full counter_section margin_bottom_30">
-                                    <div class="couter_icon">
-                                        <div>
-                                            <i class="fa fa-user dark_blue_color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="counter_no">
-                                        <div>
-                                            <p class="total_no">{{ $projectCount }}</p>
-                                            <p class="head_couter">Projects</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="full counter_section margin_bottom_30">
-                                    <div class="couter_icon">
-                                        <div>
-                                            <i class="fa fa-clock-o dark_blue_color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="counter_no">
-                                        <div>
-                                            <p class="total_no">{{ $acadTeamCount }}</p>
-                                            <p class="head_couter">Academic Staff</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="full counter_section margin_bottom_30">
-                                    <div class="couter_icon">
-                                        <div>
-                                            <i class="fa fa-cloud-download dark_blue_color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="counter_no">
-                                        <div>
-                                            <p class="total_no">{{ $nacadTeamCount }}</p>
-                                            <p class="head_couter">Non-Academic Staff</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="full counter_section margin_bottom_30">
-                                    <div class="couter_icon">
-                                        <div>
-                                            <i class="fa fa-comments-o dark_blue_color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="counter_no">
-                                        <div>
-                                            <p class="total_no">{{ $serviceCount }}</p>
-                                            <p class="head_couter">Services</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- graph -->
-                        <!-- <div class="row column2 graph margin_bottom_30">
-                            <div class="col-md-l2 col-lg-12">
-                                <div class="white_shd full">
-                                    <div class="full graph_head">
-                                        <div class="heading1 margin_0">
-                                            <h2>Extra Area Chart</h2>
-                                        </div>
-                                    </div>
-                                    <div class="full graph_revenue">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="content">
-                                                    <div class="area_chart">
-                                                        <canvas height="120" id="canvas"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- end graph -->
-                        <div class="row column3">
-                            <!-- testimonial -->
-                            <div class="col-md-6">
-                                <div class="dark_bg full margin_bottom_30" style="height: 352px;">
-                                    <div class="full graph_head">
-                                        <div class="heading1 margin_0">
-                                            <h2>Teams</h2>
-                                        </div>
-                                    </div>
-                                    <div class="full graph_revenue">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                @if($teams && $teams->count() > 0)
-                                                    <div class="content testimonial">
-                                                        <div id="testimonial_slider" class="carousel slide"
-                                                            data-ride="carousel">
-                                                            <!-- Wrapper for carousel items -->
-                                                            <div class="carousel-inner">
-                                                                @foreach ($teams as $index => $team)
-                                                                    <div
-                                                                        class="item carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                                        <div class="img-box">
-                                                                            <img src="{{ asset('storage/' . $team->image) }}"
-                                                                                alt="{{ $team->name }}">
-                                                                        </div>
+    <div class="row column_title">
+        <div class="col-md-12">
+            <div class="page_title">
+                <h2>Dashboard</h2>
+            </div>
+        </div>
+    </div>
 
-                                                                        <p class="testimonial">
-                                                                            {{ $team->description }}
-                                                                        </p>
-
-                                                                        <p class="overview">
-                                                                            <b>{{ $team->name }}</b>
-                                                                        </p>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                            <!-- Carousel controls -->
-                                                            <a class="carousel-control left carousel-control-prev"
-                                                                href="#testimonial_slider" data-slide="prev">
-                                                                <i class="fa fa-angle-left"></i>
-                                                            </a>
-                                                            <a class="carousel-control right carousel-control-next"
-                                                                href="#testimonial_slider" data-slide="next">
-                                                                <i class="fa fa-angle-right"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                @else
-                                                    <div class="mt-5"
-                                                        style="color: white; font-size: 20px; text-align:center;">No Teams
-                                                        Added Yet</div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end testimonial -->
-                            <!-- progress bar -->
-                            <div class="col-md-6">
-                                <div class="dash_blog">
-                                    <div class="dash_blog_inner">
-                                        <div class="dash_head">
-                                            <h3>Updates</h3>
-                                        </div>
-                                        <div class="task_list_main">
-                                            <ul class="task_list">
-                                                @if($events && $events->count() > 0)
-                                                    @foreach ($events as $update)
-                                                        <li>
-                                                            <a href="#">{{ $update->name }}</a><br>
-                                                            <strong>{{ $update->date }}</strong>
-                                                        </li>
-                                                    @endforeach
-                                                @else
-                                                    <div class="mt-5"
-                                                        style="color:#214162; font-size: 20px; text-align:center;">No Events
-                                                        Added Yet</div>
-                                                @endif
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="row">
+        {{-- LEFT: STATS --}}
+        <div class="col-lg-5">
+            <div class="row column1">
+                <div class="col-md-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div><i class="fa fa-users dark_blue_color"></i></div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <p class="total_no">{{ $userCount }}</p>
+                                <p class="head_couter">Users</p>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div><i class="fa fa-clock-o dark_blue_color"></i></div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <p class="total_no">{{ $clubCount }}</p>
+                                <p class="head_couter">Clubs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div><i class="fa fa-book dark_blue_color"></i></div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <p class="total_no">{{ $courseCount }}</p>
+                                <p class="head_couter">Courses</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div><i class="fa fa-bookmark dark_blue_color"></i></div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <p class="total_no">{{ $moduleCount }}</p>
+                                <p class="head_couter">Modules</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row column1">
+                <div class="col-md-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div><i class="fa fa-folder dark_blue_color"></i></div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <p class="total_no">{{ $projectCount }}</p>
+                                <p class="head_couter">Projects</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div><i class="fa fa-graduation-cap dark_blue_color"></i></div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <p class="total_no">{{ $acadTeamCount }}</p>
+                                <p class="head_couter">Staffs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div><i class="fa fa-gears dark_blue_color"></i></div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <p class="total_no">{{ $events }}</p>
+                                <p class="head_couter">Events</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div><i class="fa fa-gear dark_blue_color"></i></div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <p class="total_no">{{ $serviceCount }}</p>
+                                <p class="head_couter">Services</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- RIGHT: ACTION LOGS --}}
+        <div class="col-lg-7">
+            <div class="full margin_bottom_30">
+                <div class="heading1 margin_0">
+                    <h2>Action Logs</h2>
+                </div>
+
+                <div class="table-responsive-sm" style="width:100%;">
+                    <table class="table w-100">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Time</th>
+                                <th>User</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($logs as $index => $log)
+                                <tr>
+                                    <td style="max-width: 340px;">{{ $log->description }}</td>
+                                    <td>{{ $log->created_at }}</td>
+                                    <td>{{ $log->causer['name'] }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center">No logs found.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                 </div>
             </div>
         </div>

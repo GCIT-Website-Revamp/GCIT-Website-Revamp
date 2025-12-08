@@ -15,6 +15,7 @@ use App\Models\Overview;
 use App\Models\ICT;
 use App\Models\Welfare;
 use App\Models\Contact;
+use Spatie\Activitylog\Models\Activity;
 
 
 Route::get('/admin', function () {
@@ -41,11 +42,12 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
         $projectCount = Project::count();
         $clubCount = Club::count();
         $serviceCount = Services::count();
-        $acadTeamCount = Team::where('type', 'Academic')->count();
+        $acadTeamCount = Team::count();
         $nacadTeamCount = Team::where('type', 'Non-Academic')->count();
-        $teams = Team::all();
-        $events = Event::latest()->take(4)->get();
-        return view('admin.dashboard', compact('userCount','moduleCount', 'courseCount', 'projectCount', 'clubCount', 'teams', 'events', 'serviceCount','acadTeamCount', 'nacadTeamCount'));
+        $events = Event::count();
+        $logs = Activity::with('causer')->latest()->take(12)->get();
+
+        return view('admin.dashboard', compact('userCount','moduleCount', 'courseCount', 'projectCount', 'clubCount', 'events', 'serviceCount','acadTeamCount', 'logs'));
     });
 
     Route::get('/profile', function () {
@@ -63,8 +65,8 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
     });
 
     Route::get('/academics', function () {
-        $courses = Course::orderBy('created_at', 'desc')->paginate(5);
-        $modules = Module::orderBy('created_at', 'desc')->paginate(5);
+        $courses = Course::orderBy('created_at', 'desc')->paginate(5,['*'], 'courses_page');
+        $modules = Module::orderBy('created_at', 'desc')->paginate(5, ['*'], 'modules_page');
         return view('admin.academics', compact('courses', 'modules'));
     });
 
@@ -84,8 +86,8 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
     });
 
     Route::get('/updates', function () {
-        $events = Event::orderBy('created_at', 'desc')->paginate(4);
-        $announcements = Announcement::orderBy('created_at', 'desc')->paginate(4);
+        $events = Event::orderBy('created_at', 'desc')->paginate(4, ['*'], 'events_page');
+        $announcements = Announcement::orderBy('created_at', 'desc')->paginate(4, ['*'], 'announcements_page');
         return view('admin.updates', compact('events', 'announcements'));
     });
 
@@ -116,6 +118,18 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 
     Route::get('/calendar', function () {
         return view('admin.calendar');
+    });
+
+    Route::get('/logs', function () {
+        activity()
+        ->causedBy(Auth::user())
+        ->withProperties([
+            'ip' => request()->ip(),
+            'url' => request()->fullUrl(),
+        ])
+        ->log('Viewed action logs');
+        $logs = Activity::orderBy('created_at', 'desc')->with('causer')->paginate(15);
+        return view('admin.logs', compact('logs'));
     });
 });
 

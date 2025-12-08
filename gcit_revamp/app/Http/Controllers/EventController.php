@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     public function getAllEvents()
@@ -76,7 +76,14 @@ class EventController extends Controller
             }
 
             $event->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($event)
+                ->withProperties([
+                    'name' => $event->name,
+                    'id' => $event->id
+                ])
+                ->log('Added a new event');
             return response()->json([
                 'success' => true,
                 'message' => 'Event created successfully!',
@@ -96,7 +103,14 @@ class EventController extends Controller
         try {
             $event = Event::findOrFail($id);
             $event->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($event)
+                ->withProperties([
+                    'name' => $event->name,
+                    'id' => $event->id
+                ])
+                ->log('Deleted event');
             return response()->json([
                 'success' => true,
                 'message' => 'Event deleted successfully!'
@@ -146,7 +160,14 @@ class EventController extends Controller
             }
 
             $event->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($event)
+                ->withProperties([
+                    'name' => $event->name,
+                    'id' => $event->id
+                ])
+                ->log('Updated event');
             return response()->json([
                 'success' => true,
                 'message' => 'Event updated successfully!',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -63,7 +64,14 @@ class ServiceController extends Controller
             $service->roles = $request->roles;
 
             $service->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($service)
+                ->withProperties([
+                    'name' => $service->name,
+                    'id' => $service->id
+                ])
+                ->log('Added a new service');
             return response()->json([
                 'success' => true,
                 'message' => 'Service created successfully!',
@@ -83,7 +91,14 @@ class ServiceController extends Controller
         try {
             $service = Services::findOrFail($id);
             $service->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($service)
+                ->withProperties([
+                    'name' => $service->name,
+                    'id' => $service->id
+                ])
+                ->log('Deleted a service');
             return response()->json([
                 'success' => true,
                 'message' => 'Service deleted successfully!'
@@ -120,7 +135,14 @@ class ServiceController extends Controller
             $service->roles = $request->roles;
 
             $service->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($service)
+                ->withProperties([
+                    'name' => $service->name,
+                    'id' => $service->id
+                ])
+                ->log('Updated a service');
             return response()->json([
                 'success' => true,
                 'message' => 'Service updated successfully!',

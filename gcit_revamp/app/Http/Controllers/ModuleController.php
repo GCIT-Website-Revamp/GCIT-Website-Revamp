@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ModuleController extends Controller
 {
@@ -67,7 +68,14 @@ class ModuleController extends Controller
             $module->semester = $request->semester;
             $module->course_id = $request->course_id;
             $module->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($module)
+                ->withProperties([
+                    'module_name' => $module->name,
+                    'module_id' => $module->id
+                ])
+                ->log('Created a new module');
             return response()->json([
                 'success' => true,
                 'message' => 'Module created successfully!',
@@ -87,7 +95,14 @@ class ModuleController extends Controller
         try {
             $module = Module::findOrFail($id);
             $module->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($module)
+                ->withProperties([
+                    'module_name' => $module->name,
+                    'module_id' => $module->id
+                ])
+                ->log('Deleted a module');
             return response()->json([
                 'success' => true,
                 'message' => 'Module deleted successfully!'
@@ -128,7 +143,14 @@ class ModuleController extends Controller
             $module->semester = $request->semester;
             $module->course_id = $request->course_id;
             $module->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($module)
+                ->withProperties([
+                    'module_name' => $module->name,
+                    'module_id' => $module->id
+                ])
+                ->log('Updated a module');
             return response()->json([
                 'success' => true,
                 'message' => 'Module updated successfully!',

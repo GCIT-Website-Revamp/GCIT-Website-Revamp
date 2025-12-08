@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
@@ -79,6 +80,15 @@ class ProjectController extends Controller
 
             $project->save();
 
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($project)
+                ->withProperties([
+                    'project_name' => $project->name,
+                    'project_id' => $project->id
+                ])
+                ->log('Created a new project');
+
             return response()->json([
                 'success' => true,
                 'message' => 'Project added successfully!',
@@ -97,7 +107,16 @@ class ProjectController extends Controller
     {
         try {
             $project = Project::findOrFail($id);
+
             $project->delete();
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($project)
+                ->withProperties([
+                    'project_name' => $project->name,
+                    'project_id' => $project->id
+                ])
+                ->log('Deleted a project');
 
             return response()->json([
                 'success' => true,
@@ -124,7 +143,6 @@ class ProjectController extends Controller
                 'display' => 'sometimes',
                 'developers' => 'required',
                 'year' => 'required',
-                // image is optional on update
                 'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120'
             ];
 
@@ -151,6 +169,14 @@ class ProjectController extends Controller
             }
 
             $project->save();
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($project)
+                ->withProperties([
+                    'project_name' => $project->name,
+                    'project_id' => $project->id
+                ])
+                ->log('Updated project details');
 
             return response()->json([
                 'success' => true,

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ICT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 class ICTController extends Controller
 {
     public function getAllICT()
@@ -60,6 +60,14 @@ class ICTController extends Controller
             $ict->description = $request->description;
             $ict->save();
 
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($ict)
+                ->withProperties([
+                    'ict_id' => $ict->id
+                ])
+                ->log('Create new ict details');
+
             return response()->json([
                 'success' => true,
                 'message' => 'ICT infomation added successfully!',
@@ -79,6 +87,14 @@ class ICTController extends Controller
         try {
             $ict = ICT::findOrFail($id);
             $ict->delete();
+
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($ict)
+                ->withProperties([
+                    'ict_id' => $ict->id
+                ])
+                ->log('Deleted ict details');
 
             return response()->json([
                 'success' => true,
@@ -112,6 +128,14 @@ class ICTController extends Controller
 
             $ict->description = $request->description;
             $ict->save();
+
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($ict)
+                ->withProperties([
+                    'ict_id' => $ict->id
+                ])
+                ->log('Updated ict details');
 
             return response()->json([
                 'success' => true,

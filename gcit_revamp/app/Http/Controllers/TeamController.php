@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -76,7 +77,14 @@ class TeamController extends Controller
             }
 
             $team->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($team)
+                ->withProperties([
+                    'name' => $team->name,
+                    'id' => $team->id
+                ])
+                ->log('Added a faculty details');
             return response()->json([
                 'success' => true,
                 'message' => 'Team added successfully!',
@@ -96,7 +104,14 @@ class TeamController extends Controller
         try {
             $team = Team::findOrFail($id);
             $team->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($team)
+                ->withProperties([
+                    'name' => $team->name,
+                    'id' => $team->id
+                ])
+                ->log('Deleted a faculty detail');
             return response()->json([
                 'success' => true,
                 'message' => 'Team deleted successfully!'
@@ -146,7 +161,14 @@ class TeamController extends Controller
             }
 
             $team->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($team)
+                ->withProperties([
+                    'name' => $team->name,
+                    'id' => $team->id
+                ])
+                ->log('Updated a faculty detail');
             return response()->json([
                 'success' => true,
                 'message' => 'Team updated successfully!',

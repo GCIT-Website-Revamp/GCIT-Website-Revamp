@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class AdmissionController extends Controller
 {
@@ -60,6 +61,14 @@ class AdmissionController extends Controller
             $admission->description = $request->description;
             $admission->save();
 
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($admission)
+                ->withProperties([
+                    'admission_id' => $admission->id
+                ])
+                ->log('Created admission details');
+
             return response()->json([
                 'success' => true,
                 'message' => 'Admission created successfully!',
@@ -79,6 +88,14 @@ class AdmissionController extends Controller
         try {
             $admission = Admission::findOrFail($id);
             $admission->delete();
+
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($admission)
+                ->withProperties([
+                    'admission_id' => $admission->id
+                ])
+                ->log('Deleted admission details');
 
             return response()->json([
                 'success' => true,
@@ -112,6 +129,14 @@ class AdmissionController extends Controller
 
             $admission->description = $request->description;
             $admission->save();
+
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($admission)
+                ->withProperties([
+                    'admission_id' => $admission->id
+                ])
+                ->log('Updated admission details');
 
             return response()->json([
                 'success' => true,

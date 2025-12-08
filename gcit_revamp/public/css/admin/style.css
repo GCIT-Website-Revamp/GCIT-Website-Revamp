@@ -1195,6 +1195,81 @@ a[data-toggle="collapse"] {
     font-weight: 400;
 }
 
+.table-responsive-sm {
+         overflow-x: auto;
+      }
+
+      .table td,
+      .table th {
+         vertical-align: middle;
+      }
+
+      .action-buttons {
+         display: flex;
+         gap: 8px;
+         flex-wrap: wrap;
+      }
+
+      .action-buttons .btn {
+         flex: 1;
+         min-width: 70px;
+      }
+
+      .modal-content {
+         border-radius: 8px;
+         overflow: hidden;
+      }
+
+      .modal-header {
+         background-color: #f8f9fa;
+         border-bottom: 1px solid #dee2e6;
+      }
+
+      .modal-footer {
+         border-top: 1px solid #dee2e6;
+      }
+
+      @media (max-width: 768px) {
+         .action-buttons {
+            flex-direction: column;
+         }
+
+         .table-responsive-sm {
+            font-size: 0.875rem;
+         }
+
+         .d-flex.justify-content-between {
+            flex-direction: column;
+            gap: 15px;
+         }
+      }
+
+/* CKEditor content styling */
+.ck-content {
+    color: #333 !important;
+    line-height: 1.6;
+}
+
+.ck-content ol,
+.ck-content ul {
+    padding-left: 25px !important;
+    margin-bottom: 1rem !important;
+}
+
+.ck-content ol {
+    list-style-type: decimal !important;
+}
+
+.ck-content ul {
+    list-style-type: disc !important;
+}
+
+.ck-content li {
+    margin-bottom: 0.25rem !important;
+    color: #333 !important;
+    display: list-item !important;
+}
+
 .counter_no .head_couter {
     float: left;
     width: 100%;
@@ -1226,8 +1301,6 @@ a[data-toggle="collapse"] {
 #graph1 {
     margin-top: 10px;
 }
-
-#rebenue {}
 
 .graph_revenue {
     padding: 0;
@@ -1269,6 +1342,10 @@ a[data-toggle="collapse"] {
     position: relative;
     color: #15283c;
     font-family: 'Raleway', sans-serif;
+}
+
+.text-center nav {
+    margin-bottom: -10rem !important;
 }
 
 .time_form {

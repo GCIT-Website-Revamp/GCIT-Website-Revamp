@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -80,7 +81,14 @@ class CourseController extends Controller
             }
 
             $course->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($course)
+                ->withProperties([
+                    'course_name' => $course->name,
+                    'course_id' => $course->id
+                ])
+                ->log('Created a new course');
             return response()->json([
                 'success' => true,
                 'message' => 'Course created successfully!',
@@ -100,7 +108,14 @@ class CourseController extends Controller
         try {
             $course = Course::findOrFail($id);
             $course->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($course)
+                ->withProperties([
+                    'course_name' => $course->name,
+                    'course_id' => $course->id
+                ])
+                ->log('Deleted a course');
             return response()->json([
                 'success' => true,
                 'message' => 'Course deleted successfully!'
@@ -153,7 +168,14 @@ class CourseController extends Controller
             }
 
             $course->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($course)
+                ->withProperties([
+                    'course_name' => $course->name,
+                    'course_id' => $course->id
+                ])
+                ->log('Updated a course');
             return response()->json([
                 'success' => true,
                 'message' => 'Course updated successfully!',

@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -19,7 +16,17 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            // Regenerate session ID to prevent fixation
+
+            // Log successful login
+            activity()
+                ->causedBy(Auth::user())
+                ->withProperties([
+                    'ip' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                ])
+                ->log('User logged in');
+
+            // Regenerate session ID for security
             $request->session()->regenerate();
             
             return response()->json([
@@ -29,13 +36,33 @@ class AuthController extends Controller
             ]);
         }
 
+        // Log failed login attempt (optional)
+        activity()
+            ->causedByAnonymous()
+            ->withProperties([
+                'email' => $request->email,
+                'ip' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+            ])
+            ->log('Failed login attempt');
+
         return response()->json([
             'success' => false,
             'message' => 'Invalid credentials.'
         ], 401);
     }
+
     public function logout(Request $request)
     {
+        // Log logout action
+        activity()
+            ->causedBy(Auth::user())
+            ->withProperties([
+                'ip' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+            ])
+            ->log('User logged out');
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -51,7 +78,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'current_password' => ['required'],
-            'new_password' => ['required', 'min:8', 'confirmed'],
+            'new_password'     => ['required', 'min:8', 'confirmed'],
         ]);
 
         $user = Auth::user();
@@ -66,7 +93,8 @@ class AuthController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        // Regenerate session for security
+        // No action log here as requested
+
         $request->session()->regenerate();
 
         return response()->json([

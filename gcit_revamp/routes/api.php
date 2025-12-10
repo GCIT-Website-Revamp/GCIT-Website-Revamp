@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MediaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CourseController;
@@ -40,6 +41,7 @@ Route::get('/project/{project}', [ProjectController::class, 'getProject'])->name
 Route::post('/project', [ProjectController::class, 'createProject'])->middleware('web')->name('createProject');
 Route::delete('/project/{project}', [ProjectController::class, 'deleteProject'])->middleware('web')->name('deleteProject');
 Route::put('/project/{project}', [ProjectController::class, 'updateProject'])->middleware('web')->name('updateProject');
+Route::delete('/project-image/{id}', [ProjectController::class, 'deleteImage'])->middleware('web')->name('deleteImage');
 
 // Event API Routes
 Route::get('/event', [EventController::class, 'getAllEvents'])->name('getAllEvents');
@@ -47,6 +49,7 @@ Route::get('/event/{event}', [EventController::class, 'getEvent'])->name('getEve
 Route::post('/event', [EventController::class, 'createEvent'])->middleware('web')->name('createEvent');
 Route::delete('/event/{event}', [EventController::class, 'deleteEvent'])->middleware('web')->name('deleteEvent');
 Route::put('/event/{event}', [EventController::class, 'updateEvent'])->middleware('web')->name('updateEvent');
+Route::delete('/event-image/{id}', [EventController::class, 'deleteImage'])->middleware('web')->name('deleteEventImage');
 
 // News API Routes
 Route::get('/announcement', [AnnouncementController::class, 'getAllAnnouncement'])->name('getAllAnnouncement');
@@ -124,3 +127,10 @@ Route::get('/contact/{contact}', [ContactController::class, 'getContact'])->name
 Route::post('/contact', [ContactController::class, 'createContact'])->name('createContact');
 Route::delete('/contact/{contact}', [ContactController::class, 'deleteContact'])->name('deleteContact');
 Route::put('/contact/{contact}', [ContactController::class, 'updateContact'])->middleware('web')->name('updateContact');
+
+// Media API Routes
+Route::get('/media', [MediaController::class, 'getAllMedias'])->name('getAllMedias');
+Route::get('/media/{media}', [MediaController::class, 'getMedia'])->name('getMedia');
+Route::post('/media', [MediaController::class, 'createMedia'])->middleware('web')->name('createMedia');
+Route::delete('/media/{media}', [MediaController::class, 'deleteMedia'])->middleware('web')->name('deleteMedia');
+Route::put('/media/{media}', [MediaController::class, 'updatemedia'])->middleware('web')->name('updatemedia');

@@ -23,11 +23,13 @@
             </li>
             <li><a href="projects"><i class="fa fa-folder-open white_color"></i> <span>Projects</span></a>
             </li>
+            <li><a href="media"><i class="fa fa-image white_color"></i> <span>Media Gallery</span></a>
+            </li>
             <li>
                 <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
                         class="fa fa-graduation-cap white_color"></i> <span>Student Services</span></a>
                 <ul class="collapse list-unstyled" id="element">
-                    <li><a href="admission">> <span>Admission</span></a></li>
+                    <!-- <li><a href="admission">> <span>Admission</span></a></li> -->
                     <li><a href="clubs">> <span>Clubs</span></a></li>
                     <li><a href="ict">> <span>ICT</span></a></li>
                     <li><a href="student-welfare">> <span>Student Welfare</span></a></li>
@@ -35,11 +37,11 @@
             </li>
             <li><a href="academics"><i class="fa fa-book white_color"></i> <span>Academics</span></a></li>
             <li>
-                <a href="teams"><i class="fa fa-users white_color"></i> <span>Teams</span></a>
+                <a href="teams"><i class="fa fa-users white_color"></i> <span>Staffs</span></a>
             </li>
             <li>
                 <a href="contact">
-                    <i class="fa fa-paper-plane white_color"></i> <span>Contacts</span></a>
+                    <i class="fa fa-paper-plane white_color"></i> <span>Inquiries</span></a>
             </li>
             <li class="active">
                 <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i

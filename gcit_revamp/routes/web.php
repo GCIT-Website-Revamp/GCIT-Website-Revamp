@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Media;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Course;
@@ -120,6 +121,11 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
         return view('admin.calendar');
     });
 
+    Route::get('/media', function () {
+        $media = Media::orderBy('created_at', 'desc')->paginate(7);
+        return view('admin.media_gallery', compact('media'));
+    });
+
     Route::get('/logs', function () {
         activity()
         ->causedBy(Auth::user())
@@ -135,12 +141,11 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 
 Route::get('/', function () {
     $bsc = Course::where('type', '=', 'School of Computing')->orderBy('name', 'ASC')->get();
-    $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->orderBy('name', 'ASC')->get();
-    $announcements = Announcement::orderBy('created_at', 'asc')->where('display', '=', "true")->get();
-    $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
+    $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
+    $announcements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(5)->get();
     $events = Event::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
     $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
-    return view('user.home', compact('bsc','sidd', 'announcements', 'latestAnnouncements', 'events', 'projects'));
+    return view('user.home', compact('bsc','sidd', 'announcements', 'events', 'projects'));
 });
 
 Route::get('/news&events', function () {
@@ -161,28 +166,79 @@ Route::get('/course', function () {
 Route::get('/post/{type}/{id}', function ($type, $id) {
     $event = null;
     $announcement = null;
+    $project = null;
+
     $latestEvents = null;
     $latestAnnouncements = null;
-    $project = null;
     $latestProjects = null;
 
+    $previous = null;
+    $next = null;
+
+    // ------------------------
+    // EVENTS
+    // ------------------------
     if ($type === 'events') {
         $event = Event::findOrFail($id);
-        $latestEvents = Event::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
-    }
-    if ($type === 'announcement') {
-        $announcement = Announcement::findOrFail($id);
-        $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
-    }
-    if ($type === 'project') {
-        $project = Project::with('guideTeam')->findOrFail($id);
-        $previous = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
-        $next = Project::where('id', '>', $project->id)->orderBy('id', 'asc')->first();
-        $latestProjects = Project::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
+
+        // Next & Previous based on ID
+        $previous = Event::where('id', '<', $event->id)->orderBy('id', 'desc')->first();
+        $next = Event::where('id', '>', $event->id)->orderBy('id', 'asc')->first();
+
+        // Latest events
+        $latestEvents = Event::orderBy('created_at', 'desc')
+            ->where('display', '=', "true")
+            ->take(4)
+            ->get();
     }
 
-    return view('user.postDetailsTemplate', compact('event', 'announcement', 'latestAnnouncements', 'latestEvents','project', 'latestProjects', 'next', 'previous'));
+    // ------------------------
+    // ANNOUNCEMENTS
+    // ------------------------
+    if ($type === 'announcement') {
+        $announcement = Announcement::findOrFail($id);
+
+        // Next & Previous based on ID
+        $previous = Announcement::where('id', '<', $announcement->id)->orderBy('id', 'desc')->first();
+        $next = Announcement::where('id', '>', $announcement->id)->orderBy('id', 'asc')->first();
+
+        // Latest announcements
+        $latestAnnouncements = Announcement::orderBy('created_at', 'desc')
+            ->where('display', '=', "true")
+            ->take(4)
+            ->get();
+    }
+
+    // ------------------------
+    // PROJECTS
+    // ------------------------
+    if ($type === 'project') {
+        $project = Project::with('guideTeam')->findOrFail($id);
+
+        // Next & Previous based on ID
+        $previous = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
+        $next = Project::where('id', '>', $project->id)->orderBy('id', 'asc')->first();
+
+        // Latest projects
+        $latestProjects = Project::orderBy('created_at', 'desc')
+            ->where('display', '=', "true")
+            ->take(4)
+            ->get();
+    }
+
+    return view('user.postDetailsTemplate', compact(
+        'event',
+        'announcement',
+        'latestAnnouncements',
+        'latestEvents',
+        'project',
+        'latestProjects',
+        'next',
+        'previous',
+        'type'
+    ));
 });
+
 
 Route::get('/courseDetails/{id}', function ($id) {
     $course = Course::findOrFail($id);

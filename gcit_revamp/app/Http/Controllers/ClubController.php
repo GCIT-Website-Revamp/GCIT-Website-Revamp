@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ClubController extends Controller
 {
@@ -66,6 +67,15 @@ class ClubController extends Controller
 
             $club->save();
 
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($club)
+                ->withProperties([
+                    'club_name' => $club->name,
+                    'club_id' => $club->id
+                ])
+                ->log('Created a new club');
+
             return response()->json([
                 'success' => true,
                 'message' => 'Club created successfully!',
@@ -109,6 +119,15 @@ class ClubController extends Controller
 
             $club->save();
 
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($club)
+                ->withProperties([
+                    'club_name' => $club->name,
+                    'club_id' => $club->id
+                ])
+                ->log('Updated a club');
+
             return response()->json([
                 'success' => true,
                 'message' => 'Club updated successfully!',
@@ -128,7 +147,14 @@ class ClubController extends Controller
         try {
             $club = Club::findOrFail($id);
             $club->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($club)
+                ->withProperties([
+                    'club_name' => $club->name,
+                    'club_id' => $club->id
+                ])
+                ->log('Deleted a club');
             return response()->json([
                 'success' => true,
                 'message' => 'Club deleted successfully!'

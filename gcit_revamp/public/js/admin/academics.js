@@ -25,10 +25,15 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
             </div>
 
             <div class="form-group">
+                <label>Header</label>
+                <textarea class="form-control" id="header" rows="2" required></textarea>
+            </div>
+
+            <div class="form-group">
                 <label for="courseType">Type</label>
                 <select class="form-control" id="courseType">
                     <option value="" disabled selected>Select Degree</option>
-                    <option value="Bachelors of Computer Science">Bachelors of Computer Science</option>
+                    <option value="School of Computing">School of Computing</option>
                     <option value="School of Interactive Design and Development">School of Interactive Design and Development</option>
                 </select>
             </div>
@@ -81,6 +86,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
         formData.append("structure", document.getElementById('structure').value);
         formData.append("career", document.getElementById('career').value);
         formData.append("type", document.getElementById("courseType").value);
+        formData.append("header", document.getElementById("header").value);
         let imageFile = document.getElementById('courseImage').files[0];
         formData.append("image", imageFile);
 
@@ -274,10 +280,15 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                 </div>
 
                 <div class="form-group">
+                    <label>Header</label>
+                    <textarea class="form-control" id="header" rows="2" required>${this.dataset.courseHeader}</textarea>
+                </div>
+
+                <div class="form-group">
                     <label for="courseType">Type</label>
                     <select class="form-control" id="courseType">
                         <option value="" disabled selected>Select Degree</option>
-                        <option value="Bachelors of Computer Science"  ${this.dataset.courseType === "Bachelors of Computer Science" ? "selected" : ""}>Bachelors of Computer Science</option>
+                        <option value="School of Computing"  ${this.dataset.courseType === "School of Computing" ? "selected" : ""}>School of Computing</option>
                         <option value="School of Interactive Design and Development" ${this.dataset.courseType === "School of Interactive Design and Development" ? "selected" : ""}>School of Interactive Design and Development</option>
                     </select>
                 </div>

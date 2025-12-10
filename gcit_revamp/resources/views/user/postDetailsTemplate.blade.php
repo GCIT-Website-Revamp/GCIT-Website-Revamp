@@ -47,17 +47,44 @@
                 <img src="{{ asset('storage/' . $project->image) }}" alt="">
                 <p>{!! $project->description !!}</p>
                 <p>Year of Completion: {{ $project->year }}</p>
-                <p>Project Guide: {{ $project->guide }}</p>
-                <p>Developers: <br> {!! nl2br(e($project->developers)) !!}</p>
+                <p>Project Guide: {{ $project->guideTeam->name }}</p>
+                <p>Developers:</p>
+                <ol>
+                @foreach(explode(',', $project->developers) as $dev)
+                    <li>{{ trim($dev) }}</li>
+                @endforeach
+                </ol>
                 @endif
-                    <div class="btnWrapper">
-                        <button class="left"><span class="material-symbols-outlined">keyboard_arrow_right</span>Previous
+                <div class="btnWrapper">
+                    @if($previous)
+                        <a href="{{ url('post/'. $type.'/' . $previous->id) }}">
+                            <button class="left">
+                                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                Previous
+                            </button>
+                        </a>
+                    @else
+                        <button class="left" disabled>
+                            <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                            Previous
                         </button>
-                        <button class="right">
-                            Next<span class="material-symbols-outlined">keyboard_arrow_right</span>
+                    @endif
+
+                    @if($next)
+                        <a href="{{ url('post/'.$type.'/' . $next->id) }}">
+                            <button class="right">
+                                Next
+                                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                            </button>
+                        </a>
+                    @else
+                        <button class="right" disabled>
+                            Next
+                            <span class="material-symbols-outlined">keyboard_arrow_right</span>
                         </button>
-                      
-                    </div>
+                    @endif
+
+                </div>
             </div>
             <div class="suggestionWrapper">
                 @if($latestAnnouncements)

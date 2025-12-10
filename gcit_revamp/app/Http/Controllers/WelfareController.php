@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Welfare;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class WelfareController extends Controller
 {
@@ -60,6 +61,14 @@ class WelfareController extends Controller
             $welfare->description = $request->description;
             $welfare->save();
 
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($welfare)
+                ->withProperties([
+                    'welfare_id' => $welfare->id
+                ])
+                ->log('Created new student welfare details');
+
             return response()->json([
                 'success' => true,
                 'message' => 'Student welfare infomation added successfully!',
@@ -79,7 +88,13 @@ class WelfareController extends Controller
         try {
             $welfare = Welfare::findOrFail($id);
             $welfare->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($welfare)
+                ->withProperties([
+                    'welfare_id' => $welfare->id
+                ])
+                ->log('Deleted student welfare details');
             return response()->json([
                 'success' => true,
                 'message' => 'Student welfare infomation deleted successfully!'
@@ -112,7 +127,13 @@ class WelfareController extends Controller
 
             $welfare->description = $request->description;
             $welfare->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($welfare)
+                ->withProperties([
+                    'welfare_id' => $welfare->id
+                ])
+                ->log('Updated student welfare details');
             return response()->json([
                 'success' => true,
                 'message' => 'Student welfare infomation updated successfully!',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -47,6 +48,7 @@ class TeamController extends Controller
             $rules = [
                 'name' => 'required|string',
                 'title' => 'sometimes',
+                'qualification' => 'sometimes',
                 'type' => 'required|string',
                 'category' => 'sometimes',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
@@ -67,6 +69,7 @@ class TeamController extends Controller
             $team->category = $request->category;
             $team->title = $request->title;
             $team->description = $request->description;
+            $team->qualification = $request->qualification;
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -76,7 +79,14 @@ class TeamController extends Controller
             }
 
             $team->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($team)
+                ->withProperties([
+                    'name' => $team->name,
+                    'id' => $team->id
+                ])
+                ->log('Added a faculty details');
             return response()->json([
                 'success' => true,
                 'message' => 'Team added successfully!',
@@ -96,7 +106,14 @@ class TeamController extends Controller
         try {
             $team = Team::findOrFail($id);
             $team->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($team)
+                ->withProperties([
+                    'name' => $team->name,
+                    'id' => $team->id
+                ])
+                ->log('Deleted a faculty detail');
             return response()->json([
                 'success' => true,
                 'message' => 'Team deleted successfully!'
@@ -120,6 +137,7 @@ class TeamController extends Controller
                 'type' => 'required|string',
                 'title' => 'sometimes',
                 'category' => 'sometimes',
+                'qualification' => 'sometimes',
                 'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'description' => 'required'
             ];
@@ -137,6 +155,7 @@ class TeamController extends Controller
             $team->category = $request->category;
             $team->title = $request->title;
             $team->description = $request->description;
+            $team->qualification = $request->qualification;
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -146,7 +165,14 @@ class TeamController extends Controller
             }
 
             $team->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($team)
+                ->withProperties([
+                    'name' => $team->name,
+                    'id' => $team->id
+                ])
+                ->log('Updated a faculty detail');
             return response()->json([
                 'success' => true,
                 'message' => 'Team updated successfully!',

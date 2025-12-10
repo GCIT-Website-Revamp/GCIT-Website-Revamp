@@ -65,15 +65,20 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
     openModal(
         "Add News & Event",
         `
-            <form id="eventForm" autocomplete="off">
+            <form id="eventForm" autocomplete="off" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" id="event_name" class="form-control" required>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Image</label>
-                    <input type="file" id="event_image" class="form-control" accept="image/*" required>
+                    <label>Main Event Image</label>
+                    <input type="file" id="event_image" name="image" class="form-control" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Images (Optional)</label>
+                    <input type="file" id="additional_images" class="form-control" name="additional_images[]" accept="image/*" multiple>
                 </div>
 
                 <div class="form-group mt-2">
@@ -82,9 +87,8 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Category</label>
+                    <label>Category</label>
                     <select class="form-control" id="category">
-                        <option value="" disabled selected>Select Category</option>
                         <option value="Events">Events</option>
                         <option value="News">News</option>
                     </select>
@@ -96,11 +100,17 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
                 </div>
 
                 <div class="form-group" style="margin-left:19px;">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
-                    Display in the site
-                </label>
-            </div>
+                    <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="display" value="true">
+                    Display in the site (Event Page)
+                    </label>
+                </div>
+                <div class="form-group" style="margin-left:19px;">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="highlight" value="true">
+                    Display in highlights (Home Page)
+                    </label>
+                </div>
             </form>
         `,
         `
@@ -109,19 +119,20 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
         `
     );
 
-    ClassicEditor
-        .create(document.querySelector('#event_description'))
-        .then(editor => window.ictEditorInstance = editor)
-        .catch(err => console.error(err));
+    ClassicEditor.create(document.querySelector('#event_description')).then(e => window.ictEditorInstance = e);
 
     document.getElementById('saveEvent').addEventListener('click', () => {
-        const formData = new FormData();
-        formData.append("name", document.getElementById('event_name').value);
-        formData.append("date", document.getElementById('event_date').value);
-        formData.append("category", document.getElementById('category').value);
+        const form = document.getElementById("eventForm");
+        const formData = new FormData(form);
+
+        formData.append("name", document.getElementById("event_name").value);
+        formData.append("date", document.getElementById("event_date").value);
+        formData.append("category", document.getElementById("category").value);
         formData.append("description", window.ictEditorInstance.getData());
-        formData.append("image", document.getElementById('event_image').files[0]);
-        formData.append("display", document.getElementById('display').checked ? "true" : "false");
+        formData.append("display", document.getElementById("display").checked ? "true" : "false");
+        formData.append("highlight", document.getElementById("highlight").checked ? "true" : "false");
+
+        // multiple images added automatically by FormData
 
         confirmAction("Add Event?", "Do you want to add this event?", () =>
             fetch("/api/event", {
@@ -133,37 +144,51 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
     });
 });
 
+
 // ===============================
 // EDIT EVENT
 // ===============================
 document.querySelectorAll('.edit-event-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const id = btn.dataset.eventId;
+        const images = JSON.parse(btn.dataset.eventImages || "[]");
 
         openModal(
             "Edit Event",
             `
-                <form id="editEventForm" autocomplete="off">
+                <form id="editEventForm" autocomplete="off" enctype="multipart/form-data">
+                    
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" id="event_name" class="form-control" value="${btn.dataset.eventName}" required>
+                        <input type="text" id="event_name" class="form-control" value="${btn.dataset.eventName}">
                     </div>
 
                     <div class="form-group mt-2">
                         <label>Replace Image (optional)</label>
                         <input type="file" id="event_image" class="form-control" accept="image/*">
-                        <img src="${btn.dataset.eventImage}" width="80" class="mt-2" />
+                        <img src="${btn.dataset.eventImage}" width="100" class="mt-2 rounded">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Images</label>
+                        <div id="eventAdditionalImages"
+                            style="white-space:nowrap; overflow-x:auto; border:1px solid #ddd; padding:5px; border-radius:5px;">
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Add More Images</label>
+                        <input type="file" multiple id="additional_images" name="additional_images[]" class="form-control" accept="image/*">
                     </div>
 
                     <div class="form-group mt-2">
                         <label>Date</label>
-                        <input type="date" id="event_date" class="form-control" value="${btn.dataset.eventDate}" required>
+                        <input type="date" id="event_date" class="form-control" value="${btn.dataset.eventDate}">
                     </div>
 
                     <div class="form-group">
-                        <label for="category">Category</label>
+                        <label>Category</label>
                         <select class="form-control" id="category">
-                            <option value="" disabled selected>Select Category</option>
                             <option value="Events" ${btn.dataset.eventCategory === "Events" ? "selected" : ""}>Events</option>
                             <option value="News" ${btn.dataset.eventCategory === "News" ? "selected" : ""}>News</option>
                         </select>
@@ -171,16 +196,23 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
 
                     <div class="form-group mt-2">
                         <label>Description</label>
-                        <textarea id="event_description" class="form-control" rows="5">${btn.dataset.eventDescription || ""}</textarea>
+                        <textarea id="event_description" class="form-control">${btn.dataset.eventDescription || ""}</textarea>
                     </div>
 
                     <div class="form-group" style="margin-left:19px;">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true" 
-                            ${btn.dataset.eventDisplay == "true" ? "checked" : ""}>
-                        Display in the site
-                    </label>
-                </div>
+                        <label class="form-check-label">
+                        <input type="checkbox" id="display" class="form-check-input" ${btn.dataset.eventDisplay == "true" ? "checked" : ""}>
+                        Display in the site (Event Page)
+                        </label>
+                    </div>
+
+                    <div class="form-group" style="margin-left:19px;">
+                        <label class="form-check-label">
+                        <input type="checkbox" id="highlight" class="form-check-input" ${btn.dataset.eventHighlight == "true" ? "checked" : ""}>
+                        Display in highlights (Home Page)
+                        </label>
+                    </div>
+
                 </form>
             `,
             `
@@ -189,23 +221,71 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
             `
         );
 
-        ClassicEditor
-            .create(document.querySelector('#event_description'))
-            .then(editor => window.ictEditorInstance = editor)
-            .catch(err => console.error(err));
+        ClassicEditor.create(document.querySelector('#event_description')).then(e => window.ictEditorInstance = e);
 
+        // ----- Show Additional Images -----
+        const container = document.getElementById("eventAdditionalImages");
+        images.forEach(img => {
+            const wrap = document.createElement("div");
+            wrap.style.display = "inline-block";
+            wrap.style.position = "relative";
+            wrap.style.marginRight = "10px";
+
+            wrap.innerHTML = `
+                <img src="/storage/${img.image_path}" width="120" class="rounded border">
+                <button type="button" class="btn btn-danger btn-sm delete-event-image"
+                        data-id="${img.id}"
+                        style="position:absolute; top:0; right:0; border-radius:50%; padding:2px 6px;">×</button>
+            `;
+
+            container.appendChild(wrap);
+        });
+
+        // ----- Delete Additional Image -----
+        document.querySelectorAll('.delete-event-image').forEach(delBtn => {
+            delBtn.addEventListener('click', () => {
+                const imgId = delBtn.dataset.id;
+
+                Swal.fire({
+                    title: "Delete image?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Delete",
+                }).then(res => {
+                    if (res.isConfirmed) {
+                        fetch(`/api/event-image/${imgId}`, {
+                            method: "DELETE",
+                            headers: { "X-CSRF-TOKEN": csrf }
+                        })
+                        .then(r => r.json())
+                        .then(resp => {
+                            if (resp.success) delBtn.parentElement.remove();
+                        });
+                    }
+                });
+            });
+        });
+
+        // ----- Update Event -----
         document.getElementById('updateEvent').addEventListener('click', () => {
-            const formData = new FormData();
-            formData.append("name", document.getElementById('event_name').value);
-            formData.append("date", document.getElementById('event_date').value);
-            formData.append("description", window.ictEditorInstance.getData());
-            formData.append("category", document.getElementById('category').value);
-            formData.append("display", document.getElementById('display').checked ? "true" : "false");
+            const form = document.getElementById("editEventForm");
+            const formData = new FormData(form);
 
-            const img = document.getElementById('event_image').files[0];
-            if (img) formData.append("image", img);
-            formData.append('_method', 'PUT');
-            confirmAction("Update Event?", "Do you want to save changes?", () =>
+            formData.append("name", document.getElementById("event_name").value);
+            formData.append("date", document.getElementById("event_date").value);
+            formData.append("description", window.ictEditorInstance.getData());
+            formData.append("category", document.getElementById("category").value);
+            formData.append("display", document.getElementById("display").checked ? "true" : "false");
+            formData.append("highlight", document.getElementById("highlight").checked ? "true" : "false");
+            formData.append("_method", "PUT");
+
+            if (document.getElementById("event_image").files[0]) {
+                formData.append("image", document.getElementById("event_image").files[0]);
+            }
+
+            confirmAction("Update Event?", "Save changes?", () =>
                 fetch(`/api/event/${id}`, {
                     method: "POST",
                     headers: { "X-CSRF-TOKEN": csrf },
@@ -289,7 +369,7 @@ document.getElementById('addAnnouncementBtn').addEventListener('click', () => {
             date: document.getElementById('announcement_date').value,
             description:  window.ictEditorInstance.getData(),
             category: document.getElementById('category').value,
-            display: document.getElementById('display').checked ? 1 : 0
+            display: document.getElementById('display').checked ? "true" : "false"
         };
 
         confirmAction("Add Announcement?", "Do you want to add this announcement?", () =>

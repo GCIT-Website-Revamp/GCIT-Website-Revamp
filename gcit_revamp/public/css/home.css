@@ -606,7 +606,7 @@ font-size: 32px;}
     width: 60%;
 }
 .projectBanner img{
-    height: 70%;
+    height: 100%;
     width: 100%;
     object-fit: cover;
     z-index: 5;

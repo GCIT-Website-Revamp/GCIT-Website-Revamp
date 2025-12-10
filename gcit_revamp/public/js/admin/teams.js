@@ -45,8 +45,7 @@ document.getElementById('addTeamBtn').addEventListener('click', function () {
             <select class="form-control" id="teamDepartment">
                 <option value="" disabled selected>Select Department</option>
                 <option value="Blockchain Department">Blockchain Department</option>
-                <option value="Fullstack Department">Fullstack Department</option>
-                <option value="AI Department">AI Department</option>
+                <option value="AI & Fullstack Department">AI & Fullstack Department</option>
                 <option value="Cyber Department">Cyber Department</option>
                 <option value="Interactive Design & Development">Interactive Design & Development</option>
             </select>
@@ -56,6 +55,11 @@ document.getElementById('addTeamBtn').addEventListener('click', function () {
         <div class="form-group" id="titleGroup" style="display:none;">
             <label for="teamTitle">Title</label>
             <input type="text" class="form-control" id="teamTitle">
+        </div>
+
+        <div class="form-group" id="qualificationsGroup" style="display:none;">
+            <label for="teamQualifications">Qualifications</label>
+            <textarea class="form-control" id="teamQualifications" rows="2"></textarea>
         </div>
 
         <div class="form-group">
@@ -128,6 +132,11 @@ document.querySelectorAll('.edit-btn').forEach(btn => {
             <input type="text" class="form-control" id="teamTitle" value="${this.dataset.title || ''}">
         </div>
 
+        <div class="form-group" id="qualificationsGroup" style="display:${type === "Academic" ? "block" : "none"};">
+            <label for="teamQualifications">Qualifications</label>
+            <textarea class="form-control" id="teamQualifications" rows="2">${this.dataset.qualifications || ''}</textarea>
+        </div>
+
         <div class="form-group">
             <label>Current Image</label><br>
             <img src="${image}" width="50" class="mb-2">
@@ -159,6 +168,7 @@ function saveOrUpdateTeam(isEdit = false, id = null) {
     formData.append("type", document.getElementById("teamType").value);
     formData.append("category", document.getElementById("teamDepartment").value);
     formData.append("title", document.getElementById("teamTitle").value);
+    formData.append("qualification", document.getElementById("teamQualifications").value);
     if (isEdit) {
         formData.append("_method", "PUT");
     }
@@ -266,6 +276,7 @@ function attachTypeToggle() {
     const typeSelect = document.getElementById("teamType");
     const titleGroup = document.getElementById("titleGroup");
     const department = document.getElementById("department");
+    const qualifications = document.getElementById("qualificationsGroup");
 
     if (!typeSelect) return; // safety
 
@@ -273,11 +284,14 @@ function attachTypeToggle() {
         if (this.value === "Academic") {
             titleGroup.style.display = "block";
             department.style.display = "block";
+            qualifications.style.display = "block";
         } else {
             titleGroup.style.display = "none";
             document.getElementById("teamTitle").value = "";
-             department.style.display = "none";
+            department.style.display = "none";
             document.getElementById("teamDepartment").value = "";
+            qualifications.style.display = "none";
+            document.getElementById("teamQualifications").value = "";
         }
     });
 }

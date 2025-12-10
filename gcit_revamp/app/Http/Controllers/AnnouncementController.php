@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Announcement;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnnouncementController extends Controller
 {
@@ -67,7 +68,14 @@ class AnnouncementController extends Controller
             $announcement->category = $request->category;
             $announcement->description = $request->description;
             $announcement->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($announcement)
+                ->withProperties([
+                    'name' => $announcement->name,
+                    'id' => $announcement->id
+                ])
+                ->log('Added a new announcement');
             return response()->json([
                 'success' => true,
                 'message' => 'Announcement created successfully!',
@@ -87,7 +95,14 @@ class AnnouncementController extends Controller
         try {
             $announcement = Announcement::findOrFail($id);
             $announcement->delete();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($announcement)
+                ->withProperties([
+                    'name' => $announcement->name,
+                    'id' => $announcement->id
+                ])
+                ->log('Deleted announcement');
             return response()->json([
                 'success' => true,
                 'message' => 'Announcement deleted successfully!'
@@ -128,7 +143,14 @@ class AnnouncementController extends Controller
             $announcement->display = $request->display;
             $announcement->category = $request->category;
             $announcement->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($announcement)
+                ->withProperties([
+                    'name' => $announcement->name,
+                    'id' => $announcement->id
+                ])
+                ->log('Updated announcement');
             return response()->json([
                 'success' => true,
                 'message' => 'Announcement updated successfully!',

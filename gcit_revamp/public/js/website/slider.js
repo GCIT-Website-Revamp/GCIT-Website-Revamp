@@ -1,47 +1,62 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // -------------------------------------------------------------------------
-    // SLIDE DATA
-    // -------------------------------------------------------------------------
-    const heroSlides = [
-        {
-            title: "Empowering the Next Generation of Innovators",
-            subtitle: "Driving Bhutan’s digital transformation.",
-            media: "/videos/gcit-MPH.mp4",
-            label: "Learn"
-        },
-        {
-            title: "Where Ideas Evolve into Innovation",
-            subtitle: "Fostering creativity and experimentation.",
-            media: "/videos/corporateVideo-GCIT.mp4",
-            label: "Innovation"
-        },
-        {
-            title: "Inspiring Excellence Through Knowledge",
-            subtitle: "Strong foundations for future leaders.",
-            media: "/videos/gcit-MPH.mp4",
-            label: "Excellence"
-        }
-    ];
+    let heroSlides = [];
+    let slides = [];
 
-    // DOM references
     const sliderTrack = document.querySelector(".sliderTrack");
     const heroTitle = document.querySelector(".hero-header");
     const heroSubtitle = document.querySelector(".subtitle");
     const heroVideo = document.querySelector(".hero-video");
+    const heroImage = document.querySelector(".hero-image");
 
     const leftBtn = document.querySelector(".leftBtn");
     const rightBtn = document.querySelector(".rightBtn");
 
-    let activeIndex = 0;  // controls hero
-    let viewStart = 0;    // controls slider position (0,1)
+    let activeIndex = 0;
+    let viewStart = 0;
+    const VISIBLE = 3;
 
-    const VISIBLE = 3;    // exactly 3 items visible
+    // -----------------------------------------------------------
+    // FETCH MEDIA FROM LARAVEL
+    // -----------------------------------------------------------
+    fetch("/api/media")
+        .then(res => res.json())
+        .then(json => {
+
+            if (!json.success) return;
+
+            heroSlides = json.data.map(item => ({
+                title: item.title,
+                subtitle: "",
+                media: `/storage/${item.media}`,
+                label: item.title
+            }));
+
+            initializeSlider();
+        })
+        .catch(err => console.error("Failed to load media:", err));
 
 
-    // -------------------------------------------------------------------------
-    // Render slider tabs
-    // -------------------------------------------------------------------------
+
+    // -----------------------------------------------------------
+    // INITIALIZE SLIDER ONLY AFTER DATA ARRIVES
+    // -----------------------------------------------------------
+    function initializeSlider() {
+        renderSlides();
+        slides = Array.from(document.querySelectorAll(".sliderTrack .slide"));
+
+        generateThumbnails();
+        applyWidths();
+
+        updateHero(0);
+        updateActive();
+        updateSliderPosition();
+    }
+
+
+    // -----------------------------------------------------------
+    // RENDER SLIDE LABELS
+    // -----------------------------------------------------------
     function renderSlides() {
         sliderTrack.innerHTML = "";
         heroSlides.forEach((s, i) => {
@@ -52,18 +67,29 @@ document.addEventListener("DOMContentLoaded", () => {
             sliderTrack.appendChild(div);
         });
     }
-    renderSlides();
-
-    let slides = Array.from(document.querySelectorAll(".sliderTrack .slide"));
 
 
-    // -------------------------------------------------------------------------
-    // Generate video thumbnails
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------
+    // GENERATE THUMBNAILS
+    // -----------------------------------------------------------
+    function generateThumbnails() {
+        heroSlides.forEach((slide, i) => {
+            const el = slides[i];
+            if (!el) return;
+
+            if (slide.media.endsWith(".mp4")) {
+                generateVideoThumbnail(slide.media, thumb => {
+                    el.style.backgroundImage = `url(${thumb})`;
+                });
+            } else {
+                el.style.backgroundImage = `url(${slide.media})`;
+            }
+        });
+    }
+
     function generateVideoThumbnail(videoUrl, callback) {
         const video = document.createElement("video");
         video.src = videoUrl;
-        video.crossOrigin = "anonymous";
         video.muted = true;
 
         video.addEventListener("loadeddata", () => {
@@ -79,93 +105,71 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    heroSlides.forEach((slide, i) => {
-        const el = slides[i];
 
-        if (slide.media.endsWith(".mp4")) {
-            generateVideoThumbnail(slide.media, thumb => {
-                el.style.backgroundImage = `url(${thumb})`;
-            });
-        } else {
-            el.style.backgroundImage = `url(${slide.media})`;
-        }
-    });
-
-
-    // -------------------------------------------------------------------------
-    // Apply width (3 visible)
-    // -------------------------------------------------------------------------
-function applyWidths() {
-    slides.forEach(s => {
-        s.style.flex = `0 0 calc(100% / ${VISIBLE})`;
-    });
-}
-applyWidths();
-function updateActive() {
-    // reset only the first 3 slides
-    for (let i = 0; i < 3; i++) {
-        if (slides[i]) {
-            slides[i].classList.remove("active");
-            slides[i].textContent = heroSlides[i].label;
-        }
-    }
-
-    // set active state
-    if (slides[activeIndex]) {
-        slides[activeIndex].classList.add("active");
-        slides[activeIndex].textContent = "Playing";
-    }
-}
-
-updateActive();
-
-
-    // -------------------------------------------------------------------------
-    // Update Hero Banner
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------
+    // UPDATE HERO BANNER
+    // -----------------------------------------------------------
     function updateHero(i) {
-
         const s = heroSlides[i];
+
         heroTitle.textContent = s.title;
         heroSubtitle.textContent = s.subtitle;
 
-        heroVideo.classList.add("fade");
-        setTimeout(() => {
+        if (s.media.endsWith(".mp4")) {
+            heroVideo.style.display = "block";
+            heroImage.style.display = "none";
+
             heroVideo.src = s.media;
             heroVideo.load();
             heroVideo.play();
-            heroVideo.classList.remove("fade");
-        }, 150);
+        } else {
+            heroVideo.style.display = "none";
+            heroImage.style.display = "block";
+
+            heroImage.src = s.media;
+        }
     }
-    updateHero(0);
 
 
-    // -------------------------------------------------------------------------
-    // Active state
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------
+    // ACTIVE SLIDE STATE
+    // -----------------------------------------------------------
+    function updateActive() {
+        slides.forEach(s => s.classList.remove("active"));
+
+        if (slides[activeIndex]) {
+            slides[activeIndex].classList.add("active");
+            slides[activeIndex].textContent = "Playing";
+        }
+    }
 
 
+    // -----------------------------------------------------------
+    // SLIDER WIDTHS
+    // -----------------------------------------------------------
+    function applyWidths() {
+        slides.forEach(s => s.style.flex = `0 0 calc(100% / ${VISIBLE})`);
+    }
 
-    // -------------------------------------------------------------------------
-    // Move viewport of slider (non-loop)
-    // -------------------------------------------------------------------------
+
+    // -----------------------------------------------------------
+    // MOVE VIEWPORT
+    // -----------------------------------------------------------
     function updateSliderPosition() {
         const shift = -(viewStart * (100 / VISIBLE));
         sliderTrack.style.transform = `translateX(${shift}%)`;
     }
-    updateSliderPosition();
 
 
-    // -------------------------------------------------------------------------
-    // Button Controls
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------
+    // BUTTON CONTROLS
+    // -----------------------------------------------------------
     rightBtn.onclick = () => {
         if (activeIndex < heroSlides.length - 1) {
             activeIndex++;
             updateHero(activeIndex);
             updateActive();
 
-            // shift slider if needed
             if (activeIndex >= viewStart + VISIBLE) {
                 viewStart++;
                 updateSliderPosition();
@@ -187,26 +191,21 @@ updateActive();
     };
 
 
-    // -------------------------------------------------------------------------
-    // Clicking any slide tab
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------
+    // JUMP TO CLICKED SLIDE
+    // -----------------------------------------------------------
     function jumpToSlide(i) {
         activeIndex = i;
         updateHero(i);
         updateActive();
 
-        // adjust viewport to keep clicked item visible
         if (i < viewStart) {
             viewStart = i;
         } else if (i >= viewStart + VISIBLE) {
             viewStart = i - (VISIBLE - 1);
         }
+
         updateSliderPosition();
     }
-
-    // -------------------------------------------------------------------------
-    // Resize
-    // -------------------------------------------------------------------------
-    window.addEventListener("resize", applyWidths);
 
 });

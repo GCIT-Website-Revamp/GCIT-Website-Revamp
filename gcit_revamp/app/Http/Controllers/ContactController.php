@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 class ContactController extends Controller
 {
     public function getAllContacts()
@@ -124,7 +124,14 @@ class ContactController extends Controller
             $contact->message = $request->message;
             $contact->status = $request->status;
             $contact->save();
-
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($contact)
+                ->withProperties([
+                    'name' => $contact->name,
+                    'id' => $contact->id
+                ])
+                ->log('Updated a contact detail');
             return response()->json([
                 'success' => true,
                 'message' => 'contact updated successfully!',

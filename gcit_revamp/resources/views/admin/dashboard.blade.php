@@ -186,7 +186,7 @@
                                 <tr>
                                     <td style="max-width: 340px;">{{ $log->description }}</td>
                                     <td>{{ $log->created_at }}</td>
-                                    <td>{{ $log->causer['name'] }}</td>
+                                    <td>{{ $log->causer?->name }}</td>
                                 </tr>
                             @empty
                                 <tr>

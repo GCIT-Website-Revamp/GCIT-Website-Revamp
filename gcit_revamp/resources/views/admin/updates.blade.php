@@ -141,7 +141,7 @@
                                                    data-event-image="{{ asset('storage/' . $event->image) }}"
                                                    data-event-date="{{ $event->date }}" data-event-display="{{ $event->display }}"
                                                    data-event-category="{{ $event->category }}" data-event-highlight="{{ $event->highlight }}"
-                                                   data-event-description="{{ $event->description }}">
+                                                   data-event-description="{{ $event->description }}" data-event-images='@json($event->images)'>
                                                    Edit
                                                 </button>
                                                 <button type="button" class="btn btn-danger delete-event-btn"

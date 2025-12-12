@@ -12,9 +12,8 @@
 
                 <div class="bannerContent">
                     <div class="media">
-                        <video class="hero-video" autoplay muted loop playsinline>
-                            <source src="{{ asset('videos/gcit-MPH.mp4') }}" type="video/mp4">
-                        </video>
+                        <video class="hero-video" autoplay muted loop playsinline></video>
+                        <img class="hero-image" style="display:none;">
                     </div>
                     <div class="descriptionWrapper">
                         <h1 class = "hero-header">Empowering the Next Generation of Innovators</h1>
@@ -141,9 +140,11 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                     @endforeach
                     </div>    
                     <div class="courseLinkWrapper">
-                        @foreach ($sidd as $item)
-                            <a href="/courseDetails/{{ $item->id }}">{{ $item->name }} <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        @endforeach
+                        @if($sidd)
+                            <a href="/courseDetails/{{ $sidd->id }}">Frontend Engineer<span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                            <a href="/courseDetails/{{ $sidd->id }}">User Experience Research<span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                            <a href="/courseDetails/{{ $sidd->id }}">User Interface Design<span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                        @endif
                     </div> 
             </div>
         </div>
@@ -192,7 +193,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                 <span class="material-symbols-outlined left">expand_circle_right</span>
 
                 <div class="homeSliderTrack">
-                    <h1 class="homeSlide">Start Up Investment</h1>
+                    <h1 class="homeSlide"></h1>
                 </div>
 
                 <span class="material-symbols-outlined right">expand_circle_right</span>
@@ -205,11 +206,8 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
         </div>
     </div>
 
-    <div class="projectBanner" data-bg0="{{ asset('images/projects/dummyImg.png') }}"
-     data-bg1="{{ asset('images/projects/dummyImg2.png') }}"
-     data-bg2="{{ asset('images/projects/dummyImg3.png') }}">
-        <img src="{{ asset('images/projects/dummyImg.png') }}" alt="" class="background">
-        <img id="activeBanner" src="{{ asset('images/projects/dummyImg.png') }}" alt="">
+    <div class="projectBanner" id="projectBanner" data-projects='@json($projects)'>
+        <img id="activeBanner" class="bannerFront" />
     </div>
 </div>
 
@@ -225,21 +223,34 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
             </div>
             <div class="homeAnnouncementContent">
                 <div class="cardAnnouncement">
-                    @foreach ($announcements as $item)
+                    @foreach ($announcements->take(2) as $item)
                         <div class="card">
-                            <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span> <br>                   <h1>{{$item->name}}</h1>
-                            <br><p class = "multi-truncate">{!! Str::limit($item->description, 250) !!}</p>
-                            <a href="/post/announcement/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                            <span class="date">
+                                <span class="material-symbols-outlined">calendar_month</span>
+                                {{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}
+                            </span>
+                            <h1>{{ $item->name }}</h1>
+                            <p class="multi-truncate">{!! Str::limit($item->description, 250) !!}</p>
+                            <a href="/post/announcement/{{ $item->id }}">
+                                <span class="material-symbols-outlined">expand_circle_right</span>
+                                Read More
+                            </a>
                         </div>
                     @endforeach
                 </div>
                 <div class="suggestionWrapper">
-                    @foreach ($latestAnnouncements as $item)
+                    @foreach ($announcements->skip(2)->take(3) as $item)
                         <div class="suggestion">
-                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
-                        <h1>{{$item->name}}</h1>
-                        <a href="/post/announcement/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
+                            <span class="date">
+                                <span class="material-symbols-outlined">calendar_month</span>
+                                {{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}
+                            </span>
+                            <h1>{{ $item->name }}</h1>
+                            <a href="/post/announcement/{{ $item->id }}">
+                                <span class="material-symbols-outlined">expand_circle_right</span>
+                                Read More
+                            </a>
+                        </div>
                     @endforeach
                 </div>
             </div>

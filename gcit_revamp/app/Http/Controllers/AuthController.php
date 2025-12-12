@@ -17,6 +17,9 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
 
+            // Regenerate session ID for security
+            $request->session()->regenerate();
+            
             // Log successful login
             activity()
                 ->causedBy(Auth::user())
@@ -25,9 +28,6 @@ class AuthController extends Controller
                     'user_agent' => $request->userAgent(),
                 ])
                 ->log('User logged in');
-
-            // Regenerate session ID for security
-            $request->session()->regenerate();
             
             return response()->json([
                 'success' => true,

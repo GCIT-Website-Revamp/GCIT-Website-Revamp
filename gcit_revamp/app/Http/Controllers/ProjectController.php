@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
+use App\Models\ProjectImage;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -81,6 +83,16 @@ class ProjectController extends Controller
             }
 
             $project->save();
+
+            if ($request->hasFile('additional_images')) {
+                foreach ($request->file('additional_images') as $file) {
+                    $path = $file->store('projects', 'public');
+
+                    $project->images()->create([
+                        'image_path' => $path
+                    ]);
+                }
+            }
 
             activity()
                 ->causedBy(Auth::user())
@@ -173,6 +185,16 @@ class ProjectController extends Controller
             }
 
             $project->save();
+
+            if ($request->hasFile('additional_images')) {
+                foreach ($request->file('additional_images') as $file) {
+                    $path = $file->store('projects', 'public');
+
+                    $project->images()->create([
+                        'image_path' => $path
+                    ]);
+                }
+            }
             activity()
                 ->causedBy(Auth::user())
                 ->performedOn($project)
@@ -195,4 +217,25 @@ class ProjectController extends Controller
             ], 500);
         }
     }
+
+    public function deleteImage($id)
+        {
+            $image = ProjectImage::find($id);
+
+            if (!$image) {
+                return response()->json(['success' => false, 'message' => 'Image not found']);
+            }
+
+            Storage::disk('public')->delete($image->image_path);
+            $image->delete();
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($image)
+                ->withProperties([
+                    'project_image_path' => $image->imagepath
+                ])
+                ->log('Deleted project Image');
+
+            return response()->json(['success' => true, 'message' => 'Image deleted']);
+        }
 }

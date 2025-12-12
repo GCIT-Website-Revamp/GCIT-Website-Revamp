@@ -57,7 +57,7 @@
                 @endif
                 <div class="btnWrapper">
                     @if($previous)
-                        <a href="{{ url('post/project/' . $previous->id) }}">
+                        <a href="{{ url('post/'. $type.'/' . $previous->id) }}">
                             <button class="left">
                                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
                                 Previous
@@ -71,7 +71,7 @@
                     @endif
 
                     @if($next)
-                        <a href="{{ url('post/project/' . $next->id) }}">
+                        <a href="{{ url('post/'.$type.'/' . $next->id) }}">
                             <button class="right">
                                 Next
                                 <span class="material-symbols-outlined">keyboard_arrow_right</span>

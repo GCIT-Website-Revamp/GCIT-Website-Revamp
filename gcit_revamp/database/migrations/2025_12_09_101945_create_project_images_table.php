@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clubs', function (Blueprint $table) {
+        Schema::create('project_images', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->text('logo');
-            $table->json('roles');
+            $table->foreignId('project_id')->constrained()->onDelete('cascade');
+            $table->string('image_path'); // URL or storage path
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clubs');
+        Schema::dropIfExists('project_images');
     }
 };

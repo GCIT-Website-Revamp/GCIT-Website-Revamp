@@ -6,6 +6,8 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Models\EventImage;
+use Illuminate\Support\Facades\Storage;
 class EventController extends Controller
 {
     public function getAllEvents()
@@ -78,6 +80,16 @@ class EventController extends Controller
             }
 
             $event->save();
+
+            if ($request->hasFile('additional_images')) {
+                foreach ($request->file('additional_images') as $file) {
+                    $path = $file->store('events', 'public');
+
+                    $event->images()->create([
+                        'image_path' => $path
+                    ]);
+                }
+            }
             activity()
                 ->causedBy(Auth::user())
                 ->performedOn($event)
@@ -164,6 +176,15 @@ class EventController extends Controller
             }
 
             $event->save();
+            if ($request->hasFile('additional_images')) {
+                foreach ($request->file('additional_images') as $file) {
+                    $path = $file->store('events', 'public');
+
+                    $event->images()->create([
+                        'image_path' => $path
+                    ]);
+                }
+            }
             activity()
                 ->causedBy(Auth::user())
                 ->performedOn($event)
@@ -185,4 +206,24 @@ class EventController extends Controller
             ], 500);
         }
     }
+    public function deleteImage($id)
+        {
+            $image = EventImage::find($id);
+
+            if (!$image) {
+                return response()->json(['success' => false, 'message' => 'Image not found']);
+            }
+
+            Storage::disk('public')->delete($image->image_path);
+            $image->delete();
+            activity()
+                ->causedBy(Auth::user())
+                ->performedOn($image)
+                ->withProperties([
+                    'event_image_path' => $image->imagepath
+                ])
+                ->log('Deleted event Image');
+
+            return response()->json(['success' => true, 'message' => 'Image deleted']);
+        }
 }

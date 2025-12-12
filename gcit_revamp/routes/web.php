@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Media;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Course;
@@ -16,7 +17,140 @@ use App\Models\ICT;
 use App\Models\Welfare;
 use App\Models\Contact;
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ClubController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\OverviewController;
+use App\Http\Controllers\ICTController;
+use App\Http\Controllers\WelfareController;
+use App\Http\Controllers\ContactController;
 
+Route::middleware('web')->group(function () {
+    // Auth
+    Route::post('/api/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/api/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/api/updatepassword', [AuthController::class, 'updatePassword'])->name('updatePassword');
+
+    // User profile & management
+    Route::post('/api/users', [UserController::class, 'createUser'])->name('createUser');
+    Route::get('/api/users', [UserController::class, 'getAllUsers'])->name('getAllUsers');
+    Route::get('/api/users/{user}', [UserController::class, 'getUser'])->name('getUser');
+    Route::put('/api/users/{user}', [UserController::class, 'updateUser'])->name('updateUser');
+    Route::delete('/api/users/{user}', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::put('/api/users/{id}/toggle', [UserController::class, 'toggleEnabled'])->name('toggleUser');
+    Route::post('/api/reset-password', [UserController::class, 'resetPassword'])->name('resetPassword');
+    Route::post('/api/verify-otp', [UserController::class, 'verifyOtp'])->name('verifyOTP');
+    Route::post('/api/send-otp-email', [UserController::class, 'sendOtpEmail'])->name('sendOTP');
+
+    // Project API Routes
+    Route::get('/api/project', [ProjectController::class, 'getAllProjects'])->name('getAllProjects');
+    Route::get('/api/project/{project}', [ProjectController::class, 'getProject'])->name('getProject');
+    Route::post('/api/project', [ProjectController::class, 'createProject'])->name('createProject');
+    Route::delete('/api/project/{project}', [ProjectController::class, 'deleteProject'])->name('deleteProject');
+    Route::put('/api/project/{project}', [ProjectController::class, 'updateProject'])->name('updateProject');
+    Route::delete('/api/project-image/{id}', [ProjectController::class, 'deleteImage'])->name('deleteImage');
+
+    // Event API Routes
+    Route::get('/api/event', [EventController::class, 'getAllEvents'])->name('getAllEvents');
+    Route::get('/api/event/{event}', [EventController::class, 'getEvent'])->name('getEvent');
+    Route::post('/api/event', [EventController::class, 'createEvent'])->name('createEvent');
+    Route::delete('/api/event/{event}', [EventController::class, 'deleteEvent'])->name('deleteEvent');
+    Route::put('/api/event/{event}', [EventController::class, 'updateEvent'])->name('updateEvent');
+    Route::delete('/api/event-image/{id}', [EventController::class, 'deleteImage'])->name('deleteEventImage');
+
+    // News API Routes
+    Route::get('/api/announcement', [AnnouncementController::class, 'getAllAnnouncement'])->name('getAllAnnouncement');
+    Route::get('/api/announcement/{announcement}', [AnnouncementController::class, 'getAnnouncement'])->name('getAnnouncement');
+    Route::post('/api/announcement', [AnnouncementController::class, 'createAnnouncement'])->name('createAnnouncement');
+    Route::delete('/api/announcement/{announcement}', [AnnouncementController::class, 'deleteAnnouncement'])->name('deleteAnnouncement');
+    Route::put('/api/announcement/{announcement}', [AnnouncementController::class, 'updateAnnouncement'])->name('updateAnnouncement');
+
+    // Course API Routes
+    Route::get('/api/course', [CourseController::class, 'getAllCourses'])->name('getAllCourses');
+    Route::get('/api/course/{course}', [CourseController::class, 'getCourse'])->name('getCourse');
+    Route::post('/api/course', [CourseController::class, 'createCourse'])->name('createCourse');
+    Route::delete('/api/course/{course}', [CourseController::class, 'deleteCourse'])->name('deleteCourse');
+    Route::put('/api/course/{course}', [CourseController::class, 'updateCourse'])->name('updateCourse');
+
+    // Module API Routes
+    Route::get('/api/module', [ModuleController::class, 'getAllModules'])->name('getAllModules');
+    Route::get('/api/module/{module}', [ModuleController::class, 'getModule'])->name('getModule');
+    Route::post('/api/module', [ModuleController::class, 'createModule'])->name('createModule');
+    Route::delete('/api/module/{module}', [ModuleController::class, 'deleteModule'])->name('deleteModule');
+    Route::put('/api/module/{module}', [ModuleController::class, 'updateModule'])->name('updateModule');
+
+    // Club API Routes
+    Route::get('/api/club', [ClubController::class, 'getAllClubs'])->name('getAllClubs');
+    Route::get('/api/club/{club}', [ClubController::class, 'getClub'])->name('getClub');
+    Route::post('/api/club', [ClubController::class, 'createClub'])->name('createClub');
+    Route::delete('/api/club/{club}', [ClubController::class, 'deleteClub'])->name('deleteClub');
+    Route::put('/api/club/{club}', [ClubController::class, 'updateClub'])->name('updateClub');
+
+    // Service API Routes
+    Route::get('/api/service', [ServiceController::class, 'getAllServices'])->name('getAllServices');
+    Route::get('/api/service/{service}', [ServiceController::class, 'getService'])->name('getService');
+    Route::post('/api/service', [ServiceController::class, 'createService'])->name('createService');
+    Route::delete('/api/service/{service}', [ServiceController::class, 'deleteService'])->name('deleteService');
+    Route::put('/api/service/{service}', [ServiceController::class, 'updateService'])->name('updateService');
+
+    // Team API Routes
+    Route::get('/api/team', [TeamController::class, 'getAllTeams'])->name('getAllTeams');
+    Route::get('/api/team/{team}', [TeamController::class, 'getTeam'])->name('getTeam');
+    Route::post('/api/team', [TeamController::class, 'createTeam'])->name('createTeam');
+    Route::delete('/api/team/{team}', [TeamController::class, 'deleteTeam'])->name('deleteTeam');
+    Route::put('/api/team/{team}', [TeamController::class, 'updateTeam'])->name('updateTeam');
+
+    // Overview API Routes
+    Route::get('/api/overview', [OverviewController::class, 'getAllOverviews'])->name('getAllOverviews');
+    Route::get('/api/overview/{overview}', [OverviewController::class, 'getOverview'])->name('getOverview');
+    Route::post('/api/overview', [OverviewController::class, 'createOverview'])->name('createOverview');
+    Route::delete('/api/overview/{overview}', [OverviewController::class, 'deleteOverview'])->name('deleteOverview');
+    Route::put('/api/overview/{overview}', [OverviewController::class, 'updateOverview'])->name('updateOverview');
+
+    // Admisison API Routes
+    Route::get('/api/admission', [AdmissionController::class, 'getAllAdmissions'])->name('getAllAdmissions');
+    Route::get('/api/admission/{admission}', [AdmissionController::class, 'getAdmission'])->name('getAdmission');
+    Route::post('/api/admission', [AdmissionController::class, 'createAdmission'])->name('createAdmission');
+    Route::delete('/api/admission/{admission}', [AdmissionController::class, 'deleteAdmission'])->name('deleteAdmission');
+    Route::put('/api/admission/{admission}', [AdmissionController::class, 'updateAdmission'])->name('updateAdmission');
+
+    // ICT API Routes
+    Route::get('/api/ict', [ICTController::class, 'getAllICT'])->name('getAllICT');
+    Route::get('/api/ict/{ict}', [ICTController::class, 'getICT'])->name('getICT');
+    Route::post('/api/ict', [ICTController::class, 'createICT'])->name('createICT');
+    Route::delete('/api/ict/{ict}', [ICTController::class, 'deleteICT'])->name('deleteICT');
+    Route::put('/api/ict/{ict}', [ICTController::class, 'updateICT'])->name('updateICT');
+
+    // Welfare API Routes
+    Route::get('/api/welfare', [WelfareController::class, 'getAllWelfare'])->name('getAllWelfare');
+    Route::get('/api/welfare/{welfare}', [WelfareController::class, 'getWelfare'])->name('getWelfare');
+    Route::post('/api/welfare', [WelfareController::class, 'createWelfare'])->name('createWelfare');
+    Route::delete('/api/welfare/{welfare}', [WelfareController::class, 'deleteWelfare'])->name('deleteWelfare');
+    Route::put('/api/welfare/{welfare}', [WelfareController::class, 'updateWelfare'])->name('updateWelfare');
+
+    // Contacts API Routes
+    Route::get('/api/contact', [ContactController::class, 'getAllContacts'])->name('getAllContacts');
+    Route::get('/api/contact/{contact}', [ContactController::class, 'getContact'])->name('getContact');
+    Route::post('/api/contact', [ContactController::class, 'createContact'])->name('createContact');
+    Route::delete('/api/contact/{contact}', [ContactController::class, 'deleteContact'])->name('deleteContact');
+    Route::put('/apicontact/{contact}', [ContactController::class, 'updateContact'])->name('updateContact');
+
+    // Media API Routes
+    Route::get('/api/media', [MediaController::class, 'getAllMedias'])->name('getAllMedias');
+    Route::get('/api/media/{media}', [MediaController::class, 'getMedia'])->name('getMedia');
+    Route::post('/api/media', [MediaController::class, 'createMedia'])->name('createMedia');
+    Route::delete('/api/media/{media}', [MediaController::class, 'deleteMedia'])->name('deleteMedia');
+    Route::put('/api/media/{media}', [MediaController::class, 'updatemedia'])->name('updatemedia');
+});
 
 Route::get('/admin', function () {
     return view('admin.login');
@@ -120,6 +254,11 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
         return view('admin.calendar');
     });
 
+    Route::get('/media', function () {
+        $media = Media::orderBy('created_at', 'desc')->paginate(7);
+        return view('admin.media_gallery', compact('media'));
+    });
+
     Route::get('/logs', function () {
         activity()
         ->causedBy(Auth::user())
@@ -134,13 +273,12 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 });
 
 Route::get('/', function () {
-    $bsc = Course::where('type', '=', 'School of Computing')->orderBy('name', 'ASC')->get();
-    $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->orderBy('name', 'ASC')->get();
-    $announcements = Announcement::orderBy('created_at', 'asc')->where('display', '=', "true")->get();
-    $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
+    $bsc = Course::where('type', '=', 'School of Computer Science')->orderBy('name', 'ASC')->get();
+    $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
+    $announcements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(5)->get();
     $events = Event::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
     $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
-    return view('user.home', compact('bsc','sidd', 'announcements', 'latestAnnouncements', 'events', 'projects'));
+    return view('user.home', compact('bsc','sidd', 'announcements', 'events', 'projects'));
 });
 
 Route::get('/news&events', function () {
@@ -161,28 +299,79 @@ Route::get('/course', function () {
 Route::get('/post/{type}/{id}', function ($type, $id) {
     $event = null;
     $announcement = null;
+    $project = null;
+
     $latestEvents = null;
     $latestAnnouncements = null;
-    $project = null;
     $latestProjects = null;
 
+    $previous = null;
+    $next = null;
+
+    // ------------------------
+    // EVENTS
+    // ------------------------
     if ($type === 'events') {
         $event = Event::findOrFail($id);
-        $latestEvents = Event::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
-    }
-    if ($type === 'announcement') {
-        $announcement = Announcement::findOrFail($id);
-        $latestAnnouncements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
-    }
-    if ($type === 'project') {
-        $project = Project::with('guideTeam')->findOrFail($id);
-        $previous = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
-        $next = Project::where('id', '>', $project->id)->orderBy('id', 'asc')->first();
-        $latestProjects = Project::orderBy('created_at', 'desc')->where('display', '=', "true")->take(4)->get();
+
+        // Next & Previous based on ID
+        $previous = Event::where('id', '<', $event->id)->orderBy('id', 'desc')->first();
+        $next = Event::where('id', '>', $event->id)->orderBy('id', 'asc')->first();
+
+        // Latest events
+        $latestEvents = Event::orderBy('created_at', 'desc')
+            ->where('display', '=', "true")
+            ->take(4)
+            ->get();
     }
 
-    return view('user.postDetailsTemplate', compact('event', 'announcement', 'latestAnnouncements', 'latestEvents','project', 'latestProjects', 'next', 'previous'));
+    // ------------------------
+    // ANNOUNCEMENTS
+    // ------------------------
+    if ($type === 'announcement') {
+        $announcement = Announcement::findOrFail($id);
+
+        // Next & Previous based on ID
+        $previous = Announcement::where('id', '<', $announcement->id)->orderBy('id', 'desc')->first();
+        $next = Announcement::where('id', '>', $announcement->id)->orderBy('id', 'asc')->first();
+
+        // Latest announcements
+        $latestAnnouncements = Announcement::orderBy('created_at', 'desc')
+            ->where('display', '=', "true")
+            ->take(4)
+            ->get();
+    }
+
+    // ------------------------
+    // PROJECTS
+    // ------------------------
+    if ($type === 'project') {
+        $project = Project::with('guideTeam')->findOrFail($id);
+
+        // Next & Previous based on ID
+        $previous = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
+        $next = Project::where('id', '>', $project->id)->orderBy('id', 'asc')->first();
+
+        // Latest projects
+        $latestProjects = Project::orderBy('created_at', 'desc')
+            ->where('display', '=', "true")
+            ->take(4)
+            ->get();
+    }
+
+    return view('user.postDetailsTemplate', compact(
+        'event',
+        'announcement',
+        'latestAnnouncements',
+        'latestEvents',
+        'project',
+        'latestProjects',
+        'next',
+        'previous',
+        'type'
+    ));
 });
+
 
 Route::get('/courseDetails/{id}', function ($id) {
     $course = Course::findOrFail($id);

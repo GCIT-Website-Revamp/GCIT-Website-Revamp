@@ -31,8 +31,9 @@
                 <div class="staffProfileWrapper">
                     @foreach ($service->roles as $role)
                         <div class="staff">
-                        <img src="{{ asset('storage/' . $role['image']) }}" alt="">
-                        <div class="staffDescription">
+                                @if(isset($role['image']) && $role['image'])
+                                    <img src="{{ asset('storage/' . $role['image']) }}" alt="">
+                                @endif                        <div class="staffDescription">
                             <h1>{{ $role['team_name'] }}</h1>
                             <p>{{ $role['name'] }}</p>
                         </div>

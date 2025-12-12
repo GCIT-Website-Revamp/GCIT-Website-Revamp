@@ -273,7 +273,7 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 });
 
 Route::get('/', function () {
-    $bsc = Course::where('type', '=', 'School of Computing')->orderBy('name', 'ASC')->get();
+    $bsc = Course::where('type', '=', 'School of Computer Science')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
     $announcements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(5)->get();
     $events = Event::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();

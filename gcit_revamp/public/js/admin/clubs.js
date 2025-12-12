@@ -1,311 +1,290 @@
-const csrf = document.querySelector('input[name="_token"]').value;
+// =====================================
+// CSRF Token
+// =====================================
+const csrf = document.querySelector('input[name="_token"]')?.value;
 
 function formatErrors(errors) {
     if (!errors) return "";
     if (typeof errors === "string") return errors;
-
-    // If errors is an object (like Laravel validation errors)
-    return Object.values(errors)
-        .flat()
-        .join("\n");
+    return Object.values(errors).flat().join("\n");
 }
-// =====================
-// Add Club Modal Logic
-// =====================
+
+// =====================================
+// ADD CLUB
+// =====================================
 document.getElementById('addClubBtn').addEventListener('click', function () {
+
     document.querySelector('#myModal .modal-title').textContent = 'Add New Club';
 
-    // Modal body
     document.querySelector('#myModal .modal-body').innerHTML = `
-        <form id="addClubForm" enctype="multipart/form-data" autocomplete="off">
-            <div class="form-group">
-                <label for="club_name">Club Name</label>
-                <input type="text" class="form-control" id="club_name" name="club_name" required>
-            </div>
-            <div class="form-group">
-                <label for="club_description">Description</label>
-                <textarea class="form-control" id="club_description" name="club_description" rows="5" required></textarea>
-            </div>
-            <div class="form-group">
-                <label>Roles</label>
-                <div id="roles-container">
-                    <!-- Roles will be added dynamically -->
-                </div>
-                <button type="button" class="btn btn-primary mt-2" id="addRoleBtn">Add Role</button>
-            </div>
-        </form>
+    <form id="addClubForm" autocomplete="off">
+        <div class="form-group">
+            <label>Club Name</label>
+            <input type="text" class="form-control" id="club_name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Logo</label>
+            <input type="file" class="form-control" id="clubLogo" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" id="club_description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Roles</label>
+            <div id="roles-container"></div>
+            <button type="button" class="btn btn-primary mt-2" id="addRoleBtn">Add Role</button>
+        </div>
+    </form>
+    `;
+
+    document.querySelector('#myModal .modal-footer').innerHTML = `
+        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" id="addClub">Add Club</button>
     `;
 
     ClassicEditor
         .create(document.querySelector('#club_description'))
-        .then(editor => window.ictEditorInstance = editor)
-        .catch(err => console.error(err));
-
-    // Modal footer
-    document.querySelector('#myModal .modal-footer').innerHTML = `
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-success" id="addClub">Add Club</button>
-    `;
+        .then(editor => window.clubEditor = editor);
 
     let teams = [];
 
-    // Fetch teams from API
     fetch('/api/team')
         .then(res => res.json())
         .then(data => {
             teams = data.data || [];
-            // Add initial role row after fetching teams
             addRoleRow();
-        })
-        .catch(err => {
-            console.error('Error fetching teams:', err);
-            Swal.fire({ icon: "error", title: "Error", text: "Failed to load teams." });
         });
 
-    // Function to create a role row
-    const createRoleRow = () => {
-        const options = teams.map(team => `<option value="${team.id}">${team.name}</option>`).join('');
-        return `
-            <div class="role-row d-flex gap-2 align-items-center mb-2">
-                <input type="text" class="form-control role-name me-3" placeholder="Role Name" required>
-                <select class="form-control role-team mx-3" required>
-                    <option value="">Assign Role</option>
-                    ${options}
-                </select>
-                <button type="button" class="btn btn-danger remove-role ms-2">Remove</button>
-            </div>
-        `;
-    };
+    const createRoleRow = () => `
+        <div class="role-row d-flex gap-2 mb-2">
+            <input type="text" class="form-control role-name me-3" placeholder="Role Name" required>
+            <select class="form-control role-team mx-3" required>
+                <option value="">Assign Role</option>
+                ${teams.map(t => `<option value="${t.id}">${t.name}</option>`).join("")}
+            </select>
+            <button type="button" class="btn btn-danger remove-role">Remove</button>
+        </div>
+    `;
 
-    const addRoleRow = () => {
-        const container = document.getElementById('roles-container');
-        container.insertAdjacentHTML('beforeend', createRoleRow());
-    };
+    const addRoleRow = () =>
+        document.getElementById("roles-container")
+            .insertAdjacentHTML("beforeend", createRoleRow());
 
-    document.getElementById('addRoleBtn').addEventListener('click', addRoleRow);
+    document.getElementById("addRoleBtn").addEventListener("click", addRoleRow);
 
-    // Handle Remove Role buttons
-    document.getElementById('roles-container').addEventListener('click', function (e) {
-        if (e.target && e.target.classList.contains('remove-role')) {
-            e.target.closest('.role-row').remove();
+    document.getElementById("roles-container").addEventListener("click", e => {
+        if (e.target.classList.contains("remove-role")) {
+            e.target.closest(".role-row").remove();
         }
     });
 
-    // Handle Add Club submission
-    document.getElementById('addClub').addEventListener('click', function () {
-        const clubName = document.getElementById('club_name').value;
-        const clubDescription = window.ictEditorInstance.getData();
+    document.getElementById("addClub").addEventListener("click", function () {
 
-        // Gather roles
-        const roles = Array.from(document.querySelectorAll('.role-row')).map(row => ({
+        const logoInput = document.getElementById("clubLogo");
+        if (!logoInput.files.length) {
+            Swal.fire("Error", "Club logo is required", "error");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("name", document.getElementById("club_name").value);
+        formData.append("description", window.clubEditor.getData());
+        formData.append("logo", logoInput.files[0]);
+
+        const roles = [...document.querySelectorAll('.role-row')].map(row => ({
             name: row.querySelector('.role-name').value,
             team_id: row.querySelector('.role-team').value
         }));
 
-        const payload = { name: clubName, description: clubDescription, roles };
+        roles.forEach((role, index) => {
+            formData.append(`roles[${index}][name]`, role.name);
+            formData.append(`roles[${index}][team_id]`, role.team_id);
+        });
 
         Swal.fire({
             title: "Add Club?",
-            text: "Do you want to create this new club?",
             icon: "question",
             showCancelButton: true,
+            confirmButtonText: "Create Club",
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, create"
         }).then(result => {
             if (result.isConfirmed) {
-                fetch('/api/club', {
+                fetch("/api/club", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
                         "X-CSRF-TOKEN": csrf,
                         "Accept": "application/json"
                     },
-                    body: JSON.stringify(payload)
+                    body: formData
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: "success",
-                                title: "New Club Added",
-                                text: data.message || "New Club Added successfully!"
-                            });
-                            setTimeout(() => location.reload(), 1500);
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Failed",
-                                text: formatErrors(data.errors || data.message)
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire({ icon: "error", title: "Error", text: "Something went wrong!" });
-                    });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire("Success", data.message, "success");
+                        setTimeout(() => location.reload(), 1200);
+                    } else {
+                        Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
+                    }
+                });
             }
         });
     });
 
-    // Show modal
-    const modalEl = document.getElementById('myModal');
-    const bsModal = new bootstrap.Modal(modalEl);
-    bsModal.show();
+    new bootstrap.Modal(document.getElementById('myModal')).show();
 });
 
-// =====================
-// Edit Club Logic
-// =====================
-document.querySelectorAll('.edit-club-btn').forEach(button => {
-    button.addEventListener('click', function () {
+// =====================================
+// EDIT CLUB
+// =====================================
+document.querySelectorAll('.edit-club-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
 
         const clubId = this.dataset.clubId;
         const clubName = this.dataset.clubName;
         const clubDescription = this.dataset.clubDescription;
+        const clubLogo = this.dataset.clubLogo;
         const clubRoles = JSON.parse(this.dataset.clubRoles || "[]");
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Club';
 
         document.querySelector('#myModal .modal-body').innerHTML = `
-            <form id="editClubForm" enctype="multipart/form-data" autocomplete="off">
-                <div class="form-group">
-                    <label>Club Name</label>
-                    <input type="text" class="form-control" id="edit_club_name" value="${clubName}" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea class="form-control" id="edit_club_description" rows="5" required>${clubDescription}</textarea>
-                </div>
+        <form id="editClubForm" autocomplete="off">
+            <div class="form-group">
+                <label>Club Name</label>
+                <input type="text" class="form-control" id="edit_club_name" value="${clubName}" required>
+            </div>
 
-                <div class="form-group">
-                    <label>Roles</label>
-                    <div id="edit-roles-container"></div>
-                    <button type="button" class="btn btn-primary mt-2" id="editAddRoleBtn">Add Role</button>
-                </div>
-            </form>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" id="edit_club_description">${clubDescription}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Current Logo</label><br>
+                <img src="${clubLogo}" width="80" class="mb-2"><br>
+                <input type="file" class="form-control" id="edit_club_logo" accept="image/*">
+                <small class="text-muted">Upload only if you want to replace the logo</small>
+            </div>
+
+            <div class="form-group">
+                <label>Roles</label>
+                <div id="edit-roles-container"></div>
+                <button type="button" class="btn btn-primary mt-2" id="editAddRoleBtn">Add Role</button>
+            </div>
+        </form>
         `;
-
-        // Init CKEditor
-        ClassicEditor
-            .create(document.querySelector('#edit_club_description'))
-            .then(editor => window.ictEditorInstance = editor)
-            .catch(err => console.error(err));
 
         document.querySelector('#myModal .modal-footer').innerHTML = `
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-success" id="updateClubBtn">Update Club</button>
+            <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-success" id="updateClubBtn">Update Club</button>
         `;
+
+        ClassicEditor
+            .create(document.querySelector('#edit_club_description'))
+            .then(editor => window.clubEditor = editor);
 
         let teams = [];
 
-        // Fetch teams first
         fetch('/api/team')
             .then(res => res.json())
             .then(data => {
                 teams = data.data || [];
 
-                const renderRoleRow = (role = {}) => {
-                    const options = teams.map(t => `
-                        <option value="${t.id}" ${t.id == role.team_id ? "selected" : ""}>${t.name}</option>
-                    `).join('');
+                const renderRoleRow = (role = {}) => `
+                    <div class="role-row d-flex gap-2 mb-2">
+                        <input type="text" class="form-control role-name me-3" value="${role.name || ""}" required>
+                        <select class="form-control role-team mx-3" required>
+                            <option value="">Assign Role</option>
+                            ${teams.map(t => `
+                                <option value="${t.id}" ${t.id == role.team_id ? "selected" : ""}>${t.name}</option>
+                            `).join("")}
+                        </select>
+                        <button type="button" class="btn btn-danger remove-role">Remove</button>
+                    </div>
+                `;
 
-                    return `
-                        <div class="role-row d-flex gap-2 align-items-center mb-2">
-                            <input type="text" class="form-control role-name me-3" value="${role.name || ""}" placeholder="Role Name" required>
-                            <select class="form-control role-team mx-3" required>
-                                <option value="">Assign Role</option>
-                                ${options}
-                            </select>
-                            <button type="button" class="btn btn-danger remove-role ms-2">Remove</button>
-                        </div>
-                    `;
-                };
+                const container = document.getElementById("edit-roles-container");
+                clubRoles.forEach(r => container.insertAdjacentHTML("beforeend", renderRoleRow(r)));
 
-                const container = document.getElementById('edit-roles-container');
+                document.getElementById("editAddRoleBtn")
+                    .addEventListener("click", () =>
+                        container.insertAdjacentHTML("beforeend", renderRoleRow())
+                    );
 
-                // Load existing roles
-                clubRoles.forEach(role => {
-                    container.insertAdjacentHTML('beforeend', renderRoleRow(role));
-                });
-
-                // Add new role
-                document.getElementById('editAddRoleBtn').addEventListener('click', () => {
-                    container.insertAdjacentHTML('beforeend', renderRoleRow());
-                });
-
-                // Remove role
-                container.addEventListener('click', e => {
-                    if (e.target.classList.contains('remove-role')) {
-                        e.target.closest('.role-row').remove();
+                container.addEventListener("click", e => {
+                    if (e.target.classList.contains("remove-role")) {
+                        e.target.closest(".role-row").remove();
                     }
                 });
 
-                // Submit Update
-                document.getElementById('updateClubBtn').addEventListener('click', () => {
-                    const updatedName = document.getElementById('edit_club_name').value;
-                    const updatedDescription = window.ictEditorInstance.getData();
+                document.getElementById("updateClubBtn").addEventListener("click", function () {
+
+                    const formData = new FormData();
+                    formData.append("name", document.getElementById("edit_club_name").value);
+                    formData.append("description", window.clubEditor.getData());
+                    formData.append("_method", "PUT");
+
+                    const logoInput = document.getElementById("edit_club_logo");
+                    if (logoInput.files.length) {
+                        formData.append("logo", logoInput.files[0]);
+                    }
 
                     const roles = [...document.querySelectorAll('#edit-roles-container .role-row')].map(row => ({
                         name: row.querySelector('.role-name').value,
                         team_id: row.querySelector('.role-team').value
                     }));
 
+                    roles.forEach((role, index) => {
+                        formData.append(`roles[${index}][name]`, role.name);
+                        formData.append(`roles[${index}][team_id]`, role.team_id);
+                    });
+
                     Swal.fire({
                         title: "Update Club?",
-                        text: "Do you want to save changes?",
                         icon: "question",
                         showCancelButton: true,
-                        confirmButtonText: "Update",
+                        confirmButtonText: "Update Club",
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
                     }).then(result => {
                         if (result.isConfirmed) {
                             fetch(`/api/club/${clubId}`, {
-                                method: "PUT",
+                                method: "POST",
                                 headers: {
-                                    "Content-Type": "application/json",
-                                    "X-CSRF-TOKEN": csrf
+                                    "X-CSRF-TOKEN": csrf,
+                                    "Accept": "application/json"
                                 },
-                                body: JSON.stringify({
-                                    name: updatedName,
-                                    description: updatedDescription,
-                                    roles: roles
-                                })
+                                body: formData
                             })
-                                .then(res => res.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Updated",
-                                            text: data.message || "Club Updated successfully!"
-                                        });
-                                        setTimeout(() => location.reload(), 1200);
-                                    } else {
-                                        Swal.fire({
-                                            icon: "error",
-                                            title: "Failed",
-                                            text: formatErrors(data.errors || data.message)
-                                        });
-                                    }
-                                });
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire("Updated", data.message, "success");
+                                    setTimeout(() => location.reload(), 1200);
+                                } else {
+                                    Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
+                                }
+                            });
                         }
                     });
                 });
-
             });
 
-        // Show modal
         new bootstrap.Modal(document.getElementById('myModal')).show();
     });
 });
 
-// =====================
-// Delete Club Logic
-// =====================
-document.querySelectorAll('.delete-club-btn').forEach(button => {
-    button.addEventListener('click', function () {
+// =====================================
+// DELETE CLUB
+// =====================================
+document.querySelectorAll('.delete-club-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+
         const clubId = this.dataset.clubId;
         const clubName = this.dataset.clubName;
 
@@ -314,9 +293,9 @@ document.querySelectorAll('.delete-club-btn').forEach(button => {
             text: "This action cannot be undone!",
             icon: "warning",
             showCancelButton: true,
+            confirmButtonText: "Delete",
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Delete"
         }).then(result => {
             if (result.isConfirmed) {
                 fetch(`/api/club/${clubId}`, {
@@ -326,32 +305,16 @@ document.querySelectorAll('.delete-club-btn').forEach(button => {
                         "Accept": "application/json"
                     }
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: "success",
-                                title: "Club Deleted",
-                                text: data.message || "Club Deleted successfully!"
-                            });
-                            setTimeout(() => location.reload(), 1200);
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Failed",
-                                text: formatErrors(data.errors || data.message)
-                            });
-                        }
-                    })
-                    .catch(err => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Something went wrong!"
-                        });
-                    });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire("Deleted", data.message, "success");
+                        setTimeout(() => location.reload(), 1200);
+                    } else {
+                        Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
+                    }
+                });
             }
         });
     });
 });
-

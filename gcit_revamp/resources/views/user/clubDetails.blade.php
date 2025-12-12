@@ -27,18 +27,21 @@
         <div class="postWrapper departmentWrapper">
             <div class="post">
                 @if($club)
-                <p>{!! $club->description !!}</p>
-                <div class="staffProfileWrapper">
-                    @foreach ($club->roles as $role)
-                        <div class="staff">
-                        <img src="{{ asset('storage/' . $role['image']) }}" alt="">
-                        <div class="staffDescription">
-                            <h1>{{ $role['team_name'] }}</h1>
-                            <p>{{ $role['name'] }}</p>
-                        </div>
+                    <p>{!! $club->description !!}</p>
+
+                    <div class="staffProfileWrapper">
+                        @foreach ($club->roles as $role)
+                            <div class="staff">
+                                @if(isset($role['image']) && $role['image'])
+                                    <img src="{{ asset('storage/' . $role['image']) }}" alt="">
+                                @endif
+                                <div class="staffDescription">
+                                    <h1>{{ $role['team_name'] ?? '' }}</h1>
+                                    <p>{{ $role['name'] ?? '' }}</p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
                 @endif
 
             </div>

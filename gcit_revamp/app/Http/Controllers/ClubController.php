@@ -49,6 +49,7 @@ class ClubController extends Controller
                 'name' => 'required|string',
                 'description' => 'required|string',
                 'roles' => 'required|array', // must be an array
+                'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -64,6 +65,13 @@ class ClubController extends Controller
             $club->name = $request->name;
             $club->description = $request->description;
             $club->roles = $request->roles; // stored as JSON automatically
+            
+            if ($request->hasFile('logo')) {
+                $image = $request->file('logo');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imagePath = $image->storeAs('clubs', $imageName, 'public');
+                $club->logo = $imagePath;
+            }
 
             $club->save();
 
@@ -98,7 +106,8 @@ class ClubController extends Controller
             $rules = [
                 'name' => 'required|string',
                 'description' => 'required|string',
-                'roles' => 'sometimes|array'
+                'roles' => 'sometimes|array',
+                'logo' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -115,6 +124,13 @@ class ClubController extends Controller
 
             if ($request->has('roles')) {
                 $club->roles = $request->roles;
+            }
+
+            if ($request->hasFile('logo')) {
+                $image = $request->file('logo');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imagePath = $image->storeAs('clubs', $imageName, 'public');
+                $club->logo = $imagePath;
             }
 
             $club->save();

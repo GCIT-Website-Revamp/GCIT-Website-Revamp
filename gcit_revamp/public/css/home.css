@@ -1,6 +1,6 @@
 .heroBannerWrapper{
     position: relative;
-    height: calc(100vh - 141px);
+    height: calc(100vh - 86px);
     width: 100%;
 }
 
@@ -149,8 +149,9 @@
 
 .heading-row .main-header{
     display: grid;
-    grid-template-columns: 250px 1fr; /* LEFT fixed by content, RIGHT aligns */
-    align-items: baseline; /* keeps typography alignment clean */
+    grid-template-columns: minmax(140px, auto) 1fr;
+    align-items: baseline;
+    column-gap: 1rem;
 }
 
 .heading-row .left {
@@ -159,14 +160,14 @@
 }
 
 .heading-row .right {
-    white-space: nowrap;
+    white-space: normal;
+}
+.aboutGCIT p {
+    max-width: 65ch;
+    width: 100%;
+    line-height: 1.5;
 }
 
-.aboutGCIT p{
-    width: clamp(200px, 45vw, 1200px);
-    line-height: 150%;
-    /* min-width: 250px; */
-}
 
 
 .iconWrapper * {
@@ -180,14 +181,15 @@
 
 .cardWrapper{
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
     margin: clamp(60px, 10vw, 140px) 0;
     align-items: center;
 }
 
 .cardWrapper .card{
-    width: 33%;
+    width: 30%;
     padding: clamp(1rem, 3vw, 30px);
     background-color: #FAFAFA;
     height: 560px;
@@ -216,7 +218,7 @@
 }
 .cardWrapper .card .cardContent h2{
     font-weight: 400;
-    font-style: italic;
+    /* font-style: italic; */
     color: var(--color-primary);
     font-size: clamp(18px, 3vw, 22px);
 
@@ -236,25 +238,29 @@
 
 
 .courseWrapper{
+    transition: 0.3s all ease-in-out;
     margin: clamp(60px, 10vw, 140px) 0
 }
 .courseWrapper .header h1{
     padding: 0 var(--padding-sides);
-    font-size: clamp(48px, 10vw, 120px);
+    font-size: clamp(48px, 5vw, 120px);
     font-weight: 400;
     color: #D9D9D9;
     font-family: var(--font-Header);
+    transition: 0.3s all ease-in-out;
 }
 
 .courseContent{
     display: flex;
     width: 100%;
+    transition: 0.3s all ease-in-out;
 }
 
 .course{
     width: 50%;
     height: 65vh;
     position: relative;
+    transition: 0.3s all ease-in-out;
 }
 
 .courseBG img{
@@ -264,6 +270,7 @@
     object-fit: cover;
     left: 0;
     right: 0;
+    transition: 0.3s all ease-in-out;
     z-index: 0;
 }
 
@@ -340,7 +347,7 @@
     font-weight: 500;
     color: white;
     width: 80%;
-    font-size: clamp(24px, 3vw, 48px);
+    font-size: clamp(24px, 5vw, 48px);
 }
 
 .course:hover .courseCoverTitle{
@@ -813,4 +820,137 @@ font-size: 32px;}
 }
 .event .eventContent a:hover{
    color: var(--color-secondary)
+}
+
+
+
+@media (max-width: 1024px) {
+    .heading-row .main-header {
+display: block;
+        row-gap: 0.3rem;
+    }
+
+    .heading-row .left {
+        padding-right: 0;
+    }
+}
+@media (max-width: 768px) {
+   
+
+    .heading-row .right {
+        font-weight: 600;
+    }
+}
+
+@media (min-width: 576px) {
+    /* small screens */
+}
+
+
+@media (min-width: 1000px) {
+    /* tablets */
+    .heroBannerWrapper{
+    height: calc(100vh - 120px);
+}
+
+}
+
+@media (max-width: 800px) {
+    /* Tablet */
+     .heading-row .main-header {
+       display: block;
+    }
+    .aboutGCIT p{
+        max-width: none !important;
+    }
+    .cardWrapper{
+    flex-direction: column;
+    }
+    .cardWrapper .card{
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+    .cardWrapper .card .cardContent{
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+    .cardWrapper .card .cardContent h1{
+        align-items: center;
+        display: block;
+        text-align: center;
+        width: 100%;
+        min-height: auto;
+    }
+    .cardWrapper .card .cardContent p{
+        text-align: center;
+    }
+
+    .courseWrapper .header h1{
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .course{
+        height: 50vh;
+    }
+    .courseContent{
+        flex-direction: column;
+    }
+    .courseContent .course{
+        width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
+    }
+    .courseCoverTitle{
+        left: var(--padding-sides);
+        top: 50%;
+        width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
+        /* transform: translateY(-50%); */
+        width: 100%;
+    }
+    .socWrapper:hover{
+        width: 100% !important;
+    }
+    .socWrapper:hover~.siddWrapper{
+        width: 100% !important;
+    }
+    .siddWrapper:hover {
+        width: 100% !important;
+    }
+
+    .courseContent:hover .socWrapper:not(:hover) {
+        width: 100% !important;
+    }
+
+    .course:hover .courseCoverTitle{
+    left: var(--padding-sides);
+    top: 40%;
+    bottom: none;
+    width: 100%;
+    }
+
+    .course:hover .courseCoverTitle p{
+        opacity: 1;
+        height: auto;
+        width: 100%;
+        transform: translateY(0);
+    }
+    .course:hover .courseCoverTitle .ctaBtn{
+        opacity: 1;
+        transform: translateY(0);
+        height: auto;
+    }
+    /* .course:hover .courseLinkWrapper{
+    padding-left: 10%;
+    } */
+    .course:hover .courseBG img{
+        transform: scale(1.05)
+    }
+}
+
+@media (min-width: 1200px) {
+    /* large desktops */
+}
+
+@media (min-width: 1400px) {
+    /* 2K monitors */
 }

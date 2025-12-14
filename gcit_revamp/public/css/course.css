@@ -1,5 +1,6 @@
 .courseContent .card img{
     width: 40% !important;
+    max-width: 400px;
 }
 
 .courseContent .coursePreHeader{

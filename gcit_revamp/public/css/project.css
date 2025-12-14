@@ -68,10 +68,12 @@
 
 .highlight .content{
     position: absolute;
-    bottom: clamp(20px, 4vw, 60px);
+    bottom: clamp(30px, 4vw, 60px);
     left: var(--padding-sides);
     width: 60%;
     z-index: 20;
+    transform: translateY(-0.8rem);
+
 }
 
 .highlight .content h1{
@@ -97,55 +99,6 @@
     background-color: var(--color-primary-hover);
 }
 
-.highlightSliderTrack{
-    display: flex;
-    flex-direction: column;
-    height: 80%;
-    z-index: 20;
-    width: 10%;
-    min-width: 200px;
-    position: absolute;
-    bottom: clamp(20px, 4vw, 60px);
-    right: var(--padding-sides);
-    overflow: hidden;
-}
-.highlightSlider{
-    width: 100%;
-    height: 16%;
-    position: relative;
-}
-.highlightSlider img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    z-index: 10;
-    position: absolute;
-    top:0;
-    left: 0;
-}
-
-.highlightSlider .sliderImgOverlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(126, 126, 126, 0.55);   /* black tint */
-    backdrop-filter: blur(8px);        /* main blur */
-    -webkit-backdrop-filter: blur(8px);/* Safari support */
-    z-index: 20;
-}
-
-.highlightSlider .activeHighlight{
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 20;
-   
-    background: #76b44477;   
-}
 
 .projectAllHeader{
     margin: 2.5rem 0;
@@ -164,4 +117,60 @@
 
 .projectContent{
     margin-bottom: 150px;
+}
+
+.highlightNav {
+    position: absolute;
+    bottom: clamp(30px, 4vw, 60px);
+    right: var(--padding-sides);
+    display: flex;
+    gap: 1rem;
+    z-index: 30;
+}
+
+.highlightBtn {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.highlightBtn:hover {
+    background: rgba(0,0,0,0.8);
+}
+
+.btnWrapper a{
+    text-decoration: none;
+}
+@media (max-width: 1024px) {
+    .projectAllHeader p{
+        width: 100%;
+    }
+
+    .mainContent .card .cardContent h1{
+        height: fit-content;
+        /* gap: 1rem; */
+    }
+    .mainContent .card .cardContent{
+        gap: 1rem;
+    }
+    .courseContent .card img{
+        width: 50% !important;
+    }
+    .projectHeaderContent p{
+        width: 100%;
+    }
+    .highlight .content{
+        width: 100%;
+    }
+    .projectHeaderWrapper{
+    padding: 80px var(--padding-sides) 20px var(--padding-sides);
+    }
+   
 }

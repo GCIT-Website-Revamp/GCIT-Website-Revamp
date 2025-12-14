@@ -661,6 +661,20 @@ font-size: 32px;}
     gap: 30px;
     margin-top: 2rem;
 }
+.homeAnnouncementContent {
+    display: flex;
+    gap: 30px;
+    margin-top: 2rem;
+}
+
+.cardAnnouncement {
+    flex: 2;
+}
+
+.suggestionWrapper {
+    flex: 1;
+}
+
 .homeAnnouncementContent .cardAnnouncement{
     display: flex;
     flex-direction: column;
@@ -730,14 +744,15 @@ font-size: 32px;}
 .homeAnnouncementContent .cardAnnouncement .card a:hover{
   color: var(--color-secondary)
 }
-
 .homeEventWrapper{
     padding: 200px var(--padding-sides);
     display: flex;
     flex-wrap: wrap;
 }
+
 .homeEventWrapper > *{
-    width: 29vw;
+    width: calc(33.333% - 1.5vw);
+    transition: 0.3s all ease-in-out;
     height: 29vw;
 }
 
@@ -781,6 +796,9 @@ font-size: 32px;}
 .event{
     position: relative;
     overflow: hidden;
+}
+.event img{
+    transition: 0.3s all ease-in-out;
 }
 .event:hover img{
     transform: scale(1.05);
@@ -842,8 +860,44 @@ display: block;
     }
 }
 
-@media (min-width: 576px) {
+@media (max-width: 576px) {
     /* small screens */
+     .homeAnnouncementWrapper {
+        padding: 0 1rem;
+    }
+
+    .homeAnnouncementHeader .headerContent p {
+        font-size: 0.9rem;
+    }
+
+    .homeAnnouncementContent .cardAnnouncement .card {
+        padding: 1.2rem;
+    }
+
+    .homeAnnouncementContent .cardAnnouncement .card a {
+        margin-top: 1.2rem;
+        font-size: 0.9rem;
+    }
+     .homeEventWrapper {
+        padding: 100px 1rem;
+    }
+
+    .event .eventContent {
+        bottom: 1.5rem;
+        left: 1rem;
+    }
+
+    .event .eventContent h1 {
+        font-size: 1.1rem;
+    }
+
+    .eventMessage h1 {
+        font-size: 1.4rem;
+    }
+
+    .eventMessage p {
+        font-size: 0.9rem;
+    }
 }
 
 
@@ -898,7 +952,7 @@ display: block;
         flex-direction: column;
     }
     .courseContent .course{
-        width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
+        width: 100%;
     }
     .courseCoverTitle{
         left: var(--padding-sides);
@@ -945,6 +999,159 @@ display: block;
     .course:hover .courseBG img{
         transform: scale(1.05)
     }
+
+    .messageContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    /* IMAGE FIRST */
+    .messageContainer .presidentImg {
+        order: 1;
+        position: relative; /* disable sticky on mobile */
+        top: auto;
+        padding-top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .messageContainer .presidentImg img {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+    }
+
+    /* MESSAGE AFTER */
+    .messageWrapper .message {
+        order: 2;
+        width: 100%;
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+    /* Quote adjustment */
+    .message .quote {
+        width: auto;
+        transform: none;
+        margin-bottom: 1rem;
+    }
+
+    /* Content spacing */
+    .messageContent {
+        padding: 0;
+    }
+
+    .messageContent p {
+        width: 100%;
+    }
+
+    .messageContent span {
+        margin-bottom: 1rem;
+    }
+
+    
+    .homeProjectWrapper{
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* 1️⃣ MESSAGE FIRST */
+    .homeProjectDetails .projectMessage{
+        order: 1;
+        height: auto;
+    }
+
+    /* 2️⃣ IMAGE SECOND */
+    .projectBanner{
+        order: 2;
+        width: 100%;
+        height: auto;
+    }
+
+    .projectBanner img{
+        height: auto;
+        max-height: 360px;
+    }
+
+    /* 3️⃣ PROJECT SLIDER LAST */
+    .homeProjectDetails .projectName{
+        order: 3;
+    }
+
+    /* Layout cleanup */
+    .homeProjectDetails{
+        width: 100%;
+    }
+
+    .homeProjectDetails .projectMessage,
+    .homeProjectDetails .projectName{
+        padding: 2rem var(--padding-sides);
+    }
+
+    /* Center CTA nicely on mobile */
+    .prjLink{
+        justify-content: center;
+    }
+        .homeAnnouncementWrapper {
+        margin-top: 120px;
+    }
+
+    .homeAnnouncementHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .homeAnnouncementHeader .headerLink {
+        align-self: flex-start;
+    }
+
+    .homeAnnouncementContent {
+        gap: 20px;
+    }
+
+    .homeAnnouncementContent .cardAnnouncement .card {
+        width: 100%;
+    }
+
+    .homeAnnouncementContent .cardAnnouncement .card h1 {
+        height: auto;
+        font-size: clamp(20px, 6vw, 26px);
+    }
+    .suggestionWrapper{
+        width: 100% !important;
+    }
+    .suggestion{
+        padding: 1rem 1.5rem;
+    }
+    .headerContent{
+        margin-bottom: 1rem;
+    }
+     .homeEventWrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .homeEventWrapper > * {
+        width: 100% !important;
+        height: auto;
+        min-height: 320px;
+    }
+
+    .eventMessage {
+        min-height: unset;
+        padding: 2rem 1.5rem;
+    }
+
+    .event {
+        aspect-ratio: 16 / 9;
+    }
+    .eventMessage{
+        height: fit-content !important;
+    }
+
 }
 
 @media (min-width: 1200px) {
@@ -953,4 +1160,24 @@ display: block;
 
 @media (min-width: 1400px) {
     /* 2K monitors */
+}
+
+@media (max-width: 1024px) {
+    .homeAnnouncementContent {
+        flex-direction: column;
+    }
+
+    .cardAnnouncement,
+    .suggestionWrapper {
+        width: 100%;
+    }
+    .homeEventWrapper {
+        padding: 140px var(--padding-sides);
+    }
+
+    .homeEventWrapper > * {
+        width: calc(50% - 1.5vw);
+        height: 40vw;
+    }
+    
 }

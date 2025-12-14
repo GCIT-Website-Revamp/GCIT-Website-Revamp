@@ -121,7 +121,7 @@
     </div>
     <div class="subMiniLinkWrapper">
         <h1>Academics</h1>
-        <a href="">Courses<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/course">Courses<span class="material-symbols-outlined">chevron_right</span></a>
     </div>
 </div>
 <div class="miniAboutWrapper miniSubLinkContainer">
@@ -130,6 +130,8 @@
     </div>
     <div class="subMiniLinkWrapper">
         <h1>About GCIT</h1>
+        <a href="/about">Institutional Overview</a>
+        <label>Non Academics</label>
         <a href="/department/Finance">Finance<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/department/Human Resources & Administration">Human Resources & Administration<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/department/Information & Communication Technology">Information & Communication Technology<span class="material-symbols-outlined">chevron_right</span></a>

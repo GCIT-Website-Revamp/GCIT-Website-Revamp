@@ -195,6 +195,11 @@ nav.fullSize {
 
 nav.mini, .miniTopNav, .miniSubLinkContainer {
     display: flex;
+    transition: none;
+}
+nav.mini h1, .miniTopNav g1{
+    transition: none;
+
 }
 
 #miniNavToggle{
@@ -264,6 +269,7 @@ nav.mini, .miniTopNav, .miniSubLinkContainer {
 }
 .miniQuickLinkWrapper h1{
     color: white;
+    transition: none;
     font-size: var(--font-size-s);
     font-weight: 600;
     /* color: rgb(97, 97, 97); */
@@ -293,10 +299,13 @@ nav.mini, .miniTopNav, .miniSubLinkContainer {
     justify-content: flex-start;
     align-items: center;
     width: fit-content;
+    transition: none;
+}
+.backWrapper label{
+    transition: none;
 }
 .backWrapper span{
     transition: all 0.3s ease-in-out;
-
 }
 .backWrapper span:hover{
     cursor: pointer;
@@ -335,6 +344,7 @@ nav.mini, .miniTopNav, .miniSubLinkContainer {
 }
 .miniSubLinkContainer h1{
     margin-bottom: 1rem;
+    transition: none
 }
 .miniSubLinkContainer{
     display: flex;

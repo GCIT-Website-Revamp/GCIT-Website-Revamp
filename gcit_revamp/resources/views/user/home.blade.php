@@ -54,10 +54,10 @@
                 </div>
             </div>
             <p class="lightText">GCIT is more than an institution — it is a creative and technological hub where students grow as innovators and leaders.
-Rooted in Bhutanese values of harmony and community, the college combines technology, design, and culture to prepare learners for meaningful careers in a digital world.</p>
+            Rooted in Bhutanese values of harmony and community, the college combines technology, design, and culture to prepare learners for meaningful careers in a digital world.</p>
             <div class="ctaWrapper">
                 <div class="ctaBtn">
-                    <a href="">Learn More</a>
+                    <a href="/about">Learn More</a>
                 </div>
                 <a href="/resources/Admission" class = "secondaryCta">
                     Admissions
@@ -70,11 +70,10 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
         <div class="section cardWrapper">
             <div class="card">
                 <div class="iconWrapper">
-                     <x-icons.globe class="globe-icon" />
+                    <x-icons.connect class="connect-icon" />
                 </div>
                 <div class="cardContent">
-                    <h1>Worldwide Recognition</h1>
-                    <h2>Our Students Compete Globally</h2>
+                    <h1>Co-Development at the Forefront</h1>
                     <p>Our graduates secure roles at top international tech firms, showcasing skills that open doors to high-demand careers across global markets</p>
                 </div>
             </div>
@@ -83,9 +82,8 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                     <x-icons.circuit class="circuit-icon" />
                 </div>
                 <div class="cardContent">
-                    <h1>Global Faculty, <br> Read World Pedagogy</h1>
-                    <h2>We Bring Industry to the Classroom </h2>
-                    <p>Our programs are led by experienced local and international faculty, blending global best practices with hands-on learning.</p>
+                    <h1>Integrated Real-World Pedagogy </h1>
+                    <p>We integrate industry challenges directly into our curriculum, allowing students to tackle authentic problems through capstone projects and partnerships.</p>
                 </div>
             </div>
             <div class="card">
@@ -93,9 +91,8 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                      <x-icons.handshake class="globe-icon" />
                 </div>
                 <div class="cardContent">
-                    <h1>Industry Collaboration & Recognition</h1>
-                    <h2>We Build Career-Ready Pathways </h2>
-                    <p>We work closely with industry to create internships and joint projects that equip students with real-world experience and career-ready skills.</p>
+                    <h1>Technopreneurship Mindset </h1>
+                    <p>Guided by the ICE Model (Inspire–Challenge–Empower) and rooted in GNH values, we nurture developers to think with entrepreneurial vision and purpose.</p>
                 </div>
             </div>
         </div>
@@ -121,7 +118,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                 <div class="course overlayWrapper siddWrapper">
                     <div class="courseBG bgRight backgroundWrapper ">
                         <div class="overlay"></div>
-                        <img src="{{ asset('images/sidd.png') }}" alt="">
+                        <img src="{{ asset('images/sidd.jpg') }}" alt="">
                     </div>
                     <div class="courseCoverTitle">
                         <h1>School of Interactive Design and Development</h1>
@@ -154,9 +151,6 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
             </div>
             <div class="messageContainer">
                 <div class="message">
-                    <div class="quote">
-                        <x-icons.quote class="circuit-icon" />
-                    </div>
                     <div class="messageContent">
                         <span>Kuzuzangpo la!</span>
                         <p>Welcome to GCIT campus and thank you for your interest in Gyalpozhing College of Information Technology. We are a leading institution that specialises in modern education and we offer both the Computer Science and Interactive Design & Development Degree.
@@ -238,7 +232,7 @@ Rooted in Bhutanese values of harmony and community, the college combines techno
                         </div>
                     @endforeach
                 </div>
-                <div class="suggestionWrapper">
+                <div class="suggestionWrapper homeSuggestion">
                     @foreach ($announcements->skip(2)->take(3) as $item)
                         <div class="suggestion">
                             <span class="date">

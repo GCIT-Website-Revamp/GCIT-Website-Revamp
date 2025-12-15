@@ -95,6 +95,10 @@ footer .linkWrapper a:hover{
   background-color: white;
 }
 
+.linkWrapper .dash{
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .footerContentWrapper{
     flex-direction: column;
@@ -145,7 +149,7 @@ footer .linkWrapper a:hover{
   footer .linkWrapper{
     flex-direction: column;
     gap: 30px;
-    align-items: center;
+    /* align-items: center; */
     text-align: center;
   }
 
@@ -179,7 +183,17 @@ footer .linkWrapper a:hover{
 
 @media (max-width: 480px) {
   footer{
-    padding: 60px 1rem 25px;
+    padding: 40px 1rem 25px;
+  }
+  
+.linkWrapper .dash{
+  display: block;
+}
+  .footerContentWrapper{
+    align-items: flex-start;
+  }
+  footer * {
+    text-align: start !important;
   }
 
   footer .linkWrapper h1{
@@ -196,5 +210,26 @@ footer .linkWrapper a:hover{
 
   .copyRight{
     font-size: 13px;
+  }
+  .footer .linkWrapper{
+    align-items: flex-start !important;
+  }
+  footer .linkContainer{
+    align-items: flex-start;
+  }
+  .socialWrapper{
+    align-items: flex-start;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .copyRight p{
+    font-size: 8.5px;
+  }
+
+  .copyRight{
+    align-items: flex-start;
+  }
+  footer .linkWrapper h1{
+    margin-bottom: 0;
   }
 }

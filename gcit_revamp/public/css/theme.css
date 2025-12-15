@@ -328,7 +328,11 @@ p{
     
 }
 
-
+.pageContentWrapper{
+    max-width:1600px;
+      margin: 0 auto;        /* centers horizontally */
+  padding-inline: 1.5rem;/* prevents edge touching on small screens */
+}
 
 
 @media (min-width: 576px) {
@@ -360,6 +364,10 @@ p{
 
 @media (min-width: 1400px) {
     /* 2K monitors */
+    :root {
+        padding
+
+    }
 }
 
 

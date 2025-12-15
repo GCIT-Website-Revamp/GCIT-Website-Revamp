@@ -48,8 +48,8 @@
                  </div>
                  <div class="otherContent">
                      <h1>Other Departments</h1>
-                     @foreach ($services as $service)
-                        <a href="/department/{{ $service->id }}">{{ $service->name }}</a>
+                     @foreach ($courses as $course)
+                        <a href="/courseDetails/{{ $course->id }}">{{ $course->name }}</a>
                      @endforeach
                  </div>
     </div>

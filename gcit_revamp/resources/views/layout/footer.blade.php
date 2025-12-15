@@ -18,6 +18,8 @@
         </div>
     </div>
     <div class="linkWrapper">
+        <div class="dash"></div>
+
        <div class="linkContainer">
             <h1>Quick Links</h1>
             <a>Admissions 2024</a>

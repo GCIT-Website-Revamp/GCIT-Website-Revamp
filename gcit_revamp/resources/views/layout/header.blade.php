@@ -17,7 +17,7 @@
                 <label class = "dropDownLink" for="academicToggle">About GCIT<span class="material-symbols-outlined">arrow_drop_down</span></label>
                 <div class="dropDownContent">
                     <a href="/about">Institutional Overview</a>
-                    <label>Non Academics</label>
+                    <label>Support & Services</label>
                     <a class = "subLink" href="/department/Finance">Finance</a>
                     <a class = "subLink" href="/department/Human Resources & Administration">Human Resources & Administration</a>
                     <a class = "subLink" href="/department/Information & Communication Technology">Information & Communication Technology</a>
@@ -73,8 +73,9 @@
 <nav class="mini">
     <div class="miniMainBar wrapper">
         <div class="miniLogoWrapper">
-            <img src="{{ asset('images/logo/logo2.png') }}" alt="">
-        </div>
+        <a href="/">
+                <img src="{{ asset('images/logo/logo2.png') }}" alt="">
+            </a>        </div>
         <div class="miniNavContent">
             <div class="searchWrapper">
                 <input type="text" class="searchInput" placeholder="Search..." />
@@ -101,8 +102,8 @@
             <label for="miniUpdates">Updates <span class="material-symbols-outlined">chevron_right</span></label>
         </div>
         <div class="miniQuickLinkWrapper">
-            <h1>Quick Links</h1>
-            <a href="">Alumini</a>
+            <!-- <h1>Quick Links</h1> -->
+            <a href="">Alumni</a>
             <a href="">CETA</a>
             <a href="">Contact Us</a>
             <a href="/faculty">Faculty</a>
@@ -131,7 +132,7 @@
     <div class="subMiniLinkWrapper">
         <h1>About GCIT</h1>
         <a href="/about">Institutional Overview</a>
-        <label>Non Academics</label>
+        <label>Support & Services</label>
         <a href="/department/Finance">Finance<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/department/Human Resources & Administration">Human Resources & Administration<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/department/Information & Communication Technology">Information & Communication Technology<span class="material-symbols-outlined">chevron_right</span></a>

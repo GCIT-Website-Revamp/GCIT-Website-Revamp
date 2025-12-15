@@ -24,8 +24,8 @@
 <div class="pageContentWrapper">
     <div class="section eventsWrapper">
         <button class="filterToggle">
+            Filter
             <span class="material-symbols-outlined">filter_list</span>
-        Filter Courses
         </button>
 
         <div class="mainContent courseContent">

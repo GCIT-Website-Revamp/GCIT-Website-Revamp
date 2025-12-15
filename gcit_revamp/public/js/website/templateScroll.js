@@ -82,41 +82,46 @@
         }
     );
 
-    /* ----------------------------------
-        FILTER SIDEBAR — SLIDE IN
-    ----------------------------------*/
-    gsap.fromTo(
-        ".eventsWrapper .filterWrapper",
-        { opacity: 0, x: 40 },
-        {
-            scrollTrigger: {
-                trigger: ".eventsWrapper",
-                start: "top 88%",
-            },
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            ease: "power3.out"
-        }
-    );
-
-    /* ----------------------------------
-        FILTER CHECKBOXES — SMALL STAGGER
-    ----------------------------------*/
-    gsap.fromTo(
-        ".filterContainer .filter",
-        { opacity: 0, x: 15 },
-        {
-            scrollTrigger: {
-                trigger: ".filterWrapper",
-                start: "top 92%",
-            },
-            opacity: 1,
-            x: 0,
-            duration: 0.35,
-            ease: "power2.out",
-            stagger: 0.1
-        }
-    );
-
+    // /* ----------------------------------
+    //     FILTER SIDEBAR — SLIDE IN
+    // ----------------------------------*/
+    // if (window.innerWidth > 1024) {
+    //     gsap.fromTo(
+    //         ".eventsWrapper .filterWrapper",
+    //         { opacity: 0, y: 30 },
+    //         {
+    //         scrollTrigger: {
+    //             trigger: ".eventsWrapper",
+    //             start: "top 88%",
+    //             once: true // 🔥 important
+    //         },
+    //         opacity: 1,
+    //         y: 0,
+    //         duration: 0.5,
+    //         ease: "power3.out"
+    //         }
+    //     );
+        
+    //     /* ----------------------------------
+    //     FILTER CHECKBOXES — SMALL STAGGER
+    //     ----------------------------------*/
+    //     gsap.fromTo(
+    //         ".filterContainer .filter",
+    //         { opacity: 0, x: 15 },
+    //         {
+    //             scrollTrigger: {
+    //                 trigger: ".filterWrapper",
+    //                 start: "top 92%",
+    //             },
+    //             opacity: 1,
+    //             x: 0,
+    //             duration: 0.35,
+    //             ease: "power2.out",
+    //             stagger: 0.1
+    //         }
+    //     );
+    // }else{
+    //     console.log("SKIPPING THIS FILTER ")
+    // }
+        
 });

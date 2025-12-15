@@ -44,10 +44,10 @@
         </div>
     <div class="otherCourseContainer otherDepartment">
                  <div class="header">
-                     <h1>More on Academics</h1>
+                     <h1>More on Non Academic</h1>
                  </div>
                  <div class="otherContent">
-                     <h1>Other Courses</h1>
+                     <h1>Other Departments</h1>
                      @foreach ($courses as $course)
                         <a href="/courseDetails/{{ $course->id }}">{{ $course->name }}</a>
                      @endforeach

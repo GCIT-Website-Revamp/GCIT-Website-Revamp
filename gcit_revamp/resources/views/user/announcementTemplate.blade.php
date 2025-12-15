@@ -23,6 +23,10 @@
 </div>
 <div class="pageContentWrapper">
     <div class="section eventsWrapper">
+        <button class="filterToggle">
+            <span class="material-symbols-outlined">filter_list</span>
+        Filter Courses
+        </button>
         <div class="mainContent announcementContent">
             @forelse ($announcements as $index => $announcement)
             <div class="card">
@@ -40,6 +44,11 @@
             @endforelse
         </div>
         <div class="filterWrapper">
+             <div class="filterCloseWrapper">
+                <button class="filterClose">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
             <div class="headerWrapper">
                 <h1>Filters</h1>
             </div>

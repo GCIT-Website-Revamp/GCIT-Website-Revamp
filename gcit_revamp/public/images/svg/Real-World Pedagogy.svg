@@ -1,13 +1,17 @@
-@props(['class' => ''])
-
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 444.28 489.82"
-    class="{{ $class }}"
-    fill="none"
->
-    <g stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
- <g id="Layer_9" data-name="Layer 9">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444.28 489.82">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #231f20;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 14px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_9" data-name="Layer 9">
     <g>
       <circle class="cls-1" cx="154.38" cy="196.49" r="16.65"/>
       <circle class="cls-1" cx="221.4" cy="232.98" r="16.65"/>
@@ -53,6 +57,4 @@
       <line class="cls-1" x1="273.98" y1="399.26" x2="273.98" y2="315.44"/>
     </g>
   </g>
-
-    </g>
 </svg>

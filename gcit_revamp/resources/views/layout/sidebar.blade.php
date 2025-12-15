@@ -46,7 +46,7 @@
             <li class="active">
                 <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
                         class="fa fa-briefcase white_color"></i>
-                    <span>Non-Academic</span></a>
+                    <span>Support and Services</span></a>
                 <ul class="collapse list-unstyled" id="additional_page">
                     <li>
                         <a href="overview">> <span>Institutional Overview</span></a>

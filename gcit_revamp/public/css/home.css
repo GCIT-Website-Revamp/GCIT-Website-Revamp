@@ -1,6 +1,6 @@
 .heroBannerWrapper{
     position: relative;
-    height: calc(100vh - 141px);
+    height: calc(100vh - 86px);
     width: 100%;
 }
 
@@ -9,12 +9,16 @@
     position: relative;
     height: 100%;
     width: 100%;
+    max-width: 1600px;
+     margin: 0 auto;        /* centers horizontally */
+  padding-inline: 1.5rem;/* prevents edge touching on small screens */
 }
 
 
 .bannerContent .media{
     height: 100%;
     width: 100%;
+    max-width: 100%;
 }
 .heroBannerWrapper .bannerContent .media img,
 .heroBannerWrapper .bannerContent .media video{
@@ -30,6 +34,7 @@
 .descriptionWrapper{
     position: absolute;
     bottom: 100px;
+    
     left: var(--padding-sides);
     z-index: 10;
     color: white;
@@ -45,6 +50,7 @@
     padding: 0 var(--padding-sides);
     width: 100%;
     z-index: 20;
+    
 }
 
 
@@ -149,8 +155,9 @@
 
 .heading-row .main-header{
     display: grid;
-    grid-template-columns: 250px 1fr; /* LEFT fixed by content, RIGHT aligns */
-    align-items: baseline; /* keeps typography alignment clean */
+    grid-template-columns: minmax(140px, auto) 1fr;
+    align-items: baseline;
+    column-gap: 1rem;
 }
 
 .heading-row .left {
@@ -159,20 +166,20 @@
 }
 
 .heading-row .right {
-    white-space: nowrap;
+    white-space: normal;
+}
+.aboutGCIT p {
+    max-width: 65ch;
+    width: 100%;
+    line-height: 1.5;
 }
 
-.aboutGCIT p{
-    width: clamp(200px, 45vw, 1200px);
-    line-height: 150%;
-    /* min-width: 250px; */
-}
 
 
 .iconWrapper * {
     width: auto;
-    height: 70%;
-    color: #D4D4D4; /* original color */
+    height:80%;
+    color: var(--color-primary); /* original color */
     transition: transform 0.6s ease;
     transform-origin: center;
 }
@@ -180,14 +187,15 @@
 
 .cardWrapper{
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
     margin: clamp(60px, 10vw, 140px) 0;
     align-items: center;
 }
 
 .cardWrapper .card{
-    width: 33%;
+    width: 30%;
     padding: clamp(1rem, 3vw, 30px);
     background-color: #FAFAFA;
     height: 560px;
@@ -209,14 +217,14 @@
 .cardWrapper .card .cardContent h1{
     font-weight: 400;
     min-height: 80px;
-    align-items: flex-end;
+    align-items: center;
     display: flex;
-    font-size: clamp(22px, 3vw, 32px);
+    font-size: clamp(22px, 2vw, 32px);
 
 }
 .cardWrapper .card .cardContent h2{
     font-weight: 400;
-    font-style: italic;
+    /* font-style: italic; */
     color: var(--color-primary);
     font-size: clamp(18px, 3vw, 22px);
 
@@ -236,25 +244,29 @@
 
 
 .courseWrapper{
+    transition: 0.3s all ease-in-out;
     margin: clamp(60px, 10vw, 140px) 0
 }
 .courseWrapper .header h1{
     padding: 0 var(--padding-sides);
-    font-size: clamp(48px, 10vw, 120px);
+    font-size: clamp(48px, 5vw, 120px);
     font-weight: 400;
-    color: #D9D9D9;
+    color: #838383;
     font-family: var(--font-Header);
+    transition: 0.3s all ease-in-out;
 }
 
 .courseContent{
     display: flex;
     width: 100%;
+    transition: 0.3s all ease-in-out;
 }
 
 .course{
     width: 50%;
     height: 65vh;
     position: relative;
+    transition: 0.3s all ease-in-out;
 }
 
 .courseBG img{
@@ -264,6 +276,7 @@
     object-fit: cover;
     left: 0;
     right: 0;
+    transition: 0.3s all ease-in-out;
     z-index: 0;
 }
 
@@ -340,7 +353,7 @@
     font-weight: 500;
     color: white;
     width: 80%;
-    font-size: clamp(24px, 3vw, 48px);
+    font-size: clamp(38px, 8vw, 48px);
 }
 
 .course:hover .courseCoverTitle{
@@ -503,10 +516,7 @@
     font-family: var(--font-Header);
     color: white;
 }
-.homeProjectDetails .projectMessage h1 span{
-   
-    color: rgb(0, 0, 0);
-}
+
 .homeProjectDetails .projectMessage p{
    font-weight: 300;
    color: white;
@@ -654,6 +664,20 @@ font-size: 32px;}
     gap: 30px;
     margin-top: 2rem;
 }
+.homeAnnouncementContent {
+    display: flex;
+    gap: 30px;
+    margin-top: 2rem;
+}
+
+.cardAnnouncement {
+    flex: 2;
+}
+
+.suggestionWrapper {
+    flex: 1;
+}
+
 .homeAnnouncementContent .cardAnnouncement{
     display: flex;
     flex-direction: column;
@@ -714,7 +738,7 @@ font-size: 32px;}
 }
 .homeAnnouncementContent .cardAnnouncement .card a{
    text-decoration: none;
-   color: #9A9A9A;
+   color: var(--color-primary);
    display: flex;
    gap: 0.5rem;
    margin-top: 2rem;
@@ -723,14 +747,15 @@ font-size: 32px;}
 .homeAnnouncementContent .cardAnnouncement .card a:hover{
   color: var(--color-secondary)
 }
-
 .homeEventWrapper{
     padding: 200px var(--padding-sides);
     display: flex;
     flex-wrap: wrap;
 }
+
 .homeEventWrapper > *{
-    width: 29vw;
+    width: calc(33.333% - 1.5vw);
+    transition: 0.3s all ease-in-out;
     height: 29vw;
 }
 
@@ -775,6 +800,9 @@ font-size: 32px;}
     position: relative;
     overflow: hidden;
 }
+.event img{
+    transition: 0.3s all ease-in-out;
+}
 .event:hover img{
     transform: scale(1.05);
 }
@@ -813,4 +841,396 @@ font-size: 32px;}
 }
 .event .eventContent a:hover{
    color: var(--color-secondary)
+}
+
+.eventContent .date{
+    color: white;
+}
+
+
+@media (max-width: 1024px) {
+    .heading-row .main-header {
+display: block;
+        row-gap: 0.3rem;
+    }
+
+    .heading-row .left {
+        padding-right: 0;
+    }
+}
+@media (max-width: 768px) {
+   
+
+}
+
+@media (max-width: 576px) {
+    /* small screens */
+     .homeAnnouncementWrapper {
+        padding: 0;
+    }
+
+    .homeAnnouncementHeader .headerContent p {
+        font-size: 0.9rem;
+    }
+
+    .homeAnnouncementContent .cardAnnouncement .card {
+        padding: 1.2rem;
+    }
+
+    .homeAnnouncementContent .cardAnnouncement .card a {
+        margin-top: 1.2rem;
+        font-size: 0.9rem;
+    }
+     .homeEventWrapper {
+        padding: 100px;
+    }
+
+    .event .eventContent {
+        bottom: 1.5rem;
+        left: 1rem;
+    }
+
+    .event .eventContent h1 {
+        font-size: 1.1rem;
+    }
+
+    .eventMessage h1 {
+        font-size: 1.4rem;
+    }
+
+    .eventMessage p {
+        font-size: 0.9rem;
+    }
+    .homeSuggestion{
+        display: none !important;
+    }
+}
+
+
+@media (min-width: 1000px) {
+    /* tablets */
+    .heroBannerWrapper{
+    height: calc(100vh - 120px);
+    }
+    
+
+}
+@media (min-width: 1600px) {
+    /* tablets */
+    .heroBannerWrapper{
+    height: calc(100vh - 120px);
+    }
+    
+
+}
+
+@media (max-width: 800px) {
+    /* Tablet */
+     .heading-row .main-header {
+       display: block;
+    }
+    .aboutGCIT p{
+        max-width: none !important;
+    }
+    .cardWrapper{
+    flex-direction: column;
+    }
+    .cardWrapper .card{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .cardWrapper .card .cardContent{
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+    .cardWrapper .card .cardContent h1{
+        align-items: center;
+        display: block;
+        text-align: center;
+        width: 100%;
+        min-height: auto;
+    }
+    .cardWrapper .card .cardContent p{
+        text-align: center;
+    }
+
+    .courseWrapper .header h1{
+        /* text-align: center; */
+        margin-bottom: 1rem;
+    }
+    .course{
+        height: 50vh;
+    }
+    .courseContent{
+        flex-direction: column;
+    }
+    .courseContent .course{
+        width: 100%;
+    }
+    .courseCoverTitle{
+        left: var(--padding-sides);
+        bottom:5%;
+        width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
+        /* transform: translateY(-50%); */
+        width: 100%;
+    }
+    .socWrapper:hover{
+        width: 100% !important;
+    }
+    .socWrapper:hover~.siddWrapper{
+        width: 100% !important;
+    }
+    .siddWrapper:hover {
+        width: 100% !important;
+    }
+
+    .courseContent:hover .socWrapper:not(:hover) {
+        width: 100% !important;
+    }
+
+    .course:hover .courseCoverTitle{
+    left: var(--padding-sides);
+    top: 40%;
+    bottom: none;
+    width: 100%;
+    }
+
+    .course:hover .courseCoverTitle p{
+        opacity: 1;
+        height: auto;
+        width: 100%;
+        transform: translateY(0);
+    }
+    .course:hover .courseCoverTitle .ctaBtn{
+        opacity: 1;
+        transform: translateY(0);
+        height: auto;
+    }
+    /* .course:hover .courseLinkWrapper{
+    padding-left: 10%;
+    } */
+    .course:hover .courseBG img{
+        transform: scale(1.05)
+    }
+
+    .messageContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    /* IMAGE FIRST */
+    .messageContainer .presidentImg {
+        order: 1;
+        position: relative; /* disable sticky on mobile */
+        top: auto;
+        padding-top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .messageContainer .presidentImg img {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+    }
+
+    /* MESSAGE AFTER */
+    .messageWrapper .message {
+        order: 2;
+        width: 100%;
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+    /* Quote adjustment */
+    .message .quote {
+        width: auto;
+        transform: none;
+        margin-bottom: 1rem;
+    }
+
+    /* Content spacing */
+    .messageContent {
+        padding: 0;
+    }
+
+    .messageContent p {
+        width: 100%;
+    }
+
+    .messageContent span {
+        margin: 1rem 0;
+        font-size: 24px;
+    }
+    .presidentTitle{
+        margin: 0 !important;
+    }
+
+    
+    .homeProjectWrapper{
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* 1️⃣ MESSAGE FIRST */
+    .homeProjectDetails .projectMessage{
+        order: 1;
+        height: auto;
+    }
+
+    /* 2️⃣ IMAGE SECOND */
+    .projectBanner{
+        order: 2;
+        width: 100%;
+        height: auto;
+    }
+
+    .projectBanner img{
+        height: auto;
+        max-height: 360px;
+    }
+
+    /* 3️⃣ PROJECT SLIDER LAST */
+    .homeProjectDetails .projectName{
+        order: 3;
+    }
+
+    /* Layout cleanup */
+    .homeProjectDetails{
+        width: 100%;
+    }
+
+    .homeProjectDetails .projectMessage,
+    .homeProjectDetails .projectName{
+        padding: 2rem var(--padding-sides);
+    }
+
+    /* Center CTA nicely on mobile */
+    .prjLink{
+        justify-content: center;
+    }
+        .homeAnnouncementWrapper {
+        margin-top: 120px;
+    }
+
+    .homeAnnouncementHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .homeAnnouncementHeader .headerLink {
+        align-self: flex-start;
+    }
+
+    .homeAnnouncementContent {
+        gap: 20px;
+    }
+
+    .homeAnnouncementContent .cardAnnouncement .card {
+        width: 100%;
+    }
+
+    .homeAnnouncementContent .cardAnnouncement .card h1 {
+        height: auto;
+        font-size: clamp(20px, 3vw, 26px);
+        margin: 1rem 0;
+    }
+    .suggestionWrapper{
+        width: 100% !important;
+    }
+    .date span *{
+        color: #333 !important;
+    }
+    .suggestion{
+        padding: 1rem 1.5rem;
+    }
+    .headerContent{
+        margin-bottom: 1rem;
+    }
+     .homeEventWrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .homeEventWrapper > * {
+        width: 100% !important;
+        height: auto;
+        min-height: 320px;
+    }
+
+    .eventMessage {
+        min-height: unset;
+        padding: 2rem 1.5rem;
+    }
+
+    .event {
+        aspect-ratio: 16 / 9;
+    }
+    .eventMessage{
+        height: fit-content !important;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    /* large desktops */
+}
+
+@media (min-width: 1400px) {
+    /* 2K monitors */
+}
+
+@media (max-width: 1024px) {
+    .homeAnnouncementContent {
+        flex-direction: column;
+    }
+
+    .cardAnnouncement,
+    .suggestionWrapper {
+        width: 100%;
+    }
+    .homeEventWrapper {
+        padding: 140px 0;
+    }
+
+    .homeEventWrapper > * {
+        width: calc(50% - 1.5vw);
+        height: 40vw;
+    }
+    
+}
+@media (max-width: 480px) {
+   .heroBannerWrapper{
+    height:calc(50vh - 86px); 
+   }
+   .hero-header{
+    font-size: clamp(28px, 5vw, 48px);
+   }.contentSlider{
+    padding: 0;
+    width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)))
+   }
+   .cardWrapper .card{
+    height: 400px;
+   }
+   .iconWrapper *{
+    height: 85%;
+   }.courseLinkContainer{
+    flex-direction: column;
+    padding: 0 var(--padding-sides);
+    gap: 1rem;
+    padding-top: 2rem;
+   }
+   .courseLinkWrapper{
+    padding: 0;
+    gap: 1rem
+   }
+   
 }

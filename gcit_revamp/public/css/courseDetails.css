@@ -203,3 +203,9 @@
 .courseDetailContent input[type="checkbox"]:checked + label h1 span.material-symbols-outlined {
     transform: rotate(270deg); /* rotate UP */
 }
+
+@media screen and (max-width: 480px) {   
+    .otherCourseContainer .header h1 {
+        width: 60%;
+    }
+}

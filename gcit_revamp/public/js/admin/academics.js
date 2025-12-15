@@ -33,7 +33,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
                 <label for="courseType">Type</label>
                 <select class="form-control" id="courseType">
                     <option value="" disabled selected>Select Degree</option>
-                    <option value="School of Computing">School of Computing</option>
+                    <option value="School of Computer Science">School of Computer Science</option>
                     <option value="School of Interactive Design and Development">School of Interactive Design and Development</option>
                 </select>
             </div>
@@ -288,7 +288,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                     <label for="courseType">Type</label>
                     <select class="form-control" id="courseType">
                         <option value="" disabled selected>Select Degree</option>
-                        <option value="School of Computing"  ${this.dataset.courseType === "School of Computing" ? "selected" : ""}>School of Computing</option>
+                        <option value="School of Computer Science"  ${this.dataset.courseType === "School of Computer Science" ? "selected" : ""}>School of Computer Science</option>
                         <option value="School of Interactive Design and Development" ${this.dataset.courseType === "School of Interactive Design and Development" ? "selected" : ""}>School of Interactive Design and Development</option>
                     </select>
                 </div>
@@ -342,6 +342,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
             formData.append("structure", document.getElementById('structure').value);
             formData.append("career", document.getElementById('career').value);
             formData.append("type", document.getElementById("courseType").value);
+            formData.append("header", document.getElementById("header").value);
             let newImage = document.getElementById('courseImage').files[0];
             if (newImage) {
                 formData.append("image", newImage);

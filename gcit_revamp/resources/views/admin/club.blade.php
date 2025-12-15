@@ -122,6 +122,7 @@
                                     <tr>
                                        <th>#</th>
                                        <th>Club</th>
+                                       <th>Logo</th>
                                        <th>Description</th>
                                        <th>Action</th>
                                     </tr>
@@ -131,11 +132,14 @@
                                        <tr>
                                           <td>{{ $clubs->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $club->name }}</td>
+                                          <td style="max-width: 80px;"><img src="{{ asset('storage/' . $club->logo) }}"
+                                                alt="Club Logo" width="80"></td>
                                           <td style="max-width: 340px;">{!! Str::limit($club->description, 450) !!}</td>
                                           <td style="max-width: 60px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-club-btn"
                                                    data-club-id="{{ $club->id }}" data-club-name="{{ $club->name }}"
+                                                   data-club-logo="{{ asset('storage/' . $club->logo) }}"
                                                    data-club-description="{{ $club->description }}"
                                                    data-club-roles="{{ json_encode($club->roles) }}">
                                                    Edit

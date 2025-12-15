@@ -94,3 +94,142 @@ footer .linkWrapper a:hover{
   height: 1px;
   background-color: white;
 }
+
+.linkWrapper .dash{
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .footerContentWrapper{
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .logoContentWrapper,
+  footer .linkWrapper{
+    max-width: 100%;
+  }
+
+  .logoContentWrapper{
+    text-align: center;
+  }
+  footer .linkWrapper{
+    justify-content: space-between;
+  }
+
+  .logoContentWrapper .logoWrapper img{
+    width: 120px;
+  }
+  footer p{
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 768px) {
+  footer{
+    padding: 80px 1.5rem 30px;
+  }
+
+  
+  .footerContentWrapper{
+    gap: 40px;
+  }
+
+
+  .logoContentWrapper .logoWrapper img{
+    width: 100px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .addressWrapper{
+    text-align: center;
+  }
+
+  footer .linkWrapper{
+    flex-direction: column;
+    gap: 30px;
+    /* align-items: center; */
+    text-align: center;
+  }
+
+  footer .linkContainer{
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .subContentWrapper{
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .socialWrapper{
+    width: auto;
+    justify-content: center;
+  }
+
+  .copyRight{
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .dash{
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  footer{
+    padding: 40px 1rem 25px;
+  }
+  
+.linkWrapper .dash{
+  display: block;
+}
+  .footerContentWrapper{
+    align-items: flex-start;
+  }
+  footer * {
+    text-align: start !important;
+  }
+
+  footer .linkWrapper h1{
+    font-size: 13px;
+  }
+
+  footer .linkWrapper a{
+    font-size: 14px;
+  }
+
+  .socialWrapper a{
+    font-size: 26px;
+  }
+
+  .copyRight{
+    font-size: 13px;
+  }
+  .footer .linkWrapper{
+    align-items: flex-start !important;
+  }
+  footer .linkContainer{
+    align-items: flex-start;
+  }
+  .socialWrapper{
+    align-items: flex-start;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .copyRight p{
+    font-size: 8.5px;
+  }
+
+  .copyRight{
+    align-items: flex-start;
+  }
+  footer .linkWrapper h1{
+    margin-bottom: 0;
+  }
+}

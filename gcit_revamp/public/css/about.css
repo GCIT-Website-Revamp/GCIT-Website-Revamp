@@ -124,3 +124,108 @@ text-align: center;
 .mottoWrapper .missionWrapper h1{
     color: var(--color-primary)
 }
+
+@media (max-width: 1024px) {
+
+    .preAboutHeader {
+        padding: 80px var(--padding-sides);
+    }
+
+    .aboutContentWrapper {
+        flex-direction: column;
+    }
+
+    .aboutContent,
+    .aboutContentWrapper .otherCourseContainer {
+        max-width: 100%;
+        width: 100%;
+        padding: 20px var(--padding-sides);
+        height: fit-content;
+    }
+    .otherCourseContainer{
+        
+        margin-bottom: 100px;
+    }
+
+    .aboutHeader h1 {
+        width: 100%;
+        font-size: clamp(32px, 6vw, 64px);
+    }
+
+    .bgColorUnderlay {
+        left: 0;
+        width: 100%;
+    }
+    .otherCourseContainer{
+        height: fit-content;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .preAboutHeader {
+        padding: 60px 1.5rem;
+    }
+
+    .aboutHeader {
+        padding: 0 1.5rem;
+    }
+
+    .aboutDetailsWrapper {
+        padding: 0 1.5rem;
+    }
+
+    .aboutDetails img {
+        height: 260px;
+    }
+
+    .aboutDetails p {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+
+    .bgColorUnderlay {
+        top: 15%;
+        height: 100%;
+    }
+
+    .mottoWrapper {
+        margin: 100px 0;
+        gap: 3rem;
+        padding: 0 1.5rem;
+    }
+
+    .mottoWrapper .underlay {
+        height: 40%;
+    }
+
+    .mottoWrapper .visionWrapper p,
+    .mottoWrapper .missionWrapper p {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .aboutHeader h1 {
+        font-size: 2rem;
+    }
+
+    .aboutDetails img {
+        height: 220px;
+    }
+
+    .mottoWrapper .visionWrapper h1,
+    .mottoWrapper .missionWrapper h1 {
+        font-size: 2.5rem;
+    }
+
+    .otherCourseContainer .header h1 {
+        font-size: 1.2rem;
+    }
+
+    .otherCourseContainer a {
+        font-size: 0.95rem;
+    }
+}

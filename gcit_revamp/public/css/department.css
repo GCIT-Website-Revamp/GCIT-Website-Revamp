@@ -13,3 +13,55 @@
 .postWrapper p{
     line-height: 150%;
 }
+
+@media (max-width: 1024px) {
+
+    .departmentWrapper {
+        flex-direction: column;
+    }
+
+    .postWrapper .post,
+    .otherDepartment {
+        width: 100%;
+    }
+
+    .otherDepartment {
+        margin-top: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .postWrapper p {
+        font-size: 0.95rem;
+    }
+
+    .departmentWrapper span {
+        font-size: 1.2rem;
+        padding-top: 1.5rem;
+    }
+
+    .otherDepartment {
+        padding-top: 2rem;
+    }
+
+    .otherDepartment a {
+        display: block;
+        padding: 0.4rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .departmentWrapper span {
+        font-size: 1rem;
+    }
+
+    .postWrapper p {
+        line-height: 1.6;
+    }
+
+    .otherDepartment h1 {
+        font-size: 1.1rem;
+    }
+}

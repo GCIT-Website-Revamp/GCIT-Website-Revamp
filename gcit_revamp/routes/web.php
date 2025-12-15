@@ -267,13 +267,13 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
             'url' => request()->fullUrl(),
         ])
         ->log('Viewed action logs');
-        $logs = Activity::orderBy('created_at', 'desc')->with('causer')->paginate(15);
+        $logs = Activity::orderBy('created_at', 'desc')->with('causer')->paginate(50);
         return view('admin.logs', compact('logs'));
     });
 });
 
 Route::get('/', function () {
-    $bsc = Course::where('type', '=', 'School of Computing')->orderBy('name', 'ASC')->get();
+    $bsc = Course::where('type', '=', 'School of Computer Science')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
     $announcements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(5)->get();
     $events = Event::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();

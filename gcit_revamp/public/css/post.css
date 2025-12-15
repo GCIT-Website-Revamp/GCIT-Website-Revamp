@@ -100,3 +100,64 @@ li ul li {
 .suggestion a:hover{
     color: var(--color-secondary)
 }
+
+@media (max-width: 1024px) {
+
+    .postWrapper {
+        flex-direction: column;
+    }
+
+    .post,
+    .suggestionWrapper {
+        width: 100%;
+    }
+
+    .suggestionWrapper {
+        margin-top: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .post img {
+        height: 260px;
+        margin-bottom: 1.5rem;
+    }
+
+    .post p,
+    .post ol,
+    .post li {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    
+    .suggestionWrapper {
+        gap: 1.5rem;
+    }
+
+    .suggestion h1 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .post img {
+        height: 220px;
+    }
+
+    .post p,
+    .post li {
+        font-size: 0.9rem;
+    }
+
+    .suggestion h1 {
+        font-size: 1rem;
+    }
+
+    .suggestion a {
+        font-size: 0.9rem;
+    }
+}

@@ -3,48 +3,49 @@
 @section('title', 'Home')
 
 @section('content')
-<div class="projectHeaderWrapper">
-    <img src="{{asset('Images/projectBackground.png')}}" alt="">
-        <div class="breadCrumbs">
-            <a href="/">Home</a>
-            <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">Impact</a>
-        </div>
-        <div class="projectHeaderContent">
-            <h1>Highlight Projects</h1>
-            <p>Explore innovative student projects that bridge creativity and technology. From AI-driven solutions to blockchain applications and interactive design prototypes, these projects showcase GCIT’s commitment to real-world learning and problem-solving that makes an impact.</p>
-        </div>
-</div>
-<div class="">
-    <div class="projectContent">
-        <div class="highlightWrapper">
-            <div class="blackBar"></div>
-            <div class="projectHighlight">
-                <div class="highlight backgroundWrapper">
-                    <div class="overlay"></div>
-                    <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
-                    <div class="content">
-                        <h1>Finance Application</h1>
-                        <p>Driving Bhutan’s digital transformation through excellence in education, research, and technology.</p>
-                        <a href="">Explore More</a>
-                    </div>
-                    <div class="highlightNav">
-    <button class="highlightBtn left">
-        <span class="material-symbols-outlined">chevron_left</span>
-    </button>
-    <button class="highlightBtn right">
-        <span class="material-symbols-outlined">chevron_right</span>
-    </button>
-</div>
+   <div class="">
+            <div class="projectContent">
+                <div class="highlightWrapper">
+                    <!-- <div class="blackBar"></div> -->
+                    <div class="projectHighlight">
+                        <div class="highlight backgroundWrapper">
+                            <div class="overlay"></div>
+                            <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
+                            <div class="content">
+                                <h1>Finance Application</h1>
+                                <p>Driving Bhutan’s digital transformation through excellence in education, research, and technology.</p>
+                                <a href="">Explore More</a>
+                            </div>
+                            <div class="highlightNav">
+                                <button class="highlightBtn left">
+                                    <span class="material-symbols-outlined">chevron_left</span>
+                                </button>
+                                <button class="highlightBtn right">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
 
                     
                 </div>
             </div>
         </div>
-        <div class="projectAllHeader">
+        <div class="projectHeaderWrapper">
+            <!-- <img src="{{asset('Images/projectBackground.png')}}" alt=""> -->
+                <div class="breadCrumbs">
+                    <a href="/">Home</a>
+                    <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                    <a href="">Impact</a>
+                </div>
+                <div class="projectHeaderContent">
+                    <h1>Highlight Projects</h1>
+                    <p>Explore innovative student projects that bridge creativity and technology. From AI-driven solutions to blockchain applications and interactive design prototypes, these projects showcase GCIT’s commitment to real-world learning and problem-solving that makes an impact.</p>
+                </div>
+        </div>
+     
+        <!-- <div class="projectAllHeader">
             <h1>Capstone Projects</h1>
             <p>At GCIT, capstone projects represent the culmination of students’ academic journeys — a chance to transform classroom learning into practical, real-world solutions. These projects highlight creativity, technical excellence, and innovation across diverse fields such as Full Stack Development, AI & Data Science, Blockchain, Cybersecurity, and Interactive Design.</p>
-        </div>
+        </div> -->
         <div class="section eventsWrapper">
              <button class="filterToggle">
             <span class="material-symbols-outlined">filter_list</span>

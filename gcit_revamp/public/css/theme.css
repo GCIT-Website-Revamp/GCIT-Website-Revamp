@@ -102,7 +102,12 @@ body.no-scroll {
 p{
     text-align: justify;
 }
-
+.sectionWrapper{
+    max-width: 1600px;
+    margin: 0px auto;
+    padding-inline: 1.5rem;
+    padding: 0 var(--padding-sides);
+}
 /* ================================
    BUTTONS
    ================================ */

@@ -295,7 +295,9 @@ Route::get('/course', function () {
     $courses = Course::orderBy('name', 'ASC')->get();
     return view('user.courseList', compact('courses'));
 });
-
+Route::get('/search', function () {
+    return view('user.search');
+});
 Route::get('/post/{type}/{id}', function ($type, $id) {
     $event = null;
     $announcement = null;

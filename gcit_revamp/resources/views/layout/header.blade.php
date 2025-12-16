@@ -77,10 +77,7 @@
                 <img src="{{ asset('images/logo/logo2.png') }}" alt="">
             </a>        </div>
         <div class="miniNavContent">
-            <div class="searchWrapper">
-                <input type="text" class="searchInput" placeholder="Search..." />
-                <span class="material-symbols-outlined searchIcon">search</span>
-            </div>      
+                
             <label for="miniNavToggle" class = "toggleSpan">
                 <span class="material-symbols-outlined">menu</span>
             </label>
@@ -92,6 +89,12 @@
         <label for="miniNavToggle" class = "toggleSpan">
             <span class="material-symbols-outlined">close</span>
         </label>
+    </div>
+    <div class="searchContainer">
+        <div class="searchWrapper">
+            <input type="text" class="searchInput" placeholder="Search..." />
+            <span class="material-symbols-outlined searchIcon">search</span>
+        </div>  
     </div>
     <div class="miniNavBody">
         <div class="miniLinkWrapper">

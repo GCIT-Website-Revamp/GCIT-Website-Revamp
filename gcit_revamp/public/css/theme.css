@@ -83,7 +83,7 @@ html, body {
     padding: 0;
     background: var(--color-bg);
     color: var(--color-text);
-
+    width: 100%;
     font-family: var(--font-text);
     font-size: var(--font-size-md);
     overflow-x: hidden;
@@ -364,10 +364,7 @@ p{
 
 @media (min-width: 1400px) {
     /* 2K monitors */
-    :root {
-        padding
-
-    }
+   
 }
 
 

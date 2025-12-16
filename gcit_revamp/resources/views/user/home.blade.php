@@ -83,7 +83,7 @@
                 </div>
                 <div class="cardContent">
                     <h1>Integrated Real-World Pedagogy </h1>
-                    <p>We integrate industry challenges directly into our curriculum, allowing students to tackle authentic problems through capstone projects and partnerships.</p>
+                    <p>We integrate industry challenges directly into our curriculum, allowing students to tackle authentic problems through capstone projects and experiential learning</p>
                 </div>
             </div>
             <div class="card">

@@ -52,7 +52,7 @@
                     
             </div>
             <div class="searchWrapper">
-                <input type="text" class="searchInput" placeholder="Search..." />
+                <input type="text" class="searchInput" placeholder="Search..." data-search-input/>
                 <span class="material-symbols-outlined searchIcon">search</span>
             </div>        
         </div> 
@@ -92,7 +92,7 @@
     </div>
     <div class="searchContainer">
         <div class="searchWrapper">
-            <input type="text" class="searchInput" placeholder="Search..." />
+            <input type="text" class="searchInput" placeholder="Search..." data-search-input/>
             <span class="material-symbols-outlined searchIcon">search</span>
         </div>  
     </div>

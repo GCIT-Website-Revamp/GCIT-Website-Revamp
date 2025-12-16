@@ -33,8 +33,12 @@ use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\ICTController;
 use App\Http\Controllers\WelfareController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SearchController;
 
 Route::middleware('web')->group(function () {
+    //search
+    Route::get('/api/search', [SearchController::class, 'search']);
+
     // Auth
     Route::post('/api/login', [AuthController::class, 'login'])->name('login');
     Route::post('/api/logout', [AuthController::class, 'logout'])->name('logout');
@@ -456,3 +460,7 @@ Route::get('/project', function () {
     $projects = Project::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
     return view('user.project', compact('projects'));
 });
+
+Route::get('/search', function () {
+    return view('user.search');
+})->name('search');

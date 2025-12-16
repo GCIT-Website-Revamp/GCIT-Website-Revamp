@@ -36,8 +36,8 @@
         </div>
     </div>
 
-    <div class="pageContentWrapper">
-        <div class="section aboutGCIT">
+    <div class="">
+        <div class="section aboutGCIT sectionWrapper">
             <div class="header">
                 <div class="heading-row">
                     <h1 class="main-header">
@@ -67,7 +67,7 @@
                 </a>
             </div>
         </div>
-        <div class="section cardWrapper">
+        <div class="section cardWrapper sectionWrapper">
             <div class="card">
                 <div class="iconWrapper">
                     <x-icons.connect class="connect-icon" />
@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="courseWrapper">
-            <div class="header">
+            <div class="header sectionWrapper">
                 <h1>Our Two <br> Anchoring Schools</h1>
             </div>
             <div class="courseContent">

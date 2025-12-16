@@ -9,7 +9,6 @@
     position: relative;
     height: 100%;
     width: 100%;
-    max-width: 1600px;
      margin: 0 auto;        /* centers horizontally */
   padding-inline: 1.5rem;/* prevents edge touching on small screens */
 }
@@ -18,6 +17,7 @@
 .bannerContent .media{
     height: 100%;
     width: 100%;
+
     max-width: 100%;
 }
 .heroBannerWrapper .bannerContent .media img,
@@ -34,6 +34,7 @@
 .descriptionWrapper{
     position: absolute;
     bottom: 100px;
+    max-width: 1600px;
     
     left: var(--padding-sides);
     z-index: 10;
@@ -146,6 +147,9 @@
     transition: all .1 ease-in-out !important;
 }
 
+.aboutGCIT{
+    padding-top: clamp(60px, 10vw, 120px);
+}
 .aboutGCIT .header {
     display: flex;
     flex-direction: column;
@@ -190,7 +194,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
-    margin: clamp(60px, 10vw, 140px) 0;
+    margin: clamp(60px, 10vw, 140px) auto;
     align-items: center;
 }
 

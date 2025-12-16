@@ -66,4 +66,27 @@
         <p>Copyright © Gyalpozhing College of Information Technology 2025. All Rights Reserved.</p>
     </div>
    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.querySelector('[data-search-input]');
+            const icon = document.querySelector('.searchIcon');
+
+            if (!input || !icon) return;
+
+            const triggerSearch = () => {
+                const q = input.value.trim();
+                if (q.length < 2) return;
+
+                window.location.href = `/search?q=${encodeURIComponent(q)}`;
+            };
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    triggerSearch();
+                }
+            });
+
+            icon.addEventListener('click', triggerSearch);
+        });
+    </script>
 </footer>

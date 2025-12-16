@@ -77,3 +77,34 @@ input:focus {
     display: flex;
     align-items: center;
 }
+
+.searchPageBar{
+    display: flex;
+}
+
+.searchPageBar span{
+    color: white;
+}
+.searchResult{
+    min-height: 226px;
+}
+.notFoundBox{
+    font-size: 20px;
+    font-weight: 500;
+    
+
+}
+
+@media (max-width: 800px) {
+    /* small screens */
+    .searchHeader .sectionWrapper{
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: flex-start;
+     padding-bottom: 20px;
+
+}
+}
+
+
+       

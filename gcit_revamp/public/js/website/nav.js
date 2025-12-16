@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ------------------------------------------
-       DESKTOP DROPDOWNS (UNCHANGED)
-    ------------------------------------------ */
+    /* =========================================================
+       DESKTOP DROPDOWNS + EXTENDER
+    ========================================================= */
     const dropdowns = document.querySelectorAll(".dropDownWrapper");
     const extender = document.querySelector(".dropDownExtender");
 
@@ -37,9 +37,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function openDropdown(menu, wrapper) {
         wrapper.classList.add("activeNav");
+
         menu.style.visibility = "visible";
         menu.style.pointerEvents = "auto";
-        menu.style.opacity = "1";
+        menu.style.opacity = "0";
+
+        // Force layout so height is measurable
+        menu.getBoundingClientRect();
+
+        const dropdownHeight = menu.offsetHeight;
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const adjustedHeight = dropdownHeight - (2 * rem);
+
+        extender.style.height = adjustedHeight + "px";
+
+        requestAnimationFrame(() => {
+            menu.style.opacity = "1";
+        });
 
         activeDropdown = menu;
         activeWrapper = wrapper;
@@ -47,6 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeDropdown(menu, wrapper) {
         wrapper.classList.remove("activeNav");
+        extender.style.height = "0px";
+
         menu.style.opacity = "0";
         menu.style.pointerEvents = "none";
 
@@ -58,87 +74,92 @@ document.addEventListener("DOMContentLoaded", () => {
         activeWrapper = null;
     }
 
-    /* ------------------------------------------
-       MOBILE MAIN NAV (TOP SLIDE)
-    ------------------------------------------ */
+    /* =========================================================
+       MOBILE MAIN NAV (TOP SLIDE – TRANSFORM ONLY)
+    ========================================================= */
     const topNav = document.getElementById("miniTopNav");
     const toggle = document.getElementById("miniNavToggle");
 
-    const menuItems = topNav.querySelectorAll("label, a, h1");
+    if (topNav && toggle) {
+        const menuItems = topNav.querySelectorAll("label, a, h1");
 
-    gsap.set(topNav, { y: "-100%" });
+        gsap.set(topNav, { y: "-100%" });
 
-    const openTL = gsap.timeline({ paused: true });
-
-    openTL
-        .to(topNav, {
-            y: 0,
-            duration: 0.35,
-            ease: "power2.out"
-        })
-        .from(menuItems, {
-            y: -10,
-            opacity: 0,
-            stagger: 0.06,
-            duration: 0.25,
-            ease: "power2.out"
-        }, "-=0.1");
-
-    toggle.addEventListener("change", () => {
-        toggle.checked ? openTL.restart() : openTL.reverse();
-        updateScrollLock();
-    });
-
-    /* ------------------------------------------
-       SUBMENUS (RIGHT → CENTER)
-    ------------------------------------------ */
-    const subMenus = {
-        miniAcademics: document.querySelector(".miniAcademicsWrapper"),
-        miniAbout: document.querySelector(".miniAboutWrapper"),
-        miniStudents: document.querySelector(".miniStudentWrapper"),
-        miniTechImpact: document.querySelector(".miniTechImpactWrapper"),
-        miniUpdates: document.querySelector(".miniUpdatesWrapper")
-    };
-
-    const submenuTL = {};
-
-    Object.keys(subMenus).forEach(id => {
-        const submenu = subMenus[id];
-        const checkbox = document.getElementById(id);
-        if (!submenu || !checkbox) return;
-
-        gsap.set(submenu, { x: "100%" });
-
-        submenuTL[id] = gsap.timeline({ paused: true })
-            .to(submenu, {
-                x: 0,
+        const openTL = gsap.timeline({ paused: true })
+            .to(topNav, {
+                y: 0,
                 duration: 0.35,
                 ease: "power2.out"
             })
-            .from(submenu.querySelectorAll("h1, a, label"), {
-                x: 20,
+            .from(menuItems, {
+                y: -10,
                 opacity: 0,
-                stagger: 0.05,
+                stagger: 0.06,
                 duration: 0.25,
                 ease: "power2.out"
-            }, "-=0.15");
+            }, "-=0.1");
 
-        checkbox.addEventListener("change", () => {
-            checkbox.checked
-                ? submenuTL[id].restart()
-                : gsap.to(submenu, {
-                    x: "100%",
-                    duration: 0.25,
-                    ease: "power2.in"
-                });
-
+        toggle.addEventListener("change", () => {
+            toggle.checked ? openTL.restart() : openTL.reverse();
             updateScrollLock();
         });
-    });
+    }
 
-    /* ------------------------------------------
-       SCROLL LOCK (SOLID & SAFE)
-    ------------------------------------------ */
+   /* =========================================================
+   SUBMENUS (RIGHT → CENTER USING TRANSFORMS)
+   UPDATED FOR NEW MOBILE TABS
+========================================================= */
+const subMenus = {
+    miniStudy: document.querySelector(".miniStudyWrapper"),
+    miniAbout: document.querySelector(".miniAboutWrapper"),
+    miniInitiative: document.querySelector(".miniInitiativeWrapper")
+};
+
+const submenuTL = {};
+
+Object.keys(subMenus).forEach(id => {
+    const submenu = subMenus[id];
+    const checkbox = document.getElementById(id);
+
+    if (!submenu || !checkbox) {
+        console.warn(`Missing submenu or checkbox for ${id}`);
+        return;
+    }
+
+    // Start off-screen
+    gsap.set(submenu, { x: "100%" });
+
+    submenuTL[id] = gsap.timeline({ paused: true })
+        .to(submenu, {
+            x: 0,
+            duration: 0.35,
+            ease: "power2.out"
+        })
+        .from(submenu.querySelectorAll("h1, a, label"), {
+            x: 20,
+            opacity: 0,
+            stagger: 0.05,
+            duration: 0.25,
+            ease: "power2.out"
+        }, "-=0.15");
+
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            submenuTL[id].restart();
+        } else {
+            gsap.to(submenu, {
+                x: "100%",
+                duration: 0.25,
+                ease: "power2.in"
+            });
+        }
+        updateScrollLock();
+    });
+});
+
+    /* =========================================================
+       SCROLL LOCK (GLOBAL)
+    ========================================================= */
     let scrollPosition = 0;
 
     function lockScroll() {
@@ -156,21 +177,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateScrollLock() {
-        const anySubmenuOpen = Object.keys(subMenus)
-            .some(id => document.getElementById(id)?.checked);
-        const mainNavOpen = toggle.checked;
+    const anySubmenuOpen = Object.keys(subMenus)
+        .some(id => document.getElementById(id)?.checked);
 
-        (anySubmenuOpen || mainNavOpen) ? lockScroll() : unlockScroll();
-    }
+    const mainNavOpen = document.getElementById("miniNavToggle")?.checked;
 
-    /* ------------------------------------------
+    (anySubmenuOpen || mainNavOpen) ? lockScroll() : unlockScroll();
+}
+
+
+    /* =========================================================
        BREAKPOINT SAFETY
-    ------------------------------------------ */
+    ========================================================= */
     const MOBILE_BREAKPOINT = 780;
 
     window.addEventListener("resize", () => {
         if (window.innerWidth >= MOBILE_BREAKPOINT) {
-            toggle.checked = false;
+            if (toggle) toggle.checked = false;
             Object.keys(subMenus).forEach(id => {
                 const cb = document.getElementById(id);
                 if (cb) cb.checked = false;
@@ -179,30 +202,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-});
+    /* =========================================================
+       SEARCH UI
+    ========================================================= */
+    const searchWrapper = document.querySelector(".searchWrapper");
+    const searchInput = document.querySelector(".searchInput");
 
+    if (searchWrapper && searchInput) {
+        searchWrapper.addEventListener("click", (e) => {
+            searchWrapper.classList.add("active");
+            searchInput.focus();
+            e.stopPropagation();
+        });
 
-// Search js
-const searchWrapper = document.querySelector(".searchWrapper");
-const searchInput = document.querySelector(".searchInput");
+        document.addEventListener("click", () => {
+            searchWrapper.classList.remove("active");
+            searchInput.value = "";
+        });
 
-// Open search
-searchWrapper.addEventListener("click", (e) => {
-    searchWrapper.classList.add("active");
-    searchInput.focus();
-    e.stopPropagation();
-});
-
-// Close on outside click
-document.addEventListener("click", () => {
-    searchWrapper.classList.remove("active");
-    searchInput.value = "";
-});
-
-// Close when pressing ESC
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-        searchWrapper.classList.remove("active");
-        searchInput.value = "";
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                searchWrapper.classList.remove("active");
+                searchInput.value = "";
+            }
+        });
     }
+
 });

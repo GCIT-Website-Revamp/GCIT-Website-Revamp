@@ -5,15 +5,19 @@
 
 
 nav {
-    position: sticky;
-    top: -5px;
-    background-color: var(--color-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    min-height: 75px;
     z-index: 9999;
-       
-
+    will-change: transform;
+    background-color: var(--color-bg);
+    min-height: 75px;
 }
+nav {
+   
+}
+
 
 .navContent {
     display: flex;
@@ -469,3 +473,4 @@ nav.mini h1, .miniTopNav g1{
 @media (min-width: 1400px) {
     /* 2K monitors */
 }
+

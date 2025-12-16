@@ -8,8 +8,14 @@
             <div class="overlay"></div>
         </div>
         <div class="bannerContentWrapper">
+             <div class="heroBackground">
+                <div class="media">
+                    <video class="hero-video" autoplay muted loop playsinline></video>
+                        <img class="hero-image" style="display:none;">
+                    <div class="overlay"></div>
+                </div>
+            </div>
             <div class="contentContainr">
-
                 <div class="bannerContent">
                     <div class="media">
                         <video class="hero-video" autoplay muted loop playsinline></video>
@@ -21,16 +27,19 @@
                     </div>
                 </div>
             </div>
-            <div class="contentSlider">
-                <div class="leftBtn">
-                    <span class="material-symbols-outlined">expand_circle_right</span>
-                </div>
-               <div class="sliderWrapper">
-                    <div class="sliderTrack"></div>
-                </div>
+            <div class="sectionWrapper">
 
-                <div class="rightBtn">
-                    <span class="material-symbols-outlined">expand_circle_right</span>
+                <div class="contentSlider">
+                    <div class="leftBtn">
+                        <span class="material-symbols-outlined">expand_circle_right</span>
+                    </div>
+                    <div class="sliderWrapper">
+                        <div class="sliderTrack"></div>
+                    </div>
+                    
+                    <div class="rightBtn">
+                        <span class="material-symbols-outlined">expand_circle_right</span>
+                    </div>
                 </div>
             </div>
         </div>

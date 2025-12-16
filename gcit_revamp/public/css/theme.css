@@ -224,14 +224,14 @@ p{
 }
 
 /* SUBTITLE (below titles, intros, etc.) */
-.subtitle {
+/* .subtitle {
     font-family: var(--font-text);
     font-weight: 300;
     margin-top: 1rem;
     line-height: 1.6;
     width: 100%;
     font-size: clamp(0.9rem, 0.6vw + 0.7rem, 1.1rem);
-}
+} */
 
 /* BODY TEXT (normal paragraphs) */
 .text-body {

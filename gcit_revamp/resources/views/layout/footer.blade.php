@@ -67,9 +67,11 @@
     </div>
    </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const input = document.querySelector('[data-search-input]');
-            const icon = document.querySelector('.searchIcon');
+    document.addEventListener('DOMContentLoaded', () => {
+
+        document.querySelectorAll('.searchWrapper').forEach(wrapper => {
+            const input = wrapper.querySelector('[data-search-input]');
+            const icon  = wrapper.querySelector('.searchIcon');
 
             if (!input || !icon) return;
 
@@ -88,5 +90,7 @@
 
             icon.addEventListener('click', triggerSearch);
         });
+
+    });
     </script>
 </footer>

@@ -5,10 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const projectBanner = wrapper.querySelector("#projectBanner");
     const activeBanner = wrapper.querySelector("#activeBanner");
 
-    // Collect ALL title elements (desktop + mobile)
+    // Title text elements
     const titleEls = wrapper.querySelectorAll(".homeSliderTrack .homeSlide");
 
-    // Collect ALL arrow buttons (desktop + mobile)
+    // Title <a> wrappers
+    const titleLinks = wrapper.querySelectorAll(".homeSliderTrack a");
+
+    // View Details links
+    const viewDetailLinks = wrapper.querySelectorAll(".prjLink a");
+
+    // Arrow buttons
     const leftBtns = wrapper.querySelectorAll(".prjSlider .left");
     const rightBtns = wrapper.querySelectorAll(".prjSlider .right");
 
@@ -19,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const backgrounds = projectData.map(p => `/storage/${p.image}`);
     const titles = projectData.map(p => p.name);
+    const urls = projectData.map(p => `/post/project/${p.id}`);
 
     let index = 0;
 
@@ -35,10 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* -----------------------------
-       Update ALL titles (desktop + mobile)
+       Update titles + links
     ----------------------------- */
-    function updateText() {
-        titleEls.forEach(titleEl => {
+    function updateTextAndLinks() {
+        titleEls.forEach((titleEl, i) => {
             titleEl.style.opacity = 0;
 
             setTimeout(() => {
@@ -46,20 +53,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 titleEl.style.opacity = 1;
             }, 150);
         });
+
+        // Update title links
+        titleLinks.forEach(link => {
+            link.href = urls[index];
+        });
+
+        // Update View Details links
+        viewDetailLinks.forEach(link => {
+            link.href = urls[index];
+        });
     }
 
     /* -----------------------------
        Navigation
     ----------------------------- */
     function nextSlide() {
-        index = (index + 1) % titles.length;
-        updateText();
+        index = (index + 1) % projectData.length;
+        updateTextAndLinks();
         updateSlideBackground();
     }
 
     function prevSlide() {
-        index = (index - 1 + titles.length) % titles.length;
-        updateText();
+        index = (index - 1 + projectData.length) % projectData.length;
+        updateTextAndLinks();
         updateSlideBackground();
     }
 
@@ -69,6 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /* -----------------------------
        INITIAL LOAD
     ----------------------------- */
-    updateText();
+    updateTextAndLinks();
     updateSlideBackground();
 });

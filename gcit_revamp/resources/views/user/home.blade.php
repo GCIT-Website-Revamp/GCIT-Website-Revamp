@@ -68,7 +68,7 @@
                 <div class="ctaBtn">
                     <a href="/about">Learn More</a>
                 </div>
-                <a href="/resources/Admission" class = "secondaryCta">
+                <a href="https://www.rub.edu.bt/index.php/admission-criteria-and-tuition-fee-for-the-academic-year-2024/" class = "secondaryCta">
                     Admissions
                     <span class="material-symbols-outlined">
                     keyboard_arrow_right

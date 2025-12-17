@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-    <div class="otherCourseContainer otherDepartment">
+    <div class="otherCourseContainer paddingContainer otherDepartment">
                  <div class="header">
                      <h1>More on GCIT</h1>
                  </div>
@@ -53,7 +53,7 @@
                         <a href="/department/Information & Communication Technology">Information & Communication Technology</a>
                         <a href="/department/School Affairs">School Affairs</a>
                         <a href="/department/Student Affairs">Student Affairs</a>
-                    </div>
+                </div>
     </div>
 </div>
 

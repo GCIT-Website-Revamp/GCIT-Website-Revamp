@@ -14,7 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let activeIndex = 0;
     let viewStart = 0;
-    const VISIBLE = 3;
+    function getVisibleCount() {
+    return window.innerWidth <= 800 ? 1 : 3;
+}
+
+    let VISIBLE = getVisibleCount();
 
     // -----------------------------------------------------------
     // FETCH MEDIA FROM LARAVEL
@@ -207,5 +211,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         updateSliderPosition();
     }
+
+    window.addEventListener("resize", () => {
+    VISIBLE = getVisibleCount();
+    applyWidths();
+    updateSliderPosition();
+});
+
 
 });

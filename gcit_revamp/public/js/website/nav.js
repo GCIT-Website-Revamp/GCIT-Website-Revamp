@@ -86,21 +86,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (topNav && toggle) {
         const menuItems = topNav.querySelectorAll("label, a, h1");
 
-        gsap.set(topNav, { y: "-100%" });
+        gsap.set(topNav, { x: "100%" });
 
-        const openTL = gsap.timeline({ paused: true })
-            .to(topNav, {
-                y: 0,
-                duration: 0.35,
-                ease: "power2.out"
-            })
-            .from(menuItems, {
-                y: -10,
-                opacity: 0,
-                stagger: 0.06,
-                duration: 0.25,
-                ease: "power2.out"
-            }, "-=0.1");
+       const openTL = gsap.timeline({ paused: true })
+        .to(topNav, {
+            x: 0,
+            duration: 0.35,
+            ease: "power2.out"
+        })
+        .from(menuItems, {
+            x: 20,
+            opacity: 0,
+            stagger: 0.06,
+            duration: 0.25,
+            ease: "power2.out"
+        }, "-=0.1");
 
         toggle.addEventListener("change", () => {
             toggle.checked ? openTL.restart() : openTL.reverse();

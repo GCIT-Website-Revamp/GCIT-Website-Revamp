@@ -211,7 +211,7 @@ nav.mini, .miniTopNav, .miniSubLinkContainer {
     display: flex;
     transition: none;
 }
-nav.mini h1, .miniTopNav g1{
+nav.mini h1, .miniTopNav h1{
     transition: none;
 
 }
@@ -229,7 +229,7 @@ nav.mini h1, .miniTopNav g1{
     width: 100%;
     background-color: white;
     z-index: 999999999;
-    transform: translateY(-100%); /* ✅ hidden via transform */
+    transform: translateX(-100%); /* ✅ hidden via transform */
     will-change: transform;
 }
 

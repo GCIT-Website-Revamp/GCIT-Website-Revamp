@@ -327,7 +327,7 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
         // Latest events
         $latestEvents = Event::orderBy('created_at', 'desc')
             ->where('display', '=', "true")
-            ->take(4)
+            ->take(3)
             ->get();
     }
 
@@ -344,7 +344,7 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
         // Latest announcements
         $latestAnnouncements = Announcement::orderBy('created_at', 'desc')
             ->where('display', '=', "true")
-            ->take(4)
+            ->take(3)
             ->get();
     }
 
@@ -361,7 +361,7 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
         // Latest projects
         $latestProjects = Project::orderBy('created_at', 'desc')
             ->where('display', '=', "true")
-            ->take(4)
+            ->take(3)
             ->get();
     }
 

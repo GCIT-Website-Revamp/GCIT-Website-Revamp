@@ -7,15 +7,25 @@
             <div class="projectContent">
                 <div class="highlightWrapper">
                     <!-- <div class="blackBar"></div> -->
-                    <div class="projectHighlight">
+                    <div class="projectHighlight"
+                        id="projectHighlight"
+                        data-projects='@json($projects)'>
+
                         <div class="highlight backgroundWrapper">
                             <div class="overlay"></div>
-                            <img src="{{asset('images/projects/dummyImg.png')}}" alt="">
+
+                            <img id="heroImage"
+                                src=""
+                                alt="">
+
                             <div class="content">
-                                <h1>Finance Application</h1>
-                                <p>Driving Bhutan’s digital transformation through excellence in education, research, and technology.</p>
-                                <a href="">Explore More</a>
+                                <h1 id="heroTitle"></h1>
+                                <p id="heroDesc">
+                                   
+                                </p>
+                                <a id="heroLink" href="#">Explore More</a>
                             </div>
+
                             <div class="highlightNav">
                                 <button class="highlightBtn left">
                                     <span class="material-symbols-outlined">chevron_left</span>
@@ -24,10 +34,8 @@
                                     <span class="material-symbols-outlined">chevron_right</span>
                                 </button>
                             </div>
-
-                    
-                </div>
-            </div>
+                        </div>
+                    </div>
         </div>
         <div class="projectHeaderWrapper">
             <!-- <img src="{{asset('Images/projectBackground.png')}}" alt=""> -->

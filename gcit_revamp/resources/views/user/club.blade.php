@@ -9,7 +9,7 @@
         <div class="overlay"></div>
         <img src="{{ asset('images/pageBanner.png') }}" alt="">
     </div>
-    <div class="bannerContent">
+    <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
             <a href="">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
@@ -23,12 +23,18 @@
 </div>
 <div class="pageContentWrapper">
     <div class="section eventsWrapper">
+        <button class="filterToggle">
+                <span class="material-symbols-outlined">filter_list</span>
+                Filter
+                </button>
         <div class="mainContent courseContent">
             @forelse ($clubs as $index => $club)
             <div class="card">
-                <div class="cardContent">
+                <div class="cardContent clubContent">
                     <h1>{{ $club->name }}</h1>
-                    <p class = "multi-truncate">{!! Str::limit($club->description, 550) !!}</p>
+                    <p class="multi-truncate">
+                        {{ Str::limit(strip_tags($club->description), 550) }}
+                    </p>
                     <a href="/clubDetails/{{ $club->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                 </div>
             </div>
@@ -36,8 +42,9 @@
                 <p>No clubs found.</p>
             @endforelse
         </div>
-        <div class="filterWrapper">
-            <div class="headerWrapper">
+        <div class="filterColumn">
+            <div class="filterWrapper">
+                <div class="headerWrapper">
                 <h1>Filters</h1>
             </div>
             <div class="filterContent">
@@ -45,7 +52,7 @@
                     <h1>Courses by Schools</h1>
                 </div>
                 <div class="filterContainer">
-
+                    
                     <div class="filter">
                         <input type="checkbox">
                         <p>All Courses</p>
@@ -60,6 +67,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>

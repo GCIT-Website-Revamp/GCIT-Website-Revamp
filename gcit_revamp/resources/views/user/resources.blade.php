@@ -9,7 +9,7 @@
         <div class="overlay"></div>
         <img src="{{ asset('images/pageBanner.png') }}" alt="">
     </div>
-    <div class="bannerContent">
+    <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
             <a href="">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-<div class="pageContentWrapper ">
+<div class="pageContentWrapper">
     <div class="section">
         <div class="postWrapper departmentWrapper">
             <div class="post">

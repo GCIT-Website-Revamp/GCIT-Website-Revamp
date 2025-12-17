@@ -57,6 +57,7 @@
 <script type = "module" src = "{{ asset('js/website/projectSlider.animation.js') }}"></script>
 <script src = "{{ asset('js/website/filter.js') }}"></script>
 <script type = "module" src = "{{ asset('js/website/projectPageSlider.js') }}"></script>
+<script type = "module" src = "{{ asset('js/website/post.js') }}"></script>
 
 <div class="filterOverlay"></div>
 

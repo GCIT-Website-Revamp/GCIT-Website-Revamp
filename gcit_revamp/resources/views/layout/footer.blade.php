@@ -1,5 +1,5 @@
 <footer>
-   <div class="footerContentWrapper">
+   <div class="footerContentWrapper sectionWrapper">
     <div class="logoContentWrapper">
         <div class="logoWrapper">
             <img src="{{ asset('images/logo/logoWhite.png') }}" alt="">
@@ -55,7 +55,7 @@
 
     </div>
    </div>
-   <div class="subContentWrapper">
+   <div class="subContentWrapper sectionWrapper">
      <div class="socialWrapper">
                         <a href=""><i class="fa-brands fa-instagram"></i></a>
                         <a href=""><i class="fa-brands fa-linkedin"></i></a>

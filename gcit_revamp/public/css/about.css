@@ -55,7 +55,9 @@
     width: 100vw;
     background-color: #F3F3F3;
 }
-
+.aboutContentWrapper .otherDepartment{
+    padding: 0 var(--padding-sides)
+}
 .aboutDetails{
     position: relative;
     z-index: 10;;

@@ -25,7 +25,7 @@
     <div class="eventsWrapper">
         <button class="filterToggle">
             <span class="material-symbols-outlined">filter_list</span>
-        Filter Courses
+        Filter
         </button>
         <div class="mainContent announcementContent">
             @forelse ($announcements as $index => $announcement)
@@ -43,11 +43,13 @@
                 <p>No Announcements Yet</p>
             @endforelse
         </div>
-        <div class="filterWrapper">
-             <div class="filterCloseWrapper">
-                <button class="filterClose">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
+        <div class="filterColumn">
+
+            <div class="filterWrapper">
+                <div class="filterCloseWrapper">
+                    <button class="filterClose">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
             </div>
             <div class="headerWrapper">
                 <h1>Filters</h1>
@@ -57,7 +59,7 @@
                     <h1>Categories</h1>
                 </div>
                 <div class="filterContainer">
-
+                    
                     <div class="filter">
                         <input type="checkbox">
                         <p>All Updates</p>
@@ -76,6 +78,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>

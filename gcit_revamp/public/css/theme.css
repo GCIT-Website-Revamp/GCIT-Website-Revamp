@@ -64,8 +64,14 @@
     /* padding */
     --padding-sides: clamp(20px, 3vw, 120px);
     --btn-padding: .8rem 2.1rem;
+
+      --nav-visible-height: 100px;
+
 }
 
+h1, p, a, i{
+    font-style: normal;
+}
 /* ================================
    BASE STYLING
    ================================ */
@@ -330,18 +336,19 @@ p{
     -webkit-line-clamp: 3; /* number of lines to show */
     -webkit-box-orient: vertical;
     overflow: hidden;
-        display: none;
     
 }
 body.filter-open {
     overflow: hidden;      /* lock scroll */
     height: 100vh;
 }
-
+.noPadding{
+    padding-inline: 0 !important;
+}
 .pageContentWrapper{
     max-width:1600px;
-      margin: 0 auto;        /* centers horizontally */
-  padding-inline: 1.5rem;/* prevents edge touching on small screens */
+    margin: 0 auto;        /* centers horizontally */
+    padding-inline: 1.5rem;/* prevents edge touching on small screens */
 }
 
 .filterOverlay {
@@ -365,6 +372,9 @@ body.filter-open .filterOverlay {
 }
 body.filter-open .pageContentWrapper {
     overflow: hidden;
+}
+.paddingContainer{
+    padding: 0 var(--padding-sides) !important;
 }
 @media (min-width: 576px) {
     /* small screens */

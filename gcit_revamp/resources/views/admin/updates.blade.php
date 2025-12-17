@@ -200,7 +200,7 @@
                                           <td>{{ $announcements->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td style="max-width:100px;">{{ $announcemnet->name }}</td>
                                           <td style="max-width:80px;">{{ $announcemnet->date }}</td>
-                                          <td style="max-width:340px;">{!! Str::limit($announcemnet->description, 450) !!}</td>
+                                          <td style="max-width:340px;">{!! Str::limit($announcemnet->description, 100) !!}</td>
                                           <td style="max-width:80px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-announcemnet-btn"

@@ -92,7 +92,7 @@
                     <div class="suggestion">
                         <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
                         <h1>{{ $item->name }}</h1>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                        <a href="/post/announcement/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                     </div>
                     @empty
                     @endforelse
@@ -103,7 +103,18 @@
                     <div class="suggestion">
                         <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
                         <h1>{{ $item->name }}</h1>
-                        <a href=""><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                        <a href="/post/events/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                    </div>
+                    @empty
+                    @endforelse
+                @endif
+
+                @if($latestProjects)
+                    @forelse ($latestProjects as $index => $item)
+                    <div class="suggestion">
+                        <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
+                        <h1>{{ $item->name }}</h1>
+                        <a href="/post/project/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                     </div>
                     @empty
                     @endforelse

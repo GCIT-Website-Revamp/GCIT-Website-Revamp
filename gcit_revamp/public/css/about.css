@@ -4,7 +4,8 @@
 }
 
 .preAboutHeader{
-    padding: 100px var(--padding-sides) 
+    padding: 100px var(--padding-sides);
+    margin-top: 120px;
 }
 
 .aboutContentWrapper{
@@ -139,12 +140,15 @@ text-align: center;
     .aboutContentWrapper .otherCourseContainer {
         max-width: 100%;
         width: 100%;
-        padding: 20px var(--padding-sides);
+        padding: 20px 0;
         height: fit-content;
+    }
+    .aboutContent{
+        padding: 0;
     }
     .otherCourseContainer{
         
-        margin-bottom: 100px;
+        margin-bottom: 30px;
     }
 
     .aboutHeader h1 {
@@ -164,15 +168,20 @@ text-align: center;
 @media (max-width: 768px) {
 
     .preAboutHeader {
-        padding: 60px 1.5rem;
+        padding: 20px var(--padding-sides);
+        margin-top: 80px;
     }
 
     .aboutHeader {
-        padding: 0 1.5rem;
+        padding: 0 var(--padding-sides);
+        margin-bottom: 0;
     }
 
     .aboutDetailsWrapper {
         padding: 0 1.5rem;
+    }
+    .bgColorUnderlay{
+        height: 80% !important;
     }
 
     .aboutDetails img {
@@ -190,7 +199,7 @@ text-align: center;
     }
 
     .mottoWrapper {
-        margin: 100px 0;
+        margin: 60px 0;
         gap: 3rem;
         padding: 0 1.5rem;
     }

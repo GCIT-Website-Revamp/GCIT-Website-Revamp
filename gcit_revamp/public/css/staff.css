@@ -47,3 +47,17 @@
     display: flex;
     gap: clamp(20px, 4vw, 60px);
 }
+
+
+@media (max-width: 480px) {
+   
+    .staffProfileWrapper .staff{
+        width: 100%;
+    }
+   .staffProfileWrapper .staff img{
+    height: 100%;
+   }
+   .staffProfileWrapper{
+    flex-direction: column;
+   }
+}

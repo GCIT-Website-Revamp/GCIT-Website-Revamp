@@ -23,7 +23,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <title>@yield('title')</title>
 </head>
+
 <body>
+
 
 @include('layout.header')
 <div class="smooth-wrapper">
@@ -54,5 +56,8 @@
 <script type = "module" src = "{{ asset('js/website/detailsScroll.js') }}"></script>
 <script type = "module" src = "{{ asset('js/website/projectSlider.animation.js') }}"></script>
 <script src = "{{ asset('js/website/filter.js') }}"></script>
+
+<div class="filterOverlay"></div>
+
 </body>
 </html>

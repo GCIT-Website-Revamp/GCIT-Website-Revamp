@@ -259,7 +259,7 @@ nav.mini h1, .miniTopNav h1{
 }
 .miniQuickLinkWrapper{
     position: absolute;
-    bottom: 0;
+    bottom: 2rem;
     left: 0;
     widtH: 100%;
     height: fit-content;

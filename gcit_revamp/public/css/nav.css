@@ -34,7 +34,6 @@ nav {
 
 .dropDownWrapper {
     display: flex;
-    padding-top: 1rem;
     flex-direction: column;
     align-items: flex-start;
     position: relative; /* absolute dropdown anchor */
@@ -162,13 +161,12 @@ nav {
     justify-content: flex-end;
     cursor: pointer;
     transition: width 0.3s ease;
-    overflow: hidden;
+    overflow: visible;
     height: 40px;
 }
 
 .searchWrapper.active {
     width: 240px; /* expanded size */
-    border-bottom: 1px solid #4d4c4c;
 }
 
 .searchIcon {
@@ -188,6 +186,7 @@ nav {
     width: 0;
     background-color: transparent;
     opacity: 0;
+    display: none;
     border: none;
     outline: none;
     background-color: white;
@@ -201,6 +200,13 @@ nav {
 .searchWrapper.active .searchInput {
     width: 200px;
     opacity: 1;
+    height: 100%;
+    width: calc(100% - 50px);
+    display: block;
+    border: 1px solid var(--color-secondary);
+    border-right: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 nav.fullSize {

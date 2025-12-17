@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="cardContent">
                     <h1>{{ $club->name }}</h1>
-                    <p class = "multi-truncate">{!! Str::limit($club->description, 550) !!}</p>
+                    <p class = "multi-truncate">{!! Str::limit($club->description, 250) !!}</p>
                     <a href="/clubDetails/{{ $club->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                 </div>
             </div>

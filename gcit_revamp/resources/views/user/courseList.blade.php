@@ -43,27 +43,30 @@
                 <p>No courses found.</p>
             @endforelse
         </div>
-        <div class="filterWrapper">
-            <div class="filterCloseWrapper">
-                <button class="filterClose">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-            </div>
-            <div class="headerWrapper">
-                <h1>Filters</h1>
-            </div>
-            <div class="filterContent">
-                <div class="filterHeader">
-                    <h1>Courses by Schools</h1>
+        <div class="filterColumn">
+
+            <div class="filterWrapper">
+                <div class="filterCloseWrapper">
+                    <button class="filterClose">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
                 </div>
-                <div class="filterContainer">
-                    <div class="filter">
-                        <input type="checkbox" value = "School of Computer Science">
-                        <p>School of Computer Science</p>
+                <div class="headerWrapper">
+                    <h1>Filters</h1>
+                </div>
+                <div class="filterContent">
+                    <div class="filterHeader">
+                        <h1>Courses by Schools</h1>
                     </div>
-                    <div class="filter">
-                        <input type="checkbox" value = "School of Interactive Design and Development">
-                        <p>Interactive Design & Development</p>
+                    <div class="filterContainer">
+                        <div class="filter">
+                            <input type="checkbox" value = "School of Computer Science">
+                            <p>School of Computer Science</p>
+                        </div>
+                        <div class="filter">
+                            <input type="checkbox" value = "School of Interactive Design and Development">
+                            <p>Interactive Design & Development</p>
+                        </div>
                     </div>
                 </div>
             </div>

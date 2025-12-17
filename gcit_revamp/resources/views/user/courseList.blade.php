@@ -9,11 +9,11 @@
         <div class="overlay"></div>
         <img src="{{ asset('images/pageBanner.png') }}" alt="">
     </div>
-    <div class="bannerContent">
+    <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
             <a href="">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">Updates</a>
+            <a href="">Study</a>
         </div>
         <div class="contentWrapper">
             <h1>Courses</h1>
@@ -30,7 +30,7 @@
 
         <div class="mainContent courseContent">
             @forelse ($courses as $index => $course)
-            <div class="card">
+            <div class="card" data-tag = "{{$course->type}}">
                 <img src="{{ asset('storage/' . $course->image) }}" alt="">
                 <div class="cardContent">
                     <span class="coursePreHeader">{{ $course->type }}</span>
@@ -57,17 +57,12 @@
                     <h1>Courses by Schools</h1>
                 </div>
                 <div class="filterContainer">
-
                     <div class="filter">
-                        <input type="checkbox">
-                        <p>All Courses</p>
-                    </div>
-                    <div class="filter">
-                        <input type="checkbox">
+                        <input type="checkbox" value = "School of Computer Science">
                         <p>School of Computer Science</p>
                     </div>
                     <div class="filter">
-                        <input type="checkbox">
+                        <input type="checkbox" value = "School of Interactive Design and Development">
                         <p>Interactive Design & Development</p>
                     </div>
                 </div>

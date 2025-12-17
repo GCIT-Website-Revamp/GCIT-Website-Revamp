@@ -349,6 +349,7 @@ body.filter-open {
     max-width:1600px;
     margin: 0 auto;        /* centers horizontally */
     padding-inline: 1.5rem;/* prevents edge touching on small screens */
+    min-height: 600px;
 }
 
 .filterOverlay {

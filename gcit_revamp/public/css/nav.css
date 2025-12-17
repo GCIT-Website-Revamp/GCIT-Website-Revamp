@@ -253,7 +253,7 @@ nav.mini h1, .miniTopNav h1{
 .miniNavBody{
     display: flex;
     flex-direction: column;
-    height: calc(100% - 80px);
+    height: calc(100% - 266px);
     justify-content: space-between;
 }
 .miniLinkWrapper{

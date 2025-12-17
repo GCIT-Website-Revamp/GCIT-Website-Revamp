@@ -11,9 +11,9 @@
     </div>
     <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
-            <a href="">Home</a>
+            <a href="/">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">Updates</a>
+            <a href="/">Initiatives</a>
         </div>
         @if($event)
             <div class="contentWrapper">

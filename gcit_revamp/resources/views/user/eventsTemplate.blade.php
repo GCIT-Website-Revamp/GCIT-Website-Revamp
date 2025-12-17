@@ -11,9 +11,9 @@
     </div>
     <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
-            <a href="">Home</a>
+            <a href="/">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">Updates</a>
+            <a href="/">Initiatives</a>
         </div>
         <div class="contentWrapper">
             <h1>News & Events</h1>
@@ -28,8 +28,12 @@
         Filter Courses
         </button>
         <div class="mainContent">
+            <p class="noResults" style="display:none;">
+            No matching results found.
+            </p>
+
             @forelse ($events as $index => $event)
-                <div class="card">
+                <div class="card" data-tag = "{{$event->category}}">
                     <img src="{{ asset('storage/' . $event->image) }}" alt="">
                     <div class="cardContent">
                         <span class="date">{{ \Carbon\Carbon::parse($event->date)->format('F d, Y') }}</span>
@@ -62,16 +66,13 @@
                     </div>
                     <div class="filterContainer">
                         
-                        <div class="filter">
-                        <input type="checkbox">
-                        <p>All News & Events</p>
-                    </div>
+                       
                     <div class="filter">
-                        <input type="checkbox">
+                        <input type="checkbox" value = "Events">
                         <p>Events</p>
                     </div>
                     <div class="filter">
-                        <input type="checkbox">
+                        <input type="checkbox" value = "News">
                         <p>News</p>
                     </div>
                 </div>

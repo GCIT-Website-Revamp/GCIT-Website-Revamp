@@ -80,7 +80,7 @@
         <div class="section cardWrapper sectionWrapper">
             <div class="card">
                 <div class="iconWrapper">
-                    <x-icons.connect class="connect-icon" />
+                    <x-icons.connect  />
                 </div>
                 <div class="cardContent">
                     <h1>Co-Development at the Forefront</h1>
@@ -89,7 +89,7 @@
             </div>
             <div class="card">
                 <div class="iconWrapper">
-                    <x-icons.circuit class="circuit-icon" />
+                    <x-icons.circuit />
                 </div>
                 <div class="cardContent">
                     <h1>Integrated Real-World Pedagogy </h1>
@@ -98,7 +98,7 @@
             </div>
             <div class="card">
                 <div class="iconWrapper">
-                     <x-icons.handshake class="globe-icon" />
+                     <x-icons.handshake  />
                 </div>
                 <div class="cardContent">
                     <h1>Technopreneurship Mindset </h1>

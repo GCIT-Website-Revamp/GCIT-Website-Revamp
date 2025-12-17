@@ -11,9 +11,9 @@
     </div>
     <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
-            <a href="">Home</a>
+            <a href="/">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">Updates</a>
+            <a href="/">Initiatives</a>
         </div>
         <div class="contentWrapper">
             <h1>Announcements</h1>
@@ -28,8 +28,12 @@
         Filter
         </button>
         <div class="mainContent announcementContent">
+            <p class="noResults" style="display:none;">
+  No matching results found.
+</p>
+
             @forelse ($announcements as $index => $announcement)
-            <div class="card">
+            <div class="card" data-tag = "{{$announcement->category}}">
                 <div class="cardContent">
                     <h1>{{ $announcement->name }}</h1>
                     <p class = "multi-truncate">{!! Str::limit($announcement->description, 100) !!}</p>
@@ -60,20 +64,17 @@
                 </div>
                 <div class="filterContainer">
                     
+                   
                     <div class="filter">
-                        <input type="checkbox">
-                        <p>All Updates</p>
-                    </div>
-                    <div class="filter">
-                        <input type="checkbox">
+                        <input type="checkbox" value = "Announcements">
                         <p>Announcements</p>
                     </div>
                     <div class="filter">
-                        <input type="checkbox">
+                        <input type="checkbox" value="Tender">
                         <p>Tender</p>
                     </div>
                     <div class="filter">
-                        <input type="checkbox">
+                        <input type="checkbox" value="Vacancy">
                         <p>Vacancy</p>
                     </div>
                 </div>

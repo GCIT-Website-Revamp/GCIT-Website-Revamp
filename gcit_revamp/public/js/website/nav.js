@@ -342,3 +342,17 @@ window.addEventListener("scroll", () => {
     lastScrollYMobile = currentScrollY;
 });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("courseMenuToggle");
+    const menuLinks = document.querySelectorAll(".sideMenu a");
+
+    menuLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            if (menuToggle.checked) {
+                menuToggle.checked = false;
+            }
+        });
+    });
+});

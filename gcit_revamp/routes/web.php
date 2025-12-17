@@ -279,19 +279,19 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 Route::get('/', function () {
     $bsc = Course::where('type', '=', 'School of Computer Science')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
-    $announcements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->take(5)->get();
-    $events = Event::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
+    $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "true")->take(5)->get();
+    $events = Event::orderBy('date', 'desc')->where('highlight', '=', "true")->get();
     $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
     return view('user.home', compact('bsc','sidd', 'announcements', 'events', 'projects'));
 });
 
 Route::get('/news&events', function () {
-    $events = Event::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
+    $events = Event::orderBy('date', 'desc')->where('display', '=', "true")->get();
     return view('user.eventsTemplate', compact('events'));
 });
 
 Route::get('/announcements', function () {
-    $announcements = Announcement::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
+    $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "true")->get();
     return view('user.announcementTemplate', compact('announcements'));
 });
 
@@ -325,7 +325,7 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
         $next = Event::where('id', '>', $event->id)->orderBy('id', 'asc')->first();
 
         // Latest events
-        $latestEvents = Event::orderBy('created_at', 'desc')
+        $latestEvents = Event::orderBy('date', 'desc')
             ->where('display', '=', "true")
             ->take(3)
             ->get();
@@ -342,7 +342,7 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
         $next = Announcement::where('id', '>', $announcement->id)->orderBy('id', 'asc')->first();
 
         // Latest announcements
-        $latestAnnouncements = Announcement::orderBy('created_at', 'desc')
+        $latestAnnouncements = Announcement::orderBy('date', 'desc')
             ->where('display', '=', "true")
             ->take(3)
             ->get();

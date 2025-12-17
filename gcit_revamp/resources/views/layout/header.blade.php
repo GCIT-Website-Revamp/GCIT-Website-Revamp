@@ -44,8 +44,10 @@
                 <div class="dropDownContent">
                     <a href="/resources/Admission">Admissions</a>
                     <a href="/course">Courses</a>
-                    <a href="/resources/Student-Welfare">Student Services</a>
-                </div>
+                    <label>Student Services</label>
+                    <a href="/clubs" class = "subLink">Clubs</a>
+                    <a href="/resources/ICT" class = "subLink">ICT</a>
+                    <a href="/resources/Student-Welfare" class = "subLink">Student Welfare</a>                </div>
             </div>
 
             <!-- SEARCH -->
@@ -139,8 +141,10 @@
         <h1>Study</h1>
         <a href="/resources/Admission">Admissions<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/course">Courses<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/resources/Student-Welfare">Student Services<span class="material-symbols-outlined">chevron_right</span></a>
-    </div>
+        <label>Student Services</label>
+        <a href="/clubs">Clubs<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/resources/ICT">ICT<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/resources/Student-Welfare">Student Welfare<span class="material-symbols-outlined">chevron_right</span></a>    </div>
 </div>
 
 <!-- ABOUT GCIT -->

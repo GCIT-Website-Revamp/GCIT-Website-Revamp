@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================================================
        DESKTOP DROPDOWNS + EXTENDER
     ========================================================= */
+
+    const DESKTOP_BREAKPOINT = 1000;
+
     const dropdowns = document.querySelectorAll(".dropDownWrapper");
     const extender = document.querySelector(".dropDownExtender");
 
@@ -83,21 +86,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (topNav && toggle) {
         const menuItems = topNav.querySelectorAll("label, a, h1");
 
-        gsap.set(topNav, { y: "-100%" });
+        gsap.set(topNav, { x: "100%" });
 
-        const openTL = gsap.timeline({ paused: true })
-            .to(topNav, {
-                y: 0,
-                duration: 0.35,
-                ease: "power2.out"
-            })
-            .from(menuItems, {
-                y: -10,
-                opacity: 0,
-                stagger: 0.06,
-                duration: 0.25,
-                ease: "power2.out"
-            }, "-=0.1");
+       const openTL = gsap.timeline({ paused: true })
+        .to(topNav, {
+            x: 0,
+            duration: 0.35,
+            ease: "power2.out"
+        })
+        .from(menuItems, {
+            x: 20,
+            opacity: 0,
+            stagger: 0.06,
+            duration: 0.25,
+            ease: "power2.out"
+        }, "-=0.1");
 
         toggle.addEventListener("change", () => {
             toggle.checked ? openTL.restart() : openTL.reverse();
@@ -228,4 +231,114 @@ Object.keys(subMenus).forEach(id => {
         });
     }
 
+    /* =========================================================
+   NAV HIDE ON SCROLL (DESKTOP ONLY)
+========================================================= */
+
+const nav = document.querySelector("nav.fullSize");
+
+if (nav) {
+    let lastScrollY = window.scrollY;
+    let isHidden = false;
+
+    const showNav = () => {
+        gsap.to(nav, {
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+        isHidden = false;
+    };
+
+    const hideNav = () => {
+        gsap.to(nav, {
+            y: "-100%",
+            duration: 0.3,
+            ease: "power2.out"
+        });
+        isHidden = true;
+    };
+
+
+    window.addEventListener("scroll", () => {
+        if (window.innerWidth < DESKTOP_BREAKPOINT) return;
+
+        const currentScrollY = window.scrollY;
+
+        if (Math.abs(currentScrollY - lastScrollY) < 10) return;
+
+        if (currentScrollY > lastScrollY && currentScrollY > 120) {
+            if (!isHidden) {
+                gsap.to(nav, {
+                    y: "-100%",
+                    duration: 0.35,
+                    ease: "power2.out"
+                });
+                isHidden = true;
+            }
+        } else {
+            if (isHidden) {
+                gsap.to(nav, {
+                    y: 0,
+                    duration: 0.35,
+                    ease: "power2.out"
+                });
+                isHidden = false;
+            }
+        }
+
+        lastScrollY = currentScrollY;
+    });
+    }
+
+
+    /* =========================================================
+   MOBILE NAV HIDE / SHOW ON SCROLL
+========================================================= */
+const miniNav = document.querySelector("nav.mini");
+const miniToggle = document.getElementById("miniNavToggle");
+
+let lastScrollYMobile = window.scrollY;
+let mobileHidden = false;
+
+function showMiniNav() {
+    gsap.to(miniNav, {
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out"
+    });
+    mobileHidden = false;
+}
+
+function hideMiniNav() {
+    gsap.to(miniNav, {
+        y: "-100%",
+        duration: 0.3,
+        ease: "power2.out"
+    });
+    mobileHidden = true;
+}
+
+window.addEventListener("scroll", () => {
+    // Only mobile/tablet
+    if (window.innerWidth >= DESKTOP_BREAKPOINT) return;
+
+    // If menu overlay is open → do nothing
+    if (miniToggle?.checked) return;
+
+    const currentScrollY = window.scrollY;
+
+    if (Math.abs(currentScrollY - lastScrollYMobile) < 8) return;
+
+    // Scroll down → hide
+    if (currentScrollY > lastScrollYMobile && currentScrollY > 80) {
+        if (!mobileHidden) hideMiniNav();
+    }
+    // Scroll up → show
+    else {
+        if (mobileHidden) showMiniNav();
+    }
+
+    lastScrollYMobile = currentScrollY;
+});
 });

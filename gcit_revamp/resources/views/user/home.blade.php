@@ -8,8 +8,14 @@
             <div class="overlay"></div>
         </div>
         <div class="bannerContentWrapper">
+             <div class="heroBackground">
+                <div class="media">
+                    <video class="hero-video" autoplay muted loop playsinline></video>
+                        <img class="hero-image" style="display:none;">
+                    <div class="overlay"></div>
+                </div>
+            </div>
             <div class="contentContainr">
-
                 <div class="bannerContent">
                     <div class="media">
                         <video class="hero-video" autoplay muted loop playsinline></video>
@@ -21,16 +27,19 @@
                     </div>
                 </div>
             </div>
-            <div class="contentSlider">
-                <div class="leftBtn">
-                    <span class="material-symbols-outlined">expand_circle_right</span>
-                </div>
-               <div class="sliderWrapper">
-                    <div class="sliderTrack"></div>
-                </div>
+            <div class="sectionWrapper">
 
-                <div class="rightBtn">
-                    <span class="material-symbols-outlined">expand_circle_right</span>
+                <div class="contentSlider">
+                    <div class="leftBtn">
+                        <span class="material-symbols-outlined">expand_circle_right</span>
+                    </div>
+                    <div class="sliderWrapper">
+                        <div class="sliderTrack"></div>
+                    </div>
+                    
+                    <div class="rightBtn">
+                        <span class="material-symbols-outlined">expand_circle_right</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,17 +186,17 @@
         <div class="projectMessage">
             <h1>Creating <span>Impact</span> Through Innovation</h1>
             <p>We work with leading organizations to drive innovation and create meaningful technological solutions for Bhutan and beyond</p>
-            <a href="">Connect <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+            <a href="/project">More Projects <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
         </div>
 
         <!-- PROJECT NAME SLIDER -->
-        <div class="projectName">
+        <div class="projectName desktopPRJSlider">
             <div class="prjSlider">
 
                 <span class="material-symbols-outlined left">expand_circle_right</span>
 
                 <div class="homeSliderTrack">
-                    <h1 class="homeSlide"></h1>
+                    <a href=""><h1 class="homeSlide"></h1></a>
                 </div>
 
                 <span class="material-symbols-outlined right">expand_circle_right</span>
@@ -195,13 +204,30 @@
             </div>
 
             <div class="prjLink ctaWrapper">
-                <a href="">Explore More</a>
+                <a href="">View Details</a>
             </div>
         </div>
     </div>
 
     <div class="projectBanner" id="projectBanner" data-projects='@json($projects)'>
         <img id="activeBanner" class="bannerFront" />
+        <div class="projectName mobilePRJSlider">
+            <div class="prjSlider">
+
+                <span class="material-symbols-outlined left">expand_circle_right</span>
+
+                <div class="homeSliderTrack">
+                    <a href=""><h1 class="homeSlide"></h1></a>
+                </div>
+
+                <span class="material-symbols-outlined right">expand_circle_right</span>
+
+            </div>
+
+            <div class="prjLink ctaWrapper">
+                <a href="">View Details</a>
+            </div>
+        </div>
     </div>
 </div>
 

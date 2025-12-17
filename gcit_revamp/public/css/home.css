@@ -2,6 +2,7 @@
     position: relative;
     height: calc(100vh - 86px);
     width: 100%;
+    margin-top: 120px;
 }
 
 
@@ -20,8 +21,8 @@
 
     max-width: 100%;
 }
-.heroBannerWrapper .bannerContent .media img,
-.heroBannerWrapper .bannerContent .media video{
+.heroBannerWrapper .bannerContentWrapper .media img,
+.heroBannerWrapper .bannerContentWrapper .media video{
     position: absolute;
     top: 0;
     left: 0;
@@ -30,6 +31,7 @@
     z-index: 0;
     object-fit: cover;
 }
+
 
 .descriptionWrapper{
     position: absolute;
@@ -41,15 +43,24 @@
     color: white;
 }
 
+.contentContainr {
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  padding-inline: var(--padding-sides);
+  position: relative; /* 🔑 anchor point */
+}
 .contentSlider{
     position: absolute;
     bottom: clamp(20px, 4vw, 35px);
     display: flex;
+    max-width: 1600px;
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    padding: 0 var(--padding-sides);
-    width: 100%;
+    /* padding: 0 var(--padding-sides); */
+    width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
     z-index: 20;
     
 }
@@ -253,7 +264,7 @@
 }
 .courseWrapper .header h1{
     padding: 0 var(--padding-sides);
-    font-size: clamp(48px, 5vw, 120px);
+    font-size: clamp(48px, 5vw, 100px);
     font-weight: 400;
     color: #838383;
     font-family: var(--font-Header);
@@ -559,10 +570,12 @@
     opacity: 1;
 }
 .homeProjectWrapper .homeSliderTrack .homeSlide {
-    min-width: 250px;
+    width: 100%;
+    text-wrap: wrap;
+    text-align: center;
     transition: transform 0.4s ease;
      opacity: 0.25;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 /* Fade banners */
 .projectBanner img {
@@ -699,6 +712,14 @@ font-size: 32px;}
     position: relative;
     z-index: 10;
 }
+.homeSliderTrack a{
+    text-decoration: none;
+    text-align: center;
+}
+.homeSliderTrack{
+    display: flex;
+    justify-content: center;
+}
 
 /* TOP-LEFT light glow */
 .homeAnnouncementContent .cardAnnouncement .card::before {
@@ -735,7 +756,7 @@ font-size: 32px;}
 }
 
 .homeAnnouncementContent .cardAnnouncement .card h1{
-    height: 35%;
+    padding: 1rem 0;
     font-size: clamp(24px, 5vw, 32px);
     display: flex;
     align-items: center;
@@ -848,10 +869,12 @@ font-size: 32px;}
 }
 
 .eventContent .date{
-    color: white;
+    color: white !important;
 }
 
-
+.mobilePRJSlider{
+    display: none
+}
 @media (max-width: 1024px) {
     .heading-row .main-header {
 display: block;
@@ -872,7 +895,11 @@ display: block;
      .homeAnnouncementWrapper {
         padding: 0;
     }
-
+    
+    .homeAnnouncementWrapper{
+        padding: 0 var(--padding-sides);
+    }
+    
     .homeAnnouncementHeader .headerContent p {
         font-size: 0.9rem;
     }
@@ -908,6 +935,9 @@ display: block;
     .homeSuggestion{
         display: none !important;
     }
+.aboutGCIT {
+    margin-bottom: 50px;    
+}
 }
 
 
@@ -935,6 +965,9 @@ display: block;
     }
     .aboutGCIT p{
         max-width: none !important;
+    }
+    .heroBannerWrapper{
+        margin-top: 80px
     }
     .cardWrapper{
     flex-direction: column;
@@ -992,7 +1025,7 @@ display: block;
     .siddWrapper:hover {
         width: 100% !important;
     }
-
+    
     .courseContent:hover .socWrapper:not(:hover) {
         width: 100% !important;
     }
@@ -1003,14 +1036,16 @@ display: block;
     bottom: none;
     width: 100%;
     }
-
-    .course:hover .courseCoverTitle p{
+.courseWrapper .header h1{
+    padding: 0;
+}
+    .course .courseCoverTitle p{
         opacity: 1;
         height: auto;
-        width: 100%;
+        width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
         transform: translateY(0);
     }
-    .course:hover .courseCoverTitle .ctaBtn{
+    .course .courseCoverTitle .ctaBtn{
         opacity: 1;
         transform: translateY(0);
         height: auto;
@@ -1080,7 +1115,9 @@ display: block;
     
     .homeProjectWrapper{
         flex-direction: column;
-        gap: 2rem;
+        gap: 0;
+        height: fit-content;
+        margin-top: 100px;
     }
 
     /* 1️⃣ MESSAGE FIRST */
@@ -1093,12 +1130,27 @@ display: block;
     .projectBanner{
         order: 2;
         width: 100%;
+        flex-direction: column;
         height: auto;
     }
-
+    .desktopPRJSlider{
+        display: none
+    }
+    .mobilePRJSlider{
+        display: block;
+        width: 100%;
+        align-items: flex-start;
+        padding:0 var(--padding-sides);
+    }
     .projectBanner img{
-        height: auto;
+        height: 66vw;
         max-height: 360px;
+    }
+    .projectName .prjSlider{
+        align-items: flex-start;
+    }
+    .homeProjectWrapper .homeSliderTrack{
+        width: 100%;
     }
 
     /* 3️⃣ PROJECT SLIDER LAST */
@@ -1110,6 +1162,12 @@ display: block;
     .homeProjectDetails{
         width: 100%;
     }
+    .mobilePRJSlider div{
+        width: 100%;
+    }
+    .homeProjectWrapper .homeSliderTrack .homeSlide{
+        /* height: 60px; */
+    }
 
     .homeProjectDetails .projectMessage,
     .homeProjectDetails .projectName{
@@ -1118,10 +1176,10 @@ display: block;
 
     /* Center CTA nicely on mobile */
     .prjLink{
-        justify-content: center;
+        justify-content: flex-end;
     }
         .homeAnnouncementWrapper {
-        margin-top: 120px;
+        margin-top: 100px;
     }
 
     .homeAnnouncementHeader {
@@ -1141,6 +1199,7 @@ display: block;
     .homeAnnouncementContent .cardAnnouncement .card {
         width: 100%;
     }
+
 
     .homeAnnouncementContent .cardAnnouncement .card h1 {
         height: auto;
@@ -1162,6 +1221,7 @@ display: block;
      .homeEventWrapper {
         flex-direction: column;
         width: 100%;
+        padding: 100px 0;
     }
 
     .homeEventWrapper > * {
@@ -1181,6 +1241,18 @@ display: block;
     .eventMessage{
         height: fit-content !important;
     }
+        .sliderTrack {
+        transform: translateX(0); /* reset safety */
+    }
+
+    .slide {
+        flex: 0 0 100%;
+    }
+
+    .contentSlider {
+        gap: 0.75rem;
+    }
+
 
 }
 
@@ -1216,7 +1288,7 @@ display: block;
     height:calc(50vh - 86px); 
    }
    .hero-header{
-    font-size: clamp(28px, 5vw, 48px);
+    font-size: clamp(22px, 5vw, 48px);
    }.contentSlider{
     padding: 0;
     width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)))
@@ -1236,5 +1308,17 @@ display: block;
     padding: 0;
     gap: 1rem
    }
+   .descriptionWrapper{
+    bottom: 75px;
+   }
    
+}
+
+@media (max-width: 1600px){
+    .contentSlider{
+        left: var(--padding-sides);
+    }
+    .descriptionWrapper{
+        left: 0;
+    }
 }

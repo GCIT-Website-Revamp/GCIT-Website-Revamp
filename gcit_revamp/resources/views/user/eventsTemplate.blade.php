@@ -9,7 +9,7 @@
         <div class="overlay"></div>
         <img src="{{ asset('images/pageBanner.png') }}" alt="">
     </div>
-    <div class="bannerContent">
+    <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
             <a href="">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
@@ -22,7 +22,7 @@
     </div>
 </div>
 <div class="pageContentWrapper">
-    <div class="section eventsWrapper">
+    <div class="eventsWrapper">
          <button class="filterToggle">
             <span class="material-symbols-outlined">filter_list</span>
         Filter Courses
@@ -45,22 +45,24 @@
             <p>No Events Yet</p>
             @endforelse
         </div>
-        <div class="filterWrapper">
-             <div class="filterCloseWrapper">
-                <button class="filterClose">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-            </div>
-            <div class="headerWrapper">
-                <h1>Filters</h1>
-            </div>
-            <div class="filterContent">
-                <div class="filterHeader">
-                    <h1>Categories</h1>
-                </div>
-                <div class="filterContainer">
+        <div class="filterColumn">
 
-                    <div class="filter">
+            <div class="filterWrapper">
+                <div class="filterCloseWrapper">
+                    <button class="filterClose">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <div class="headerWrapper">
+                    <h1>Filters</h1>
+                </div>
+                <div class="filterContent">
+                    <div class="filterHeader">
+                        <h1>Categories</h1>
+                    </div>
+                    <div class="filterContainer">
+                        
+                        <div class="filter">
                         <input type="checkbox">
                         <p>All News & Events</p>
                     </div>
@@ -74,6 +76,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>

@@ -124,3 +124,55 @@
 //   }
 //   });
 // });
+const filter = document.querySelector(".filterWrapper");
+const column = document.querySelector(".filterColumn");
+
+const OFFSET = 86; // header height
+
+window.addEventListener("scroll", () => {
+    const colRect = column.getBoundingClientRect();
+    const filterHeight = filter.offsetHeight;
+
+    const startFix = colRect.top <= OFFSET;
+    const endFix = colRect.bottom <= filterHeight + OFFSET;
+
+    if (startFix && !endFix) {
+        // 🔒 FIXED STATE
+        filter.style.position = "fixed";
+        filter.style.top = OFFSET + "px";
+        filter.style.left = colRect.left + "px";
+    } 
+    else if (endFix) {
+        // 🛑 STOP AT BOTTOM OF PARENT
+        filter.style.position = "absolute";
+        filter.style.top = (column.offsetHeight - filterHeight) + "px";
+        filter.style.left = "0";
+    } 
+    else {
+        // 🔓 NORMAL FLOW
+        filter.style.position = "relative";
+        filter.style.top = "auto";
+        filter.style.left = "auto";
+    }
+});
+const filterToggle = document.querySelector(".filterToggle");
+const filterClose = document.querySelector(".filterClose");
+const filterColumn = document.querySelector(".filterColumn");
+const filterOverlay = document.querySelector(".filterOverlay");
+function openFilter() {
+    filterColumn.classList.add("active");
+    document.body.classList.add("filter-open");
+}
+
+function closeFilter() {
+    filterColumn.classList.remove("active");
+    document.body.classList.remove("filter-open");
+}
+
+
+filterToggle?.addEventListener("click", openFilter);
+filterClose?.addEventListener("click", closeFilter);
+filterOverlay?.addEventListener("click", closeFilter);
+
+
+

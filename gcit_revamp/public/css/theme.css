@@ -106,7 +106,7 @@ p{
     max-width: 1600px;
     margin: 0px auto;
     padding-inline: 1.5rem;
-    padding: 0 var(--padding-sides);
+    /* padding: 0 var(--padding-sides); */
 }
 /* ================================
    BUTTONS
@@ -330,7 +330,12 @@ p{
     -webkit-line-clamp: 3; /* number of lines to show */
     -webkit-box-orient: vertical;
     overflow: hidden;
+        display: none;
     
+}
+body.filter-open {
+    overflow: hidden;      /* lock scroll */
+    height: 100vh;
 }
 
 .pageContentWrapper{
@@ -339,7 +344,28 @@ p{
   padding-inline: 1.5rem;/* prevents edge touching on small screens */
 }
 
+.filterOverlay {
+    position: fixed;
+    top: 80px;        /* 👈 BELOW NAV */
+    left: 0;
+    right: 0;
+    bottom: 0;
 
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    z-index: 9000; /* below drawer */
+}
+
+body.filter-open .filterOverlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+body.filter-open .pageContentWrapper {
+    overflow: hidden;
+}
 @media (min-width: 576px) {
     /* small screens */
    

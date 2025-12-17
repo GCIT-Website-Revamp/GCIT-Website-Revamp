@@ -33,8 +33,12 @@ use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\ICTController;
 use App\Http\Controllers\WelfareController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SearchController;
 
 Route::middleware('web')->group(function () {
+    //search
+    Route::get('/api/search', [SearchController::class, 'search']);
+
     // Auth
     Route::post('/api/login', [AuthController::class, 'login'])->name('login');
     Route::post('/api/logout', [AuthController::class, 'logout'])->name('logout');
@@ -200,7 +204,7 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 
     Route::get('/academics', function () {
         $courses = Course::orderBy('created_at', 'desc')->paginate(5,['*'], 'courses_page');
-        $modules = Module::orderBy('created_at', 'desc')->paginate(5, ['*'], 'modules_page');
+        $modules = Module::orderBy('created_at', 'desc')->paginate(25, ['*'], 'modules_page');
         return view('admin.academics', compact('courses', 'modules'));
     });
 
@@ -295,7 +299,9 @@ Route::get('/course', function () {
     $courses = Course::orderBy('name', 'ASC')->get();
     return view('user.courseList', compact('courses'));
 });
-
+Route::get('/search', function () {
+    return view('user.search');
+});
 Route::get('/post/{type}/{id}', function ($type, $id) {
     $event = null;
     $announcement = null;
@@ -454,3 +460,7 @@ Route::get('/project', function () {
     $projects = Project::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
     return view('user.project', compact('projects'));
 });
+
+Route::get('/search', function () {
+    return view('user.search');
+})->name('search');

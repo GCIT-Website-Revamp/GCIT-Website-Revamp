@@ -84,7 +84,7 @@
                 </div>
                 <div class="cardContent">
                     <h1>Co-Development at the Forefront</h1>
-                    <p>Our graduates secure roles at top international tech firms, showcasing skills that open doors to high-demand careers across global markets</p>
+                    <p>GCIT collaborates closely with government and industry, enabling capable students to engage in real development work.</p>
                 </div>
             </div>
             <div class="card">

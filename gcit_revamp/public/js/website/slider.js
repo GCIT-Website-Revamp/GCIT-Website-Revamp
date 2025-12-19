@@ -170,7 +170,7 @@ function updateActive() {
 
     s.classList.toggle("active", isActive);
 
-    label.textContent = isActive ? "Playing" : s.dataset.label;
+    label.textContent = isActive ? "Now Playing" : s.dataset.label;
 
     // ✅ Show mute ONLY if active + video
     if (isActive && isVideo) {

@@ -102,7 +102,7 @@ li ul li {
 }
 
 .suggestion a:hover{
-    color: var(--color-secondary)
+    color: var(--color-primary)
 }
 
 .post figure.table {

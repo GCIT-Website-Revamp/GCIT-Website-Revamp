@@ -29,10 +29,19 @@
 
 <label for="courseMenuToggle" class="courseMenuBtn">
     <span class="material-symbols-outlined">menu</span>
+    Quick Index
+
 </label>
         <div class="section">
             <div class="courseDetailsContainer">
                 <div class="sideMenu">
+                    <div class="menuHeader">
+                        <label for="courseMenuToggle">
+                            <span class="material-symbols-outlined">menu</span>
+                            Quick Index
+
+                    </label>
+                    </div>
                     <div class="menuSection">
                         <div class="header">
                             <div class="circle"></div>

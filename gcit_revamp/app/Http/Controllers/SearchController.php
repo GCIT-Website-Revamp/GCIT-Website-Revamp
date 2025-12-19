@@ -27,7 +27,7 @@ class SearchController extends Controller
         // 🔍 EVENTS
         $events = Event::where('name', 'like', "%{$q}%")
             ->orWhere('description', 'like', "%{$q}%")
-            ->limit(5)
+            ->limit(50)
             ->get()
             ->map(fn ($e) => [
                 'id' => $e->id,
@@ -44,7 +44,7 @@ class SearchController extends Controller
         // 🔍 ANNOUNCEMENTS
         $announcements = Announcement::where('name', 'like', "%{$q}%")
             ->orWhere('description', 'like', "%{$q}%")
-            ->limit(5)
+            ->limit(50)
             ->get()
             ->map(fn ($a) => [
                 'id' => $a->id,
@@ -60,7 +60,7 @@ class SearchController extends Controller
         // 🔍 PROJECTS
         $projects = Project::where('name', 'like', "%{$q}%")
             ->orWhere('description', 'like', "%{$q}%")
-            ->limit(5)
+            ->limit(50)
             ->get()
             ->map(fn ($p) => [
                 'id' => $p->id,
@@ -77,7 +77,7 @@ class SearchController extends Controller
         // 🔍 COURSES
         $courses = Course::where('name', 'like', "%{$q}%")
             ->orWhere('description', 'like', "%{$q}%")
-            ->limit(5)
+            ->limit(50)
             ->get()
             ->map(fn ($c) => [
                 'id' => $c->id,
@@ -97,7 +97,7 @@ class SearchController extends Controller
             ->merge($announcements)
             ->merge($projects)
             ->merge($courses)
-            ->take(20)
+            ->take(50)
             ->values();
 
         return response()->json([

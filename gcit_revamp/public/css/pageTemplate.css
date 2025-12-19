@@ -1,7 +1,7 @@
 .pageBannerWrapper{
     position: relative;
     margin-top: 120px;
-    height: clamp(240px, 15vw, 350px);
+    height: 350px;
     display: flex;
     justify-content: flex-end;
     padding-bottom: clamp(1.5rem, 3vw, 2.5rem)
@@ -223,7 +223,16 @@
 .filterCloseWrapper {
     display: none;
 }
+.filterWrapper *{
+    font-style: normal;
+}
 
+.announcementContent .cardContent{
+    width: 100% !important;
+}
+.clubContent{
+    min-height: 250px !important;
+}
 @media (min-width: 1024px) {
     .filterColumn {
         position: relative;
@@ -268,7 +277,9 @@
 .filterColumn *::after {
   pointer-events: none;
 }
-
+ .pageBannerWrapper{
+    margin-top: 80px;
+}
   body.filter-open .filterColumn {
     pointer-events: auto;
   }
@@ -286,7 +297,7 @@
     right: 0;
     width: 85%;
     max-width: 360px;
-height: 100vh;
+    height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;    background: #fff;
     z-index: 1000;
@@ -296,7 +307,8 @@ height: 100vh;
 
     /* IMPORTANT: remove any transform here */
     transform: none;
-    pointer-events: none;
+    /* pointer-events: none; */
+    
   }
   .mainContent{
     width: 100%;
@@ -362,9 +374,7 @@ height: 100vh;
 
 }
 @media(max-width: 800px){
-    .pageBannerWrapper{
-    margin-top: 80px;
-}
+   
 
 }
 @media (max-width: 480px) {

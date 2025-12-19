@@ -6,6 +6,7 @@
 
 .post{
     width: 65%;
+    min-width: 0;
 }
 
 .post img{
@@ -65,6 +66,9 @@ li ul li {
 .suggestionWrapper{
     display: flex;
     width: 35%;
+    position: relative;
+    width: 320px;
+    min-width: 320px;
     flex-direction: column;
 }
 
@@ -99,6 +103,73 @@ li ul li {
 
 .suggestion a:hover{
     color: var(--color-secondary)
+}
+
+.post figure.table {
+  margin: 1.5rem 0;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.post table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.post th,
+.post td {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.post thead th {
+  background: #f6f7f9;
+  font-weight: 600;
+}
+
+.post ul,
+.post ol {
+  padding-left: 1.4rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.post li {
+  margin: 0.4rem 0;
+}
+
+.post ul,
+.post ol {
+  padding-left: 1.4rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.post li {
+  margin: 0.4rem 0;
+}
+
+.post p {
+  margin: 0.8rem 0;
+}
+
+.post p[style] {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 1023px) {
+  .postWrapper {
+    flex-direction: column;
+  }
+
+  .suggestionWrapper {
+    width: 100%;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+  }
 }
 
 @media (max-width: 1024px) {

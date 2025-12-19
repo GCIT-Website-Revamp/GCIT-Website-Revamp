@@ -17,6 +17,7 @@
             </div>
             <div class="contentContainr">
                 <div class="bannerContent">
+
                     <div class="media">
                         <video class="hero-video" autoplay muted loop playsinline></video>
                         <img class="hero-image" style="display:none;">
@@ -79,7 +80,7 @@
         <div class="section cardWrapper sectionWrapper">
             <div class="card">
                 <div class="iconWrapper">
-                    <x-icons.connect class="connect-icon" />
+                    <x-icons.connect  />
                 </div>
                 <div class="cardContent">
                     <h1>Co-Development at the Forefront</h1>
@@ -88,7 +89,7 @@
             </div>
             <div class="card">
                 <div class="iconWrapper">
-                    <x-icons.circuit class="circuit-icon" />
+                    <x-icons.circuit />
                 </div>
                 <div class="cardContent">
                     <h1>Integrated Real-World Pedagogy </h1>
@@ -97,7 +98,7 @@
             </div>
             <div class="card">
                 <div class="iconWrapper">
-                     <x-icons.handshake class="globe-icon" />
+                     <x-icons.handshake  />
                 </div>
                 <div class="cardContent">
                     <h1>Technopreneurship Mindset </h1>
@@ -184,6 +185,7 @@
 
     <div class="homeProjectDetails">
         <div class="projectMessage">
+
             <h1>Creating <span>Impact</span> Through Innovation</h1>
             <p>We work with leading organizations to drive innovation and create meaningful technological solutions for Bhutan and beyond</p>
             <a href="/project">More Projects <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
@@ -203,9 +205,7 @@
 
             </div>
 
-            <div class="prjLink ctaWrapper">
-                <a href="">View Details</a>
-            </div>
+           
         </div>
     </div>
 
@@ -224,14 +224,12 @@
 
             </div>
 
-            <div class="prjLink ctaWrapper">
-                <a href="">View Details</a>
-            </div>
+           
         </div>
     </div>
 </div>
 
-        <div class="homeAnnouncementWrapper">
+        <div class="homeAnnouncementWrapper sectionWrapper">
             <div class="homeAnnouncementHeader">
                 <div class="headerContent">
                     <h1>Announcements</h1>
@@ -275,7 +273,7 @@
                 </div>
             </div>
         </div>
-        <div class="homeEventWrapper">
+        <div class="homeEventWrapper sectionWrapper">
             <div class="eventMessage">
                 <h1>News & Events</h1>
                 <p>Stay up to date with the latest happenings at GCIT — from student achievements and research showcases to innovation challenges, collaborations, and campus celebrations. Discover how our community continues to shape Bhutan’s digital future.</p>

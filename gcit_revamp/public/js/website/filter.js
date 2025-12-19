@@ -1,178 +1,282 @@
+document.addEventListener("DOMContentLoaded", () => {
 
+  /* =========================================================
+     CONFIG
+  ========================================================= */
+  const DESKTOP_BREAKPOINT = 1024;
+  const NAV_HEIGHT = 86; // actual nav height in px
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const filterWrapper = document.querySelector(".filterWrapper");
-//     const filterToggle  = document.querySelector(".filterToggle");
-//     const filterClose   = document.querySelector(".filterClose");
-    
-//     const FILTER_BREAKPOINT = 1024;
-    
-//     function shouldUseDrawer() {
-//       return window.innerWidth <= 1024;
-//     }
-    
-//     function resetForDesktop() {
-//       gsap.killTweensOf(filterWrapper);
-    
-//       // remove ALL GSAP inline styles
-//       gsap.set(filterWrapper, {
-//         clearProps: "all"
-//       });
-    
-//       filterWrapper.classList.remove("active");
-//       filterWrapper.style.pointerEvents = "auto";
-//     }
-//   if (!filterWrapper) return;
+  /* =========================================================
+     ELEMENTS
+  ========================================================= */
+  const nav = document.querySelector("nav.fullSize");
 
-//   const BP = 1024;
+  const filter = document.querySelector(".filterWrapper");
+  const column = document.querySelector(".filterColumn");
 
-//  function forceClosed() {
-//   gsap.killTweensOf(filterWrapper);
+  const filterToggle = document.querySelector(".filterToggle");
+  const filterClose = document.querySelector(".filterClose");
+  const filterOverlay = document.querySelector(".filterOverlay");
 
-//   if (!shouldUseDrawer()) {
-//     // desktop: sidebar visible normally
-//     gsap.set(filterWrapper, { clearProps: "transform" });
-//     filterWrapper.style.pointerEvents = "auto";
-//     return;
-//   }
+  if (!filter || !column) return;
 
-//   // mobile/tablet: off-canvas
-//   filterWrapper.classList.remove("active");
-//   gsap.set(filterWrapper, { xPercent: 100 });
-//   filterWrapper.style.pointerEvents = "none";
-//   safeUnlockScroll();
-// }
+  /* =========================================================
+     INLINE-PARENT SAFETY (ROGUE <i> FIX)
+  ========================================================= */
 
-//   function openDrawer() {
-//       if (!shouldUseDrawer()) return;
+  function getStickyBoundary(el) {
+    let parent = el.parentElement;
 
-//     filterWrapper.classList.add("active");
-//     filterWrapper.style.pointerEvents = "auto";
-//     lockScroll?.();
+    // Skip inline elements (e.g. injected <i>)
+    while (parent && getComputedStyle(parent).display === "inline") {
+      parent = parent.parentElement;
+    }
 
-//     // animate panel in
-//     gsap.to(filterWrapper, {
-//       xPercent: 0,
-//       duration: 0.35,
-//       ease: "power2.out"
-//     });
+    return parent || el.parentElement;
+  }
 
-//     // animate content in (stagger)
-//     gsap.fromTo(
-//       filterWrapper.querySelectorAll(".filterCloseWrapper, .headerWrapper h1, .filterHeader h1, .filter"),
-//       { x: 20, opacity: 0 },
-//       { x: 0, opacity: 1, duration: 0.25, stagger: 0.06, ease: "power2.out", delay: 0.1 }
-//     );
-//   }
+  // True visual boundary for sticky math
+  const stickyBoundary = getStickyBoundary(column);
 
-//   function closeDrawer() {
-//     gsap.to(filterWrapper, {
-//       xPercent: 100,
-//       duration: 0.25,
-//       ease: "power2.in",
-//       onComplete: () => {
-//         filterWrapper.classList.remove("active");
-//         filterWrapper.style.pointerEvents = "none";
-//         unlockScroll?.();
-//       }
-//     });
-//   }
+  /* =========================================================
+     NAV VISIBILITY TRACKING (CRITICAL)
+  ========================================================= */
 
-//   // ✅ Always closed on refresh/page restore (including bfcache)
-//   window.addEventListener("load", () => {
-//     if (window.innerWidth <= BP) forceClosed();
-//      if (window.innerWidth > FILTER_BREAKPOINT) {
-//     resetForDesktop();
-//   }
-//   });
+  document.documentElement.style.setProperty(
+    "--nav-visible-height",
+    NAV_HEIGHT + "px"
+  );
 
-//   window.addEventListener("pageshow", (e) => {
-//     // pageshow fires on normal load AND bfcache restore
-//     if (window.innerWidth <= BP) forceClosed();
-//   });
+  let navHidden = false;
 
-//   // open / close
-//   filterToggle?.addEventListener("click", openDrawer);
-//   filterClose?.addEventListener("click", closeDrawer);
+  function setNavVisibleHeight(value) {
+    document.documentElement.style.setProperty(
+      "--nav-visible-height",
+      value + "px"
+    );
+  }
 
-//   // ESC to close
-//   document.addEventListener("keydown", (e) => {
-//     if (e.key === "Escape" && filterWrapper.classList.contains("active")) {
-//       closeDrawer();
-//     }
-//   });
+  function showNav() {
+    if (!nav || !navHidden) return;
 
-//   // click outside to close
-//   document.addEventListener("click", (e) => {
-//     if (!filterWrapper.classList.contains("active")) return;
-//     if (filterWrapper.contains(e.target)) return;
-//     if (filterToggle && filterToggle.contains(e.target)) return;
-//     closeDrawer();
-//   });
+    gsap.to(nav, {
+      y: 0,
+      duration: 0.35,
+      ease: "power2.out",
+      onStart: () => setNavVisibleHeight(NAV_HEIGHT)
+    });
 
-//   // resize safety
-//   window.addEventListener("resize", () => {
-//     if (window.innerWidth > BP) {
-//       // on desktop, force it closed (since sidebar shows normally)
-//       forceClosed();
-//     } else {
-//       // keep closed by default when returning to small screens
-//       forceClosed();
-//     }
-//      if (window.innerWidth > FILTER_BREAKPOINT) {
-//     resetForDesktop();
-//   }
-//   });
-// });
-const filter = document.querySelector(".filterWrapper");
-const column = document.querySelector(".filterColumn");
+    navHidden = false;
+  }
 
-const OFFSET = 86; // header height
+  function hideNav() {
+    if (!nav || navHidden) return;
 
-window.addEventListener("scroll", () => {
-    const colRect = column.getBoundingClientRect();
+    gsap.to(nav, {
+      y: "-100%",
+      duration: 0.35,
+      ease: "power2.out",
+      onStart: () => setNavVisibleHeight(0)
+    });
+
+    navHidden = true;
+  }
+
+  /* =========================================================
+     DESKTOP NAV HIDE / SHOW ON SCROLL
+  ========================================================= */
+
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    if (window.innerWidth < DESKTOP_BREAKPOINT) return;
+
+    const currentScrollY = window.scrollY;
+    if (Math.abs(currentScrollY - lastScrollY) < 10) return;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 120) {
+      hideNav();
+    } else {
+      showNav();
+    }
+
+    lastScrollY = currentScrollY;
+  });
+
+  /* =========================================================
+     STICKY FILTER (DESKTOP ONLY, <i> SAFE)
+  ========================================================= */
+
+  function getNavOffset() {
+    return (
+      parseInt(
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--nav-visible-height")
+      ) || 0
+    );
+  }
+
+  function updateStickyFilter() {
+    if (window.innerWidth < DESKTOP_BREAKPOINT) return;
+
+    const OFFSET = getNavOffset();
+
+    const boundaryRect = stickyBoundary.getBoundingClientRect();
     const filterHeight = filter.offsetHeight;
 
-    const startFix = colRect.top <= OFFSET;
-    const endFix = colRect.bottom <= filterHeight + OFFSET;
+    const startFix = boundaryRect.top <= OFFSET;
+    const endFix = boundaryRect.bottom <= filterHeight + OFFSET;
 
     if (startFix && !endFix) {
-        // 🔒 FIXED STATE
-        filter.style.position = "fixed";
-        filter.style.top = OFFSET + "px";
-        filter.style.left = colRect.left + "px";
-    } 
-    else if (endFix) {
-        // 🛑 STOP AT BOTTOM OF PARENT
-        filter.style.position = "absolute";
-        filter.style.top = (column.offsetHeight - filterHeight) + "px";
-        filter.style.left = "0";
-    } 
-    else {
-        // 🔓 NORMAL FLOW
-        filter.style.position = "relative";
-        filter.style.top = "auto";
-        filter.style.left = "auto";
+      // 🔒 Fixed
+      filter.style.position = "fixed";
+      filter.style.top = OFFSET + "px";
+      filter.style.left = boundaryRect.left + "px";
+      filter.style.width = boundaryRect.width + "px";
     }
-});
-const filterToggle = document.querySelector(".filterToggle");
-const filterClose = document.querySelector(".filterClose");
-const filterColumn = document.querySelector(".filterColumn");
-const filterOverlay = document.querySelector(".filterOverlay");
-function openFilter() {
-    filterColumn.classList.add("active");
+    else if (endFix) {
+      // 🛑 Stop at bottom
+      filter.style.position = "absolute";
+      filter.style.top =
+        stickyBoundary.offsetHeight - filterHeight + "px";
+      filter.style.left = "0";
+      filter.style.width = "100%";
+    }
+    else {
+      resetFilter();
+    }
+  }
+
+  function resetFilter() {
+    filter.style.position = "relative";
+    filter.style.top = "auto";
+    filter.style.left = "auto";
+    filter.style.width = "100%";
+  }
+
+  window.addEventListener("scroll", updateStickyFilter);
+  window.addEventListener("resize", () => {
+    if (window.innerWidth < DESKTOP_BREAKPOINT) {
+      resetFilter();
+    }
+    updateStickyFilter();
+  });
+
+  /* =========================================================
+     MOBILE FILTER DRAWER
+  ========================================================= */
+
+  function openFilter() {
+    column.classList.add("active");
     document.body.classList.add("filter-open");
-}
+  }
 
-function closeFilter() {
-    filterColumn.classList.remove("active");
+  function closeFilter() {
+    column.classList.remove("active");
     document.body.classList.remove("filter-open");
+  }
+
+  filterToggle?.addEventListener("click", openFilter);
+  filterClose?.addEventListener("click", closeFilter);
+  filterOverlay?.addEventListener("click", closeFilter);
+
+  /* =========================================================
+     SAFETY: BREAKPOINT SWITCH RESET
+  ========================================================= */
+
+  let wasDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
+
+  window.addEventListener("resize", () => {
+    const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
+
+    if (isDesktop !== wasDesktop) {
+      closeFilter();
+      resetFilter();
+    }
+
+    wasDesktop = isDesktop;
+  });
+
+
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const filterWrapper = document.querySelector(".filterWrapper");
+  const cards = document.querySelectorAll(".mainContent .card");
+
+  console.log("Cards found:", cards.length);
+
+  if (!filterWrapper || !cards.length) {
+    console.warn("Filter or cards not found");
+    return;
+  }
+
+  const checkboxes = filterWrapper.querySelectorAll(
+    'input[type="checkbox"]'
+  );
+
+  const noResultsEl = document.querySelector(".noResults");
+
+function applyFilters() {
+  const active = Array.from(checkboxes)
+    .filter(cb => cb.checked)
+    .map(cb => cb.value.toLowerCase());
+
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const tag = card.dataset.tag?.toLowerCase();
+
+    const show =
+      active.length === 0 || active.includes(tag);
+
+    card.style.display = show ? "flex" : "none";
+
+    if (show) visibleCount++;
+  });
+
+  // ✅ No results handling
+  if (noResultsEl) {
+    noResultsEl.style.display =
+      active.length > 0 && visibleCount === 0
+        ? "block"
+        : "none";
+  }
 }
 
 
-filterToggle?.addEventListener("click", openFilter);
-filterClose?.addEventListener("click", closeFilter);
-filterOverlay?.addEventListener("click", closeFilter);
+  function show(card) {
+    card.style.display = "flex";   // important
+    card.style.opacity = "1";
+    card.style.pointerEvents = "auto";
+  }
 
+  function hide(card) {
+    card.style.display = "none";
+    card.style.pointerEvents = "none";
+  }
 
+  checkboxes.forEach(cb => {
+    cb.addEventListener("change", () => {
 
+      // Handle "All"
+      if (cb.value === "All" && cb.checked) {
+        checkboxes.forEach(other => {
+          if (other !== cb) other.checked = false;
+        });
+      }
+
+      if (cb.value !== "All" && cb.checked) {
+        const allCb = Array.from(checkboxes)
+          .find(c => c.value === "All");
+        if (allCb) allCb.checked = false;
+      }
+
+      applyFilters();
+    });
+  });
+
+});

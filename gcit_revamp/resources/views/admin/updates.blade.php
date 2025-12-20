@@ -106,7 +106,8 @@
                               <div class="heading1 margin_0">
                                  <h2>News and Events</h2>
                               </div>
-                              <div>
+                              <div class="d-flex">
+                                 <input type="text" id="eventSearch" class="form-control mx-2" placeholder="Search..." data-search-input>
                                  <button id="addEventBtn" type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#myModal" aria-haspopup="true" aria-controls="myModal">
                                     <i class="fa fa-plus-circle mx-2 mb-2 mt-2"></i> Add News & Event
@@ -173,7 +174,8 @@
                               <div class="heading1 margin_0">
                                  <h2>Announcements</h2>
                               </div>
-                              <div>
+                              <div class="d-flex">
+                                 <input type="text" id="announcementSearch" class="form-control mx-2" placeholder="Search..." data-search-input>
                                  <button id="addAnnouncementBtn" type="button" class="btn btn-success"
                                     data-bs-toggle="modal" data-bs-target="#myModal" aria-haspopup="true"
                                     aria-controls="myModal">

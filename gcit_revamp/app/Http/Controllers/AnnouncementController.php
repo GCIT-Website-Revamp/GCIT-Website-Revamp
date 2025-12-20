@@ -164,4 +164,36 @@ class AnnouncementController extends Controller
             ], 500);
         }
     }
+    public function searchAnnouncement(Request $request)
+    {
+        try {
+            $q = trim($request->query('q'));
+
+            if (!$q || strlen($q) < 1) {
+                return response()->json([
+                    'success' => true,
+                    'count' => 0,
+                    'data' => []
+                ]);
+            }
+
+            $announcements = Announcement::where('name', 'LIKE', "%{$q}%")
+                ->orWhere('description', 'LIKE', "%{$q}%")
+                ->orderBy('date', 'desc')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'count' => $announcements->count(),
+                'data' => $announcements
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to search announcements.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

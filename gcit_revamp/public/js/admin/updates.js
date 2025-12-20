@@ -1,5 +1,159 @@
 const csrf = document.querySelector('input[name="_token"]')?.value;
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    const eventSearchInput = document.getElementById('eventSearch');
+
+    if (!eventSearchInput) {
+        console.warn('eventSearch input not found');
+        return;
+    }
+
+    const eventTableBody = eventSearchInput
+        .closest('.white_shd')
+        .querySelector('table tbody');
+
+    const originalEventRows = eventTableBody.innerHTML;
+
+    eventSearchInput.addEventListener('input', function () {
+        const query = this.value.trim();
+
+        if (query.length === 0) {
+            eventTableBody.innerHTML = originalEventRows;
+            return;
+        }
+
+        fetch(`/api/event-search?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) return;
+
+                eventTableBody.innerHTML = '';
+
+                if (data.data.length === 0) {
+                    eventTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center">No matching events found</td>
+                    </tr>
+                `;
+                    return;
+                }
+
+                data.data.forEach((event, index) => {
+                    eventTableBody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${event.name}</td>
+                        <td>
+                            <img src="/storage/${event.image}" width="80">
+                        </td>
+                        <td style="max-width:250px;">${event.description.substring(0, 200)}...</td>
+                        <td style="max-width:60px;">
+                            <div class="action-buttons">
+                                <button type="button"
+                                    class="btn btn-success edit-event-btn"
+                                    data-event-id="${event.id}"
+                                    data-event-name="${event.name}"
+                                    data-event-image="/storage/${event.image}"
+                                    data-event-date="${event.date}"
+                                    data-event-display="${event.display}"
+                                    data-event-category="${event.category}"
+                                    data-event-highlight="${event.highlight}"
+                                    data-event-description="${event.description.replace(/"/g, '&quot;')}"
+                                    data-event-images='${JSON.stringify(event.images || [])}'>
+                                    Edit
+                                </button>
+
+                                <button type="button"
+                                    class="btn btn-danger delete-event-btn"
+                                    data-event-id="${event.id}">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                });
+            })
+            .catch(err => console.error('Event search error:', err));
+    });
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const announcementSearchInput = document.getElementById('announcementSearch');
+
+    if (!announcementSearchInput) {
+        console.warn('announcementSearch input not found');
+        return;
+    }
+
+    const announcementTableBody = announcementSearchInput
+        .closest('.white_shd')
+        .querySelector('table tbody');
+
+    const originalAnnouncementRows = announcementTableBody.innerHTML;
+
+    announcementSearchInput.addEventListener('input', function () {
+        const query = this.value.trim();
+
+        if (query.length === 0) {
+            announcementTableBody.innerHTML = originalAnnouncementRows;
+            return;
+        }
+
+        fetch(`/api/announcement-search?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) return;
+
+                announcementTableBody.innerHTML = '';
+
+                if (data.data.length === 0) {
+                    announcementTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="text-center">No matching announcements found</td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                data.data.forEach((announcement, index) => {
+                    announcementTableBody.innerHTML += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td style="max-width:100px;">${announcement.name}</td>
+                            <td style="max-width:80px;">${announcement.date}</td>
+                            <td style="max-width:340px;">${announcement.description}</td>
+                            <td style="max-width:80px;">
+                                <div class="action-buttons">
+                                    <button type="button"
+                                        class="btn btn-success edit-announcemnet-btn"
+                                        data-announcemnet-id="${announcement.id}"
+                                        data-announcemnet-name="${announcement.name}"
+                                        data-announcemnet-date="${announcement.date}"
+                                        data-announcemnet-category="${announcement.category}"
+                                        data-announcemnet-display="${announcement.display}"
+                                        data-announcemnet-description="${announcement.description.replace(/"/g, '&quot;')}">
+                                        Edit
+                                    </button>
+
+                                    <button type="button"
+                                        class="btn btn-danger delete-announcemnet-btn"
+                                        data-announcemnet-id="${announcement.id}">
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(err => console.error('Announcement search error:', err));
+    });
+});
+
 function formatErrors(errors) {
     if (!errors) return "";
     if (typeof errors === "string") return errors;
@@ -36,19 +190,19 @@ function confirmAction(title, message, apiCall) {
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
-                            Swal.fire({
-                                icon: "success",
-                                title: title,
-                                text: data.message || ""
-                            });
-                            setTimeout(() => location.reload(), 1500);
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Failed",
-                                text: formatErrors(data.errors || data.message)
-                            });
-                        }
+                        Swal.fire({
+                            icon: "success",
+                            title: title,
+                            text: data.message || ""
+                        });
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Failed",
+                            text: formatErrors(data.errors || data.message)
+                        });
+                    }
                 })
                 .catch(err => {
                     console.error(err);
@@ -148,77 +302,78 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
 // ===============================
 // EDIT EVENT
 // ===============================
-document.querySelectorAll('.edit-event-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const id = btn.dataset.eventId;
-        const images = JSON.parse(btn.dataset.eventImages || "[]");
+document.addEventListener('click', function (e) {
+    const editBtn = e.target.closest('.edit-event-btn');
+    if (editBtn) {
+        const id = editBtn.dataset.eventId;
+        const images = JSON.parse(editBtn.dataset.eventImages || "[]");
 
         openModal(
             "Edit Event",
             `
-                <form id="editEventForm" autocomplete="off" enctype="multipart/form-data">
-                    
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="event_name" class="form-control" value="${btn.dataset.eventName}">
-                    </div>
-
-                    <div class="form-group mt-2">
-                        <label>Replace Image (optional)</label>
-                        <input type="file" id="event_image" class="form-control" accept="image/*">
-                        <img src="${btn.dataset.eventImage}" width="100" class="mt-2 rounded">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Additional Images</label>
-                        <div id="eventAdditionalImages"
-                            style="white-space:nowrap; overflow-x:auto; border:1px solid #ddd; padding:5px; border-radius:5px;">
+                    <form id="editEventForm" autocomplete="off" enctype="multipart/form-data">
+                        
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="event_name" class="form-control" value="${editBtn.dataset.eventName}">
                         </div>
-                    </div>
 
-                    <div class="form-group mt-2">
-                        <label>Add More Images</label>
-                        <input type="file" multiple id="additional_images" name="additional_images[]" class="form-control" accept="image/*">
-                    </div>
+                        <div class="form-group mt-2">
+                            <label>Replace Image (optional)</label>
+                            <input type="file" id="event_image" class="form-control" accept="image/*">
+                            <img src="${editBtn.dataset.eventImage}" width="100" class="mt-2 rounded">
+                        </div>
 
-                    <div class="form-group mt-2">
-                        <label>Date</label>
-                        <input type="date" id="event_date" class="form-control" value="${btn.dataset.eventDate}">
-                    </div>
+                        <div class="form-group">
+                            <label>Additional Images</label>
+                            <div id="eventAdditionalImages"
+                                style="white-space:nowrap; overflow-x:auto; border:1px solid #ddd; padding:5px; border-radius:5px;">
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select class="form-control" id="category">
-                            <option value="Events" ${btn.dataset.eventCategory === "Events" ? "selected" : ""}>Events</option>
-                            <option value="News" ${btn.dataset.eventCategory === "News" ? "selected" : ""}>News</option>
-                        </select>
-                    </div>
+                        <div class="form-group mt-2">
+                            <label>Add More Images</label>
+                            <input type="file" multiple id="additional_images" name="additional_images[]" class="form-control" accept="image/*">
+                        </div>
 
-                    <div class="form-group mt-2">
-                        <label>Description</label>
-                        <textarea id="event_description" class="form-control">${btn.dataset.eventDescription || ""}</textarea>
-                    </div>
+                        <div class="form-group mt-2">
+                            <label>Date</label>
+                            <input type="date" id="event_date" class="form-control" value="${editBtn.dataset.eventDate}">
+                        </div>
 
-                    <div class="form-group" style="margin-left:19px;">
-                        <label class="form-check-label">
-                        <input type="checkbox" id="display" class="form-check-input" ${btn.dataset.eventDisplay == "true" ? "checked" : ""}>
-                        Display in the site (Event Page)
-                        </label>
-                    </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-control" id="category">
+                                <option value="Events" ${editBtn.dataset.eventCategory === "Events" ? "selected" : ""}>Events</option>
+                                <option value="News" ${editBtn.dataset.eventCategory === "News" ? "selected" : ""}>News</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group" style="margin-left:19px;">
-                        <label class="form-check-label">
-                        <input type="checkbox" id="highlight" class="form-check-input" ${btn.dataset.eventHighlight == "true" ? "checked" : ""}>
-                        Display in highlights (Home Page)
-                        </label>
-                    </div>
+                        <div class="form-group mt-2">
+                            <label>Description</label>
+                            <textarea id="event_description" class="form-control">${editBtn.dataset.eventDescription || ""}</textarea>
+                        </div>
 
-                </form>
-            `,
+                        <div class="form-group" style="margin-left:19px;">
+                            <label class="form-check-label">
+                            <input type="checkbox" id="display" class="form-check-input" ${editBtn.dataset.eventDisplay == "true" ? "checked" : ""}>
+                            Display in the site (Event Page)
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="margin-left:19px;">
+                            <label class="form-check-label">
+                            <input type="checkbox" id="highlight" class="form-check-input" ${editBtn.dataset.eventHighlight == "true" ? "checked" : ""}>
+                            Display in highlights (Home Page)
+                            </label>
+                        </div>
+
+                    </form>
+                `,
             `
-                <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-success" id="updateEvent">Update</button>
-            `
+                    <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" id="updateEvent">Update</button>
+                `
         );
 
         ClassicEditor.create(document.querySelector('#event_description')).then(e => window.ictEditorInstance = e);
@@ -232,11 +387,11 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
             wrap.style.marginRight = "10px";
 
             wrap.innerHTML = `
-                <img src="/storage/${img.image_path}" width="120" class="rounded border">
-                <button type="button" class="btn btn-danger btn-sm delete-event-image"
-                        data-id="${img.id}"
-                        style="position:absolute; top:0; right:0; border-radius:50%; padding:2px 6px;">×</button>
-            `;
+                    <img src="/storage/${img.image_path}" width="120" class="rounded border">
+                    <button type="button" class="btn btn-danger btn-sm delete-event-image"
+                            data-id="${img.id}"
+                            style="position:absolute; top:0; right:0; border-radius:50%; padding:2px 6px;">×</button>
+                `;
 
             container.appendChild(wrap);
         });
@@ -259,10 +414,10 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
                             method: "DELETE",
                             headers: { "X-CSRF-TOKEN": csrf }
                         })
-                        .then(r => r.json())
-                        .then(resp => {
-                            if (resp.success) delBtn.parentElement.remove();
-                        });
+                            .then(r => r.json())
+                            .then(resp => {
+                                if (resp.success) delBtn.parentElement.remove();
+                            });
                     }
                 });
             });
@@ -293,23 +448,24 @@ document.querySelectorAll('.edit-event-btn').forEach(btn => {
                 })
             );
         });
-    });
+    }
 });
+
 
 // ===============================
 // DELETE EVENT
 // ===============================
-document.querySelectorAll('.delete-event-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const id = btn.dataset.eventId;
 
-        confirmAction("Delete Event?", "This action cannot be undone.", () =>
-            fetch(`/api/event/${id}`, {
-                method: "DELETE",
-                headers: { "X-CSRF-TOKEN": csrf }
-            })
-        );
-    });
+document.addEventListener('click', function (e) {
+    const deleteBtn = e.target.closest('.delete-event-btn');
+    const id = deleteBtn.dataset.eventId;
+
+    confirmAction("Delete Event?", "This action cannot be undone.", () =>
+        fetch(`/api/event/${id}`, {
+            method: "DELETE",
+            headers: { "X-CSRF-TOKEN": csrf }
+        })
+    );
 });
 
 // ===============================
@@ -367,7 +523,7 @@ document.getElementById('addAnnouncementBtn').addEventListener('click', () => {
         const payload = {
             name: document.getElementById('announcement_name').value,
             date: document.getElementById('announcement_date').value,
-            description:  window.ictEditorInstance.getData(),
+            description: window.ictEditorInstance.getData(),
             category: document.getElementById('category').value,
             display: document.getElementById('display').checked ? "true" : "false"
         };
@@ -388,51 +544,51 @@ document.getElementById('addAnnouncementBtn').addEventListener('click', () => {
 // ===============================
 // EDIT ANNOUNCEMENT
 // ===============================
-document.querySelectorAll('.edit-announcemnet-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const id = btn.dataset.announcemnetId;
-
+document.addEventListener('click', function (e) {
+    const editBtn = e.target.closest('.edit-announcemnet-btn')
+    const id = editBtn.dataset.announcemnetId;
+    if (editBtn) {
         openModal(
             "Edit Announcement",
             `
-                <form autocomplete="off">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="announcement_name" class="form-control" value="${btn.dataset.announcemnetName}">
-                    </div>
+                    <form autocomplete="off">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="announcement_name" class="form-control" value="${editBtn.dataset.announcemnetName}">
+                        </div>
 
-                    <div class="form-group mt-2">
-                        <label>Date</label>
-                        <input type="date" id="announcement_date" class="form-control" value="${btn.dataset.announcemnetDate}">
-                    </div>
+                        <div class="form-group mt-2">
+                            <label>Date</label>
+                            <input type="date" id="announcement_date" class="form-control" value="${editBtn.dataset.announcemnetDate}">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="category">Category</label>
-                        <select class="form-control" id="category">
-                            <option value="" disabled selected>Select Category</option>
-                            <option value="Announcements" ${btn.dataset.announcemnetCategory === "Announcements" ? "selected" : ""}>Announcements</option>
-                            <option value="Tender" ${btn.dataset.announcemnetCategory === "Tender" ? "selected" : ""}>Tender</option>
-                            <option value="Vacancy" ${btn.dataset.announcemnetCategory === "Vacancy" ? "selected" : ""}>Vacancy</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select class="form-control" id="category">
+                                <option value="" disabled selected>Select Category</option>
+                                <option value="Announcements" ${editBtn.dataset.announcemnetCategory === "Announcements" ? "selected" : ""}>Announcements</option>
+                                <option value="Tender" ${editBtn.dataset.announcemnetCategory === "Tender" ? "selected" : ""}>Tender</option>
+                                <option value="Vacancy" ${editBtn.dataset.announcemnetCategory === "Vacancy" ? "selected" : ""}>Vacancy</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group mt-2">
-                        <label>Description</label>
-                        <textarea id="announcement_description" class="form-control" rows="5">${btn.dataset.announcemnetDescription}</textarea>
-                    </div>
+                        <div class="form-group mt-2">
+                            <label>Description</label>
+                            <textarea id="announcement_description" class="form-control" rows="5">${editBtn.dataset.announcemnetDescription}</textarea>
+                        </div>
 
-                    <div class="form-group" style="margin-left:19px;">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true"
-                        ${btn.dataset.announcemnetDisplay == "true" ? "checked" : ""}>
-                        Display in the site
-                    </label>
-                </form>
-            `,
+                        <div class="form-group" style="margin-left:19px;">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="display" name="display" value="true"
+                            ${editBtn.dataset.announcemnetDisplay == "true" ? "checked" : ""}>
+                            Display in the site
+                        </label>
+                    </form>
+                `,
             `
-                <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-success" id="updateAnnouncement">Update</button>
-            `
+                    <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" id="updateAnnouncement">Update</button>
+                `
         );
 
         ClassicEditor
@@ -444,7 +600,7 @@ document.querySelectorAll('.edit-announcemnet-btn').forEach(btn => {
             const payload = {
                 name: document.getElementById('announcement_name').value,
                 date: document.getElementById('announcement_date').value,
-                description:  window.ictEditorInstance.getData(),
+                description: window.ictEditorInstance.getData(),
                 category: document.getElementById('category').value,
                 display: document.getElementById('display').checked ? "true" : "false"
             };
@@ -460,21 +616,20 @@ document.querySelectorAll('.edit-announcemnet-btn').forEach(btn => {
                 })
             );
         });
-    });
+    }
 });
 
 // ===============================
 // DELETE ANNOUNCEMENT
 // ===============================
-document.querySelectorAll('.delete-announcemnet-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const id = btn.dataset.announcemnetId;
+document.addEventListener('click', function (e) {
+    const deleteBtn = e.target.closest('.delete-announcemnet-btn');
+    const id = deleteBtn.dataset.announcemnetId;
 
-        confirmAction("Delete Announcement?", "This action cannot be undone.", () =>
-            fetch(`/api/announcement/${id}`, {
-                method: "DELETE",
-                headers: { "X-CSRF-TOKEN": csrf }
-            })
-        );
-    });
+    confirmAction("Delete Announcement?", "This action cannot be undone.", () =>
+        fetch(`/api/announcement/${id}`, {
+            method: "DELETE",
+            headers: { "X-CSRF-TOKEN": csrf }
+        })
+    );
 });

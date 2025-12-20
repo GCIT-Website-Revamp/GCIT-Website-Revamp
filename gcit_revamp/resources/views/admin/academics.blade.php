@@ -127,7 +127,8 @@
                               <div class="heading1 margin_0">
                                  <h2>Modules</h2>
                               </div>
-                              <div>
+                              <div class="d-flex">
+                                 <input type="text" id="moduleSearch" class="form-control mx-2" placeholder="Search..." data-search-input>
                                  <button id="addModuleBtn" type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#myModal" aria-haspopup="true" aria-controls="myModal">
                                     <i class="fa fa-plus-circle mx-2 mb-2 mt-2"></i> Add Module

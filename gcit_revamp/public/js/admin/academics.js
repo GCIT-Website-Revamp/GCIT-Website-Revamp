@@ -1,5 +1,82 @@
 const csrf = document.querySelector('input[name="_token"]').value;
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    const moduleSearchInput = document.getElementById('moduleSearch');
+    if (!moduleSearchInput) return;
+
+    const moduleTableBody = moduleSearchInput
+        .closest('.white_shd')
+        .querySelector('table tbody');
+
+    const originalModuleRows = moduleTableBody.innerHTML;
+
+    moduleSearchInput.addEventListener('input', function () {
+        const query = this.value.trim();
+
+        // Restore original table
+        if (query.length === 0) {
+            moduleTableBody.innerHTML = originalModuleRows;
+            return;
+        }
+
+        fetch(`/api/module-search?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) return;
+
+                moduleTableBody.innerHTML = '';
+
+                if (data.data.length === 0) {
+                    moduleTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center">No matching modules found</td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                data.data.forEach((module, index) => {
+                    moduleTableBody.innerHTML += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${module.name}</td>
+                            <td>${module.year}</td>
+                            <td>${module.semester}</td>
+                            <td style="max-width:250px;">
+                                ${module.description.substring(0, 150)}...
+                            </td>
+                            <td style="max-width:80px;">
+                                <div class="action-buttons">
+                                    <button
+                                        class="btn btn-success edit-module-btn"
+                                        data-module-id="${module.id}"
+                                        data-module-name="${module.name}"
+                                        data-module-description="${module.description.replace(/"/g, '&quot;')}"
+                                        data-module-year="${module.year}"
+                                        data-module-semester="${module.semester}"
+                                        data-module-course-id='${JSON.stringify(module.course_id || [])}'
+                                    >
+                                        Edit
+                                    </button>
+
+                                    <button
+                                        class="btn btn-danger delete-module-btn"
+                                        data-module-id="${module.id}"
+                                        data-module-name="${module.name}"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(err => console.error('Module search error:', err));
+    });
+});
+
 function formatErrors(errors) {
     if (!errors) return "";
     if (typeof errors === "string") return errors;
@@ -447,14 +524,15 @@ document.querySelectorAll('.delete-course-btn').forEach(button => {
 // =============================
 // Edit Module Button (Updated to Match Add Module)
 // =============================
-document.querySelectorAll('.edit-module-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        const moduleId = this.dataset.moduleId;
-        const moduleName = this.dataset.moduleName;
-        const moduleDescription = this.dataset.moduleDescription;
-        const moduleYear = this.dataset.moduleYear;
-        const moduleSemester = this.dataset.moduleSemester;
-        const moduleCourseIds = JSON.parse(this.dataset.moduleCourseId).map(Number); // pass as JSON array
+document.addEventListener('click', function (e) {
+    const editBtn = e.target.closest('.edit-module-btn');
+    if (editBtn) {
+        const moduleId = editBtn.dataset.moduleId;
+        const moduleName = editBtn.dataset.moduleName;
+        const moduleDescription = editBtn.dataset.moduleDescription;
+        const moduleYear = editBtn.dataset.moduleYear;
+        const moduleSemester = editBtn.dataset.moduleSemester;
+        const moduleCourseIds = JSON.parse(editBtn.dataset.moduleCourseId).map(Number); // pass as JSON array
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Module';
 
@@ -584,61 +662,60 @@ document.querySelectorAll('.edit-module-btn').forEach(button => {
         const modalEl = document.getElementById('myModal');
         const bsModal = new bootstrap.Modal(modalEl);
         bsModal.show();
-    });
+    }
 });
 
 
 // =============================
 // Delete Module Button
 // =============================
-document.querySelectorAll('.delete-module-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        const moduleId = this.dataset.moduleId;
-        const moduleName = this.dataset.moduleName;
+document.addEventListener('click', function (e) {
+    const deleteBtn = e.target.closest('.delete-module-btn');
+    const moduleId = deleteBtn.dataset.moduleId;
+    const moduleName = deleteBtn.dataset.moduleName;
 
-        Swal.fire({
-            title: "Delete Module?",
-            text: `Are you sure you want to delete "${moduleName}"? This action cannot be undone.`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, delete it!"
-        }).then(result => {
-            if (result.isConfirmed) {
-                fetch(`/api/module/${moduleId}`, {
-                    method: "DELETE",
-                    headers: {
-                        "X-CSRF-TOKEN": csrf,
-                        "Accept": "application/json"
-                    }
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: "success",
-                                title: "Module Deleted",
-                                text: data.message || "Module Deleted successfully!"
-                            });
-                            setTimeout(() => location.reload(), 1200);
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Failed",
-                                text: formatErrors(data.errors || data.message)
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
+    Swal.fire({
+        title: "Delete Module?",
+        text: `Are you sure you want to delete "${moduleName}"? This action cannot be undone.`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+        if (result.isConfirmed) {
+            fetch(`/api/module/${moduleId}`, {
+                method: "DELETE",
+                headers: {
+                    "X-CSRF-TOKEN": csrf,
+                    "Accept": "application/json"
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Module Deleted",
+                            text: data.message || "Module Deleted successfully!"
+                        });
+                        setTimeout(() => location.reload(), 1200);
+                    } else {
                         Swal.fire({
                             icon: "error",
-                            title: "Error",
-                            text: "Something went wrong!"
+                            title: "Failed",
+                            text: formatErrors(data.errors || data.message)
                         });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Something went wrong!"
                     });
-            }
-        });
+                });
+        }
     });
 });

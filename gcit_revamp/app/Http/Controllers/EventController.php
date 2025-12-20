@@ -226,4 +226,36 @@ class EventController extends Controller
 
             return response()->json(['success' => true, 'message' => 'Image deleted']);
         }
+        public function searchEvent(Request $request)
+        {
+            try {
+                $q = trim($request->query('q'));
+
+                if (!$q || strlen($q) < 1) {
+                    return response()->json([
+                        'success' => true,
+                        'count' => 0,
+                        'data' => []
+                    ]);
+                }
+
+                $events = Event::with('images')
+                    ->where('name', 'LIKE', "%{$q}%")
+                    ->orderBy('date', 'desc')
+                    ->get();
+
+                return response()->json([
+                    'success' => true,
+                    'count' => $events->count(),
+                    'data' => $events
+                ]);
+
+            } catch (\Exception $e) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to search events.',
+                    'error' => $e->getMessage()
+                ], 500);
+            }
+        }
 }

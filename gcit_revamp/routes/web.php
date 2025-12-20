@@ -33,7 +33,7 @@ use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\ICTController;
 use App\Http\Controllers\WelfareController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SearchController;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 
 Route::middleware('web')->group(function () {
     //search
@@ -70,6 +70,7 @@ Route::middleware('web')->group(function () {
     Route::delete('/api/event/{event}', [EventController::class, 'deleteEvent'])->name('deleteEvent');
     Route::put('/api/event/{event}', [EventController::class, 'updateEvent'])->name('updateEvent');
     Route::delete('/api/event-image/{id}', [EventController::class, 'deleteImage'])->name('deleteEventImage');
+    Route::get('/api/event-search', [EventController::class, 'searchEvent'])->name('searchEvent');
 
     // News API Routes
     Route::get('/api/announcement', [AnnouncementController::class, 'getAllAnnouncement'])->name('getAllAnnouncement');
@@ -77,6 +78,7 @@ Route::middleware('web')->group(function () {
     Route::post('/api/announcement', [AnnouncementController::class, 'createAnnouncement'])->name('createAnnouncement');
     Route::delete('/api/announcement/{announcement}', [AnnouncementController::class, 'deleteAnnouncement'])->name('deleteAnnouncement');
     Route::put('/api/announcement/{announcement}', [AnnouncementController::class, 'updateAnnouncement'])->name('updateAnnouncement');
+    Route::get('/api/announcement-search', [AnnouncementController::class, 'searchAnnouncement'])->name('searchAnnouncement');
 
     // Course API Routes
     Route::get('/api/course', [CourseController::class, 'getAllCourses'])->name('getAllCourses');
@@ -91,6 +93,7 @@ Route::middleware('web')->group(function () {
     Route::post('/api/module', [ModuleController::class, 'createModule'])->name('createModule');
     Route::delete('/api/module/{module}', [ModuleController::class, 'deleteModule'])->name('deleteModule');
     Route::put('/api/module/{module}', [ModuleController::class, 'updateModule'])->name('updateModule');
+    Route::get('/api/module-search', [ModuleController::class, 'searchModule'])->name('searchModule');
 
     // Club API Routes
     Route::get('/api/club', [ClubController::class, 'getAllClubs'])->name('getAllClubs');
@@ -112,6 +115,7 @@ Route::middleware('web')->group(function () {
     Route::post('/api/team', [TeamController::class, 'createTeam'])->name('createTeam');
     Route::delete('/api/team/{team}', [TeamController::class, 'deleteTeam'])->name('deleteTeam');
     Route::put('/api/team/{team}', [TeamController::class, 'updateTeam'])->name('updateTeam');
+    Route::get('/api/team-search', [TeamController::class, 'searchTeam'])->name('updateTeam');
 
     // Overview API Routes
     Route::get('/api/overview', [OverviewController::class, 'getAllOverviews'])->name('getAllOverviews');

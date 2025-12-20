@@ -3,6 +3,77 @@
 // =====================================
 const csrf = document.querySelector('input[name="_token"]')?.value;
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    const teamSearchInput = document.getElementById('teamSearch');
+    if (!teamSearchInput) return;
+
+    const teamTableBody = teamSearchInput
+        .closest('.white_shd')
+        .querySelector('table tbody');
+
+    const originalTeamRows = teamTableBody.innerHTML;
+
+    teamSearchInput.addEventListener('input', function () {
+        const query = this.value.trim();
+
+        // Restore original table when empty
+        if (query.length === 0) {
+            teamTableBody.innerHTML = originalTeamRows;
+            return;
+        }
+
+        fetch(`/api/team-search?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) return;
+
+                teamTableBody.innerHTML = '';
+
+                if (!data.data.length) {
+                    teamTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center">No matching team members found</td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                data.data.forEach((team, index) => {
+                    teamTableBody.innerHTML += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${team.name}</td>
+                            <td>
+                                <img src="/storage/${team.image}" width="60" class="rounded">
+                            </td>
+                            <td>${team.description || '-'}</td>
+                            <td>
+                                <button class="btn btn-success edit-btn"
+                                    data-id="${team.id}"
+                                    data-name="${team.name}"
+                                    data-type="${team.type}"
+                                    data-category="${team.category || ''}"
+                                    data-title="${team.title || ''}"
+                                    data-qualifications="${team.qualification || ''}"
+                                    data-description="${team.description || ''}"
+                                    data-image="/storage/${team.image}">
+                                    Edit
+                                </button>
+
+                                <button class="btn btn-danger delete-btn"
+                                    data-id="${team.id}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(err => console.error('Team search error:', err));
+    });
+});
+
 function formatErrors(errors) {
     if (!errors) return "";
     if (typeof errors === "string") return errors;
@@ -85,14 +156,15 @@ document.getElementById('addTeamBtn').addEventListener('click', function () {
 // =====================================
 // Edit Team
 // =====================================
-document.querySelectorAll('.edit-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-        const id = this.dataset.id;
-        const name = this.dataset.name;
-        const type = this.dataset.type;
-        const description = this.dataset.description;
-        const image = this.dataset.image;
-        const department = this.dataset.department;
+document.addEventListener('click', function (e) {
+    const editBtn = e.target.closest('.edit-btn');
+    if (editBtn) {
+        const id = editBtn.dataset.id;
+        const name = editBtn.dataset.name;
+        const type = editBtn.dataset.type;
+        const description = editBtn.dataset.description;
+        const image = editBtn.dataset.image;
+        const department = editBtn.dataset.department;
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Team';
 
@@ -129,12 +201,12 @@ document.querySelectorAll('.edit-btn').forEach(btn => {
 
         <div class="form-group" id="titleGroup" style="display:${type === "Academic" ? "block" : "none"};">
             <label>Title</label>
-            <input type="text" class="form-control" id="teamTitle" value="${this.dataset.title || ''}">
+            <input type="text" class="form-control" id="teamTitle" value="${editBtn.dataset.title || ''}">
         </div>
 
         <div class="form-group" id="qualificationsGroup" style="display:${type === "Academic" ? "block" : "none"};">
             <label for="teamQualifications">Qualifications</label>
-            <textarea class="form-control" id="teamQualifications" rows="2">${this.dataset.qualifications || ''}</textarea>
+            <textarea class="form-control" id="teamQualifications" rows="2">${editBtn.dataset.qualifications || ''}</textarea>
         </div>
 
         <div class="form-group">
@@ -155,7 +227,7 @@ document.querySelectorAll('.edit-btn').forEach(btn => {
         modal.show();
         attachTypeToggle();
         document.getElementById('updateTeamBtn').addEventListener('click', () => saveOrUpdateTeam(true, `${id}`));
-    });
+    }
 });
 
 // =====================================
@@ -221,54 +293,53 @@ function saveOrUpdateTeam(isEdit = false, id = null) {
 // =====================================
 // Delete Team (with fetch + confirmation)
 // =====================================
-document.querySelectorAll('.delete-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-        const id = this.dataset.id;
+document.addEventListener('click', function (e) {
+    const deleteBtn = e.target.closest('.delete-btn');
+    const id = deleteBtn.dataset.id;
 
-        Swal.fire({
-            title: "Are you absolutely sure?",
-            text: "This team will be permanently deleted.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it",
-            cancelButtonText: "Cancel",
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33"
-        }).then(result => {
-            if (result.isConfirmed) {
-                fetch(`/api/team/${id}`, {
-                    method: "DELETE",
-                    headers: {
-                        "X-CSRF-TOKEN": csrf,
-                        "Accept": "application/json"
-                    }
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: "success",
-                                title: "Deleted",
-                                text: data.message || "Team Deleted successfully!"
-                            });
-                            setTimeout(() => location.reload(), 1200);
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Failed",
-                                text: formatErrors(data.errors || data.message)
-                            });
-                        }
-                    })
-                    .catch(err => {
+    Swal.fire({
+        title: "Are you absolutely sure?",
+        text: "This team will be permanently deleted.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33"
+    }).then(result => {
+        if (result.isConfirmed) {
+            fetch(`/api/team/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "X-CSRF-TOKEN": csrf,
+                    "Accept": "application/json"
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Deleted",
+                            text: data.message || "Team Deleted successfully!"
+                        });
+                        setTimeout(() => location.reload(), 1200);
+                    } else {
                         Swal.fire({
                             icon: "error",
-                            title: "Error",
-                            text: "Something went wrong while deleting."
+                            title: "Failed",
+                            text: formatErrors(data.errors || data.message)
                         });
+                    }
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Something went wrong while deleting."
                     });
-            }
-        });
+                });
+        }
     });
 });
 

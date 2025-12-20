@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     eventTableBody.innerHTML += `
                     <tr>
                         <td>${index + 1}</td>
-                        <td>${event.name}</td>
-                        <td>
+                        <td style="max-width: 80px;">${event.name}</td>
+                        <td style="max-width: 80px;">
                             <img src="/storage/${event.image}" width="80">
                         </td>
                         <td style="max-width:250px;">${event.description.substring(0, 200)}...</td>
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>${index + 1}</td>
                             <td style="max-width:100px;">${announcement.name}</td>
                             <td style="max-width:80px;">${announcement.date}</td>
-                            <td style="max-width:340px;">${announcement.description}</td>
+                            <td style="max-width:340px;">${announcement.description.substring(0, 200)}</td>
                             <td style="max-width:80px;">
                                 <div class="action-buttons">
                                     <button type="button"

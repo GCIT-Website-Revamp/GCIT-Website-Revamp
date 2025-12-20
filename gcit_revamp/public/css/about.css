@@ -11,6 +11,7 @@
 .aboutContentWrapper{
     display: flex;
     gap: clamp(20px, 4vw, 60px);
+    padding-inline: 0 !important;
 }
 .aboutHeader h1{
     font-size: clamp(40px, 7vw, 96px);
@@ -49,9 +50,9 @@
 .bgColorUnderlay{
     position: absolute;
     left: 0;
-    top: 20%;
+    top: 35vw;
     z-index: 0;
-    height: 90%;
+    height: 100%;
     width: 100vw;
     background-color: #F3F3F3;
 }
@@ -182,9 +183,6 @@ text-align: center;
     .aboutDetailsWrapper {
         padding: 0 1.5rem;
     }
-    .bgColorUnderlay{
-        height: 80% !important;
-    }
 
     .aboutDetails img {
         height: 260px;
@@ -196,8 +194,8 @@ text-align: center;
     }
 
     .bgColorUnderlay {
-        top: 15%;
-        height: 100%;
+        top: 40%;
+        /* height: 100%; */
     }
 
     .mottoWrapper {
@@ -238,5 +236,13 @@ text-align: center;
 
     .otherCourseContainer a {
         font-size: 0.95rem;
+    }
+}
+
+
+@media (min-width: 1600px){
+    .preAboutHeader{
+        padding-left:  var(--padding-sides) !important;
+        padding-right:  var(--padding-sides) !important;
     }
 }

@@ -11,9 +11,9 @@
     </div>
     <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
-            <a href="">Home</a>
+            <a href="/">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">Updates</a>
+            <a href="/">Study</a>
         </div>
         <div class="contentWrapper">
             <h1>Clubs</h1>
@@ -45,32 +45,16 @@
                 <p>No clubs found.</p>
             @endforelse
         </div>
-        <div class="filterColumn">
-            <div class="filterWrapper">
-                <div class="headerWrapper">
-                <h1>Filters</h1>
-            </div>
-            <div class="filterContent">
-                <div class="filterHeader">
-                    <h1>Courses by Schools</h1>
-                </div>
-                <div class="filterContainer">
-                    
-                    <div class="filter">
-                        <input type="checkbox">
-                        <p>All Courses</p>
+        <div class="otherCourseContainer paddingContainer otherDepartment">
+                    <div class="header">
+                        <h1>More on Students</h1>
                     </div>
-                    <div class="filter">
-                        <input type="checkbox">
-                        <p>School of Computer Science</p>
+                    <div class="otherContent">
+                        <h1>Other Services</h1>
+                            <a href="/Clubs">Clubs</a>
+                            <a href="/resources/ICT">ICT</a>
+                            <a href="/resources/Student-Welfare">Student Welfare</a>
                     </div>
-                    <div class="filter">
-                        <input type="checkbox">
-                        <p>Interactive Design & Development</p>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
     </div>
 </div>

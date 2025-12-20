@@ -60,6 +60,17 @@
 <script type = "module" src = "{{ asset('js/website/post.js') }}"></script>
 
 <div class="filterOverlay"></div>
+<div class="heroVideoModal" aria-hidden="true">
+  <div class="heroVideoBackdrop"></div>
+
+  <div class="heroVideoContainer">
+    <button class="closeHeroVideo" aria-label="Close video">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <video class="heroVideoPlayer" controls playsinline></video>
+  </div>
+</div>
 
 </body>
 </html>

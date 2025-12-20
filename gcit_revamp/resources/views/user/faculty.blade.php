@@ -11,9 +11,8 @@
     </div>
     <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs">
-            <a href="">Home</a>
-            <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">Updates</a>
+            <a href="/">Home</a>
+           
         </div>
         <div class="contentWrapper ">
             <h1>Faculty</h1>

@@ -45,10 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>${index + 1}</td>
                             <td>${team.name}</td>
                             <td>
-                                <img src="/storage/${team.image}" width="60" class="rounded">
+                                <img src="/storage/${team.image}" width="80" class="rounded">
                             </td>
                             <td>${team.description || '-'}</td>
-                            <td>
+                            <td style="max-width: 80px;">
                                 <button class="btn btn-success edit-btn"
                                     data-id="${team.id}"
                                     data-name="${team.name}"

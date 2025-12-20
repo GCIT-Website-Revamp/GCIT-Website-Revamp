@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>${module.name}</td>
                             <td>${module.year}</td>
                             <td>${module.semester}</td>
-                            <td style="max-width:250px;">
-                                ${module.description.substring(0, 150)}...
+                            <td style="max-width: 440px;">
+                                ${module.description.substring(0, 200)}...
                             </td>
                             <td style="max-width:80px;">
                                 <div class="action-buttons">

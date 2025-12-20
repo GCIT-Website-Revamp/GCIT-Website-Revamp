@@ -11,7 +11,7 @@
 
 .post img{
     width: 100%;
-    height: clamp(350px, 40vw, 500px);
+    height: auto;
     object-fit: cover;
     margin-bottom: 40px;
 }
@@ -95,7 +95,7 @@ li ul li {
 
 .suggestion a{
     text-decoration: none;
-    color: #9A9A9A;
+    color: var(--color-primary);
     display: flex;
     align-items: center;
     gap: 0.5rem

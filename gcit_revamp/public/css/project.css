@@ -190,7 +190,7 @@
         height: fit-content;
     }
     .courseWrapper .header h1{
-        padding: 0;
+        padding: 0 var(--padding-sides);
     }
     .highlightContentContainer{
     display: flex;
@@ -199,7 +199,14 @@
     width: 100%;
     padding: 0 !important;
     align-items: center;
-}
+    }
+    .cardWrapper{
+        padding: 0 var(--padding-sides) !important;
+    }
+    .messageContainer{
+    padding: clamp(60px, 10vw, 120px) var(--padding-sides);
+
+    }
 }
 @media (max-width: 1024px) {
     .projectAllHeader p{

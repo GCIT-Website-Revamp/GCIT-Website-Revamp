@@ -12,27 +12,50 @@ document.addEventListener("DOMContentLoaded", () => {
     let activeDropdown = null;
     let activeWrapper = null;
 
-    dropdowns.forEach(wrapper => {
-        const link = wrapper.querySelector(".dropDownLink");
-        const menu = wrapper.querySelector(".dropDownContent");
+   dropdowns.forEach(wrapper => {
+    const link = wrapper.querySelector(".dropDownLink");
+    const menu = wrapper.querySelector(".dropDownContent");
+    if (!link || !menu) return;
 
-        if (!link || !menu) return;
+    /* =========================
+       DESKTOP → HOVER
+    ========================= */
+    wrapper.addEventListener("mouseenter", () => {
+        if (window.innerWidth < DESKTOP_BREAKPOINT) return;
 
-        link.addEventListener("click", (e) => {
-            e.stopPropagation();
+        if (activeDropdown && activeDropdown !== menu) {
+            closeDropdown(activeDropdown, activeWrapper);
+        }
 
-            if (activeDropdown === menu) {
-                closeDropdown(menu, wrapper);
-                return;
-            }
-
-            if (activeDropdown) {
-                closeDropdown(activeDropdown, activeWrapper);
-            }
-
-            openDropdown(menu, wrapper);
-        });
+        openDropdown(menu, wrapper);
     });
+
+    wrapper.addEventListener("mouseleave", () => {
+        if (window.innerWidth < DESKTOP_BREAKPOINT) return;
+
+        closeDropdown(menu, wrapper);
+    });
+
+    /* =========================
+       MOBILE → CLICK
+    ========================= */
+    link.addEventListener("click", (e) => {
+        if (window.innerWidth >= DESKTOP_BREAKPOINT) return;
+
+        e.stopPropagation();
+
+        if (activeDropdown === menu) {
+            closeDropdown(menu, wrapper);
+            return;
+        }
+
+        if (activeDropdown) {
+            closeDropdown(activeDropdown, activeWrapper);
+        }
+
+        openDropdown(menu, wrapper);
+    });
+});
 
     document.addEventListener("click", () => {
         if (activeDropdown) closeDropdown(activeDropdown, activeWrapper);

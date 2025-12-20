@@ -251,4 +251,78 @@ function toggleMute() {
     updateViewport();
   });
 
+  const heroModal = document.querySelector(".heroVideoModal");
+  const heroPlayer = document.querySelector(".heroVideoPlayer");
+  const closeHeroBtn = document.querySelector(".closeHeroVideo");
+
+  function openHeroVideo(src) {
+    heroPlayer.src = src;
+    heroPlayer.currentTime = 0;
+    heroPlayer.play();
+
+    heroModal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeHeroVideo() {
+    heroPlayer.pause();
+    heroPlayer.src = "";
+    heroModal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  closeHeroBtn.addEventListener("click", closeHeroVideo);
+  heroModal.querySelector(".heroVideoBackdrop")
+    .addEventListener("click", closeHeroVideo);
+
+      const contentContainer = document.querySelector(".contentContainr");
+
+contentContainer.addEventListener("click", (e) => {
+  const s = heroSlides[activeIndex];
+
+  if (!s || !s.media.endsWith(".mp4")) return;
+
+  openHeroVideo(s.media);
+});
+
+  heroImage.addEventListener("click", () => {
+    const s = heroSlides[activeIndex];
+    if (s.media.endsWith(".mp4")) {
+      openHeroVideo(s.media);
+    }
+  });
+
+  heroTitle.style.cursor = "pointer";
+
+heroTitle.addEventListener("click", () => {
+  const s = heroSlides[activeIndex];
+  if (s.media.endsWith(".mp4")) {
+    openHeroVideo(s.media);
+  }
+});
+
+// Optional JS enhancement (recommended)
+document.querySelectorAll(".course").forEach(course => {
+  const checkbox = course.querySelector("input[type='checkbox']");
+  if (!checkbox) return;
+
+  course.addEventListener("click", () => {
+    checkbox.checked = !checkbox.checked;
+  });
+});
+
+document.querySelectorAll(".course").forEach(course => {
+  const checkbox = course.querySelector("input[type='checkbox']");
+  if (!checkbox) return;
+
+  course.addEventListener("click", (e) => {
+    if (e.target.closest("a, button")) return;
+
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      return;
+    }
+
+    checkbox.checked = !checkbox.checked;
+  });
+});
 });

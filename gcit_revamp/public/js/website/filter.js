@@ -1,18 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-let lockedLeft = null;
-let lockedWidth = null;
 
-function lockHorizontalPosition() {
-  const rect = column.getBoundingClientRect();
-  lockedLeft = rect.left + window.scrollX;
-  lockedWidth = rect.width;
-}
-
-lockHorizontalPosition();
-
-window.addEventListener("resize", () => {
-  lockHorizontalPosition();
-});
   /* =========================================================
      CONFIG
   ========================================================= */
@@ -33,6 +20,20 @@ window.addEventListener("resize", () => {
 
   if (!filter || !column) return;
 
+  let lockedLeft = null;
+let lockedWidth = null;
+
+function lockHorizontalPosition() {
+  const rect = column.getBoundingClientRect();
+  lockedLeft = rect.left + window.scrollX;
+  lockedWidth = rect.width;
+}
+
+lockHorizontalPosition();
+
+window.addEventListener("resize", () => {
+  lockHorizontalPosition();
+});
   /* =========================================================
      INLINE-PARENT SAFETY (ROGUE <i> FIX)
   ========================================================= */

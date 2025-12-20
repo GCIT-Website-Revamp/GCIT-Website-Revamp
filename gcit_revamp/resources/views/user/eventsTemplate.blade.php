@@ -25,7 +25,7 @@
     <div class="eventsWrapper">
          <button class="filterToggle">
             <span class="material-symbols-outlined">filter_list</span>
-        Filter Courses
+        Filter
         </button>
         <div class="mainContent">
             <p class="noResults" style="display:none;">

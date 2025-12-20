@@ -20,6 +20,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!filter || !column) return;
 
+  let lockedLeft = null;
+let lockedWidth = null;
+
+function lockHorizontalPosition() {
+  const rect = column.getBoundingClientRect();
+  lockedLeft = rect.left + window.scrollX;
+  lockedWidth = rect.width;
+}
+
+lockHorizontalPosition();
+
+window.addEventListener("resize", () => {
+  lockHorizontalPosition();
+});
   /* =========================================================
      INLINE-PARENT SAFETY (ROGUE <i> FIX)
   ========================================================= */
@@ -131,8 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // 🔒 Fixed
       filter.style.position = "fixed";
       filter.style.top = OFFSET + "px";
-      filter.style.left = boundaryRect.left + "px";
-      filter.style.width = boundaryRect.width + "px";
+      filter.style.left = lockedLeft + "px";
+      filter.style.width = lockedWidth + "px";
     }
     else if (endFix) {
       // 🛑 Stop at bottom

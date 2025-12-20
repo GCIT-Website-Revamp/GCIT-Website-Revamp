@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="pageBannerWrapper">
+    <div class="pageBannerWrapper courseContentContainer">
         <div class="backgroundWrapper">
             <div class="overlay"></div>
             <img src="{{ asset('images/pageBanner.png') }}" alt="">
@@ -24,15 +24,23 @@
             </div>
         </div>
     </div>
-    <div class="pageContentWrapper">
+    <div class="pageContentWrapper courseContentContainer">
         <input type="checkbox" id="courseMenuToggle" hidden>
 
 <label for="courseMenuToggle" class="courseMenuBtn">
     <span class="material-symbols-outlined">menu</span>
+
 </label>
         <div class="section">
             <div class="courseDetailsContainer">
                 <div class="sideMenu">
+                    <div class="menuHeader">
+                        <label for="courseMenuToggle">
+                            <span class="material-symbols-outlined">menu</span>
+    Quick Index
+
+                    </label>
+                    </div>
                     <div class="menuSection">
                         <div class="header">
                             <div class="circle"></div>

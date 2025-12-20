@@ -44,7 +44,7 @@
 }
 
 .contentContainr {
-  max-width: 1600px;
+  /* max-width: 1600px; */
   margin: 0 auto;
   height: 100%;
   width: 100%;
@@ -55,12 +55,12 @@
     position: absolute;
     bottom: clamp(20px, 4vw, 35px);
     display: flex;
-    max-width: 1600px;
+    /* max-width: 1600px; */
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    /* padding: 0 var(--padding-sides); */
-    width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
+    padding: 0 var(--padding-sides);
+    width: calc(100% - var(--padding-sides));
     z-index: 20;
     
 }
@@ -76,7 +76,17 @@
 
 .leftBtn, .rightBtn{
     color: white;
-
+    position: absolute;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    transform: translateY(-50%)
+}
+.leftBtn{
+    left: 0;
+}
+.rightBtn{
+    right: 0;
 }
 
 .leftBtn span, .rightBtn span{
@@ -88,7 +98,7 @@
     cursor: pointer
 }
 .leftBtn{
-    transform: rotate(180deg);
+    transform: rotate(180deg) translateY(50%);
 }
 
 .sliderWrapper {
@@ -203,14 +213,15 @@
 .cardWrapper{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     gap: 2rem;
-    margin: clamp(60px, 10vw, 140px) auto;
+    padding: clamp(60px, 10vw, 120px) var(--padding-sides) !important;
+    /* margin: clamp(60px, 10vw, 140px) auto; */
     align-items: center;
 }
 
 .cardWrapper .card{
-    width: 30%;
+    width: calc(calc(100% - calc(var(--padding-sides) + var(--padding-sides)) ) / 3);
     padding: clamp(1rem, 3vw, 30px);
     background-color: #FAFAFA;
     height: 560px;
@@ -346,7 +357,7 @@
     z-index: 20;
     left: 30%;
     width: 50%;
-    bottom: 20%;
+    bottom: 10%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -357,8 +368,9 @@
     font-weight: 300;
     font-family: var(--font-text);
     opacity: 0;
+    width: calc(80%);
     height: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     transform: translateY(10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -505,7 +517,7 @@
     display: flex;
     height: 80vh;
     width: 100%;
-    background-color:#F3F3F3 ;
+    background-color:#FAFAFA ;
 }
 .homeProjectDetails{
     display: flex;
@@ -514,7 +526,7 @@
 }
 
 .homeProjectDetails .projectMessage{
-    height: 50%;
+    height: 80%;
     background-color: var(--color-primary);
     display: flex;
     flex-direction: column;
@@ -592,6 +604,7 @@
 
 .projectName .prjSlider{
     margin-top: 2rem;
+    justify-content: center;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -605,7 +618,10 @@
     text-align: left;
     gap: 1rem;
 }
-
+.projectBanner a{
+    height: 100%;
+    width: 100%;
+}
 .prjSlider .left{
     transform: rotate(180deg)
 }
@@ -658,7 +674,13 @@ font-size: 32px;}
     align-items: flex-end;
     justify-content: space-between;
 }
+.homeAnnouncementWrapper .card p {
+    display: none;
+}
 
+.homeAnnouncementWrapper .card p:nth-of-type(2) {
+    display: block;
+}
 .homeAnnouncementHeader .headerContent h1{
     font-size: clamp(22px, 4vw, 40px);
     font-family: var(--font-Header);
@@ -765,6 +787,7 @@ font-size: 32px;}
    text-decoration: none;
    color: var(--color-primary);
    display: flex;
+ 
    gap: 0.5rem;
    justify-content: flex-end;
    margin-top: 2rem;
@@ -912,6 +935,56 @@ font-size: 32px;}
 .mobilePRJSlider{
     display: none
 }
+
+.heroVideoModal {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: none;
+}
+
+.heroVideoModal.active {
+  display: block;
+}
+
+.heroVideoBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+}
+
+.heroVideoContainer {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.heroVideoPlayer {
+  width: 100%;
+  height: auto;
+  max-height: 90vh;
+  background: black;
+}
+
+.closeHeroVideo {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.heroBannerWrapper .overlay {
+  pointer-events: none;
+}
+
+
 @media (max-width: 1024px) {
     .heading-row .main-header {
 display: block;
@@ -1078,15 +1151,15 @@ display: block;
         padding: 0;
     }
     .course .courseCoverTitle p{
-        opacity: 1;
-        height: auto;
+        opacity: 0;
+        height: 0;
         width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
-        transform: translateY(0);
+        /* transform: translateY(0); */
     }
     .course .courseCoverTitle .ctaBtn{
-        opacity: 1;
-        transform: translateY(0);
-        height: auto;
+        opacity: 0;
+        /* transform: translateY(0); */
+        height: 0;
     }
     /* .course:hover .courseLinkWrapper{
     padding-left: 10%;
@@ -1295,9 +1368,56 @@ display: block;
         top: unset;
         bottom: 5%;
     }
+
+  
+}
+
+@media (hover:hover) and (pointer:fine){
+      .socWrapper:hover,
+  .siddWrapper:hover,
+  .courseContent:hover .course {
+    width: 100% !important;
+  }
+   .courseCoverTitle p,
+  .courseCoverTitle .ctaBtn {
+    opacity: 0;
+    height: 0;
+    transform: translateY(10px);
+  }
+  .socToggle:checked ~ .courseCoverTitle{
+
+        bottom: 5%;
+        top: unset;
+
+    }
+    .siddToggle:checked ~ .courseCoverTitle{
+
+        bottom: 5%;
+        top: unset;
+
+    }
+
+    .socToggle:checked ~ .courseCoverTitle p{
+        opacity: 1;
+        transform: translateY(0);
+        height: auto
+    }
+    .siddToggle:checked ~ .courseCoverTitle p{
+        opacity: 1;
+        transform: translateY(0);
+        height: auto
+    }
     
-
-
+    .socToggle:checked ~ .courseCoverTitle .ctaBtn{
+        opacity: 1;
+        transform: translateY(0);
+        height: auto;
+    }
+    .siddToggle:checked ~ .courseCoverTitle .ctaBtn{
+        opacity: 1;
+        height: auto;
+        transform: translateY(0);
+    }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1409,4 +1529,11 @@ display: block;
     .descriptionWrapper{
         left: 0;
     }
+}
+
+@media (max-width: 800px) {
+  .homeEventWrapper .event:nth-of-type(n+5) {
+    display: none;
+  }
+
 }

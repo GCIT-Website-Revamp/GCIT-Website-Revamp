@@ -5,8 +5,8 @@
 @section('content')
    <div class="">
             <div class="projectContent">
-                <div class="highlightWrapper">
-                    <!-- <div class="blackBar"></div> -->
+                <!-- <div class="highlightWrapper">
+                    <div class="blackBar"></div>
                     <div class="projectHighlight"
                         id="projectHighlight"
                         data-projects='@json($projects)'>
@@ -37,9 +37,8 @@
                             </div>
                         </div>
                     </div>
-        </div>
-        <div class="projectHeaderWrapper sectionWrapper">
-            <!-- <img src="{{asset('Images/projectBackground.png')}}" alt=""> -->
+                </div> -->
+        <!-- <div class="projectHeaderWrapper sectionWrapper">
                 <div class="breadCrumbs">
                     <a href="/">Home</a>
                     <span class="material-symbols-outlined">keyboard_arrow_right</span>
@@ -49,13 +48,30 @@
                     <h1>Highlight Projects</h1>
                     <p>Explore innovative student projects that bridge creativity and technology. From AI-driven solutions to blockchain applications and interactive design prototypes, these projects showcase GCIT’s commitment to real-world learning and problem-solving that makes an impact.</p>
                 </div>
-        </div>
+        </div> -->
      
         <!-- <div class="projectAllHeader">
             <h1>Capstone Projects</h1>
             <p>At GCIT, capstone projects represent the culmination of students’ academic journeys — a chance to transform classroom learning into practical, real-world solutions. These projects highlight creativity, technical excellence, and innovation across diverse fields such as Full Stack Development, AI & Data Science, Blockchain, Cybersecurity, and Interactive Design.</p>
         </div> -->
-        <div class="sectionWrapper noPadding">
+        <div class="pageBannerWrapper projectListBanner">
+            <div class="backgroundWrapper">
+                <div class="overlay"></div>
+                <img src="{{ asset('images/pageBanner.png') }}" alt="">
+            </div>
+            <div class="bannerContent sectionWrapper">
+                <div class="breadCrumbs">
+                    <a href="/">Home</a>
+                    <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                    <a href="/">Initiatives</a>
+                </div>
+                <div class="contentWrapper">
+                    <h1>Highlight Projects</h1>
+                    <p>Explore innovative student projects that bridge creativity and technology. From AI-driven solutions to blockchain applications and interactive design prototypes, these projects showcase GCIT’s commitment to real-world learning and problem-solving that makes an impact.</p>
+                </div>
+            </div>
+        </div>
+        <div class="sectionWrapper eventsWrapper noPadding">
 
             <div class="section eventsWrapper paddingContainer">
                 <button class="filterToggle">
@@ -87,17 +103,16 @@
                         </div>
                         <div class="filterContent">
                             <div class="filterHeader">
-                                <h1>Courses by Schools</h1>
+                                <h1>Projects By Courses</h1>
                             </div>
                             <div class="filterContainer">
-                                
                                 <div class="filter">
                                     <input type="checkbox">
-                                    <p>All Courses</p>
+                                    <p>Fullstack & AI</p>
                                 </div>
                                 <div class="filter">
                                     <input type="checkbox">
-                                    <p>School of Computer Science</p>
+                                    <p>Blockchain</p>
                                 </div>
                                 <div class="filter">
                                     <input type="checkbox">

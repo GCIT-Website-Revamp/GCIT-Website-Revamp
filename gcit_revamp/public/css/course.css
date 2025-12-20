@@ -1,7 +1,4 @@
-.courseContent .card img{
-    width: 40% !important;
-    max-width: 400px;
-}
+
 
 .courseContent .coursePreHeader{
     font-size: clamp(16px, 2vw, 20px);
@@ -9,4 +6,20 @@
 
 .courseContent .cardContent{
     padding-top: 2.5rem !important;
+}
+
+
+.courseContentContainer{
+    padding-inline: 2.5rem;
+}
+
+/* DESKTOP ONLY */
+@media (min-width: 1024px) {
+  .filterColumn {
+    position: relative;
+    width: 320px;
+    max-width: 320px;
+    transform: none !important;
+    box-shadow: none;
+  }
 }

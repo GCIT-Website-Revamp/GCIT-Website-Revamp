@@ -32,17 +32,17 @@
 
             </div>
             
-            <div class="otherCourseContainer otherDepartment">
-                 <div class="header">
-                     <h1>More on Academics</h1>
-                 </div>
-                 <div class="otherContent">
-                     <h1>Other Courses</h1>
-                     @foreach ($courses as $course)
-                        <a href="/courseDetails/{{ $course->id }}">{{ $course->name }}</a>
-                     @endforeach
-                 </div>
-             </div>
+              <div class="otherCourseContainer paddingContainer otherDepartment">
+                    <div class="header">
+                        <h1>More on Students</h1>
+                    </div>
+                    <div class="otherContent">
+                        <h1>Other Services</h1>
+                            <a href="/Clubs">Clubs</a>
+                            <a href="/resources/ICT">ICT</a>
+                            <a href="/resources/Student-Welfare">Student Welfare</a>
+                    </div>
+        </div>
         </div>
     </div>
 </div>

@@ -3,22 +3,23 @@
 @section('title', 'Home')
 
 @section('content')
+<div class="bgColorUnderlay"></div>
 
-<div class="preAboutHeader">
+<div class="preAboutHeader sectionWrapper">
         <div class="breadCrumbs">
             <a href="">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
             <a href="">About GCIT</a>
         </div>
 </div>
-<div class="aboutContentWrapper">
+
+<div class="aboutContentWrapper sectionWrapper">
     <div class="aboutContent">
         <div class="aboutHeader">
             <h1>Institutional Overview</h1>
             <br>
         </div>
         <div class="aboutDetailsWrapper">
-            <div class="bgColorUnderlay"></div>
             <div class="aboutDetails">
                 @if($overview)
                 <img src="{{ asset('storage/' . $overview->image) }}" alt="">

@@ -164,4 +164,36 @@ class ModuleController extends Controller
             ], 500);
         }
     }
+    public function searchModule(Request $request)
+    {
+        try {
+            $q = trim($request->query('q'));
+
+            if (!$q || strlen($q) < 1) {
+                return response()->json([
+                    'success' => true,
+                    'count' => 0,
+                    'data' => []
+                ]);
+            }
+
+            $modules = Module::where('name', 'LIKE', "%{$q}%")
+                ->orderBy('year')
+                ->orderBy('semester')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'count' => $modules->count(),
+                'data' => $modules
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to search modules.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

@@ -186,4 +186,39 @@ class TeamController extends Controller
             ], 500);
         }
     }
+    public function searchTeam(Request $request)
+    {
+        try {
+            $q = trim($request->query('q'));
+
+            if (!$q || strlen($q) < 1) {
+                return response()->json([
+                    'success' => true,
+                    'count' => 0,
+                    'data' => []
+                ]);
+            }
+
+            $teams = Team::where('name', 'LIKE', "%{$q}%")
+                ->orWhere('title', 'LIKE', "%{$q}%")
+                ->orWhere('qualification', 'LIKE', "%{$q}%")
+                ->orWhere('type', 'LIKE', "%{$q}%")
+                ->orWhere('category', 'LIKE', "%{$q}%")
+                ->orderBy('name', 'asc')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'count' => $teams->count(),
+                'data' => $teams
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to search teams.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

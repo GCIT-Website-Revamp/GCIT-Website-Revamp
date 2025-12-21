@@ -1,5 +1,94 @@
 const csrf = document.querySelector('input[name="_token"]').value;
 
+// =====================================
+// Project Search (Live Search)
+// =====================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    const projectSearchInput = document.getElementById('projectSearch');
+    if (!projectSearchInput) return;
+
+    const projectTableBody = projectSearchInput
+        .closest('.white_shd')
+        .querySelector('table tbody');
+
+    // Save original rows to restore later
+    const originalProjectRows = projectTableBody.innerHTML;
+
+    projectSearchInput.addEventListener('input', function () {
+        const query = this.value.trim();
+
+        // Restore original table when input is empty
+        if (query.length === 0) {
+            projectTableBody.innerHTML = originalProjectRows;
+            return;
+        }
+
+        fetch(`/api/project-search?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) return;
+
+                projectTableBody.innerHTML = '';
+
+                if (!data.data.length) {
+                    projectTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center">No matching projects found</td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                data.data.forEach((project, index) => {
+                    projectTableBody.innerHTML += `
+                        <tr>
+                            <td>${index + 1}</td>
+
+                            <td style="max-width:40px;">${project.name}</td>
+
+                            <td style="max-width:80px;">
+                                <img src="/storage/${project.image}" width="80">
+                            </td>
+
+                            <td style="max-width:340px;">
+                                ${project.description ? project.description.substring(0, 200) + '...' : '-'}
+                            </td>
+
+                            <td>${project.year}</td>
+
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-success edit-project-btn"
+                                        data-id="${project.id}"
+                                        data-name="${project.name}"
+                                        data-year="${project.year}"
+                                        data-guide="${project.guide}"
+                                        data-display="${project.display}"
+                                        data-highlight="${project.highlight}"
+                                        data-developers="${project.developers || ''}"
+                                        data-description="${project.description || ''}"
+                                        data-image="/storage/${project.image}"
+                                        data-images='${JSON.stringify(project.images || [])}'>
+                                        Edit
+                                    </button>
+
+                                    <button class="btn btn-danger delete-project-btn"
+                                        data-project-id="${project.id}">
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(err => {
+                console.error('Project search error:', err);
+            });
+    });
+});
+
 // Helper to format validation errors
 function formatErrors(errors) {
     if (!errors) return "";
@@ -105,7 +194,7 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
             console.error('Error fetching teams:', err);
             Swal.fire({ icon: "error", title: "Error", text: "Failed to load teams." });
         });
-    
+
     document.getElementById('addProject').addEventListener('click', function () {
         const form = document.getElementById('addProjectForm');
         const formData = new FormData(form);
@@ -126,31 +215,31 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
                     headers: { "X-CSRF-TOKEN": csrf },
                     body: formData
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire({
-                            icon: "success",
-                            title: "Project Added",
-                            text: data.message || "Project created successfully!"
-                        });
-                        setTimeout(() => location.reload(), 1500);
-                    } else {
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Project Added",
+                                text: data.message || "Project created successfully!"
+                            });
+                            setTimeout(() => location.reload(), 1500);
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Failed",
+                                text: formatErrors(data.errors || data.message)
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
                         Swal.fire({
                             icon: "error",
-                            title: "Failed",
-                            text: formatErrors(data.errors || data.message)
+                            title: "Error",
+                            text: "Something went wrong!"
                         });
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Something went wrong!"
                     });
-                });
             }
         });
     });
@@ -161,9 +250,10 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
 // =====================
 // Edit Project Modal Logic
 // =====================
-document.querySelectorAll('.edit-project-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        const { id, name, year, guide, developers, description, image } = this.dataset;
+document.addEventListener('click', function (e) {
+    const editBtn = e.target.closest('.edit-project-btn');
+    if (editBtn) {
+        const { id, name, year, guide, developers, description, image } = editBtn.dataset;
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Project';
 
@@ -223,13 +313,13 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
 
                 <div class="form-group" style="margin-left:19px;">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true" ${this.dataset.display == "true" ? "checked" : ""}>
+                        <input type="checkbox" class="form-check-input" id="display" name="display" value="true" ${editBtn.dataset.display == "true" ? "checked" : ""}>
                         Display in the site (Project Page)
                     </label>
                 </div>
                 <div class="form-group" style="margin-left:19px;">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="true" ${this.dataset.highlight == "true" ? "checked" : ""}>
+                        <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="true" ${editBtn.dataset.highlight == "true" ? "checked" : ""}>
                         Display in highlights (Home Page)
                     </label>
                 </div>
@@ -246,7 +336,7 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
             <button type="submit" class="btn btn-success" id="updateProject">Update</button>
         `;
 
-        const images = JSON.parse(this.dataset.images || "[]");
+        const images = JSON.parse(editBtn.dataset.images || "[]");
         const container = document.getElementById("additionalImagesContainer");
 
         images.forEach(img => {
@@ -321,31 +411,31 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
                         headers: { "X-CSRF-TOKEN": csrf },
                         body: formData
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: "success",
-                                title: "Updated!",
-                                text: data.message || "Project updated successfully!"
-                            });
-                            setTimeout(() => location.reload(), 1500);
-                        } else {
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Updated!",
+                                    text: data.message || "Project updated successfully!"
+                                });
+                                setTimeout(() => location.reload(), 1500);
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Failed",
+                                    text: formatErrors(data.errors || data.message)
+                                });
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err);
                             Swal.fire({
                                 icon: "error",
-                                title: "Failed",
-                                text: formatErrors(data.errors || data.message)
+                                title: "Error",
+                                text: "Something went wrong!"
                             });
-                        }
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Something went wrong!"
                         });
-                    });
                 }
             });
         });
@@ -368,29 +458,30 @@ document.querySelectorAll('.edit-project-btn').forEach(button => {
                             method: "DELETE",
                             headers: { "X-CSRF-TOKEN": csrf }
                         })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                this.parentElement.remove(); // remove from UI
-                            } else {
-                                Swal.fire({ icon: "error", title: "Failed", text: data.message });
-                            }
-                        });
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.success) {
+                                    this.parentElement.remove(); // remove from UI
+                                } else {
+                                    Swal.fire({ icon: "error", title: "Failed", text: data.message });
+                                }
+                            });
                     }
                 });
             });
         });
 
         new bootstrap.Modal(document.getElementById('myModal')).show();
-    });
+    }
 });
 
 // =====================
 // Delete Project Button
 // =====================
-document.querySelectorAll('.delete-project-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        const id = this.dataset.projectId;
+document.addEventListener('click', function (e) {
+    const deleteBtn = e.target.closest('.delete-project-btn');
+    if (deleteBtn) {
+        const id = deleteBtn.dataset.projectId;
 
         Swal.fire({
             title: "Delete Project?",
@@ -409,27 +500,27 @@ document.querySelectorAll('.delete-project-btn').forEach(button => {
                         "Accept": "application/json"
                     }
                 })
-                .then(res => res.json())
-                .then(data => {
-                    Swal.fire({
-                        icon: data.success ? "success" : "error",
-                        title: data.success ? "Deleted!" : "Failed",
-                        text: data.message || ""
-                    });
+                    .then(res => res.json())
+                    .then(data => {
+                        Swal.fire({
+                            icon: data.success ? "success" : "error",
+                            title: data.success ? "Deleted!" : "Failed",
+                            text: data.message || ""
+                        });
 
-                    if (data.success) {
-                        setTimeout(() => location.reload(), 1500);
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Something went wrong!"
+                        if (data.success) {
+                            setTimeout(() => location.reload(), 1500);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Something went wrong!"
+                        });
                     });
-                });
             }
         });
-    });
+    }
 });

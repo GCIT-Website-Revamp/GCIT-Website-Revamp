@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Announcement;
 use App\Models\Course;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\Models\Activity;
 class SearchController extends Controller
 {
     public function search(Request $request)
@@ -105,5 +106,35 @@ class SearchController extends Controller
             'count' => $results->count(),
             'results' => $results
         ]);
+    }
+    public function searchLogs(Request $request)
+    {
+        try {
+            $request->validate([
+                'q' => 'required|string|min:1',
+            ]);
+
+            $query = $request->q;
+
+            $logs = Activity::with('causer')
+                ->where('log_name', 'LIKE', "%{$query}%")
+                ->orWhere('description', 'LIKE', "%{$query}%")
+                ->orWhereHas('causer', function ($q2) use ($query) {
+                    $q2->where('name', 'LIKE', "%{$query}%");
+                })
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'count' => $logs->count(),
+                'data' => $logs
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Search failed.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

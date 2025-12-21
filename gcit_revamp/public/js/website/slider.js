@@ -32,7 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(json => {
       if (!json.success) return;
 
-      heroSlides = json.data.map(item => ({
+      heroSlides = json.data
+      .sort((a, b) => a.position - b.position)
+      .map(item => ({
         title: item.title,
         subtitle: "",
         media: `/storage/${item.media}`,

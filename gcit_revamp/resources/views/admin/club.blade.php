@@ -130,11 +130,11 @@
                                  <tbody>
                                     @forelse ($clubs as $index => $club)
                                        <tr>
-                                          <td>{{ $clubs->firstItem() + $index ?? $loop->iteration }}</td>
-                                          <td>{{ $club->name }}</td>
-                                          <td style="max-width: 80px;"><img src="{{ asset('storage/' . $club->logo) }}"
+                                          <td style="max-width: 10px;">{{ $clubs->firstItem() + $index ?? $loop->iteration }}</td>
+                                          <td style="max-width: 60px;">{{ $club->name }}</td>
+                                          <td style="max-width: 60px;"><img src="{{ asset('storage/' . $club->logo) }}"
                                                 alt="Club Logo" width="80"></td>
-                                          <td style="max-width: 340px;">{!! Str::limit($club->description, 450) !!}</td>
+                                          <td style="max-width: 290px;">{!! Str::limit($club->description, 350) !!}</td>
                                           <td style="max-width: 60px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-club-btn"

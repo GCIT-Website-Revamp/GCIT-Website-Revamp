@@ -13,7 +13,7 @@
         <div class="breadCrumbs">
             <a href="">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">Support & Services</a>
+            <p>Support & Services</p>
         </div>
         <div class="contentWrapper">
             @if($service)

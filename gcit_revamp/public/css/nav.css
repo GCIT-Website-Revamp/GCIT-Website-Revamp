@@ -256,12 +256,11 @@ nav.mini h1, .miniTopNav h1{
     flex-direction: column;
     height: calc(100%);
     position: relative;
-    justify-content: space-between;
+    /* gap: 1rem; */
 }
 .miniQuickLinkWrapper{
-    position: absolute;
-    bottom: 2rem;
-    left: 0;
+    /* bottom: 6rem; */
+    /* left: 0; */
     widtH: 100%;
     height: fit-content;
 }
@@ -286,7 +285,7 @@ nav.mini h1, .miniTopNav h1{
 
 .miniNavContent{
     display: flex;
-    gap: 1rem;
+    /* gap: 1rem; */
     align-items: center;
 }
 
@@ -296,14 +295,13 @@ nav.mini h1, .miniTopNav h1{
 }
 .miniQuickLinkWrapper{
     padding: 2rem var(--padding-sides);
-    background-color:var(--color-primary);
     display: flex;
     font-size: 17px;
     flex-direction: column;
     gap: 2rem;
 }
 .miniQuickLinkWrapper h1{
-    color: white;
+    color: rgb(24, 24, 24);
     transition: none;
     font-size: var(--font-size-s);
     font-weight: 600;
@@ -311,7 +309,7 @@ nav.mini h1, .miniTopNav h1{
 }
 .miniQuickLinkWrapper a{
     text-decoration: none;
-    color: white;
+    color: rgb(73, 73, 73);
     transition: color 0.3s ease-in-out;
     /* color: black; */
 }

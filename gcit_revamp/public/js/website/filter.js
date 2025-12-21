@@ -29,7 +29,7 @@ function lockHorizontalPosition() {
   lockedWidth = rect.width;
 }
 
-lockHorizontalPosition();
+// lockHorizontalPosition();
 
 window.addEventListener("resize", () => {
   lockHorizontalPosition();
@@ -130,36 +130,36 @@ window.addEventListener("resize", () => {
     );
   }
 
-  function updateStickyFilter() {
-    if (window.innerWidth < DESKTOP_BREAKPOINT) return;
+  // function updateStickyFilter() {
+  //   if (window.innerWidth < DESKTOP_BREAKPOINT) return;
 
-    const OFFSET = getNavOffset();
+  //   const OFFSET = getNavOffset();
 
-    const boundaryRect = stickyBoundary.getBoundingClientRect();
-    const filterHeight = filter.offsetHeight;
+  //   const boundaryRect = stickyBoundary.getBoundingClientRect();
+  //   const filterHeight = filter.offsetHeight;
 
-    const startFix = boundaryRect.top <= OFFSET;
-    const endFix = boundaryRect.bottom <= filterHeight + OFFSET;
+  //   const startFix = boundaryRect.top <= OFFSET;
+  //   const endFix = boundaryRect.bottom <= filterHeight + OFFSET;
 
-    if (startFix && !endFix) {
-      // 🔒 Fixed
-      filter.style.position = "fixed";
-      filter.style.top = OFFSET + "px";
-      filter.style.left = lockedLeft + "px";
-      filter.style.width = lockedWidth + "px";
-    }
-    else if (endFix) {
-      // 🛑 Stop at bottom
-      filter.style.position = "absolute";
-      filter.style.top =
-        stickyBoundary.offsetHeight - filterHeight + "px";
-      filter.style.left = "0";
-      filter.style.width = "100%";
-    }
-    else {
-      resetFilter();
-    }
-  }
+  //   if (startFix && !endFix) {
+  //     // 🔒 Fixed
+  //     filter.style.position = "fixed";
+  //     filter.style.top = OFFSET + "px";
+  //     filter.style.left = lockedLeft + "px";
+  //     filter.style.width = lockedWidth + "px";
+  //   }
+  //   else if (endFix) {
+  //     // 🛑 Stop at bottom
+  //     filter.style.position = "absolute";
+  //     filter.style.top =
+  //       stickyBoundary.offsetHeight - filterHeight + "px";
+  //     filter.style.left = "0";
+  //     filter.style.width = "100%";
+  //   }
+  //   else {
+  //     // resetFilter();
+  //   }
+  // }
 
   function resetFilter() {
     filter.style.position = "relative";
@@ -168,7 +168,7 @@ window.addEventListener("resize", () => {
     filter.style.width = "100%";
   }
 
-  window.addEventListener("scroll", updateStickyFilter);
+  // window.addEventListener("scroll", updateStickyFilter);
   window.addEventListener("resize", () => {
     if (window.innerWidth < DESKTOP_BREAKPOINT) {
       resetFilter();
@@ -293,4 +293,42 @@ function applyFilters() {
     });
   });
 
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const filter = document.querySelector(".filterWrapper");
+  const section = document.querySelector(".eventsWrapper");
+
+  if (!filter || !section) return;
+
+  const NAV_OFFSET = 86;
+
+  function clampFilter() {
+    const sectionRect = section.getBoundingClientRect();
+    const filterHeight = filter.offsetHeight;
+
+    const start = sectionRect.top <= NAV_OFFSET;
+    const end =
+      sectionRect.bottom <= filterHeight + NAV_OFFSET;
+
+    if (!start) {
+      // ⬆️ BEFORE section
+      filter.style.position = "absolute";
+      filter.style.top = "0";
+    }
+    else if (end) {
+      // ⬇️ AFTER section
+      filter.style.position = "absolute";
+      filter.style.top =
+        section.offsetHeight - filterHeight + "px";
+    }
+    else {
+      // 📌 ACTIVE FIXED
+      filter.style.position = "fixed";
+      filter.style.top = NAV_OFFSET + "px";
+    }
+  }
+
+  window.addEventListener("scroll", clampFilter);
+  window.addEventListener("resize", clampFilter);
+  clampFilter();
 });

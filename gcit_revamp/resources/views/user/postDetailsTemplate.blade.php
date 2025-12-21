@@ -13,7 +13,7 @@
         <div class="breadCrumbs">
             <a href="/">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="/">Initiatives</a>
+            <p>Initiatives</p>
         </div>
         @if($event)
             <div class="contentWrapper">

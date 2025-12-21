@@ -10,6 +10,9 @@
     justify-content: space-between;
     gap: clamp(20px, 4vw, 60px);
 }
+.courseDetailsSection {
+    position: relative;
+}
 
 .courseDetailsContainer .sideMenu{
     background-color: #F3F3F3;
@@ -62,6 +65,12 @@
 .courseDetailsContainer .otherCourseContainer{
     width: 30%;
 }
+.courseDetailsContainer {
+    display: flex;
+    align-items: flex-start; /* VERY IMPORTANT */
+    gap: clamp(20px, 4vw, 60px);
+}
+
 
 .courseDetailsWrapper .courseHeaderWrapper{
     margin-bottom: 2rem;
@@ -227,6 +236,30 @@
 .courseDetailContent input[type="checkbox"]:checked + label h1 span.material-symbols-outlined {
     transform: rotate(270deg); /* rotate UP */
 }
+.courseDetailsContainer {
+  position: relative; /* REQUIRED */
+}
+
+@media (min-width: 1025px) {
+  .courseDetailsContainer {
+    position: relative;
+    align-items: flex-start;
+  }
+
+  .courseDetailsContainer .sideMenu {
+    position: relative; /* JS controls this */
+    width: 260px;       /* HARD LIMIT */
+    max-width: 260px;
+    transition: unset;
+    flex-shrink: 0;
+  }
+
+  .sideMenuSpacer {
+    width: 260px;
+    flex-shrink: 0;
+  }
+}
+
 
 @media screen and (max-width: 480px) {   
     .otherCourseContainer .header h1 {

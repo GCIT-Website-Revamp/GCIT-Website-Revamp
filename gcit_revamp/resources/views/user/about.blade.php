@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-<div class="bgColorUnderlay"></div>
+<!-- <div class="bgColorUnderlay"></div> -->
 
 <div class="preAboutHeader sectionWrapper">
         <div class="breadCrumbs">
@@ -52,8 +52,7 @@
                         <a href="/department/Finance">Finance</a>
                         <a href="/department/Human Resources & Administration">Human Resources & Administration</a>
                         <a href="/department/Information & Communication Technology">Information & Communication Technology</a>
-                        <a href="/department/School Affairs">School Affairs</a>
-                        <a href="/department/Student Affairs">Student Affairs</a>
+                        <a href="/department/School Affairs">Student Welfare</a>
                 </div>
     </div>
 </div>

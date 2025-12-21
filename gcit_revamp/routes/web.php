@@ -412,7 +412,7 @@ Route::get('/department/{type}', function ($type) {
     return view('user.departmentTemplate', compact('service', 'courses'));
 });
 Route::get('/faculty', function () {
-    $faculties = Team::where('type', '=', 'Academic')->get();
+    $faculties = Team::where('type', '=', 'Academic')->orderBy('title', 'asc')->get();
     return view('user.faculty', compact('faculties'));
 });
 

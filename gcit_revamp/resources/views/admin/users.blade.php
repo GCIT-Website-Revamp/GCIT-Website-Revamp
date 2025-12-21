@@ -109,6 +109,7 @@
 </head>
 
 <body class="inner_page widgets">
+   @include('layout.loader')
    <div class="full_container">
       <div class="inner_container">
          <!-- Sidebar  -->

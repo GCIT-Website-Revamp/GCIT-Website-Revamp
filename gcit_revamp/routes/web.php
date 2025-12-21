@@ -387,9 +387,27 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
 
 Route::get('/courseDetails/{id}', function ($id) {
     $course = Course::findOrFail($id);
-    $modules = Module::whereJsonContains('course_id', $id)->get();
+
+    $modules = Module::whereRaw(
+        "JSON_CONTAINS_PATH(course_id, 'one', ?)",
+        ['$."' . $id . '"']
+    )->get();
+
+    $groupedModules = [];
+
+    foreach ($modules as $module) {
+        $meta = $module->course_id[$id] ?? null;
+        if (!$meta) continue;
+
+        $groupedModules[$meta['year']][$meta['semester']][] = $module;
+    }
+
     $otherCourses = Course::where('id', '!=', $id)->get();
-    return view('user.courseDetails', compact('course', 'modules', 'otherCourses'));
+
+    return view(
+        'user.courseDetails',
+        compact('course', 'groupedModules', 'otherCourses')
+    );
 });
 
 Route::get('/department/{type}', function ($type) {

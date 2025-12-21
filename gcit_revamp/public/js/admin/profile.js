@@ -1,7 +1,14 @@
 // Select forms correctly using class selectors
 const updateProfileForm = document.querySelector(".updateUserForm");
 const updatePasswordForm = document.querySelector(".updatePasswordForm");
-
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
 // UPDATE PROFILE FORM
 updateProfileForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -16,7 +23,7 @@ updateProfileForm.addEventListener('submit', function (e) {
         cancelButtonColor: '#d33',
     }).then(result => {
         if (result.isConfirmed) {
-
+            Loader.show();
             const formData = new FormData(updateProfileForm);
             const action = updateProfileForm.action;
 
@@ -39,7 +46,8 @@ updateProfileForm.addEventListener('submit', function (e) {
                     if (data.success) {
                         setTimeout(() => location.reload(), 1500);
                     }
-                });
+                })
+                .finally(() => Loader.hide());
         }
     });
 });
@@ -58,7 +66,7 @@ updatePasswordForm.addEventListener('submit', function (e) {
         confirmButtonText: 'Yes, change it',
     }).then(result => {
         if (result.isConfirmed) {
-
+            Loader.show();
             const formData = new FormData(updatePasswordForm);
             const action = updatePasswordForm.action;
 
@@ -82,7 +90,8 @@ updatePasswordForm.addEventListener('submit', function (e) {
                     if (data.success) {
                         updatePasswordForm.reset();
                     }
-                });
+                })
+                .finally(() => Loader.hide());
         }
     });
 });

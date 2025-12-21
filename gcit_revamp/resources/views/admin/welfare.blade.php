@@ -133,6 +133,7 @@
 </head>
 
 <body class="inner_page tables_page">
+    @include('layout.loader')
     <div class="full_container">
         <div class="inner_container">
             <!-- Sidebar  -->
@@ -244,6 +245,14 @@
     <script src="{{ asset('js/admin/chart_custom_style1.js') }}"></script>
     <script src="{{ asset('js/admin/logout.js') }}"></script>
     <script>
+        window.Loader = {
+            show() {
+                document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+            },
+            hide() {
+                document.getElementById('global-loader')?.style.setProperty('display', 'none');
+            }
+        };
         function formatErrors(errors) {
             if (!errors) return "";
             if (typeof errors === "string") return errors;
@@ -299,7 +308,7 @@
                         cancelButtonColor: "#d33",
                     }).then(result => {
                         if (!result.isConfirmed) return;
-
+                        Loader.show();
                         fetch(`/api/welfare`, {
                             method: "POST",
                             headers: {
@@ -328,7 +337,8 @@
                             })
                             .catch(() => {
                                 Swal.fire("Error", "Something went wrong!", "error");
-                            });
+                            })
+                            .finally(() => Loader.hide());
                     });
                 });
             });
@@ -383,7 +393,7 @@
                         cancelButtonColor: "#d33",
                     }).then(result => {
                         if (!result.isConfirmed) return;
-
+                        Loader.show();
                         fetch(`/api/welfare/${welfareId}`, {
                             method: "PUT",
                             headers: {
@@ -409,7 +419,8 @@
                                         text: formatErrors(data.errors || data.message)
                                     });
                                 }
-                            });
+                            })
+                            .finally(() => Loader.hide());
                     });
                 });
 
@@ -427,7 +438,7 @@
                         confirmButtonText: "Delete"
                     }).then(result => {
                         if (!result.isConfirmed) return;
-
+                        Loader.show();
                         fetch(`/api/welfare/${welfareId}`, {
                             method: "DELETE",
                             headers: {
@@ -451,7 +462,8 @@
                                         text: formatErrors(data.errors || data.message)
                                     });
                                 }
-                            });
+                            })
+                            .finally(() => Loader.hide());
                     });
                 });
             });

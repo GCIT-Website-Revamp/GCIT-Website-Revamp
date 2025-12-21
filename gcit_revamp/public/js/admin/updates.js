@@ -1,5 +1,12 @@
 const csrf = document.querySelector('input[name="_token"]')?.value;
-
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
 document.addEventListener('DOMContentLoaded', () => {
 
     const eventSearchInput = document.getElementById('eventSearch');
@@ -22,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             eventTableBody.innerHTML = originalEventRows;
             return;
         }
-
+        Loader.show();
         fetch(`/api/event-search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
@@ -75,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 });
             })
-            .catch(err => console.error('Event search error:', err));
+            .catch(err => console.error('Event search error:', err))
+            .finally(() => Loader.hide());
     });
 
 });
@@ -102,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             announcementTableBody.innerHTML = originalAnnouncementRows;
             return;
         }
-
+        Loader.show();
         fetch(`/api/announcement-search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
@@ -150,7 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                 });
             })
-            .catch(err => console.error('Announcement search error:', err));
+            .catch(err => console.error('Announcement search error:', err))
+            .finally(() => Loader.hide());
     });
 });
 
@@ -186,6 +195,7 @@ function confirmAction(title, message, apiCall) {
         confirmButtonText: "Yes",
     }).then(result => {
         if (result.isConfirmed) {
+            Loader.show();
             apiCall()
                 .then(res => res.json())
                 .then(data => {
@@ -207,7 +217,8 @@ function confirmAction(title, message, apiCall) {
                 .catch(err => {
                     console.error(err);
                     Swal.fire({ icon: "error", title: "Error", text: "Unexpected error occurred." });
-                });
+                })
+                .finally(() => Loader.hide());
         }
     });
 }
@@ -410,6 +421,7 @@ document.addEventListener('click', function (e) {
                     confirmButtonText: "Delete",
                 }).then(res => {
                     if (res.isConfirmed) {
+                        Loader.show();
                         fetch(`/api/event-image/${imgId}`, {
                             method: "DELETE",
                             headers: { "X-CSRF-TOKEN": csrf }
@@ -417,7 +429,8 @@ document.addEventListener('click', function (e) {
                             .then(r => r.json())
                             .then(resp => {
                                 if (resp.success) delBtn.parentElement.remove();
-                            });
+                            })
+                            .finally(() => Loader.hide());
                     }
                 });
             });

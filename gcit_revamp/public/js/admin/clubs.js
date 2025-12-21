@@ -3,6 +3,15 @@
 // =====================================
 const csrf = document.querySelector('input[name="_token"]')?.value;
 
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
+
 function formatErrors(errors) {
     if (!errors) return "";
     if (typeof errors === "string") return errors;
@@ -114,6 +123,7 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
             cancelButtonColor: "#d33",
         }).then(result => {
             if (result.isConfirmed) {
+                Loader.show();
                 fetch("/api/club", {
                     method: "POST",
                     headers: {
@@ -130,7 +140,8 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
                     } else {
                         Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
                     }
-                });
+                })
+                .finally(() => Loader.hide());
             }
         });
     });
@@ -253,6 +264,7 @@ document.querySelectorAll('.edit-club-btn').forEach(btn => {
                         cancelButtonColor: "#d33",
                     }).then(result => {
                         if (result.isConfirmed) {
+                            Loader.show();
                             fetch(`/api/club/${clubId}`, {
                                 method: "POST",
                                 headers: {
@@ -269,7 +281,8 @@ document.querySelectorAll('.edit-club-btn').forEach(btn => {
                                 } else {
                                     Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
                                 }
-                            });
+                            })
+                            .finally(() => Loader.hide());
                         }
                     });
                 });
@@ -298,6 +311,7 @@ document.querySelectorAll('.delete-club-btn').forEach(btn => {
             cancelButtonColor: "#d33",
         }).then(result => {
             if (result.isConfirmed) {
+                Loader.show();
                 fetch(`/api/club/${clubId}`, {
                     method: "DELETE",
                     headers: {
@@ -313,7 +327,8 @@ document.querySelectorAll('.delete-club-btn').forEach(btn => {
                     } else {
                         Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
                     }
-                });
+                })
+                .finally(() => Loader.hide());
             }
         });
     });

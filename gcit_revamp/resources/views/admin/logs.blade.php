@@ -78,6 +78,7 @@
 </head>
 
 <body class="inner_page tables_page">
+    @include('layout.loader')
     <div class="full_container">
         <div class="inner_container">
             <!-- Sidebar  -->
@@ -200,7 +201,14 @@
     <script src="{{ asset('js/admin/contact.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
+            window.Loader = {
+                show() {
+                    document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+                },
+                hide() {
+                    document.getElementById('global-loader')?.style.setProperty('display', 'none');
+                }
+            };
             const logSearchInput = document.getElementById('logSearch');
             if (!logSearchInput) return;
 
@@ -219,7 +227,7 @@
                     logTableBody.innerHTML = originallogRows;
                     return;
                 }
-
+                Loader.show();
                 fetch(`/api/log-search?q=${encodeURIComponent(query)}`)
                     .then(res => res.json())
                     .then(data => {
@@ -253,7 +261,8 @@
                     })
                     .catch(err => {
                         console.error('log search error:', err);
-                    });
+                    })
+                    .finally(() => Loader.hide());
             });
         });
     </script>

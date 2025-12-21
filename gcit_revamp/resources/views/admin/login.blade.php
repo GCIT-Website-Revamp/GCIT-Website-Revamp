@@ -45,6 +45,7 @@
 </head>
 
 <body class="inner_page login">
+   @include('layout.loader')
    <form id="loginForm" class="form_container">
       @csrf
 
@@ -89,6 +90,14 @@
    </form>
 
    <script>
+      window.Loader = {
+         show() {
+            document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+         },
+         hide() {
+            document.getElementById('global-loader')?.style.setProperty('display', 'none');
+         }
+      };
       const passwordField = document.getElementById("password_field");
       const togglePassword = document.getElementById("togglePassword");
       const eyeOpen = document.querySelector(".eye-open");
@@ -113,7 +122,7 @@
 
          const form = e.target;
          const formData = new FormData(form);
-
+         Loader.show();
          fetch("{{ route('login') }}", {
             method: "POST",
             body: formData,
@@ -147,7 +156,8 @@
                text: "Something went wrong!"
             });
             console.error(error);
-         });
+         })
+         .finally(() => Loader.hide());
       });
    </script>
 </body>

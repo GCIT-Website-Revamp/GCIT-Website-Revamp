@@ -24,6 +24,7 @@
 </head>
 
 <body class="dashboard dashboard_1">
+    @include('layout.loader')
     <div class="full_container">
         <div class="inner_container">
             <!-- Sidebar  -->

@@ -1,5 +1,12 @@
 const csrf = document.querySelector('input[name="_token"]')?.value;
-
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
 // Format validation errors
 function formatErrors(errors) {
     if (!errors) return "";
@@ -65,7 +72,7 @@ document.getElementById("addClubBtn").addEventListener("click", () => {
             cancelButtonColor: "#d33",
         }).then(res => {
             if (!res.isConfirmed) return;
-
+            Loader.show();
             fetch("/api/media", {
                 method: "POST",
                 headers: { "X-CSRF-TOKEN": csrf },
@@ -79,7 +86,8 @@ document.getElementById("addClubBtn").addEventListener("click", () => {
                     } else {
                         Swal.fire("Failed", formatErrors(data.errors), "error");
                     }
-                });
+                })
+                .finally(() => Loader.hide());
         });
     });
 });
@@ -151,7 +159,7 @@ document.querySelectorAll(".edit-media-btn").forEach(btn => {
                 confirmButtonText: "Update Media",
             }).then(r => {
                 if (!r.isConfirmed) return;
-
+                Loader.show();
                 fetch(`/api/media/${id}`, {
                     method: "POST",
                     headers: { "X-CSRF-TOKEN": csrf },
@@ -165,7 +173,8 @@ document.querySelectorAll(".edit-media-btn").forEach(btn => {
                         } else {
                             Swal.fire("Failed", formatErrors(data.errors), "error");
                         }
-                    });
+                    })
+                    .finally(() => Loader.hide());
             });
         });
     });
@@ -188,7 +197,7 @@ document.querySelectorAll(".delete-media-btn").forEach(btn => {
             confirmButtonText: "Delete"
         }).then(result => {
             if (!result.isConfirmed) return;
-
+            Loader.show();
             fetch(`/api/media/${id}`, {
                 method: "DELETE",
                 headers: { "X-CSRF-TOKEN": csrf }
@@ -201,7 +210,8 @@ document.querySelectorAll(".delete-media-btn").forEach(btn => {
                     } else {
                         Swal.fire("Failed", data.message, "error");
                     }
-                });
+                })
+                .finally(() => Loader.hide());
         });
     });
 });

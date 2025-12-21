@@ -1,5 +1,14 @@
 const csrf = document.querySelector('input[name="_token"]').value;
 
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const moduleSearchInput = document.getElementById('moduleSearch');
@@ -19,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             moduleTableBody.innerHTML = originalModuleRows;
             return;
         }
-
+        Loader.show();
         fetch(`/api/module-search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
@@ -53,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                         data-module-id="${module.id}"
                                         data-module-name="${module.name}"
                                         data-module-description="${module.description.replace(/"/g, '&quot;')}"
-                                        data-module-year="${module.year}"
-                                        data-module-semester="${module.semester}"
                                         data-module-course-id='${JSON.stringify(module.course_id || [])}'
                                     >
                                         Edit
@@ -73,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                 });
             })
-            .catch(err => console.error('Module search error:', err));
+            .catch(err => console.error('Module search error:', err))
+            .finally(() => Loader.hide());
     });
 });
 
@@ -176,7 +184,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
             showCancelButton: true
         }).then(result => {
             if (result.isConfirmed) {
-
+                Loader.show();
                 fetch('/api/course', {
                     method: "POST",
                     headers: {
@@ -194,7 +202,8 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
                             Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
                         }
                     })
-                    .catch(() => Swal.fire("Error", "Something went wrong!", "error"));
+                    .catch(() => Swal.fire("Error", "Something went wrong!", "error"))
+                    .finally(() => Loader.hide());
             }
         });
     });
@@ -217,28 +226,8 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
 
             <div class="form-group" id="coursesContainer">
                 <label>Courses</label>
+                <small class="form-text text-danger">Select one or more courses along with year and semester.</small>
                 <div id="coursesCheckboxes">Loading courses...</div>
-                <small class="form-text text-muted">Select one or more courses.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="year">Year of Module</label>
-                <select class="form-control" id="year" name="year" required>
-                    <option value="" disabled selected>Select Year</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="semester">Semester of Module</label>
-                <select class="form-control" id="semester" name="semester" required>
-                    <option value="" disabled selected>Select Semester</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
             </div>
 
             <div class="form-group">
@@ -259,8 +248,45 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
                     const div = document.createElement('div');
                     div.classList.add('form-check');
                     div.innerHTML = `
-                        <input class="form-check-input" type="checkbox" value="${course.id}" id="course_${course.id}">
-                        <label class="form-check-label" for="course_${course.id}">${course.name}</label>
+                        <!-- Course -->
+                        <input class="form-check-input course-checkbox"
+                            type="checkbox"
+                            value="${course.id}"
+                            id="course_${course.id}">
+
+                        <label class="form-check-label fw-bold" for="course_${course.id}">
+                            ${course.name}
+                        </label>
+
+                        <!-- Year -->
+                        <div class="d-flex">
+                            <div class="d-flex mt-2 ms-3">
+                                <label class="form-label mx-2 fw-bold">Year:</label>
+                                ${[1,2,3,4].map(y => `
+                                    <div class="mx-4">
+                                        <input class="form-check-input year-radio"
+                                            type="radio"
+                                            name="year_${course.id}"
+                                            value="${y}">
+                                        <label>${y}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <!-- Semester -->
+                            <div class="d-flex mt-2 ms-3">
+                                <label class="form-label mx-2 fw-bold">Semester:</label>
+                                ${[1,2].map(s => `
+                                    <div class="mx-4">
+                                        <input class="form-check-input semester-radio"
+                                            type="radio"
+                                            name="semester_${course.id}"
+                                            value="${s}">
+                                        <label>${s}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
                     `;
                     container.appendChild(div);
                 });
@@ -279,13 +305,27 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
     `;
 
     document.getElementById('submitModuleForm').addEventListener('click', function () {
-        const selectedCourses = Array.from(document.querySelectorAll('#coursesCheckboxes input[type="checkbox"]:checked')).map(cb => cb.value);
+        const coursesData = {};
+
+        document.querySelectorAll('.course-checkbox:checked').forEach(courseCheckbox => {
+            const courseId = courseCheckbox.value;
+
+            const yearInput = document.querySelector(`input[name="year_${courseId}"]:checked`);
+            const semesterInput = document.querySelector(`input[name="semester_${courseId}"]:checked`);
+
+            if (!yearInput || !semesterInput) {
+                throw new Error(`Year and semester required for course ID ${courseId}`);
+            }
+
+            coursesData[courseId] = {
+                year: parseInt(yearInput.value),
+                semester: parseInt(semesterInput.value)
+            };
+        });
 
         const payload = {
             name: document.getElementById('name').value,
-            course_id: selectedCourses,
-            year: document.getElementById('year').value,
-            semester: document.getElementById('semester').value,
+            course_id: coursesData,
             description: document.getElementById('description').value
         };
 
@@ -299,6 +339,7 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
             confirmButtonText: "Yes, create"
         }).then(result => {
             if (result.isConfirmed) {
+                Loader.show();
                 fetch('/api/module', {
                     method: 'POST',
                     headers: {
@@ -328,7 +369,8 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
                     .catch(err => {
                         console.error('Error:', err);
                         Swal.fire({ icon: "error", title: "Error", text: "Something went wrong!" });
-                    });
+                    })
+                    .finally(() => Loader.hide());
             }
         });
     });
@@ -435,7 +477,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                 showCancelButton: true
             }).then(result => {
                 if (result.isConfirmed) {
-
+                    Loader.show();
                     fetch(`/api/course/${courseId}`, {
                         method: "POST",
                         headers: {
@@ -454,8 +496,8 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                                 Swal.fire("Failed", formatErrors(data.errors || data.message), "error");
                             }
                         })
-                        .catch(() => Swal.fire("Error", "Something went wrong!", "error"));
-
+                        .catch(() => Swal.fire("Error", "Something went wrong!", "error"))
+                        .finally(() => Loader.hide());
                 }
             });
 
@@ -484,6 +526,7 @@ document.querySelectorAll('.delete-course-btn').forEach(button => {
             confirmButtonText: "Yes, delete it!"
         }).then(result => {
             if (result.isConfirmed) {
+                Loader.show();
                 fetch(`/api/course/${courseId}`, {
                     method: "DELETE",
                     headers: {
@@ -515,7 +558,8 @@ document.querySelectorAll('.delete-course-btn').forEach(button => {
                             title: "Error",
                             text: "Something went wrong!"
                         });
-                    });
+                    })
+                    .finally(() => Loader.hide());
             }
         });
     });
@@ -530,9 +574,7 @@ document.addEventListener('click', function (e) {
         const moduleId = editBtn.dataset.moduleId;
         const moduleName = editBtn.dataset.moduleName;
         const moduleDescription = editBtn.dataset.moduleDescription;
-        const moduleYear = editBtn.dataset.moduleYear;
-        const moduleSemester = editBtn.dataset.moduleSemester;
-        const moduleCourseIds = JSON.parse(editBtn.dataset.moduleCourseId).map(Number); // pass as JSON array
+        const moduleCourseIds = JSON.parse(editBtn.dataset.moduleCourseId); // pass as JSON array
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Module';
 
@@ -545,28 +587,8 @@ document.addEventListener('click', function (e) {
 
                 <div class="form-group" id="coursesContainer">
                     <label>Courses</label>
+                    <small class="form-text text-danger">Select one or more courses along with year and semester.</small>
                     <div id="coursesCheckboxes">Loading courses...</div>
-                    <small class="form-text text-muted">Select one or more courses.</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="year">Year of Module</label>
-                    <select class="form-control" id="year" name="year" required>
-                        <option value="" disabled selected>Select Year</option>
-                        <option value="1" ${moduleYear === "1" ? "selected" : ""}>1</option>
-                        <option value="2" ${moduleYear === "2" ? "selected" : ""}>2</option>
-                        <option value="3" ${moduleYear === "3" ? "selected" : ""}>3</option>
-                        <option value="4" ${moduleYear === "4" ? "selected" : ""}>4</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="semester">Semester of Module</label>
-                    <select class="form-control" id="semester" name="semester" required>
-                        <option value="" disabled selected>Select Semester</option>
-                        <option value="1" ${moduleSemester === "1" ? "selected" : ""}>1</option>
-                        <option value="2" ${moduleSemester === "2" ? "selected" : ""}>2</option>
-                    </select>
                 </div>
 
                 <div class="form-group">
@@ -588,11 +610,48 @@ document.addEventListener('click', function (e) {
                 const container = document.getElementById('coursesCheckboxes');
                 container.innerHTML = '';
                 data.data.forEach(course => {
+                    const existing = moduleCourseIds[course.id] || null;
                     const div = document.createElement('div');
                     div.classList.add('form-check');
                     div.innerHTML = `
-                        <input class="form-check-input" type="checkbox" value="${course.id}" id="course_${course.id}" ${moduleCourseIds.includes(course.id) ? 'checked' : ''}>
-                        <label class="form-check-label" for="course_${course.id}">${course.name}</label>
+                        <input class="form-check-input course-checkbox"
+                            type="checkbox"
+                            value="${course.id}"
+                            id="course_${course.id}"
+                            ${existing ? 'checked' : ''}>
+
+                        <label class="form-check-label fw-bold" for="course_${course.id}">
+                            ${course.name}
+                        </label>
+                        <div class="d-flex">
+                            <div class="d-flex mt-2 ms-3">
+                                <label class="fw-bold mx-2">Year:</label>
+                                ${[1,2,3,4].map(y => `
+                                    <div class="mx-3">
+                                        <input class="form-check-input"
+                                            type="radio"
+                                            name="year_${course.id}"
+                                            value="${y}"
+                                            ${existing && existing.year == y ? 'checked' : ''}>
+                                        <label>${y}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <div class="d-flex mt-2 ms-3">
+                                <label class="fw-bold mx-2">Semester:</label>
+                                ${[1,2].map(s => `
+                                    <div class="mx-3">
+                                        <input class="form-check-input"
+                                            type="radio"
+                                            name="semester_${course.id}"
+                                            value="${s}"
+                                            ${existing && existing.semester == s ? 'checked' : ''}>
+                                        <label>${s}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
                     `;
                     container.appendChild(div);
                 });
@@ -603,16 +662,29 @@ document.addEventListener('click', function (e) {
             });
 
         document.getElementById('updateModule').addEventListener('click', function () {
-            const selectedCourseIds = Array.from(
-                document.querySelectorAll('#coursesCheckboxes input[type="checkbox"]:checked')
-            ).map(cb => cb.value);
+            const coursesData = {};
+
+            document.querySelectorAll('.course-checkbox:checked').forEach(cb => {
+                const courseId = cb.value;
+
+                const year = document.querySelector(`input[name="year_${courseId}"]:checked`);
+                const semester = document.querySelector(`input[name="semester_${courseId}"]:checked`);
+
+                if (!year || !semester) {
+                    Swal.fire("Error", "Year and semester required for each course", "error");
+                    throw new Error("Invalid selection");
+                }
+
+                coursesData[courseId] = {
+                    year: parseInt(year.value),
+                    semester: parseInt(semester.value)
+                };
+            });
 
             const payload = {
                 name: document.getElementById('name').value,
-                year: document.getElementById('year').value,
-                semester: document.getElementById('semester').value,
                 description: document.getElementById('description').value,
-                course_id: selectedCourseIds
+                course_id: coursesData
             };
 
             Swal.fire({
@@ -625,6 +697,7 @@ document.addEventListener('click', function (e) {
                 confirmButtonText: "Yes, update"
             }).then(result => {
                 if (result.isConfirmed) {
+                    Loader.show();
                     fetch(`/api/module/${moduleId}`, {
                         method: "PUT",
                         headers: {
@@ -654,7 +727,8 @@ document.addEventListener('click', function (e) {
                         .catch(err => {
                             console.error('Error:', err);
                             Swal.fire({ icon: "error", title: "Error", text: "Something went wrong!" });
-                        });
+                        })
+                        .finally(() => Loader.hide());
                 }
             });
         });
@@ -684,6 +758,7 @@ document.addEventListener('click', function (e) {
         confirmButtonText: "Yes, delete it!"
     }).then(result => {
         if (result.isConfirmed) {
+            Loader.show();
             fetch(`/api/module/${moduleId}`, {
                 method: "DELETE",
                 headers: {
@@ -715,7 +790,8 @@ document.addEventListener('click', function (e) {
                         title: "Error",
                         text: "Something went wrong!"
                     });
-                });
+                })
+                .finally(() => Loader.hide());
         }
     });
 });

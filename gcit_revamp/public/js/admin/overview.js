@@ -1,5 +1,14 @@
 const csrf = document.querySelector('input[name="_token"]')?.value;
 
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
+
 function formatErrors(errors) {
     if (!errors) return "";
     if (typeof errors === "string") return errors;
@@ -128,7 +137,7 @@ function submitOverviewForm(data) {
     const url = data.isEdit
         ? `/api/overview/${data.overviewId}`
         : `/api/overview`;
-
+    Loader.show();
     fetch(url, {
         method: "POST",
         headers: { "X-CSRF-TOKEN": csrf },
@@ -150,7 +159,8 @@ function submitOverviewForm(data) {
                     text: formatErrors(response.errors || response.message)
                 });
             }
-        });
+        })
+        .finally(() => Loader.hide());
 }
 
 // ===============================
@@ -167,6 +177,7 @@ function deleteOverview(id) {
         confirmButtonText: "Delete"
     }).then(result => {
         if (result.isConfirmed) {
+            Loader.show()
             fetch(`/api/overview/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -189,7 +200,8 @@ function deleteOverview(id) {
                             text: formatErrors(response.errors || response.message)
                         });
                     }
-                });
+                })
+                .finally(() => Loader.hide());
         }
     });
 }

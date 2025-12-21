@@ -1,3 +1,11 @@
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
 document.querySelector('.logout-btn').addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -15,7 +23,7 @@ document.querySelector('.logout-btn').addEventListener('click', function (e) {
         confirmButtonText: 'Yes, log out!'
     }).then(result => {
         if (result.isConfirmed) {
-
+            Loader.show();
             fetch(action, {
                 method: 'POST',
                 headers: {
@@ -56,7 +64,8 @@ document.querySelector('.logout-btn').addEventListener('click', function (e) {
                     title: 'Error!',
                     text: 'Something went wrong. Please try again.'
                 });
-            });
+            })
+            .finally(() => Loader.hide());
         }
     });
 });

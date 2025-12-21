@@ -1,5 +1,14 @@
 const csrf = document.querySelector('input[name="_token"]').value;
 
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
+
 function formatErrors(errors) {
     if (!errors) return "";
     if (typeof errors === "string") return errors;
@@ -113,6 +122,7 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
             confirmButtonText: "Yes, create"
         }).then(result => {
             if (result.isConfirmed) {
+                Loader.show();
                 fetch('/api/service', {
                     method: "POST",
                     headers: {
@@ -146,7 +156,8 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
                             title: "Error",
                             text: "Something went wrong!"
                         });
-                    });
+                    })
+                    .finally(() => Loader.hide());
             }
         });
     });
@@ -263,6 +274,7 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
                         confirmButtonText: "Yes, update"
                     }).then(result => {
                         if (result.isConfirmed) {
+                            Loader.show();
                             fetch(`/api/service/${serviceId}`, {
                                 method: "PUT",
                                 headers: {
@@ -296,7 +308,8 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
                                         title: "Error",
                                         text: "Something went wrong!"
                                     });
-                                });
+                                })
+                                .finally(() => Loader.hide());
                         }
                     });
                 });
@@ -328,6 +341,7 @@ document.querySelectorAll('.delete-service-btn').forEach(button => {
             confirmButtonText: "Yes, delete it!"
         }).then(result => {
             if (result.isConfirmed) {
+                Loader.show();
                 fetch(`/api/service/${serviceId}`, {
                     method: "DELETE",
                     headers: {
@@ -359,7 +373,8 @@ document.querySelectorAll('.delete-service-btn').forEach(button => {
                             title: "Error",
                             text: "Something went wrong!"
                         });
-                    });
+                    })
+                    .finally(() => Loader.hide());
             }
         });
     });

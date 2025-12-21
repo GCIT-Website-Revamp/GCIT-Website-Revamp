@@ -37,169 +37,185 @@
                 <!-- dashboard inner -->
                 <div class="midde_cont">
                     <div class="container-fluid">
-    <div class="row column_title">
-        <div class="col-md-12">
-            <div class="page_title">
-                <h2>Dashboard</h2>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        {{-- LEFT: STATS --}}
-        <div class="col-lg-5">
-            <div class="row column1">
-                <div class="col-md-6">
-                    <div class="full counter_section margin_bottom_30">
-                        <div class="couter_icon">
-                            <div><i class="fa fa-users dark_blue_color"></i></div>
+                        <div class="row column_title">
+                            <div class="col-md-12">
+                                <div class="page_title">
+                                    <h2>Dashboard</h2>
+                                </div>
+                            </div>
                         </div>
-                        <div class="counter_no">
-                            <div>
-                                <p class="total_no">{{ $userCount }}</p>
-                                <p class="head_couter">Users</p>
+
+                        <div class="row">
+                            {{-- LEFT: STATS --}}
+                            <div class="col-lg-5">
+                                <div class="row column1">
+                                    <div class="col-md-6">
+                                        <a href="users">
+                                            <div class="full counter_section margin_bottom_30">
+                                                <div class="couter_icon">
+                                                    <div><i class="fa fa-users dark_blue_color"></i></div>
+                                                </div>
+                                                <div class="counter_no">
+                                                    <div>
+                                                        <p class="total_no">{{ $userCount }}</p>
+                                                        <p class="head_couter">Users</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <a href="clubs">
+                                            <div class="full counter_section margin_bottom_30">
+                                                <div class="couter_icon">
+                                                    <div><i class="fa fa-clock-o dark_blue_color"></i></div>
+                                                </div>
+                                                <div class="counter_no">
+                                                    <div>
+                                                        <p class="total_no">{{ $clubCount }}</p>
+                                                        <p class="head_couter">Clubs</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <a href="academics">
+                                            <div class="full counter_section margin_bottom_30">
+                                                <div class="couter_icon">
+                                                    <div><i class="fa fa-book dark_blue_color"></i></div>
+                                                </div>
+                                                <div class="counter_no">
+                                                    <div>
+                                                        <p class="total_no">{{ $courseCount }}</p>
+                                                        <p class="head_couter">Courses</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <a href="academics">
+                                            <div class="full counter_section margin_bottom_30">
+                                                <div class="couter_icon">
+                                                    <div><i class="fa fa-bookmark dark_blue_color"></i></div>
+                                                </div>
+                                                <div class="counter_no">
+                                                    <div>
+                                                        <p class="total_no">{{ $moduleCount }}</p>
+                                                        <p class="head_couter">Modules</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="row column1">
+                                    <div class="col-md-6">
+                                        <a href="projects">
+                                            <div class="full counter_section margin_bottom_30">
+                                                <div class="couter_icon">
+                                                    <div><i class="fa fa-folder dark_blue_color"></i></div>
+                                                </div>
+                                                <div class="counter_no">
+                                                    <div>
+                                                        <p class="total_no">{{ $projectCount }}</p>
+                                                        <p class="head_couter">Projects</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <a href="teams">
+                                            <div class="full counter_section margin_bottom_30">
+                                                <div class="couter_icon">
+                                                    <div><i class="fa fa-graduation-cap dark_blue_color"></i></div>
+                                                </div>
+                                                <div class="counter_no">
+                                                    <div>
+                                                        <p class="total_no">{{ $acadTeamCount }}</p>
+                                                        <p class="head_couter">Staffs</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <a href="updates">
+                                            <div class="full counter_section margin_bottom_30">
+                                                <div class="couter_icon">
+                                                    <div><i class="fa fa-calendar dark_blue_color"></i></div>
+                                                </div>
+                                                <div class="counter_no">
+                                                    <div>
+                                                        <p class="total_no">{{ $events }}</p>
+                                                        <p class="head_couter">Events</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <a href="services">
+                                            <div class="full counter_section margin_bottom_30">
+                                                <div class="couter_icon">
+                                                    <div><i class="fa fa-gears dark_blue_color"></i></div>
+                                                </div>
+                                                <div class="counter_no">
+                                                    <div>
+                                                        <p class="total_no">{{ $serviceCount }}</p>
+                                                        <p class="head_couter">Services</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- RIGHT: ACTION LOGS --}}
+                            <div class="col-lg-7">
+                                <div class="full margin_bottom_30">
+                                    <div class="heading1 margin_0">
+                                        <h2>Action Logs</h2>
+                                    </div>
+
+                                    <div class="table-responsive-sm" style="width:100%;">
+                                        <table class="table w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Description</th>
+                                                    <th>Time</th>
+                                                    <th>User</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($logs as $index => $log)
+                                                    <tr>
+                                                        <td style="max-width: 340px;">{{ $log->description }}</td>
+                                                        <td>{{ $log->created_at }}</td>
+                                                        <td>{{ $log->causer?->name }}</td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="3" class="text-center">No logs found.</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="full counter_section margin_bottom_30">
-                        <div class="couter_icon">
-                            <div><i class="fa fa-clock-o dark_blue_color"></i></div>
-                        </div>
-                        <div class="counter_no">
-                            <div>
-                                <p class="total_no">{{ $clubCount }}</p>
-                                <p class="head_couter">Clubs</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="full counter_section margin_bottom_30">
-                        <div class="couter_icon">
-                            <div><i class="fa fa-book dark_blue_color"></i></div>
-                        </div>
-                        <div class="counter_no">
-                            <div>
-                                <p class="total_no">{{ $courseCount }}</p>
-                                <p class="head_couter">Courses</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="full counter_section margin_bottom_30">
-                        <div class="couter_icon">
-                            <div><i class="fa fa-bookmark dark_blue_color"></i></div>
-                        </div>
-                        <div class="counter_no">
-                            <div>
-                                <p class="total_no">{{ $moduleCount }}</p>
-                                <p class="head_couter">Modules</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row column1">
-                <div class="col-md-6">
-                    <div class="full counter_section margin_bottom_30">
-                        <div class="couter_icon">
-                            <div><i class="fa fa-folder dark_blue_color"></i></div>
-                        </div>
-                        <div class="counter_no">
-                            <div>
-                                <p class="total_no">{{ $projectCount }}</p>
-                                <p class="head_couter">Projects</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="full counter_section margin_bottom_30">
-                        <div class="couter_icon">
-                            <div><i class="fa fa-graduation-cap dark_blue_color"></i></div>
-                        </div>
-                        <div class="counter_no">
-                            <div>
-                                <p class="total_no">{{ $acadTeamCount }}</p>
-                                <p class="head_couter">Staffs</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="full counter_section margin_bottom_30">
-                        <div class="couter_icon">
-                            <div><i class="fa fa-calendar dark_blue_color"></i></div>
-                        </div>
-                        <div class="counter_no">
-                            <div>
-                                <p class="total_no">{{ $events }}</p>
-                                <p class="head_couter">Events</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="full counter_section margin_bottom_30">
-                        <div class="couter_icon">
-                            <div><i class="fa fa-gears dark_blue_color"></i></div>
-                        </div>
-                        <div class="counter_no">
-                            <div>
-                                <p class="total_no">{{ $serviceCount }}</p>
-                                <p class="head_couter">Services</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- RIGHT: ACTION LOGS --}}
-        <div class="col-lg-7">
-            <div class="full margin_bottom_30">
-                <div class="heading1 margin_0">
-                    <h2>Action Logs</h2>
-                </div>
-
-                <div class="table-responsive-sm" style="width:100%;">
-                    <table class="table w-100">
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Time</th>
-                                <th>User</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($logs as $index => $log)
-                                <tr>
-                                    <td style="max-width: 340px;">{{ $log->description }}</td>
-                                    <td>{{ $log->created_at }}</td>
-                                    <td>{{ $log->causer?->name }}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center">No logs found.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
                 </div>
             </div>

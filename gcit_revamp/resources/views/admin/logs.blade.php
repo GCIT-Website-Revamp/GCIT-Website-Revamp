@@ -199,13 +199,61 @@
     <script src="{{ asset('js/admin/logout.js') }}"></script>
     <script src="{{ asset('js/admin/contact.js') }}"></script>
     <script>
-        document.getElementById('logSearch').addEventListener('keyup', function () {
-            let filter = this.value.toLowerCase();
-            let rows = document.querySelectorAll("table tbody tr");
+        document.addEventListener('DOMContentLoaded', () => {
 
-            rows.forEach(row => {
-                let text = row.innerText.toLowerCase();
-                row.style.display = text.includes(filter) ? "" : "none";
+            const logSearchInput = document.getElementById('logSearch');
+            if (!logSearchInput) return;
+
+            const logTableBody = logSearchInput
+                .closest('.white_shd')
+                .querySelector('table tbody');
+
+            // Save original rows to restore later
+            const originallogRows = logTableBody.innerHTML;
+
+            logSearchInput.addEventListener('input', function () {
+                const query = this.value.trim();
+
+                // Restore original table when input is empty
+                if (query.length === 0) {
+                    logTableBody.innerHTML = originallogRows;
+                    return;
+                }
+
+                fetch(`/api/log-search?q=${encodeURIComponent(query)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data.success) return;
+
+                        logTableBody.innerHTML = '';
+
+                        if (!data.data.length) {
+                            logTableBody.innerHTML = `
+                                <tr>
+                                    <td colspan="6" class="text-center">No matching logs found</td>
+                                </tr>
+                            `;
+                            return;
+                        }
+
+                        data.data.forEach((log, index) => {
+                            logTableBody.innerHTML += `
+                                <tr>
+                                    <td>${log.description}</td>
+                                    <td >${log.created_at}</td>
+
+                                    <td>
+                                        ${log.causer && log.causer.name ? log.causer.name : 'Unknown'}
+                                    </td>
+
+                                    <td style="max-width: 500px;">${JSON.stringify(log.properties)}</td>
+                                </tr>
+                            `;
+                        });
+                    })
+                    .catch(err => {
+                        console.error('log search error:', err);
+                    });
             });
         });
     </script>

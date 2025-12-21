@@ -238,4 +238,40 @@ class ProjectController extends Controller
 
             return response()->json(['success' => true, 'message' => 'Image deleted']);
         }
+    public function searchProjects(Request $request)
+    {
+        try {
+            $request->validate([
+                'q' => 'required|string|min:1',
+            ]);
+
+            $query = $request->q;
+
+            $projects = Project::with('images')
+                ->where('name', 'LIKE', "%{$query}%")
+                ->orWhere('guide', 'LIKE', "%{$query}%")
+                ->orWhere('description', 'LIKE', "%{$query}%")
+                ->orWhere('developers', 'LIKE', "%{$query}%")
+                ->orWhere('year', 'LIKE', "%{$query}%")
+                ->when($request->has('display'), function ($q) use ($request) {
+                    $q->where('display', $request->display);
+                })
+                ->when($request->has('highlight'), function ($q) use ($request) {
+                    $q->where('highlight', $request->highlight);
+                })
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'count' => $projects->count(),
+                'data' => $projects
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Search failed.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

@@ -38,6 +38,7 @@ use App\Http\Controllers\SearchController;
 Route::middleware('web')->group(function () {
     //search
     Route::get('/api/search', [SearchController::class, 'search']);
+    Route::get('/api/log-search', [SearchController::class, 'searchLogs'])->name('searchLogs');
 
     // Auth
     Route::post('/api/login', [AuthController::class, 'login'])->name('login');
@@ -62,6 +63,7 @@ Route::middleware('web')->group(function () {
     Route::delete('/api/project/{project}', [ProjectController::class, 'deleteProject'])->name('deleteProject');
     Route::put('/api/project/{project}', [ProjectController::class, 'updateProject'])->name('updateProject');
     Route::delete('/api/project-image/{id}', [ProjectController::class, 'deleteImage'])->name('deleteImage');
+    Route::get('/api/project-search', [ProjectController::class, 'searchProjects'])->name('searchProjects');
 
     // Event API Routes
     Route::get('/api/event', [EventController::class, 'getAllEvents'])->name('getAllEvents');
@@ -197,39 +199,39 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
     });
 
     Route::get('/projects', function () {
-        $projects =Project::orderBy('created_at', 'desc')->paginate(7);
+        $projects =Project::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.projects', compact('projects'));
     });
 
     Route::get('/users', function () {
-        $users = User::orderBy('created_at', 'desc')->paginate(7);
+        $users = User::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.users',compact('users'));
     });
 
     Route::get('/academics', function () {
-        $courses = Course::orderBy('created_at', 'desc')->paginate(5,['*'], 'courses_page');
+        $courses = Course::orderBy('created_at', 'desc')->paginate(10,['*'], 'courses_page');
         $modules = Module::orderBy('created_at', 'desc')->paginate(25, ['*'], 'modules_page');
         return view('admin.academics', compact('courses', 'modules'));
     });
 
     Route::get('/clubs', function () {
-        $clubs = Club::orderBy('created_at', 'desc')->paginate(7);
+        $clubs = Club::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.club', compact('clubs'));
     });
 
     Route::get('/teams', function () {
-        $teams = Team::orderBy('created_at', 'desc')->paginate(5);
+        $teams = Team::orderBy('created_at', 'desc')->paginate(25);
         return view('admin.teams', compact('teams'));
     });
 
     Route::get('/services', function () {
-        $services = Services::orderBy('created_at', 'desc')->paginate(7);
+        $services = Services::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.services', compact('services'));
     });
 
     Route::get('/updates', function () {
-        $events = Event::orderBy('created_at', 'desc')->paginate(4, ['*'], 'events_page');
-        $announcements = Announcement::orderBy('created_at', 'desc')->paginate(4, ['*'], 'announcements_page');
+        $events = Event::orderBy('created_at', 'desc')->paginate(15, ['*'], 'events_page');
+        $announcements = Announcement::orderBy('created_at', 'desc')->paginate(15, ['*'], 'announcements_page');
         return view('admin.updates', compact('events', 'announcements'));
     });
 
@@ -254,7 +256,7 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
     });
 
     Route::get('/contact', function () {
-        $contacts = Contact::orderBy('created_at', 'desc')->paginate(7);
+        $contacts = Contact::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.contact', compact('contacts'));
     });
 
@@ -263,7 +265,7 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
     });
 
     Route::get('/media', function () {
-        $media = Media::orderBy('created_at', 'desc')->paginate(7);
+        $media = Media::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.media_gallery', compact('media'));
     });
 

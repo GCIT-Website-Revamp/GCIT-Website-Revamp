@@ -84,111 +84,119 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const DESKTOP_BREAKPOINT = 1025;
 
-  const container = document.querySelector(".courseDetailsContainer");
-  const sideMenu = document.querySelector(".courseDetailsContainer .sideMenu");
 
-  if (!container || !sideMenu) return;
+// const DESKTOP_BREAKPOINT = 1025;
+// if(window.innerWidth >= DESKTOP_BREAKPOINT){
+// console.log("RUNNING THIS ")
+// document.addEventListener("DOMContentLoaded", () => {
+//   const DESKTOP_BREAKPOINT = 1025;
 
-  // Optional: if you already have this CSS var in your project (like your filter code),
-  // we’ll use it. Otherwise fallback.
-  function getNavOffset() {
-    const v = parseInt(
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--nav-visible-height")
-    );
-    return Number.isFinite(v) ? v : 86; // fallback
-  }
+//   const container = document.querySelector(".courseDetailsContainer");
+//   const sideMenu = document.querySelector(".courseDetailsContainer .sideMenu");
 
-  // --- Spacer to keep layout from collapsing when sideMenu becomes fixed ---
-  let spacer = container.querySelector(".sideMenuSpacer");
-  if (!spacer) {
-    spacer = document.createElement("div");
-    spacer.className = "sideMenuSpacer";
-    sideMenu.parentNode.insertBefore(spacer, sideMenu);
-  }
+//   if (!container || !sideMenu) return;
 
-  let lockedLeft = 0;
-  let lockedWidth = 0;
+//   // Optional: if you already have this CSS var in your project (like your filter code),
+//   // we’ll use it. Otherwise fallback.
+//   function getNavOffset() {
+//     const v = parseInt(
+//       getComputedStyle(document.documentElement)
+//         .getPropertyValue("--nav-visible-height")
+//     );
+//     return Number.isFinite(v) ? v : 86; // fallback
+//   }
 
-  function measure() {
-    // Reset to natural flow first to measure correctly
-    sideMenu.style.position = "relative";
-    sideMenu.style.top = "auto";
-    sideMenu.style.left = "auto";
-    sideMenu.style.width = "";
+//   // --- Spacer to keep layout from collapsing when sideMenu becomes fixed ---
+//   let spacer = container.querySelector(".sideMenuSpacer");
+//   if (!spacer) {
+//     spacer = document.createElement("div");
+//     spacer.className = "sideMenuSpacer";
+//     sideMenu.parentNode.insertBefore(spacer, sideMenu);
+//   }
 
-    // Spacer should match sidebar width in flow
-    const rect = sideMenu.getBoundingClientRect();
-const containerRect = container.getBoundingClientRect();
-lockedLeft = containerRect.left + window.scrollX;    lockedWidth = rect.width;
+//   let lockedLeft = 0;
+//   let lockedWidth = 0;
 
-    spacer.style.width = rect.width + "px";
-    spacer.style.height = rect.height + "px";
-  }
+//   function measure() {
+//     // Reset to natural flow first to measure correctly
+//     sideMenu.style.position = "relative";
+//     sideMenu.style.top = "auto";
+//     sideMenu.style.left = "auto";
+//     sideMenu.style.width = "";
 
-  function resetDesktop() {
-    sideMenu.style.position = "relative";
-    sideMenu.style.top = "auto";
-    sideMenu.style.left = "auto";
-    sideMenu.style.width = "";
-    spacer.style.width = "";
-    spacer.style.height = "";
-  }
+//     // Spacer should match sidebar width in flow
+//     const rect = sideMenu.getBoundingClientRect();
+// const containerRect = container.getBoundingClientRect();
+// lockedLeft = containerRect.left + window.scrollX;    lockedWidth = rect.width;
 
-  function clamp() {
-    if (window.innerWidth < DESKTOP_BREAKPOINT) {
-      resetDesktop();
-      return;
-    }
+//     spacer.style.width = rect.width + "px";
+//     spacer.style.height = rect.height + "px";
+//   }
 
-    const OFFSET = getNavOffset();
-    const containerRect = container.getBoundingClientRect();
-    const menuHeight = sideMenu.offsetHeight;
+//   function resetDesktop() {
+//     sideMenu.style.position = "relative";
+//     sideMenu.style.top = "auto";
+//     sideMenu.style.left = "auto";
+//     sideMenu.style.width = "";
+//     spacer.style.width = "";
+//     spacer.style.height = "";
+//   }
 
-    // Start fixing when container hits nav offset
-    const startFix = containerRect.top <= OFFSET;
+//   function clamp() {
+//     if (window.innerWidth < DESKTOP_BREAKPOINT) {
+//       resetDesktop();
+//       return;
+//     }
 
-    // Stop fixing when container bottom is above the menu bottom
-    const endFix = containerRect.bottom <= OFFSET + menuHeight;
+//     const OFFSET = getNavOffset();
+//     const containerRect = container.getBoundingClientRect();
+//     const menuHeight = sideMenu.offsetHeight;
 
-    if (!startFix) {
-      // BEFORE section: sit at top of container
-      sideMenu.style.position = "absolute";
-      sideMenu.style.top = "0px";
-      sideMenu.style.left = "0px";
-      sideMenu.style.width = "100%";
-      return;
-    }
+//     // Start fixing when container hits nav offset
+//     const startFix = containerRect.top <= OFFSET;
 
-    if (endFix) {
-      // AFTER section: clamp to bottom of container
-      sideMenu.style.position = "absolute";
-      sideMenu.style.top = (container.offsetHeight - menuHeight) + "px";
-      sideMenu.style.left = "0px";
-      sideMenu.style.width = "100%";
-      return;
-    }
+//     // Stop fixing when container bottom is above the menu bottom
+//     const endFix = containerRect.bottom <= OFFSET + menuHeight;
 
-    // ACTIVE: fixed to viewport, locked to its column
-    sideMenu.style.position = "fixed";
-    sideMenu.style.top = OFFSET + "px";
-    sideMenu.style.left = lockedLeft + "px";
-    sideMenu.style.width = lockedWidth + "px";
-  }
+//     if (!startFix) {
+//       // BEFORE section: sit at top of container
+//       sideMenu.style.position = "absolute";
+//       sideMenu.style.top = "0px";
+//       sideMenu.style.left = "0px";
+//       sideMenu.style.width = "100%";
+//       return;
+//     }
 
-  // Initial pass
-  measure();
-  clamp();
+//     if (endFix) {
+//       // AFTER section: clamp to bottom of container
+//       sideMenu.style.position = "absolute";
+//       sideMenu.style.top = (container.offsetHeight - menuHeight) + "px";
+//       sideMenu.style.left = "0px";
+//       sideMenu.style.width = "100%";
+//       return;
+//     }
 
-  // Scroll only clamps (no re-measure = no jumping)
-  window.addEventListener("scroll", clamp, { passive: true });
+//     // ACTIVE: fixed to viewport, locked to its column
+//     sideMenu.style.position = "fixed";
+//     sideMenu.style.top = OFFSET + "px";
+//     sideMenu.style.left = lockedLeft + "px";
+//     sideMenu.style.width = lockedWidth + "px";
+//   }
 
-  // Resize: re-measure + clamp
-  window.addEventListener("resize", () => {
-    measure();
-    clamp();
-  });
-});
+//   // Initial pass
+//   measure();
+//   clamp();
+
+//   // Scroll only clamps (no re-measure = no jumping)
+//   window.addEventListener("scroll", clamp, { passive: true });
+
+//   // Resize: re-measure + clamp
+//   window.addEventListener("resize", () => {
+//     measure();
+//     clamp();
+//   });
+// });
+
+// }
+

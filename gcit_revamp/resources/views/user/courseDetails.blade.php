@@ -9,13 +9,13 @@
             <div class="overlay"></div>
             <img src="{{ asset('images/pageBanner.png') }}" alt="">
         </div>
-        <div class="bannerContent sectionWrapper">
+        <div class="bannerContent sectionWrapper noPadding">
             <div class="breadCrumbs">
                 <a href="/">Home</a>
                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                <p>Study</p>
+                <a>Study</a>
                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                <a href="/course">Courses</a>
+                <a>Courses</a>
             </div>
             <div class="contentWrapper">
                 <h2>{{ $course->type }}:</h2>

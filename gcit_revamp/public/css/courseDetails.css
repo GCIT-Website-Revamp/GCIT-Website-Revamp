@@ -247,7 +247,7 @@
   }
 
   .courseDetailsContainer .sideMenu {
-    position: relative; /* JS controls this */
+    /* position: relative; JS controls this */
     width: 260px;       /* HARD LIMIT */
     max-width: 260px;
     transition: unset;

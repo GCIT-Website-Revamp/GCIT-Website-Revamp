@@ -48,8 +48,6 @@ class ModuleController extends Controller
             $rules = [
                 'name' => 'required',
                 'description' => 'required',
-                'year' => 'required',
-                'semester' => 'required',
                 'course_id' => 'required',
             ];
 
@@ -64,8 +62,6 @@ class ModuleController extends Controller
             $module = new Module();
             $module->name = $request->name;
             $module->description = $request->description;
-            $module->year = $request->year;
-            $module->semester = $request->semester;
             $module->course_id = $request->course_id;
             $module->save();
             activity()
@@ -124,8 +120,6 @@ class ModuleController extends Controller
             $rules = [
                 'name' => 'required',
                 'description' => 'required',
-                'year' => 'required',
-                'semester' => 'required',
                 'course_id' => 'required',
             ];
 
@@ -139,8 +133,6 @@ class ModuleController extends Controller
 
             $module->name = $request->name;
             $module->description = $request->description;
-            $module->year = $request->year;
-            $module->semester = $request->semester;
             $module->course_id = $request->course_id;
             $module->save();
             activity()
@@ -178,8 +170,7 @@ class ModuleController extends Controller
             }
 
             $modules = Module::where('name', 'LIKE', "%{$q}%")
-                ->orderBy('year')
-                ->orderBy('semester')
+                ->orderBy('created_at')
                 ->get();
 
             return response()->json([

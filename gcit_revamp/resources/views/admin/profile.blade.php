@@ -68,6 +68,7 @@
 </head>
 
 <body class="inner_page profile_page">
+   @include('layout.loader')
    <div class="full_container">
       <div class="inner_container">
          <!-- Sidebar  -->

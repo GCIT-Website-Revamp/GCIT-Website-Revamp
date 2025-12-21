@@ -47,6 +47,7 @@
 </head>
 
 <body class="inner_page login">
+   @include('layout.loader')
    <form id="loginForm" class="form_container">
       @csrf
 
@@ -71,12 +72,20 @@
    </form>
 
    <script>
+      window.Loader = {
+         show() {
+            document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+         },
+         hide() {
+            document.getElementById('global-loader')?.style.setProperty('display', 'none');
+         }
+      };
       document.getElementById("loginForm").addEventListener("submit", function (e) {
          e.preventDefault();
 
          let form = e.target;
          let formData = new FormData(form);
-
+         Loader.show();
          fetch("/api/send-otp-email", {
             method: "POST",
             body: formData,
@@ -110,7 +119,8 @@
                   text: "Something went wrong!"
                });
                console.error(error);
-            });
+            })
+            .finally(() => Loader.hide());
       });
    </script>
 </body>

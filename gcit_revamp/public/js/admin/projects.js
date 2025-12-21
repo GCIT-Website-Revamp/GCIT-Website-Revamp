@@ -1,5 +1,13 @@
 const csrf = document.querySelector('input[name="_token"]').value;
 
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
 // =====================================
 // Project Search (Live Search)
 // =====================================
@@ -23,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             projectTableBody.innerHTML = originalProjectRows;
             return;
         }
-
+        Loader.show();
         fetch(`/api/project-search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
@@ -85,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(err => {
                 console.error('Project search error:', err);
-            });
+            })
+            .finally(() => Loader.hide());
     });
 });
 
@@ -210,6 +219,7 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
             confirmButtonText: "Yes, create"
         }).then(result => {
             if (result.isConfirmed) {
+                Loader.show();
                 fetch('/api/project', {
                     method: "POST",
                     headers: { "X-CSRF-TOKEN": csrf },
@@ -239,7 +249,8 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
                             title: "Error",
                             text: "Something went wrong!"
                         });
-                    });
+                    })
+                    .finally(() => Loader.hide());
             }
         });
     });
@@ -406,6 +417,7 @@ document.addEventListener('click', function (e) {
                 confirmButtonText: "Yes, update"
             }).then(result => {
                 if (result.isConfirmed) {
+                    Loader.show();
                     fetch(`/api/project/${id}`, {
                         method: "POST",
                         headers: { "X-CSRF-TOKEN": csrf },
@@ -435,7 +447,8 @@ document.addEventListener('click', function (e) {
                                 title: "Error",
                                 text: "Something went wrong!"
                             });
-                        });
+                        })
+                        .finally(() => Loader.hide());
                 }
             });
         });
@@ -453,7 +466,7 @@ document.addEventListener('click', function (e) {
                     cancelButtonColor: "#d33",
                 }).then(result => {
                     if (result.isConfirmed) {
-
+                        Loader.show()
                         fetch(`/api/project-image/${imageId}`, {
                             method: "DELETE",
                             headers: { "X-CSRF-TOKEN": csrf }
@@ -465,7 +478,8 @@ document.addEventListener('click', function (e) {
                                 } else {
                                     Swal.fire({ icon: "error", title: "Failed", text: data.message });
                                 }
-                            });
+                            })
+                            .finally(() => Loader.hide());
                     }
                 });
             });
@@ -492,6 +506,7 @@ document.addEventListener('click', function (e) {
             cancelButtonColor: "#3085d6",
             confirmButtonText: "Yes, delete"
         }).then(result => {
+            Loader.show();
             if (result.isConfirmed) {
                 fetch(`/api/project/${id}`, {
                     method: "DELETE",
@@ -519,7 +534,8 @@ document.addEventListener('click', function (e) {
                             title: "Error",
                             text: "Something went wrong!"
                         });
-                    });
+                    })
+                    .finally(() => Loader.hide());
             }
         });
     }

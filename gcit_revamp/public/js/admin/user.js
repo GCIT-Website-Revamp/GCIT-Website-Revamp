@@ -1,6 +1,15 @@
 // GLOBAL CSRF TOKEN FROM META
 const csrf = document.querySelector('input[name="_token"]').value;
 
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
+
 function formatErrors(errors) {
     if (!errors) return "";
     if (typeof errors === "string") return errors;
@@ -67,6 +76,7 @@ document.getElementById('addAdminBtn').addEventListener('click', function () {
             confirmButtonText: "Yes, create"
         }).then(result => {
             if (result.isConfirmed) {
+                Loader.show();
                 fetch('/api/users', {
                             method: "POST",
                             headers: {
@@ -92,7 +102,8 @@ document.getElementById('addAdminBtn').addEventListener('click', function () {
                                 text: formatErrors(data.errors || data.message)
                             });
                         }
-                    });
+                    })
+                    .finally(() => Loader.hide());
             }
         });
     });
@@ -129,7 +140,7 @@ document.querySelectorAll('.toggle-user-form').forEach(formEl => {
             confirmButtonColor: actionText === "Disable" ? "#F48423" : "#349901",
         }).then(result => {
             if (result.isConfirmed) {
-
+                Loader.show();
                 fetch(action, {
                     method: "POST",
                     headers: {
@@ -154,7 +165,8 @@ document.querySelectorAll('.toggle-user-form').forEach(formEl => {
                                 text: formatErrors(data.errors || data.message)
                             });
                         }
-                    });
+                    })
+                    .finally(() => Loader.hide());
             }
         });
     });

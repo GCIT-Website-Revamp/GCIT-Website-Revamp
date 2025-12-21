@@ -2,6 +2,14 @@
 // CSRF Token
 // =====================================
 const csrf = document.querySelector('input[name="_token"]')?.value;
+window.Loader = {
+    show() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+    },
+    hide() {
+        document.getElementById('global-loader')?.style.setProperty('display', 'none');
+    }
+};
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -22,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             teamTableBody.innerHTML = originalTeamRows;
             return;
         }
-
+        Loader.show();
         fetch(`/api/team-search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
@@ -70,7 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                 });
             })
-            .catch(err => console.error('Team search error:', err));
+            .catch(err => console.error('Team search error:', err))
+            .finally(() => Loader.hide());
     });
 });
 
@@ -260,6 +269,7 @@ function saveOrUpdateTeam(isEdit = false, id = null) {
         cancelButtonColor: "#d33",
     }).then(result => {
         if (result.isConfirmed) {
+            Loader.show();
             fetch(url, {
                 method: "POST",
                 headers: { "X-CSRF-TOKEN": csrf, "Accept": "application/json" },
@@ -285,7 +295,8 @@ function saveOrUpdateTeam(isEdit = false, id = null) {
                 .catch(err => {
                     console.error(err);
                     Swal.fire({ icon: "error", title: "Error", text: "Something went wrong!" });
-                });
+                })
+                .finally(() => Loader.hide());
         }
     });
 }
@@ -308,6 +319,7 @@ document.addEventListener('click', function (e) {
         cancelButtonColor: "#d33"
     }).then(result => {
         if (result.isConfirmed) {
+            Loader.show();
             fetch(`/api/team/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -338,7 +350,8 @@ document.addEventListener('click', function (e) {
                         title: "Error",
                         text: "Something went wrong while deleting."
                     });
-                });
+                })
+                .finally(() => Loader.hide());
         }
     });
 });

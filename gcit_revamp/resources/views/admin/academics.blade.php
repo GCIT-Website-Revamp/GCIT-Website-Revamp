@@ -27,6 +27,7 @@
 </head>
 
 <body class="inner_page tables_page">
+   @include('layout.loader')
    <div class="full_container">
       <div class="inner_container">
          <!-- Sidebar  -->
@@ -143,8 +144,6 @@
                                     <tr>
                                        <th>#</th>
                                        <th>Module</th>
-                                       <th>Year</th>
-                                       <th>Semester</th>
                                        <th>Description</th>
                                        <th>Action</th>
                                     </tr>
@@ -154,17 +153,13 @@
                                        <tr>
                                           <td>{{ $modules->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $module->name }}</td>
-                                          <td>{{ $module->year ?? '—' }}</td>
-                                          <td>{{ $module->semester ?? '—' }}</td>
-                                          <td style="max-width: 440px;">{!! nl2br(e(Str::limit($module->description, 200))) !!}</td>
+                                          <td style="max-width: 470px;">{!! nl2br(e(Str::limit($module->description, 200))) !!}</td>
                                           <td>
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-module-btn"
                                                    data-module-id="{{ $module->id }}"
                                                    data-module-name="{{ $module->name }}"
                                                    data-module-description="{{ $module->description }}"
-                                                   data-module-year="{{ $module->year }}"
-                                                   data-module-semester="{{ $module->semester }}"
                                                    data-module-course-id="{{ json_encode($module->course_id) }}">
                                                    Edit
                                                 </button>

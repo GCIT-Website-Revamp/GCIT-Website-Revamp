@@ -47,6 +47,7 @@
 </head>
 
 <body class="inner_page login">
+   @include('layout.loader')
    <form id="loginForm" class="form_container">
       @csrf
 
@@ -110,6 +111,14 @@
    </form>
 
    <script>
+      window.Loader = {
+         show() {
+            document.getElementById('global-loader')?.style.setProperty('display', 'flex');
+         },
+         hide() {
+            document.getElementById('global-loader')?.style.setProperty('display', 'none');
+         }
+      };
       function setupPasswordToggle(inputId, toggleId) {
          const input = document.getElementById(inputId);
          const toggle = document.getElementById(toggleId);
@@ -143,7 +152,7 @@
             });
             return;
          }
-
+         Loader.show();
          fetch("/api/reset-password", {
             method: "POST",
             body: formData,
@@ -176,7 +185,8 @@
                   text: "Something went wrong!"
                });
                console.error(error);
-            });
+            })
+            .finally(() => Loader.hide());
       });
    </script>
 </body>

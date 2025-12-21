@@ -129,12 +129,9 @@
                             </label>
 
                             <p>
-                                @foreach ($modules as $module)
-                                    @if($module->year == 1 && $module->semester == 1)
-                                        <strong>{{ $module->name }}</strong><br>
-                                        {{$module->description}}
-                                        <br><br>
-                                    @endif
+                                @foreach ($groupedModules[1][1] ?? [] as $module)
+                                    <strong>{{ $module->name }}</strong><br>
+                                    {{ $module->description }}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -147,12 +144,9 @@
                             </label>
 
                             <p>
-                                @foreach ($modules as $module)
-                                    @if($module->year == 1 && $module->semester == 2)
-                                        <strong>{{ $module->name }}</strong><br>
-                                        {{$module->description}}
-                                        <br><br>
-                                    @endif
+                                @foreach ($groupedModules[1][2] ?? [] as $module)
+                                    <strong>{{ $module->name }}</strong><br>
+                                    {{ $module->description }}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -165,12 +159,9 @@
                             </label>
 
                             <p>
-                                @foreach ($modules as $module)
-                                    @if($module->year == 2 && $module->semester == 1)
-                                        <strong>{{ $module->name }}</strong><br>
-                                        {{$module->description}}
-                                        <br><br>
-                                    @endif
+                                @foreach ($groupedModules[2][1] ?? [] as $module)
+                                    <strong>{{ $module->name }}</strong><br>
+                                    {{ $module->description }}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -183,12 +174,9 @@
                             </label>
 
                             <p>
-                                @foreach ($modules as $module)
-                                    @if($module->year == 2 && $module->semester == 2)
-                                        <strong>{{ $module->name }}</strong><br>
-                                        {{$module->description}}
-                                        <br><br>
-                                    @endif
+                                @foreach ($groupedModules[2][2] ?? [] as $module)
+                                    <strong>{{ $module->name }}</strong><br>
+                                    {{ $module->description }}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -201,12 +189,9 @@
                             </label>
 
                             <p>
-                                @foreach ($modules as $module)
-                                    @if($module->year == 3 && $module->semester == 1)
-                                        <strong>{{ $module->name }}</strong><br>
-                                        {{$module->description}}
-                                        <br><br>
-                                    @endif
+                                @foreach ($groupedModules[3][1] ?? [] as $module)
+                                    <strong>{{ $module->name }}</strong><br>
+                                    {{ $module->description }}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -220,12 +205,9 @@
                             </label>
 
                             <p>
-                                @foreach ($modules as $module)
-                                    @if($module->year == 3 && $module->semester == 2)
-                                        <strong>{{ $module->name }}</strong><br>
-                                        {{$module->description}}
-                                        <br><br>
-                                    @endif
+                                @foreach ($groupedModules[3][2] ?? [] as $module)
+                                    <strong>{{ $module->name }}</strong><br>
+                                    {{ $module->description }}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -238,12 +220,9 @@
                             </label>
 
                             <p>
-                                @foreach ($modules as $module)
-                                    @if($module->year == 4 && $module->semester == 1)
-                                        <strong>{{ $module->name }}</strong><br>
-                                        {{$module->description}}
-                                        <br><br>
-                                    @endif
+                                @foreach ($groupedModules[4][1] ?? [] as $module)
+                                    <strong>{{ $module->name }}</strong><br>
+                                    {{ $module->description }}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -256,12 +235,9 @@
                             </label>
 
                             <p>
-                                @foreach ($modules as $module)
-                                    @if($module->year == 4 && $module->semester == 2)
-                                        <strong>{{ $module->name }}</strong><br>
-                                        {{$module->description}}
-                                        <br><br>
-                                    @endif
+                               @foreach ($groupedModules[4][2] ?? [] as $module)
+                                    <strong>{{ $module->name }}</strong><br>
+                                    {{ $module->description }}<br><br>
                                 @endforeach
                             </p>
                         </div>

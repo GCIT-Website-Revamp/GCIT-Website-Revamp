@@ -1519,6 +1519,16 @@ display: block;
         padding: clamp(60px, 10vw, 120px) var(--padding-sides) !important;
 
    }
+   .leftBtn, .rightBtn{
+    position: static;
+    display: flex;
+    align-items: center;
+    transform: unset;
+   }
+
+   .leftBtn{
+    transform: rotate(180deg) !important;
+   }
    
 }
 

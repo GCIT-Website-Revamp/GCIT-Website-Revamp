@@ -143,7 +143,7 @@
 .mainContent .card .cardContent{
     padding: 1rem 25px;
     display: flex;
-    /* width: calc(100% - 525px); */
+    width: calc(100% - 525px);
     flex-direction: column;
     position: relative;
     gap: 1.5rem;
@@ -236,6 +236,34 @@
 .clubContent{
     min-height: 250px !important;
 }
+
+
+@media (min-width: 1024px) {
+
+  .filterColumn {
+    width: 320px;
+    position: relative;
+  }
+
+  /* spacer keeps layout intact */
+  .filterSpacer {
+    height: var(--filter-height, 0px);
+  }
+
+  .filterWrapper {
+    position: fixed;
+    top: var(--nav-visible-height, 86px);
+    width: 320px;
+
+    /* KEY: anchor from container instead of left px */
+    right: calc(
+      100vw - 
+      (var(--container-width) + var(--container-offset))
+    );
+  }
+}
+
+
 @media (min-width: 1024px) {
 
 }

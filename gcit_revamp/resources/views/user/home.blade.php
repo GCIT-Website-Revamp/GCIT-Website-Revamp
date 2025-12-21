@@ -120,9 +120,9 @@
                         <input type="checkbox" id = "socToggle" hidden>
                         <div class="courseCoverTitle">
                             <h1>School of Computer Science</h1>
-                            <p>Ready to become a web development wizard? Our Full Stack Development degree program offers a comprehensive education in the latest tools and technologies needed to design and develop complex web and mobile applications. You’ll cover both front-end and back-end development, gaining valuable skills in HTML, CSS, JavaScript, databases, and server-side languages like NodeJS and Java. Plus you’ll get hands-on experience with popular…</p>
+                            <!-- <p>Ready to become a web development wizard? Our Full Stack Development degree program offers a comprehensive education in the latest tools and technologies needed to design and develop complex web and mobile applications. You’ll cover both front-end and back-end development, gaining valuable skills in HTML, CSS, JavaScript, databases, and server-side languages like NodeJS and Java. Plus you’ll get hands-on experience with popular…</p> -->
                             <div class="ctaBtn">
-                                <a href="">Learn More</a>
+                                <a href="/course">Learn More</a>
                             </div>
                         </div>    
                         
@@ -136,9 +136,9 @@
                         <input type="checkbox" id = "siddToggle" hidden>
                         <div class="courseCoverTitle">
                             <h1>School of Interactive Design and Development</h1>
-                            <p>Get ready to elevate your design skills and create functional and visually stunning UI designs. Our program offers comprehensive guidance from experienced lecturers who will walk you through the entire UI Design Process, including wireframing, prototyping, and creating high-fidelity designs using industry-standard tools. Gain expertise in designing user-friendly and intuitive interfaces, building a portfolio of your own UI designs, and unlocking opportunities for UI-related careers worldwide.</p>
+                            <!-- <p>Get ready to elevate your design skills and create functional and visually stunning UI designs. Our program offers comprehensive guidance from experienced lecturers who will walk you through the entire UI Design Process, including wireframing, prototyping, and creating high-fidelity designs using industry-standard tools. Gain expertise in designing user-friendly and intuitive interfaces, building a portfolio of your own UI designs, and unlocking opportunities for UI-related careers worldwide.</p> -->
                             <div class="ctaBtn">
-                                <a href="">Learn More</a>
+                                <a href="/course">Learn More</a>
                             </div>
                         </div>
                         

@@ -13,7 +13,7 @@
             <div class="breadCrumbs">
                 <a href="/">Home</a>
                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                <a href="/">Study</a>
+                <p>Study</p>
                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
                 <a href="/course">Courses</a>
             </div>
@@ -32,12 +32,14 @@
 
 </label>
         <div class="section">
-            <div class="courseDetailsContainer">
+            <div class="courseDetailsSection">
+                
+                <div class="courseDetailsContainer">
                 <div class="sideMenu">
                     <div class="menuHeader">
                         <label for="courseMenuToggle">
                             <span class="material-symbols-outlined">menu</span>
-    Quick Index
+                             Quick Index
 
                     </label>
                     </div>
@@ -278,7 +280,8 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
+                </div>
+                </div>
 
         </div>
     </div>

@@ -50,9 +50,9 @@
 .bgColorUnderlay{
     position: absolute;
     left: 0;
-    top: 35vw;
+    top: 100px;
     z-index: 0;
-    height: 100%;
+    height: calc(100% - 100px);
     width: 100vw;
     background-color: #F3F3F3;
 }
@@ -193,10 +193,7 @@ text-align: center;
         font-size: 0.95rem;
     }
 
-    .bgColorUnderlay {
-        top: 40%;
-        /* height: 100%; */
-    }
+ 
 
     .mottoWrapper {
         margin: 60px 0;

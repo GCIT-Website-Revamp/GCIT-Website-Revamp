@@ -13,7 +13,7 @@
         <div class="breadCrumbs">
             <a href="/">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="/">Initiatives</a>
+            <p>Initiatives</p>
         </div>
         <div class="contentWrapper">
             <h1>News & Events</h1>
@@ -50,7 +50,7 @@
             @endforelse
         </div>
         <div class="filterColumn">
-
+            <div class="filterSpacer"></div>
             <div class="filterWrapper">
                 <div class="filterCloseWrapper">
                     <button class="filterClose">

@@ -63,10 +63,10 @@
                 <div class="breadCrumbs">
                     <a href="/">Home</a>
                     <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                    <a href="/">Initiatives</a>
+                    <p>Initiatives</p>
                 </div>
                 <div class="contentWrapper">
-                    <h1>Highlight Projects</h1>
+                    <h1>Industry Projects</h1>
                     <p>Explore innovative student projects that bridge creativity and technology. From AI-driven solutions to blockchain applications and interactive design prototypes, these projects showcase GCIT’s commitment to real-world learning and problem-solving that makes an impact.</p>
                 </div>
             </div>

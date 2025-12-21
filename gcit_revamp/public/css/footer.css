@@ -78,6 +78,10 @@ footer .linkWrapper a:hover{
   color: var(--color-secondary-light);
 }
 
+.breadCrumbs p{
+  font-weight: normal;
+}
+
 .copyRight{
   width: 90%;
   color: white;

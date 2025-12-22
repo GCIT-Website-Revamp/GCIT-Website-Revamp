@@ -34,7 +34,7 @@
             
               <div class="otherCourseContainer paddingContainer otherDepartment">
                     <div class="header">
-                        <h1>More on Students</h1>
+                        <h1>More on Student Services</h1>
                     </div>
                     <div class="otherContent">
                         <h1>Other Services</h1>

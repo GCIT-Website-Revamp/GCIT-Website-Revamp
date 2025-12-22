@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Update View Details links
         viewDetailLinks.forEach(link => {
-            link.href = urls[index];
+            link.href = '/project';
         });
     }
 

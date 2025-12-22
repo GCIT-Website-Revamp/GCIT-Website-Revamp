@@ -149,7 +149,9 @@
     gap: 1.5rem;
 }
 
-
+.clubContent{
+    width: 100% !important;
+}
 .mainContent .card .cardContent h1{
     font-size: clamp(24px, 5vw, 32px);
     display: -webkit-box;
@@ -161,7 +163,13 @@
 .mainContent .card .cardContent p{
     font-weight: 300;
 }
+.courseContent .card img{
+    width: 350px !important;
+}
 
+.courseContent .cardContent{
+    width: calc(100%) !important;
+}
 .mainContent .card .cardContent a{
     display: flex;
     align-items: center;

@@ -152,7 +152,7 @@
                         </div>
 
                         <!-- YEAR II — SEM I -->
-                        <div class="courseDetailContent moduleDropdown" id="year2sem2Section">
+                        <div class="courseDetailContent moduleDropdown" id="year2sem1Section">
                             <input type="checkbox" id="year2sem1">
                             <label for="year2sem1">
                                 <h1>Year II, Sem I <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>

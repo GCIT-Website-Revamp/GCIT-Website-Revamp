@@ -23,10 +23,7 @@
 </div>
 <div class="pageContentWrapper">
     <div class="section eventsWrapper">
-        <button class="filterToggle">
-                <span class="material-symbols-outlined">filter_list</span>
-                Filter
-                </button>
+       
         <div class="mainContent courseContent">
             @forelse ($clubs as $index => $club)
             <div class="card">
@@ -47,11 +44,11 @@
         </div>
         <div class="otherCourseContainer paddingContainer otherDepartment">
                     <div class="header">
-                        <h1>More on Students</h1>
+                        <h1>More on Student Services</h1>
                     </div>
                     <div class="otherContent">
                         <h1>Other Services</h1>
-                            <a href="/Clubs">Clubs</a>
+                            <a href="/clubs">Clubs</a>
                             <a href="/resources/ICT">ICT</a>
                             <a href="/resources/Student-Welfare">Student Welfare</a>
                     </div>

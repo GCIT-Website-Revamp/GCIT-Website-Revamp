@@ -36,32 +36,34 @@ document.addEventListener("DOMContentLoaded", () => {
        Click Handler + Offset Scroll
        + Auto-open Dropdown
     ------------------------------- */
-    menuLinks.forEach(link => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
+   menuLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
 
-            const targetId = link.getAttribute("href").substring(1);
-            const target = document.getElementById(targetId);
-            if (!target) return;
+    const targetId = link.getAttribute("href").substring(1);
+    const target = document.getElementById(targetId);
+    if (!target) return;
 
-            // Smooth scroll with offset
-            const targetY =
-                target.getBoundingClientRect().top +
-                window.pageYOffset -
-                OFFSET;
+    autoOpenDropdown(target);
 
-            window.scrollTo({
-                top: targetY,
-                behavior: "smooth"
-            });
+    requestAnimationFrame(() => {
+      const OFFSET = 170;
 
-            // Highlight immediately
-            setActive(targetId);
+      const targetY =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        OFFSET;
 
-            // ---------- AUTO-OPEN DROPDOWN ----------
-            autoOpenDropdown(target);
-        });
+      window.scrollTo({
+        top: targetY,
+        behavior: "smooth"
+      });
+
+      setActive(targetId);
     });
+  });
+});
+
 
     /* -------------------------------
        Auto-Open Logic

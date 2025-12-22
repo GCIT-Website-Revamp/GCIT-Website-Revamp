@@ -96,6 +96,14 @@ html, body {
     overflow-y: auto; /* ✅ allow vertical scrolling */
 
 }
+
+
+/* @media (min-width: 1024px){
+ body{
+    overflow-x: visible;
+ }
+    
+} */
 body.no-scroll {
     overflow: hidden;
     height: 100vh;

@@ -20,7 +20,6 @@
                 <div class="bannerContent">
 
                     <div class="media">
-                        <!-- <video class="hero-video" autoplay muted loop playsinline></video> -->
                         <img class="hero-image" style="display:none;">
                     </div>
                     <div class="descriptionWrapper">

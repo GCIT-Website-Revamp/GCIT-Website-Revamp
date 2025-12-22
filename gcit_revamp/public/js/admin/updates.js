@@ -528,7 +528,16 @@ document.getElementById('addAnnouncementBtn').addEventListener('click', () => {
     );
 
     ClassicEditor
-        .create(document.querySelector('#announcement_description'))
+        .create(document.querySelector('#announcement_description'), {
+            ckfinder: {
+                uploadUrl: '/ckeditor/upload?_token=' + csrf
+            },
+            image: {
+                upload: {
+                    types: ['jpeg', 'png', 'jpg', 'gif', 'webp']
+                }
+            }
+        })
         .then(editor => window.ictEditorInstance = editor)
         .catch(err => console.error(err));
 
@@ -605,7 +614,16 @@ document.addEventListener('click', function (e) {
         );
 
         ClassicEditor
-            .create(document.querySelector('#announcement_description'))
+            .create(document.querySelector('#announcement_description'), {
+            ckfinder: {
+                uploadUrl: '/ckeditor/upload?_token=' + csrf
+            },
+            image: {
+                upload: {
+                    types: ['jpeg', 'png', 'jpg', 'gif', 'webp']
+                }
+            }
+        })
             .then(editor => window.ictEditorInstance = editor)
             .catch(err => console.error(err));
 

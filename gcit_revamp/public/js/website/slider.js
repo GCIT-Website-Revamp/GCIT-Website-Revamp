@@ -17,37 +17,72 @@ document.addEventListener("DOMContentLoaded", () => {
   let viewStart = 0;
   let autoTimer = null;
   let isMuted = true;
-
-  function getVisibleCount() {
-    return window.innerWidth <= 800 ? 1 : 3;
-  }
-
-  let VISIBLE = getVisibleCount();
+  let VISIBLE = 0;
 
   /* -----------------------------------------------------------
      FETCH MEDIA
   ----------------------------------------------------------- */
-  fetch("/api/media")
-    .then(res => res.json())
-    .then(json => {
-      if (!json.success) return;
+  Promise.all([
+    fetch("/api/media").then(res => res.json()),
+    fetch("/api/event").then(res => res.json())
+  ])
+  .then(([mediaRes, eventRes]) => {
 
-      heroSlides = json.data
-      .sort((a, b) => a.position - b.position)
-      .map(item => ({
-        title: item.title,
-        subtitle: "",
-        media: `/storage/${item.media}`,
-        label: item.title
-      }));
+    heroSlides = [];
 
-      initializeSlider();
+    // =====================
+    // MEDIA
+    // =====================
+    if (mediaRes.success) {
+      heroSlides.push(
+        ...mediaRes.data
+          .sort((a, b) => a.position - b.position)
+          .map(item => ({
+            title: item.title,
+            subtitle: "",
+            media: `/storage/${item.media}`,
+            label: item.title,
+            type: "media"
+          }))
+      );
+    }
+
+    // =====================
+    // HIGHLIGHTED EVENTS
+    // =====================
+    if (eventRes.success) {
+      const highlightedEvents = eventRes.data
+        .filter(e => e.highlight === true || e.highlight === "true")
+        .map(event => ({
+          title: event.name,
+          subtitle: "",
+          media: `/storage/${event.image}`,
+          label: event.name,
+          type: "event"
+        }));
+
+      heroSlides.push(...highlightedEvents);
+    }
+
+    // Optional: control final order
+    heroSlides.sort((a, b) => {
+      if (a.type === "media" && b.type === "event") return -1;
+      if (a.type === "event" && b.type === "media") return 1;
+      return 0;
     });
+
+    initializeSlider();
+  });
 
   /* -----------------------------------------------------------
      INIT
   ----------------------------------------------------------- */
   function initializeSlider() {
+    function getVisibleCount() {
+      return window.innerWidth <= 800 ? 1 : 3;
+    }
+
+    VISIBLE = getVisibleCount();
     renderSlides();
     slides = Array.from(document.querySelectorAll(".sliderTrack .slide"));
 

@@ -196,4 +196,24 @@ class AnnouncementController extends Controller
             ], 500);
         }
     }
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+
+            $path = $request->file('upload')
+                ->store('ckeditor/announcements', 'public');
+
+            return response()->json([
+                'uploaded' => true,
+                'url' => asset('storage/' . $path)
+            ]);
+        }
+
+        return response()->json([
+            'uploaded' => false,
+            'error' => [
+                'message' => 'No file uploaded'
+            ]
+        ], 400);
+    }
 }

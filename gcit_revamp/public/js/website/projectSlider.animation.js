@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Title <a> wrappers
     const titleLinks = wrapper.querySelectorAll(".homeSliderTrack a");
 
+    const imgLinks = wrapper.querySelectorAll('#homeImgProjectLink')
     // View Details links
     const viewDetailLinks = wrapper.querySelectorAll(".prjLink a");
 
@@ -45,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
        Update titles + links
     ----------------------------- */
     function updateTextAndLinks() {
+        console.log("RUNINNG HERE")
         titleEls.forEach((titleEl, i) => {
             titleEl.style.opacity = 0;
 
@@ -58,6 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
         titleLinks.forEach(link => {
             link.href = urls[index];
         });
+
+        imgLinks.forEach(link => {
+            link.href = urls[index]
+        })
 
         // Update View Details links
         viewDetailLinks.forEach(link => {

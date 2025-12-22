@@ -197,7 +197,7 @@ li ul li {
 @media (max-width: 768px) {
 
     .post img {
-        height: 260px;
+        /* height: 260px; */
         margin-bottom: 1.5rem;
     }
 
@@ -222,7 +222,7 @@ li ul li {
 @media (max-width: 480px) {
 
     .post img {
-        height: 220px;
+        /* height: 220px; */
     }
 
     .post p,

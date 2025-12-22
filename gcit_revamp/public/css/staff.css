@@ -4,6 +4,7 @@
     column-gap:20px;
     flex-wrap: wrap;
     height: fit-content;
+    width: calc(100% - 320px);
 }
 
 .staffProfileWrapper .staff{
@@ -18,10 +19,11 @@
 }
 
 .staffProfileWrapper .staff img{
-    height: 80%;
+    height: auto;
     margin-bottom: 0;
     width: 100%;
     object-fit: cover;
+    aspect-ratio: 5/6;
     max-height: 350px;
 }
 .staffProfileWrapper .staffDescription{
@@ -53,13 +55,12 @@
 @media (max-width: 480px) {
    
     .staffProfileWrapper .staff{
-        width: 70%;
+        width: 100%;
     }
-   .staffProfileWrapper .staff img{
-    height: 300px;
-   }
+ 
    .staffProfileWrapper{
     flex-direction: column;
     align-items: center;
+    width: 100%;
    }
 }

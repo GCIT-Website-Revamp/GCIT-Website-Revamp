@@ -237,8 +237,9 @@
 @media (max-width: 480px) {
     .courseContent .card img {
         width: 100% !important;
+      
     }
-    
+   
    .highlightContentContainer{
     flex-direction: column;
    }

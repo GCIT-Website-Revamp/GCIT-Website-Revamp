@@ -28,7 +28,7 @@
             <span class="material-symbols-outlined">filter_list</span>
         </button>
 
-        <div class="mainContent courseContent">
+        <div class="mainContent courseContent boxImgWrapper">
             @forelse ($courses as $index => $course)
             <div class="card" data-tag = "{{$course->type}}">
                 <img src="{{ asset('storage/' . $course->image) }}" alt="">

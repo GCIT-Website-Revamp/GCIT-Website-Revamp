@@ -48,6 +48,7 @@ footer .linkContainer{
 }
 footer .linkWrapper a{
   text-decoration: none;
+  font-weight: 400 !important;
   color: white;
 }
 footer .linkWrapper a:hover{

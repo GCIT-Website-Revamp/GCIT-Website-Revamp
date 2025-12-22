@@ -222,7 +222,7 @@
 
 .cardWrapper .card{
     width: calc(calc(100% - calc(var(--padding-sides) + var(--padding-sides)) ) / 3);
-    padding: clamp(1rem, 3vw, 30px);
+    padding: clamp(1rem, 1vw, 30px);
     background-color: #FAFAFA;
     height: 560px;
 }
@@ -249,7 +249,7 @@
 .cardWrapper .card .cardContent {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    /* gap: 1.5rem; */
 }
 .homeSlide{
     transition: 0.3s all ease-in-out !important;
@@ -263,7 +263,7 @@
     min-height: 80px;
     align-items: center;
     display: flex;
-    font-size: clamp(18px, 1vw, 32px);
+    font-size: clamp(20px, 1vw, 32px);
 
 }
 .cardWrapper .card .cardContent h2{
@@ -1089,6 +1089,10 @@ display: block;
 
 @media (max-width: 800px) {
     /* Tablet */
+    .cardWrapper .card .cardContent {
+        
+        gap: 1.5rem;
+    }
     .cardWrapper .card .cardContent h1{
         font-size: clamp(22px, 2vw, 32px);
     }

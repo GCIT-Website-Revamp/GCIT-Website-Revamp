@@ -216,7 +216,7 @@
     </div>
 
     <div class="projectBanner" id="projectBanner" data-projects='@json($projects)'>
-        <a href="">
+        <a id = "homeImgProjectLink" href="">
             <div class="homeProjectImgWrapper">
                 <img id="activeBanner" class="bannerFront" />
             </div>

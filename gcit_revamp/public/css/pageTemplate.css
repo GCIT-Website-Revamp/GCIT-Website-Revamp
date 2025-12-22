@@ -163,8 +163,9 @@
 .mainContent .card .cardContent p{
     font-weight: 300;
 }
-.courseContent .card img{
+.boxImgWrapper .card img{
     width: 350px !important;
+    aspect-ratio: 1/1 !important;
 }
 
 .courseContent .cardContent{
@@ -413,6 +414,10 @@
 
 }
 @media (max-width: 480px) {
+    .boxImgWrapper .card .img{
+        height: auto !important;
+        aspect-ratio: 1/1 !important;
+    }
    .mainContent .card img{
     width: 100% !important;
     max-width: unset;
@@ -452,4 +457,5 @@
         font-size: 14px !important;
         color: #333
     }
+  
 }

@@ -65,25 +65,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-    /* -------------------------------
-       Auto-Open Logic
-    ------------------------------- */
-    function autoOpenDropdown(section) {
-        // Example section: <div id="year1-sem1" class="courseDetailContent moduleDropdown">
+   function autoOpenDropdown(section) {
+  const checkbox = section.querySelector("input[type='checkbox']");
+  if (!checkbox) return;
 
-        // Find the checkbox inside this section, if it exists
-        const checkbox = section.querySelector("input[type='checkbox']");
+  document
+    .querySelectorAll(".courseDetailContent input[type='checkbox']")
+    .forEach(cb => {
+      if (cb !== checkbox) cb.checked = false;
+    });
 
-        if (checkbox) {
-            // OPTIONAL — close all other dropdowns first
-            document.querySelectorAll(".courseDetailContent input[type='checkbox']").forEach(cb => {
-                if (cb !== checkbox) cb.checked = false;
-            });
+  checkbox.checked = true;
+  checkbox.blur(); // 🔑 stop mobile auto-scroll
+}
 
-            // Open this one
-            checkbox.checked = true;
-        }
-    }
 });
 
 

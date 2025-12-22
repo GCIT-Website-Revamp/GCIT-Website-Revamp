@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!projects.length) return;
 
     // Elements
+    const imgLink = document.getElementById('homeImgProjectLink')
     const img = document.getElementById("heroImage");
     const title = document.getElementById("heroTitle");
     const desc = document.getElementById("heroDesc");
@@ -25,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
         desc.style.opacity = 0;
 
         setTimeout(() => {
+            console.log(imgLink)
+            imgLink.href = `/post/project/${project.id}`
             img.src = project.image
                 ? `/storage/${project.image}`
                 : img.src;

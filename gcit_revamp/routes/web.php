@@ -81,6 +81,7 @@ Route::middleware('web')->group(function () {
     Route::delete('/api/announcement/{announcement}', [AnnouncementController::class, 'deleteAnnouncement'])->name('deleteAnnouncement');
     Route::put('/api/announcement/{announcement}', [AnnouncementController::class, 'updateAnnouncement'])->name('updateAnnouncement');
     Route::get('/api/announcement-search', [AnnouncementController::class, 'searchAnnouncement'])->name('searchAnnouncement');
+    Route::post('/ckeditor/upload', [AnnouncementController::class, 'upload'])->name('upload');
 
     // Course API Routes
     Route::get('/api/course', [CourseController::class, 'getAllCourses'])->name('getAllCourses');
@@ -286,7 +287,7 @@ Route::get('/', function () {
     $bsc = Course::where('type', '=', 'School of Computer Science')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
     $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "true")->take(5)->get();
-    $events = Event::orderBy('date', 'desc')->where('highlight', '=', "true")->get();
+    $events = Event::orderBy('date', 'desc')->where('display', '=', "true")->get();
     $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
     return view('user.home', compact('bsc','sidd', 'announcements', 'events', 'projects'));
 });

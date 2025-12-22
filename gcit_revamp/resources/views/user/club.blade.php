@@ -29,9 +29,12 @@
             <div class="card">
                 <div class="cardContent clubContent">
                     <h1>{{ $club->name }}</h1>
+
+
                     <p class="multi-truncate">
                         {{ Str::limit(strip_tags($club->description), 550) }}
                     </p>
+
                     <a href="/clubDetails/{{ $club->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                 </div>
             </div>

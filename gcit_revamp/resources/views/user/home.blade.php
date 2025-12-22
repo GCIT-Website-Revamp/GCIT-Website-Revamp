@@ -258,7 +258,7 @@
                                 {{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}
                             </span>
                             <h1>{{ $item->name }}</h1>
-                            <p class="multi-truncate">{!! Str::limit($item->description, 250) !!}</p>
+                            <p class="multi-truncate">{!! Str::limit($item->description, 150) !!}</p>
                             <a href="/post/announcement/{{ $item->id }}">
                                 <span class="material-symbols-outlined">expand_circle_right</span>
                                 Read More

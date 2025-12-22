@@ -215,7 +215,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 2rem;
-    padding: clamp(60px, 10vw, 120px) var(--padding-sides) !important;
+    padding: clamp(60px, 10vw, 140px)  var(--padding-sides) 0 var(--padding-sides) !important;
     /* margin: clamp(60px, 10vw, 140px) auto; */
     align-items: center;
 }
@@ -226,7 +226,18 @@
     background-color: #FAFAFA;
     height: 560px;
 }
+.homeProjectImgWrapper{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
 
+.homeProjectImgWrapper img:hover{
+    transform: scale(1.05) !important;
+}
+.homeProjectImgWrapper img{
+    transition: 0.3s all ease-in-out !important;
+}
 .cardWrapper .card .iconWrapper{
     height: 45%;
     width: 100%;
@@ -240,12 +251,19 @@
     flex-direction: column;
     gap: 1.5rem;
 }
+.homeSlide{
+    transition: 0.3s all ease-in-out !important;
+}
+.homeSlide:hover{
+
+    color: var(--color-secondary) !important;
+}
 .cardWrapper .card .cardContent h1{
     font-weight: 400;
     min-height: 80px;
     align-items: center;
     display: flex;
-    font-size: clamp(22px, 2vw, 32px);
+    font-size: clamp(18px, 1vw, 32px);
 
 }
 .cardWrapper .card .cardContent h2{
@@ -554,7 +572,7 @@
 .homeProjectDetails .projectMessage a{
     text-decoration: none;
     color: rgb(255, 255, 255);
-    width: 100%;
+    /* width: 100%; */
     text-align: end;
     display: flex;
     justify-content: flex-end;
@@ -635,10 +653,10 @@ font-size: 32px;}
     border-radius: 100px;
 }
 .prjLink{
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     justify-content: flex-end;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
 }
 
 .projectBanner{
@@ -1068,8 +1086,12 @@ display: block;
 
 }
 
+
 @media (max-width: 800px) {
     /* Tablet */
+    .cardWrapper .card .cardContent h1{
+        font-size: clamp(22px, 2vw, 32px);
+    }
      .heading-row .main-header {
        display: block;
     }

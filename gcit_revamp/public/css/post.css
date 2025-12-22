@@ -2,6 +2,9 @@
     display: flex;
     justify-content: space-between;
     gap: clamp(20px, 4vw, 60px);
+    align-items: flex-start;
+    overflow: visible;
+    position: relative;
 }
 
 .post{
@@ -66,8 +69,10 @@ li ul li {
 .suggestionWrapper{
     display: flex;
     width: 35%;
-    position: relative;
+    position: sticky;
+    top: 0;
     width: 320px;
+    transition: none;
     min-width: 320px;
     flex-direction: column;
 }
@@ -98,6 +103,7 @@ li ul li {
     color: var(--color-primary);
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.5rem
 }
 

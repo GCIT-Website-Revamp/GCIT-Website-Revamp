@@ -24,38 +24,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function updateStickySuggestion() {
-    if (window.innerWidth < DESKTOP_BREAKPOINT) return;
+ function updateStickySuggestion() {
+  if (window.innerWidth < DESKTOP_BREAKPOINT) return;
 
-    cacheWidth();
+  cacheWidth();
 
-    const OFFSET = getNavOffset();
+  const OFFSET = getNavOffset();
+  const scrollY = window.scrollY;
 
-    const containerRect = container.getBoundingClientRect();
-    const sidebarHeight = sidebar.offsetHeight;
+  const containerTop = container.offsetTop;
+  const containerBottom = containerTop + container.offsetHeight;
+  const sidebarHeight = sidebar.offsetHeight;
 
-    const startFix = containerRect.top <= OFFSET;
-    const endFix = containerRect.bottom <= sidebarHeight + OFFSET;
+  const startFix = scrollY + OFFSET >= containerTop;
+  const endFix = scrollY + OFFSET + sidebarHeight >= containerBottom;
 
-    if (startFix && !endFix) {
-      sidebar.style.position = "fixed";
-      sidebar.style.top = OFFSET + "px";
-      sidebar.style.left =
-        containerRect.right - sidebarWidth + "px";
-      sidebar.style.width = sidebarWidth + "px"; // ✅ keep natural width
-    }
-    else if (endFix) {
-      sidebar.style.position = "absolute";
-      sidebar.style.top =
-        container.offsetHeight - sidebarHeight + "px";
-      sidebar.style.left = "auto";
-      sidebar.style.right = "0";
-      sidebar.style.width = "auto"; // ✅ let CSS handle it
-    }
-    else {
-      resetSidebar();
-    }
+  if (startFix && !endFix) {
+    sidebar.style.position = "fixed";
+    sidebar.style.top = OFFSET + "px";
+    sidebar.style.left =
+      container.getBoundingClientRect().right - sidebarWidth + "px";
+    sidebar.style.width = sidebarWidth + "px";
   }
+  else if (endFix) {
+    sidebar.style.position = "absolute";
+    sidebar.style.top =
+      container.offsetHeight - sidebarHeight + "px";
+    sidebar.style.left = "auto";
+    sidebar.style.right = "0";
+    sidebar.style.width = sidebarWidth + "px"; // 🔒 keep width stable
+  }
+  else {
+    resetSidebar();
+  }
+}
+
 
   function resetSidebar() {
     sidebar.style.position = "relative";

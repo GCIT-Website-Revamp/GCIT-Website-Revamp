@@ -192,7 +192,9 @@
 
             <h1>Creating <span>Impact</span> Through Innovation</h1>
             <p>We work with leading organizations to drive innovation and create meaningful technological solutions for Bhutan and beyond</p>
-            <a href="/project">More Projects <span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+            <div class="prjLink">
+                <a href="/project">More Projects</a>
+            </div>
         </div>
 
         <!-- PROJECT NAME SLIDER -->
@@ -214,7 +216,11 @@
     </div>
 
     <div class="projectBanner" id="projectBanner" data-projects='@json($projects)'>
-        <a href=""><img id="activeBanner" class="bannerFront" /></a>
+        <a href="">
+            <div class="homeProjectImgWrapper">
+                <img id="activeBanner" class="bannerFront" />
+            </div>
+        </a>
         <div class="projectName mobilePRJSlider">
             <div class="prjSlider">
 

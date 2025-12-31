@@ -165,34 +165,51 @@ no_sound
   /* -----------------------------------------------------------
      HERO UPDATE
   ----------------------------------------------------------- */
-  function updateHero(i) {
-    const s = heroSlides[i];
+function updateHero(i) {
+  const s = heroSlides[i];
 
-    heroTitle.textContent = s.title;
-    heroSubtitle.textContent = s.subtitle;
+  heroTitle.textContent = s.title;
+  heroSubtitle.textContent = s.subtitle;
 
-    heroVideo.onended = null;
+  clearTimeout(autoTimer);
+  heroVideo.onended = null;
 
-    if (s.media.endsWith(".mp4")) {
-      heroVideo.style.display = "block";
-      heroImage.style.display = "none";
+  if (s.media.endsWith(".mp4")) {
+    heroVideo.style.display = "block";
+    heroImage.style.display = "none";
 
-      heroVideo.src = s.media;
-      heroVideo.muted = isMuted;
-      heroVideo.load();
-      heroVideo.play();
+    heroVideo.src = s.media;
+    heroVideo.muted = isMuted;
+    heroVideo.load();
 
-      heroVideo.onended = nextSlide; // 🎥 auto advance
-    } else {
-      heroVideo.pause();
-      heroVideo.style.display = "none";
-      heroImage.style.display = "block";
+    // 🔁 Always advance when video ends
+    heroVideo.onended = nextSlide;
 
-      heroImage.src = s.media;
+    // ▶️ Try autoplay safely
+    heroVideo.play().catch(() => {
+      // Autoplay blocked — fallback handled below
+    });
 
-      autoTimer = setTimeout(nextSlide, 15000); // 🖼 auto advance
-    }
+    // 🛟 Fallback auto-advance (video duration + buffer)
+    heroVideo.onloadedmetadata = () => {
+      autoTimer = setTimeout(
+        nextSlide,
+        Math.max(heroVideo.duration * 1000, 3000)
+      );
+    };
+
+  } else {
+    heroVideo.pause();
+    heroVideo.style.display = "none";
+    heroImage.style.display = "block";
+
+    heroImage.src = s.media;
+
+    // ⏱ Image auto-slide → 5 seconds
+    autoTimer = setTimeout(nextSlide, 5000);
   }
+}
+
 
   /* -----------------------------------------------------------
      ACTIVE STATE

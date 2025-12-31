@@ -489,3 +489,9 @@ Route::get('/project', function () {
 Route::get('/search', function () {
     return view('user.search');
 })->name('search');
+Route::get('/admission', function () {
+    return view('user.admission');
+})->name('admission');
+Route::get('/contactUs', function () {
+    return view('user.contact');
+})->name('contact');

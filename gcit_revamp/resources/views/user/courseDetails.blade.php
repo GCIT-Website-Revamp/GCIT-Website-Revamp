@@ -15,7 +15,7 @@
                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
                 <a>Study</a>
                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                <a>Courses</a>
+                <a href = "/course">Courses</a>
             </div>
             <div class="contentWrapper">
                 <h2>{{ $course->type }}:</h2>

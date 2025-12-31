@@ -42,7 +42,7 @@
                     Study <span class="material-symbols-outlined">arrow_drop_down</span>
                 </label>
                 <div class="dropDownContent">
-                    <a href="https://www.rub.edu.bt/index.php/admission-criteria-and-tuition-fee-for-the-academic-year-2024/">Admissions</a>
+                    <a href="/resources/Admission">Admissions</a>
                     <a href="/course">Courses</a>
                     <label>Student Services</label>
                     <a href="/clubs" class = "subLink">Clubs</a>
@@ -66,7 +66,7 @@
     <div class="wrapper subNav">
         <div class="subLinkWrapper font-xs">
             <!-- <a href="">Alumni</a> -->
-            <a href="">CETA</a>
+            <a href="https://ceta.gcit.edu.bt/">CETA</a>
             <!-- <a href="">Contact Us</a> -->
             <a href="/faculty">Faculty</a>
         </div>
@@ -118,7 +118,7 @@
 
         <div class="miniQuickLinkWrapper">
             <!-- <a href="">Alumni</a> -->
-            <a href="">CETA</a>
+            <a href="https://ceta.gcit.edu.bt/">CETA</a>
             <!-- <a href="">Contact Us</a> -->
             <a href="/faculty">Faculty</a>
         </div>

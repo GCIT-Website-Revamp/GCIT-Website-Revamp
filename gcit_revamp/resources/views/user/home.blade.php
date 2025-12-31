@@ -110,7 +110,7 @@
             <div class="header sectionWrapper">
                 <h1>Our Two <br> Anchoring Schools</h1>
             </div>
-            <div class="courseContent">
+            <div class="courseContent sectionWrapper">
                     <div class="course overlayWrapper socWrapper">
                         <div class="courseBG bgLeft backgroundWrapper">
                             <div class="overlay"></div>
@@ -143,7 +143,7 @@
                         
                     </div>
             </div>
-            <div class="courseLinkContainer">
+            <div class="courseLinkContainer sectionWrapper">
                  <div class="courseLinkWrapper">
                     @foreach ($bsc as $item)
                         <a href="/courseDetails/{{ $item->id }}">{{ $item->name }} <span class="material-symbols-outlined">keyboard_arrow_right</span></a>

@@ -7,9 +7,9 @@
 
 <div class="preAboutHeader sectionWrapper">
         <div class="breadCrumbs">
-            <a href="">Home</a>
+            <a href="/">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a href="">About GCIT</a>
+            <a >About GCIT</a>
         </div>
 </div>
 

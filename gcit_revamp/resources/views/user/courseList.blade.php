@@ -13,7 +13,7 @@
         <div class="breadCrumbs">
             <a href="">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <p>Study</p>
+            <a>Study</a>
         </div>
         <div class="contentWrapper">
             <h1>Courses</h1>

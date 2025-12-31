@@ -67,7 +67,7 @@
         <div class="subLinkWrapper font-xs">
             <!-- <a href="">Alumni</a> -->
             <a href="https://ceta.gcit.edu.bt/">CETA</a>
-            <!-- <a href="">Contact Us</a> -->
+            <a href="/contactUs">Contact Us</a>
             <a href="/faculty">Faculty</a>
         </div>
     </div>
@@ -119,7 +119,7 @@
         <div class="miniQuickLinkWrapper">
             <!-- <a href="">Alumni</a> -->
             <a href="https://ceta.gcit.edu.bt/">CETA</a>
-            <!-- <a href="">Contact Us</a> -->
+            <a href="/contactUs">Contact Us</a>
             <a href="/faculty">Faculty</a>
         </div>
     </div>

@@ -42,7 +42,7 @@
                     Study <span class="material-symbols-outlined">arrow_drop_down</span>
                 </label>
                 <div class="dropDownContent">
-                    <a href="/resources/Admission">Admissions</a>
+                    <a href="/admission">Admissions</a>
                     <a href="/course">Courses</a>
                     <label>Student Services</label>
                     <a href="/clubs" class = "subLink">Clubs</a>
@@ -139,7 +139,7 @@
     </div>
     <div class="subMiniLinkWrapper">
         <h1>Study</h1>
-        <a href="https://www.rub.edu.bt/index.php/admission-criteria-and-tuition-fee-for-the-academic-year-2024/">Admissions<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/admission">Admissions<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/course">Courses<span class="material-symbols-outlined">chevron_right</span></a>
         <label>Student Services</label>
         <a href="/clubs">Clubs<span class="material-symbols-outlined">chevron_right</span></a>

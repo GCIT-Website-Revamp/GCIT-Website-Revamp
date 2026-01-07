@@ -57,17 +57,12 @@
                 @endif
                 <div class="btnWrapper">
                     @if($previous)
-                        <a href="{{ url('post/'. $type.'/' . $previous->id) }}">
+                        <a href="{{ url('post/'.$type.'/' . $previous->id) }}">
                             <button class="left">
                                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
                                 Previous
                             </button>
                         </a>
-                    @else
-                        <button class="left" disabled>
-                            <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                            Previous
-                        </button>
                     @endif
 
                     @if($next)
@@ -77,13 +72,7 @@
                                 <span class="material-symbols-outlined">keyboard_arrow_right</span>
                             </button>
                         </a>
-                    @else
-                        <button class="right" disabled>
-                            Next
-                            <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                        </button>
                     @endif
-
                 </div>
             </div>
             <div class="suggestionWrapper">

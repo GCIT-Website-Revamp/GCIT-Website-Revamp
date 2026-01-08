@@ -32,7 +32,7 @@
 
             </div>
             
-              <div class="otherCourseContainer paddingContainer otherDepartment">
+              <div class="otherCourseContainer otherDepartment">
                     <div class="header">
                         <h1>More on Student Services</h1>
                     </div>

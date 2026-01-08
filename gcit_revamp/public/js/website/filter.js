@@ -311,18 +311,15 @@ document.addEventListener("DOMContentLoaded", () => {
       sectionRect.bottom <= filterHeight + NAV_OFFSET;
 
     if (!start) {
-      // ⬆️ BEFORE section
       filter.style.position = "absolute";
       filter.style.top = "0";
     }
     else if (end) {
-      // ⬇️ AFTER section
       filter.style.position = "absolute";
       filter.style.top =
         section.offsetHeight - filterHeight + "px";
     }
     else {
-      // 📌 ACTIVE FIXED
       filter.style.position = "fixed";
       filter.style.top = NAV_OFFSET + "px";
     }
@@ -332,3 +329,69 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", clampFilter);
   clampFilter();
 });
+
+   
+
+//   const DESKTOP_BREAKPOINT = 1024;
+//   const NAV_OFFSET = 86;
+
+//   const other = document.querySelector(".otherCourseContainer");
+//   const container = document.querySelector(".courseDetailsContainer");
+
+//   if (!other || !container) return;
+
+//   function resetOther() {
+//     other.style.position = "relative";
+//     other.style.top = "auto";
+//     other.style.left = "auto";
+//     other.style.width = "100%";
+//   }
+
+//   function clampOther() {
+//     // Disable on mobile
+//     if (window.innerWidth < DESKTOP_BREAKPOINT) {
+//       resetOther();
+//       return;
+//     }
+
+//     const containerRect = container.getBoundingClientRect();
+//     const otherHeight = other.offsetHeight;
+
+//     const start = containerRect.top <= NAV_OFFSET;
+//     const end = containerRect.bottom <= otherHeight + NAV_OFFSET;
+
+//     // Before sticky starts
+//     if (!start) {
+//       other.style.position = "absolute";
+//       other.style.top = "0";
+//       other.style.left = "0";
+//       other.style.width = "100%";
+//     }
+
+//     // Stop at container bottom
+//     else if (end) {
+//       other.style.position = "absolute";
+//       other.style.top =
+//         container.offsetHeight - otherHeight + "px";
+//       other.style.left = "0";
+//       other.style.width = "100%";
+//     }
+
+//     // Sticky state
+//     else {
+//       const rect = other.getBoundingClientRect();
+
+//       other.style.position = "fixed";
+//       other.style.top = NAV_OFFSET + "px";
+//       other.style.left = rect.left + window.scrollX + "px";
+//       other.style.width = rect.width + "px";
+//     }
+//   }
+
+//   window.addEventListener("scroll", clampOther);
+//   window.addEventListener("resize", clampOther);
+
+//   clampOther(); // initial run
+// });
+
+

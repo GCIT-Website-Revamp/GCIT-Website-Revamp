@@ -11,7 +11,7 @@
     height: 100%;
     width: 100%;
      margin: 0 auto;        /* centers horizontally */
-  padding-inline: 1.5rem;/* prevents edge touching on small screens */
+  /* padding-inline: 1.5rem;prevents edge touching on small screens */
 }
 
 
@@ -54,13 +54,14 @@
 .contentSlider{
     position: absolute;
     bottom: clamp(20px, 4vw, 35px);
+    left: var(--padding-sides);
     display: flex;
     /* max-width: 1600px; */
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    padding: 0 var(--padding-sides);
-    width: calc(100% - var(--padding-sides));
+    /* padding: 0 var(--padding-sides); */
+    width: calc(100% - calc(2 * var(--padding-sides)));
     z-index: 20;
     
 }
@@ -83,10 +84,10 @@
     transform: translateY(-50%)
 }
 .leftBtn{
-    left: 0;
+    left: -50px;
 }
 .rightBtn{
-    right: 0;
+    right: -50px;
 }
 
 .leftBtn span, .rightBtn span{
@@ -182,12 +183,13 @@
     display: grid;
     grid-template-columns: minmax(140px, auto) 1fr;
     align-items: baseline;
+    font-weight: 500 !important;
     column-gap: 1rem;
 }
 
 .heading-row .left {
     padding-right: 1rem; /* space before the right text */
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
 .heading-row .right {
@@ -215,16 +217,20 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 2rem;
-    padding: clamp(60px, 10vw, 140px)  var(--padding-sides) 0 var(--padding-sides) !important;
+    padding: clamp(26px, 4vw, 40px)  var(--padding-sides) 0 var(--padding-sides) !important;
     /* margin: clamp(60px, 10vw, 140px) auto; */
     align-items: center;
 }
 
 .cardWrapper .card{
     width: calc(calc(100% - calc(var(--padding-sides) + var(--padding-sides)) ) / 3);
-    padding: clamp(1rem, 1vw, 30px);
+    padding: 0 clamp(1rem, 1vw, 30px);
     background-color: #FAFAFA;
-    height: 560px;
+    height: 450px;
+    padding-top: 20px;
+    
+
+    
 }
 .homeProjectImgWrapper{
     height: 100%;
@@ -239,7 +245,7 @@
     transition: 0.3s all ease-in-out !important;
 }
 .cardWrapper .card .iconWrapper{
-    height: 45%;
+    height: 150px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -263,7 +269,9 @@
     min-height: 80px;
     align-items: center;
     display: flex;
-    font-size: clamp(22px, 1vw, 32px);
+    font-family: 'Kumbh sans';
+    color: #606060;
+    font-size: clamp(20px, .8vw, 32px);
 
 }
 .cardWrapper .card .cardContent h2{
@@ -293,11 +301,9 @@
 }
 .courseWrapper .header h1{
     padding: 0 var(--padding-sides);
-    font-size: clamp(48px, 5vw, 100px);
-    font-weight: 400;
-    color: #838383;
-    font-family: var(--font-Header);
-    transition: 0.3s all ease-in-out;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
 }
 
 .courseContent{
@@ -314,7 +320,7 @@
     transition: 0.3s all ease-in-out;
 }
 
-.courseBG img{
+.courseBG video{
     position: absolute;
     height: 100%;
     width: 100%;
@@ -396,7 +402,7 @@
 
 .courseCoverTitle h1{
     font-family: var(--font-Header);
-    font-weight: 500;
+    font-weight: 400;
     color: white;
     width: 80%;
     font-size: clamp(38px, 8vw, 48px);
@@ -428,9 +434,6 @@
 /* .course:hover .courseLinkWrapper{
    padding-left: 10%;
 } */
-.course:hover .courseBG img{
-    transform: scale(1.05)
-}
 
 
 .courseLinkWrapper a{
@@ -469,12 +472,8 @@
 }
 
 .messageWrapper .header h1{
-    font-family: var(--font-Header);
-    font-weight: 400;
-    font-size: clamp(24px, 3vw, 40px);
     width: 100%;
     text-align: center;
-    color: #4D4D4D;
     padding: 2rem;
 }
 
@@ -502,6 +501,7 @@
     height: 450px;
     width: 400px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 .message .quote{
@@ -555,7 +555,9 @@
 .homeProjectDetails .projectName{
     padding: 60px 60px 60px var(--padding-sides);
 }
-
+.homeProjectDetails .projectName{
+    height: 20%;
+}
 .homeProjectDetails .projectMessage h1{
     font-size: clamp(24px, 3vw, 36px);
     font-weight: 400;
@@ -622,7 +624,7 @@
 }
 
 .projectName .prjSlider{
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     justify-content: center;
     display: flex;
     align-items: center;
@@ -630,10 +632,11 @@
 }
 .projectName .prjSlider h1{
     font-weight: 700;
-    color: #222222;
+    color: #606060;
     width: 70%;
     padding: 0 1rem;
     font-size: 24px;
+
     text-align: left;
     gap: 1rem;
 }
@@ -700,14 +703,8 @@ font-size: 32px;}
 .homeAnnouncementWrapper .card p:nth-of-type(2) {
     display: block;
 }
-.homeAnnouncementHeader .headerContent h1{
-    font-size: clamp(22px, 4vw, 40px);
-    font-family: var(--font-Header);
-    font-weight: 400;
-}
-.homeAnnouncementHeader .headerContent p{
-    font-weight: 300;
-}
+
+
 .homeAnnouncementHeader .headerLink a{
     text-decoration: none;
     color: white;
@@ -746,8 +743,12 @@ font-size: 32px;}
     padding: 1.5rem;
     flex-direction: column;
     height: 50%;
+    justify-content: center
+    ;
     background: #FAFAFA;
     overflow: hidden;
+    text-decoration: none;
+    color: #606060;
 }
 .homeAnnouncementContent .cardAnnouncement .card *{
     position: relative;
@@ -798,9 +799,10 @@ font-size: 32px;}
 
 .homeAnnouncementContent .cardAnnouncement .card h1{
     padding: 1rem 0;
-    font-size: clamp(24px, 5vw, 32px);
+    font-size: var(--font-size-lg);
     display: flex;
     align-items: center;
+    color: #606060;
 }
 .homeAnnouncementContent .cardAnnouncement .card a{
    text-decoration: none;
@@ -816,7 +818,7 @@ font-size: 32px;}
   color: var(--color-secondary)
 }
 .homeEventWrapper{
-    padding: 200px var(--padding-sides);
+    padding: 200px var(--padding-sides) 40px var(--padding-sides);
     display: flex;
     flex-wrap: wrap;
 }
@@ -870,8 +872,8 @@ font-size: 32px;}
     justify-content: center;
 }
 .eventMessage h1{
-    font-size: clamp(20px, 3vw, 32px);
-    font-weight: 400;
+    /* font-size: clamp(20px, 3vw, 32px); */
+    /* font-weight: 400; */
     font-family: var(--font-Header);
     margin-bottom: 1.5rem;
     color: white;
@@ -901,6 +903,7 @@ font-size: 32px;}
 .event{
     position: relative;
     overflow: hidden;
+    text-decoration: none;
 }
 .event img{
     transition: 0.3s all ease-in-out;
@@ -1064,9 +1067,7 @@ display: block;
     .homeSuggestion{
         display: none !important;
     }
-.aboutGCIT {
-    margin-bottom: 50px;    
-}
+
 }
 
 
@@ -1251,12 +1252,7 @@ display: block;
     }
 
     
-    .homeProjectWrapper{
-        flex-direction: column;
-        gap: 0;
-        height: fit-content;
-        padding: 2rem 0;
-    }
+
 
     /* 1️⃣ MESSAGE FIRST */
     .homeProjectDetails .projectMessage{
@@ -1271,15 +1267,7 @@ display: block;
         flex-direction: column;
         height: auto;
     }
-    .desktopPRJSlider{
-        display: none
-    }
-    .mobilePRJSlider{
-        display: block;
-        width: 100%;
-        align-items: flex-start;
-        padding:0 var(--padding-sides);
-    }
+   
     .projectBanner img{
         height: 66vw;
         max-height: 360px;
@@ -1289,6 +1277,10 @@ display: block;
     }
     .homeProjectWrapper .homeSliderTrack{
         width: 100%;
+    }
+
+    .homeProjectWrapper{
+        background-color: transparent;
     }
 
     /* 3️⃣ PROJECT SLIDER LAST */
@@ -1512,6 +1504,10 @@ display: block;
     
 }
 @media (max-width: 480px) {
+    .homeEventWrapper{
+        padding-bottom: 0;
+
+    }
    .heroBannerWrapper{
     height:calc(50vh - 86px); 
    }
@@ -1543,7 +1539,7 @@ display: block;
     padding: 0;
    }
    .aboutGCIT{
-        padding: clamp(60px, 10vw, 120px) var(--padding-sides) !important;
+        padding: clamp(60px, 10vw, 120px) var(--padding-sides)  0 var(--padding-sides)!important;
 
    }
    .leftBtn, .rightBtn{
@@ -1559,12 +1555,31 @@ display: block;
    
 }
 
-@media (max-width: 1600px){
-    .contentSlider{
-        left: var(--padding-sides);
+@media (max-width: 700px){
+ 
+        .homeProjectWrapper{
+        flex-direction: column;
+        gap: 0;
+        height: fit-content;
+        padding: 2rem 0;
     }
-    .descriptionWrapper{
-        left: 0;
+
+     .mobilePRJSlider{
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .desktopPRJSlider{
+        display: none
+    }
+    .mobilePRJSlider{
+        /* display: block; */
+        width: 100%;
+        background-color: #FAFAFA;
+        /* align-items: flex-start; */
+        padding:0 var(--padding-sides);
     }
 }
 

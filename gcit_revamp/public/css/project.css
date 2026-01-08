@@ -176,6 +176,18 @@
     object-fit: cover;     /* fills without distortion */
     display: block;
 }
+.admissionWrap{
+    margin-bottom: 2.5rem;
+}
+.miniAdmissionSection{
+    margin-bottom: 2.5rem;
+}
+.miniAdmissionSection h2{
+
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+    font-size: var(--font-size-lg)
+}
 @media (min-width: 1600px){
     .section{
         padding: 0 !important
@@ -203,10 +215,7 @@
     .cardWrapper{
         padding: 0 var(--padding-sides) !important;
     }
-    .messageContainer{
-    padding: clamp(60px, 10vw, 120px) var(--padding-sides);
-
-    }
+    
 }
 @media (max-width: 1024px) {
     .projectAllHeader p{

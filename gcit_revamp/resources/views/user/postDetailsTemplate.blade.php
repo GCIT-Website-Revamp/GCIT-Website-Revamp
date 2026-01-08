@@ -78,32 +78,29 @@
             <div class="suggestionWrapper">
                 @if($latestAnnouncements)
                     @forelse ($latestAnnouncements as $index => $item)
-                    <div class="suggestion">
+                    <a href="/post/announcement/{{ $item->id }}" class="suggestion">
                         <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
                         <h1>{{ $item->name }}</h1>
-                        <a href="/post/announcement/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
+                    </a>
                     @empty
                     @endforelse
                 @endif
 
                 @if($latestEvents)
                     @forelse ($latestEvents as $index => $item)
-                    <div class="suggestion">
+                    <a href="/post/events/{{ $item->id }}" class="suggestion">
                         <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
                         <h1>{{ $item->name }}</h1>
-                        <a href="/post/events/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
-                    </div>
+                    </a>
                     @empty
                     @endforelse
                 @endif
 
                 @if($latestProjects)
                     @forelse ($latestProjects as $index => $item)
-                    <div class="suggestion">
+                    <div href="/post/project/{{ $item->id }}" class="suggestion">
                         <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
                         <h1>{{ $item->name }}</h1>
-                        <a href="/post/project/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                     </div>
                     @empty
                     @endforelse

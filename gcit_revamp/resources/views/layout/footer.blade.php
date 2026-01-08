@@ -22,7 +22,7 @@
 
        <div class="linkContainer">
            <h1>Quick Links</h1>
-           <a>Admissions 2024</a>
+           <a>Admissions 2026</a>
            <a>GovTech</a>
            <a>G2C</a>
             <a>MoESD</a>
@@ -34,20 +34,14 @@
         <div class="linkContainer">
             <h1>E-Services</h1>
             <a>CCA</a>
-            <a>Estate Desk</a>
             <a>ICT Desk</a>
-            <a>Library Catalog</a>
             <a>Moodle VLE</a>
-            <a>Residence Form</a>
             <a>RUB IMS</a>
             <a>RUB Mail</a>
-            <a>Wellbeing Center</a>
         </div>
 
         <div class="linkContainer">
             <h1>Downloads</h1>
-            <a>Assembly Agenda</a>
-            <a>Class Trip</a>
             <a>Forms</a>
             <a>Strategic Plan</a>
             <a>Stress Management</a>

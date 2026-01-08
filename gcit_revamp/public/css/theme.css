@@ -5,8 +5,9 @@
 /* ==================================
     Imports
 ======================================*/
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght,YOPQ@100..900,300&display=swap');
 
 :root {
     /* ----- Colors ----- */
@@ -31,13 +32,13 @@
     --color-border: #E0E0E0;
 
     /* ----- Typography ----- */
-    --font-Header: "Orbitron";
+    --font-Header: "Kumbh Sans";
     --font-text: "Roboto";
 
      --font-size-xs: clamp(0.65rem, 0.75vw, 0.75rem);     /* captions, meta */
     --font-size-sm: clamp(0.75rem, 1vw, 0.875rem);       /* small text */
     --font-size-md: clamp(0.9rem, 1.2vw, 1rem);          /* body text */
-    --font-size-lg: clamp(1.1rem, 1.6vw, 1.25rem);        /* subheaders */
+    --font-size-lg: clamp(18px, 1.8vw, 24px);        /* subheaders */
     --font-size-xl: clamp(1.35rem, 2.4vw, 1.75rem);       /* section headers */
     --font-size-xxl: clamp(1.75rem, 4vw, 2.5rem);         /* hero subtitle */
     --font-size-xxxl: clamp(2.2rem, 6vw, 3.5rem);         /* hero headline */
@@ -47,7 +48,7 @@
     --font-weight-medium: 500;
     --font-weight-bold: 600;
     --font-weight-extra-bold: 700;
-
+    --font-size-header: clamp(24px, 2.5vw, 32px);
     /* ----- Layout ----- */
     --radius-sm: 6px;
     --radius-md: 10px;
@@ -62,7 +63,7 @@
     --transition-slow: 0.4s ease;
 
     /* padding */
-    --padding-sides: clamp(20px, 3vw, 120px);
+    --padding-sides: clamp(20px, 4vw, 120px);
     --btn-padding: .8rem 2.1rem;
 
       --nav-visible-height: 100px;
@@ -104,6 +105,18 @@ html, body {
  }
     
 } */
+
+ul li{
+        list-style-position: inside;
+
+}
+.greyContainer{
+    color: #606060;
+}
+strong.orange{
+
+    color: var(--color-primary)
+}
 body.no-scroll {
     overflow: hidden;
     height: 100vh;
@@ -220,16 +233,18 @@ p{
 .main-header{
     font-family: var(--font-Header);
     font-weight: 400;
-    font-size: var(--font-size-xxl);
+    color: #606060;
+    font-size: var(--font-size-header);
+}
+.main-header *{
+    font-weight: 400;
 }
 .main-header .green{
     color: var(--color-secondary);
-    font-size: var(--font-size-xxxl);
 }
 
 .main-header .orange{
     color: var(--color-primary);
-    font-size: var(--font-size-xxxl);
 }
 
 .section-title {
@@ -386,6 +401,11 @@ body.filter-open .pageContentWrapper {
 }
 .paddingContainer{
     padding: 0 var(--padding-sides) !important;
+}
+
+.robotoContainer .main-header{
+    font-family: "Roboto" !important;
+    font-weight: 500 !important;
 }
 @media (min-width: 576px) {
     /* small screens */

@@ -37,7 +37,6 @@
                     <div class="sliderWrapper">
                         <div class="sliderTrack"></div>
                     </div>
-                    
                     <div class="rightBtn">
                         <span class="material-symbols-outlined">expand_circle_right</span>
                     </div>
@@ -51,20 +50,18 @@
             <div class="header">
                 <div class="heading-row">
                     <h1 class="main-header">
-                        <span class="left">Discover</span>
-                        <span class="right green">GCIT :</span>
+                        <span class="left">Discover <span class="green">GCIT: </span></span>
                     </h1>
                 </div>
 
                 <div class="heading-row">
                     <h1 class="main-header">
-                        <span class="left">A Place to</span>
-                        <span class="right"><span class="orange">Accelerate</span>, <span class="orange">Innovate</span>, and <span class="orange">Learn</span></span>
+                        <span class="left">The Intersection of<span class="orange"> Agentic Development, Wisdom </span>and <span class="orange">Innovation</span>
                     </h1>
                 </div>
             </div>
-            <p class="lightText">GCIT is more than an institution — it is a creative and technological hub where students grow as innovators and leaders.
-            Rooted in Bhutanese values of harmony and community, the college combines technology, design, and culture to prepare learners for meaningful careers in a digital world.</p>
+            <p class="lightText">GCIT is more than an institution. It is a dynamic and creative technological environment where students and faculty members emerge as tech scientist and future leaders for the world. Rooted in Bhutanese values of the GNH culture, the college combines civilization, design and technology to prepare learners for a meaningful career and lifestyle for the contemporary digital reality.
+</p>
             <div class="ctaWrapper">
                 <div class="ctaBtn">
                     <a href="/about">Learn More</a>
@@ -83,8 +80,9 @@
                     <x-icons.connect  />
                 </div>
                 <div class="cardContent">
-                    <h1>Co-Development at the Forefront</h1>
-                    <p>GCIT collaborates closely with government and industry, enabling capable students to engage in real development work.</p>
+                    <h1>Tech Ecosystem & Interconnectivity</h1>
+                    <p>From the Himalayas to the International World, public & private institutions and organizations collaborate closely with GCIT for talent, knowledge and capital formation. We have support in accelerators and incubators with deep developer communities. 
+</p>
                 </div>
             </div>
             <div class="card">
@@ -92,8 +90,12 @@
                     <x-icons.circuit />
                 </div>
                 <div class="cardContent">
-                    <h1>Integrated Real-World Pedagogy </h1>
-                    <p>We integrate industry challenges directly into our curriculum, allowing students to tackle authentic problems through capstone projects and experiential learning</p>
+                    <h1>Authentic Real-World Pedagogy
+
+ </h1>
+                    <p>We integrate tangible industry challenges directly into our curriculum. Connecting learning to real-life situations using meaningful applied projects that fosters critical thinking and practical computing & design skills for life, work and world readiness.
+
+</p>
                 </div>
             </div>
             <div class="card">
@@ -108,17 +110,23 @@
         </div>
         <div class="courseWrapper">
             <div class="header sectionWrapper">
-                <h1>Our Two <br> Anchoring Schools</h1>
+                <h1 class = "main-header">Our 2 Anchoring Schools</h1>
             </div>
             <div class="courseContent sectionWrapper">
                     <div class="course overlayWrapper socWrapper">
                         <div class="courseBG bgLeft backgroundWrapper">
                             <div class="overlay"></div>
-                            <img src="{{ asset('images/soc.png') }}" alt="">
-                        </div>
+ <video 
+                                src="{{ asset('videos/SOFC.mp4') }}"
+                                autoplay
+                                muted
+                                loop
+                                playsinline
+                                preload="metadata"
+                            >                        </div>
                         <input type="checkbox" id = "socToggle" hidden>
                         <div class="courseCoverTitle">
-                            <h1>School of Computer Science</h1>
+                            <h1>School of Future Computing</h1>
                             <!-- <p>Ready to become a web development wizard? Our Full Stack Development degree program offers a comprehensive education in the latest tools and technologies needed to design and develop complex web and mobile applications. You’ll cover both front-end and back-end development, gaining valuable skills in HTML, CSS, JavaScript, databases, and server-side languages like NodeJS and Java. Plus you’ll get hands-on experience with popular…</p> -->
                             <div class="ctaBtn">
                                 <a href="/course">Learn More</a>
@@ -130,9 +138,15 @@
                     <div class="course overlayWrapper siddWrapper">
                         <div class="courseBG bgRight backgroundWrapper ">
                             <div class="overlay"></div>
-                            <img src="{{ asset('images/sidd.jpg') }}" alt="">
-                        </div>
-                        <input type="checkbox" id = "siddToggle" hidden>
+                            <video 
+                                src="{{ asset('videos/SIDD.mp4') }}"
+                                autoplay
+                                muted
+                                loop
+                                playsinline
+                                preload="metadata"
+                            >                        </div>
+                            <input type="checkbox" id = "siddToggle" hidden>
                         <div class="courseCoverTitle">
                             <h1>School of Interactive Design and Development</h1>
                             <!-- <p>Get ready to elevate your design skills and create functional and visually stunning UI designs. Our program offers comprehensive guidance from experienced lecturers who will walk you through the entire UI Design Process, including wireframing, prototyping, and creating high-fidelity designs using industry-standard tools. Gain expertise in designing user-friendly and intuitive interfaces, building a portfolio of your own UI designs, and unlocking opportunities for UI-related careers worldwide.</p> -->
@@ -160,7 +174,7 @@
         </div>
         <div class="messageWrapper sectionPadding">
             <div class="header">
-                <h1>A Message From the President</h1>
+                <h1 class = "main-header">A Message From the President</h1>
             </div>
             <div class="messageContainer">
                 <div class="message">
@@ -189,8 +203,8 @@
     <div class="homeProjectDetails">
         <div class="projectMessage">
 
-            <h1>Creating <span>Impact</span> Through Innovation</h1>
-            <p>We work with leading organizations to drive innovation and create meaningful technological solutions for Bhutan and beyond</p>
+            <h1>Impact Through Innovation</h1>
+            <p>We work with leading organizations to develop solutions and create meaningful technological impact for Bhutan and beyond.</p>
             <div class="prjLink">
                 <a href="/project">More Projects</a>
             </div>
@@ -241,8 +255,8 @@
         <div class="homeAnnouncementWrapper sectionWrapper">
             <div class="homeAnnouncementHeader">
                 <div class="headerContent">
-                    <h1>Announcements</h1>
-                    <p>Explore announcements that showcase GCIT’s commitment to learning, research, and community engagement.</p>
+                    <h1 class = "main-header">Recent Announcements</h1>
+                  
                 </div>
                 <div class="headerLink">
                     <a href="/announcements">View More</a>
@@ -251,53 +265,50 @@
             <div class="homeAnnouncementContent">
                 <div class="cardAnnouncement">
                     @foreach ($announcements->take(2) as $item)
-                        <div class="card">
+                      <a href="/post/announcement/{{ $item->id }}" class="card">
+                        <div >
                             <span class="date">
                                 <span class="material-symbols-outlined">calendar_month</span>
                                 {{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}
                             </span>
                             <h1>{{ $item->name }}</h1>
                             <p class="multi-truncate">{!! Str::limit($item->description, 150) !!}</p>
-                            <a href="/post/announcement/{{ $item->id }}">
-                                <span class="material-symbols-outlined">expand_circle_right</span>
-                                Read More
-                            </a>
-                        </div>
+                          
+                                
+                            </div>
+                        </a>
                     @endforeach
                 </div>
                 <div class="suggestionWrapper homeSuggestion">
                     @foreach ($announcements->skip(2)->take(3) as $item)
-                        <div class="suggestion">
+                        <a class="suggestion" href="/post/announcement/{{ $item->id }}">
                             <span class="date">
                                 <span class="material-symbols-outlined">calendar_month</span>
                                 {{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}
                             </span>
                             <h1>{{ $item->name }}</h1>
-                            <a href="/post/announcement/{{ $item->id }}">
-                                <span class="material-symbols-outlined">expand_circle_right</span>
-                                Read More
-                            </a>
-                        </div>
+                            
+                        </a>
                     @endforeach
                 </div>
             </div>
         </div>
         <div class="homeEventWrapper sectionWrapper">
             <div class="eventMessage">
-                <h1>News & Events</h1>
+                <h1 class = "main-header">News & Events</h1>
                 <p>Stay up to date with the latest happenings at GCIT — from student achievements and research showcases to innovation challenges, collaborations, and campus celebrations. Discover how our community continues to shape Bhutan’s digital future.</p>
                 <a href="/news&events">Explore More</a>
             </div>
             @foreach ($events as $item)
-                <div class="event overlayWrapper">
+                <a class="event overlayWrapper" href="/post/events/{{ $item->id }}">
                     <div class="overlay"></div>
                     <img src="{{ asset('storage/' . $item->image) }}" alt="">
                     <div class="eventContent">
                         <p class="date">{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</p>
                         <h1>{{$item->name}}</h1>
-                        <a href="/post/events/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
+                       
                     </div>
-                </div>
+</a>
             @endforeach
         </div>
     </div>

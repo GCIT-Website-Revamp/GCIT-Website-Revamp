@@ -80,7 +80,7 @@ li ul li {
 .suggestionWrapper > *{
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #ccc; /* divider */
+    border-bottom: 1px solid #FAFAFA; /* divider */
 }
 
 .suggestionWrapper > *:last-child {
@@ -90,7 +90,17 @@ li ul li {
 }
 .suggestion{
     width: 100%;
+    text-decoration: none;
+    padding: 1rem;
     padding-top: 1rem;
+}
+.suggestion > *{
+    font-weight: 400;
+    color: #606060;
+}
+.suggestion:hover{
+    background-color: #FAFAFA;
+    /* border-bottom: none; */
 }
 .suggestion h1{
     font-size: clamp(16px, 2vw, 20px);
@@ -165,6 +175,10 @@ li ul li {
   opacity: 1 !important;
 }
 
+.post .btnWrapper:has(> :only-child) {
+  /* styles when exactly one child */
+  justify-content: flex-end;
+}
 @media (max-width: 1023px) {
   .postWrapper {
     flex-direction: column;

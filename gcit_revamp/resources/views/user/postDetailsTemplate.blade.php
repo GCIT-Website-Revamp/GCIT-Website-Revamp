@@ -17,6 +17,21 @@
         </div>
         @if($event)
             <div class="contentWrapper">
+                <h1>News & Events</h1>
+            </div>
+        @endif
+        @if($announcement)
+            <div class="contentWrapper">
+                <h1>Announcements</h1>
+            </div>
+        @endif
+         @if($project)
+            <div class="contentWrapper">
+                <h1>Projects</h1>
+            </div>
+        @endif
+        <!-- @if($event)
+            <div class="contentWrapper">
                 <h1>{{ $event->name }}</h1>
             </div>
         @endif
@@ -29,12 +44,23 @@
             <div class="contentWrapper">
                 <h1>{{ $project->name }}</h1>
             </div>
-        @endif
+        @endif -->
     </div>
 </div>
 <div class="pageContentWrapper">
     <div class="section">
-        <div class="postWrapper">
+        <div class="sectionHeader">
+            @if($event)
+                    <h1 class = "main-header">{{ $event->name }}</h1>
+            @endif
+            @if($announcement)
+                    <h1 class = "main-header">{{ $announcement->name }}</h1>
+            @endif
+            @if($project)
+                    <h1 class = "main-header">{{ $project->name }}</h1>
+            @endif        
+                </div>
+            <div class="postWrapper">
             <div class="post">
                 @if($event)
                 <img src="{{ asset('storage/' . $event->image) }}" alt="">

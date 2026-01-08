@@ -1,6 +1,6 @@
 
 .wrapper {
-    padding: 1rem var(--padding-sides);
+    padding: .5rem var(--padding-sides);
 }
 
 
@@ -14,15 +14,13 @@ nav {
     background-color: var(--color-bg);
     min-height: 75px;
 }
-nav {
-   
-}
+
 
 
 .navContent {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     position: relative; /* needed for dropdowns */
 }
 
@@ -116,7 +114,7 @@ nav {
     color: white;
     display: flex;
     align-items: center;
-    font-size: var(--font-size-xs);
+    font-size: 12px;
 }
 
 .subLinkWrapper a:hover {

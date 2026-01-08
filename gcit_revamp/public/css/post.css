@@ -5,6 +5,7 @@
     align-items: flex-start;
     overflow: visible;
     position: relative;
+    margin-top: 1rem;
 }
 
 .post{

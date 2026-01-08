@@ -2,7 +2,7 @@
     position: relative;
     height: calc(100vh - 86px);
     width: 100%;
-    margin-top: 120px;
+    margin-top: 104px;
 }
 
 
@@ -1074,7 +1074,7 @@ display: block;
 @media (min-width: 1000px) {
     /* tablets */
     .heroBannerWrapper{
-    height: calc(100vh - 120px);
+    height: calc(100vh - 104px);
     }
     
 
@@ -1082,7 +1082,7 @@ display: block;
 @media (min-width: 1600px) {
     /* tablets */
     .heroBannerWrapper{
-    height: calc(100vh - 120px);
+    height: calc(100vh - 104px);
     }
     
 

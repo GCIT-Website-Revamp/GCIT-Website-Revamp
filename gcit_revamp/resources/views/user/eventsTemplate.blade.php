@@ -35,15 +35,12 @@
             @forelse ($events as $index => $event)
                 <div class="card" data-tag = "{{$event->category}}">
                     <img src="{{ asset('storage/' . $event->image) }}" alt="">
-                    <div class="cardContent">
+                    <a href="/post/events/{{ $event->id }}" class="cardContent">
                         <span class="date">{{ \Carbon\Carbon::parse($event->date)->format('F d, Y') }}</span>
                         <h1>{{ $event->name }}</h1>
                         <p class="multi-truncate">{!! Str::limit($event->description, 100) !!}</p>
-                        <a href="/post/events/{{ $event->id }}">
-                            <span class="material-symbols-outlined">expand_circle_right</span>
-                            Read More
-                        </a>
-                    </div>
+                      
+                    </a>
                 </div>
             @empty
             <p>No Events Yet</p>

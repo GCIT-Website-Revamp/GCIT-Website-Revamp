@@ -61,44 +61,74 @@ document.addEventListener("DOMContentLoaded", () => {
         if (activeDropdown) closeDropdown(activeDropdown, activeWrapper);
     });
 
-    function openDropdown(menu, wrapper) {
-        wrapper.classList.add("activeNav");
+function openDropdown(menu, wrapper) {
+    wrapper.classList.add("activeNav");
 
-        menu.style.visibility = "visible";
-        menu.style.pointerEvents = "auto";
-        menu.style.opacity = "0";
+    menu.style.visibility = "visible";
+    menu.style.pointerEvents = "auto";
 
-        // Force layout so height is measurable
-        menu.getBoundingClientRect();
+    // Reset
+    gsap.set(menu, { opacity: 1 });
 
-        const dropdownHeight = menu.offsetHeight;
-        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-        const adjustedHeight = dropdownHeight - (2 * rem);
+    const items = getDropdownItems(menu);
 
-        extender.style.height = adjustedHeight + "px";
+    // Height logic (keep yours)
+    menu.getBoundingClientRect();
+    const dropdownHeight = menu.offsetHeight;
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    extender.style.height = (dropdownHeight - rem) + "px";
 
-        requestAnimationFrame(() => {
-            menu.style.opacity = "1";
-        });
+    // ✨ Slower, smoother ENTER
+    gsap.fromTo(
+        items,
+        { y: 8, opacity: 0 },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.35,          // 👈 slower enter
+            ease: "power2.out",
+            stagger: 0.04
+        }
+    );
 
-        activeDropdown = menu;
-        activeWrapper = wrapper;
-    }
+    activeDropdown = menu;
+    activeWrapper = wrapper;
+}
 
-    function closeDropdown(menu, wrapper) {
-        wrapper.classList.remove("activeNav");
-        extender.style.height = "0px";
+   function closeDropdown(menu, wrapper) {
+    wrapper.classList.remove("activeNav");
+    extender.style.height = "0px";
 
-        menu.style.opacity = "0";
-        menu.style.pointerEvents = "none";
+    const items = getDropdownItems(menu);
 
-        setTimeout(() => {
+    // ⚡ Faster EXIT
+    gsap.to(items, {
+        y: 4,
+        opacity: 0,
+        duration: 0.05,            // 👈 faster exit
+        ease: "power2.in",
+        stagger: {
+            each: 0.02,
+            from: "end"
+        }
+    });
+
+    gsap.to(menu, {
+        opacity: 0,
+        duration: 0.15,
+        onComplete: () => {
             menu.style.visibility = "hidden";
-        }, 200);
+            menu.style.pointerEvents = "none";
+        }
+    });
 
-        activeDropdown = null;
-        activeWrapper = null;
-    }
+    activeDropdown = null;
+    activeWrapper = null;
+}
+function getDropdownItems(menu) {
+    return menu.querySelectorAll("a, li, span, label");
+}
+
 
     /* =========================================================
        MOBILE MAIN NAV (TOP SLIDE – TRANSFORM ONLY)

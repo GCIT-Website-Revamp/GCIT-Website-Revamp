@@ -1,6 +1,6 @@
 .pageBannerWrapper{
     position: relative;
-    margin-top: 120px;
+    margin-top: 104px;
     min-height: 350px;
     display: flex;
     padding-top: 2rem;
@@ -145,6 +145,8 @@
     display: flex;
     width: calc(100% - 525px);
     flex-direction: column;
+    text-decoration: none;
+    color: #606060;
     position: relative;
     gap: 1.5rem;
 }

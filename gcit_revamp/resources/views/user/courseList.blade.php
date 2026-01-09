@@ -59,7 +59,7 @@
                     </div>
                     <div class="filterContainer">
                         <div class="filter">
-                            <input type="checkbox" value = "School of Computer Science">
+                            <input type="checkbox" value = "School of Future Computing">
                             <p>School of Future Computing</p>
                         </div>
                         <div class="filter">

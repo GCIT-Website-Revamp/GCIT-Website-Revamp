@@ -80,14 +80,13 @@
                 </button>
                 <div class="mainContent courseContent">
                     @foreach ($projects as $item)
-                        <div class="card">
+                        <a href="/post/project/{{ $item->id }}" class="card">
                             <img src="{{ asset('storage/' . $item->image) }}" alt="">
                             <div class="cardContent">
                                 <h1>{{ $item->name }}</h1>
                                 <p class = "multi-truncate">{!! Str::limit($item->description, 250) !!}</p>
-                                <a href="/post/project/{{ $item->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
                 <div class="filterColumn">

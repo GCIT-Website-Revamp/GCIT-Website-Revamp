@@ -5,7 +5,10 @@
     align-items: flex-start;
     overflow: visible;
     position: relative;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
+}
+.postWrapper > .post> .sectionHeader{
+    margin-bottom: 1rem;
 }
 
 .post{
@@ -81,7 +84,7 @@ li ul li {
 .suggestionWrapper > *{
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #FAFAFA; /* divider */
+    border-bottom: 1px solid #e6e6e6; /* divider */
 }
 
 .suggestionWrapper > *:last-child {
@@ -104,8 +107,8 @@ li ul li {
     /* border-bottom: none; */
 }
 .suggestion h1{
-    font-size: clamp(16px, 2vw, 20px);
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
     padding: 1rem 0;
 }
 
@@ -176,9 +179,13 @@ li ul li {
   opacity: 1 !important;
 }
 
-.post .btnWrapper:has(> :only-child) {
-  /* styles when exactly one child */
-  justify-content: flex-end;
+.post .btnWrapper:has(> a > .right):not(:has(> a > .left)) {
+    justify-content: flex-end;
+}
+
+/* Only PREVIOUS exists → align left */
+.post .btnWrapper:has(> a > .left):not(:has(> a > .right)) {
+    justify-content: flex-start;
 }
 @media (max-width: 1023px) {
   .postWrapper {

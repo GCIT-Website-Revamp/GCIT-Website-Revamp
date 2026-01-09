@@ -58,6 +58,7 @@ footer .linkWrapper a:hover{
 
 .subContentWrapper{
   display: flex;
+  gap: 3rem;
   justify-content: space-between;
   margin-top: 2rem;
   align-items: center;

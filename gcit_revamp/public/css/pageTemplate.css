@@ -84,6 +84,8 @@
 .cardAnnouncement .card {
     position: relative;
     display: flex;
+    text-decoration: none;
+    color: #606060;
     background-color: #FAFAFA;
     width: 100%;
     min-width: 350px;

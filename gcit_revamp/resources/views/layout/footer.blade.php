@@ -23,12 +23,12 @@
        <div class="linkContainer">
            <h1>Quick Links</h1>
            <a>Admissions 2026</a>
-           <a>GovTech</a>
-           <a>G2C</a>
-            <a>MoESD</a>
-            <a>MoICE</a>
-            <a>RCSC</a>
-            <a>RUB</a>
+           <a href = "https://tech.gov.bt/">GovTech</a>
+           <a href = "https://www.citizenservices.gov.bt/g2cportal/ListOfLifeEventComponent">G2C</a>
+           <a href = "https://education.gov.bt/">MoESD</a>
+           <a href = "https://www.moice.gov.bt/">MoICE</a>
+           <a href = "https://rcsc.gov.bt/">RCSC</a>
+           <a href = "https://rub.edu.bt">RUB</a>
         </div>
 
         <div class="linkContainer">

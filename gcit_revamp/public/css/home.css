@@ -1006,7 +1006,9 @@ font-size: 32px;}
   pointer-events: none;
 }
 
-
+.headerHomeAnnouncement{
+    padding-left: 1.5rem;
+}
 @media (max-width: 1024px) {
     .heading-row .main-header {
 display: block;
@@ -1320,6 +1322,7 @@ display: block;
 
     .homeAnnouncementHeader .headerLink {
         align-self: flex-start;
+        margin-left: 1.5rem;
     }
 
     .homeAnnouncementContent {
@@ -1392,11 +1395,11 @@ display: block;
 }
 
 @media (hover:hover) and (pointer:fine){
-      .socWrapper:hover,
+      /* .socWrapper:hover,
   .siddWrapper:hover,
   .courseContent:hover .course {
     width: 100% !important;
-  }
+  } */
    .courseCoverTitle p,
   .courseCoverTitle .ctaBtn {
     opacity: 0;
@@ -1441,7 +1444,7 @@ display: block;
 
 @media (hover: hover) and (pointer: fine) {
 
-    .socWrapper:hover {
+    /* .socWrapper:hover {
         width: 100% !important;
     }
 
@@ -1455,7 +1458,7 @@ display: block;
 
     .courseContent:hover .socWrapper:not(:hover) {
         width: 100% !important;
-    }
+    } */
 
     .course:hover .courseCoverTitle {
         left: var(--padding-sides);

@@ -197,3 +197,97 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  ScrollTrigger.matchMedia({
+
+    // =============================
+    // DESKTOP ONLY (>=1024px)
+    // =============================
+    "(min-width: 1024px)": () => {
+
+      function refreshStyles(el) {
+        el.style.width = "auto"; // Reset first
+        const width = el.offsetWidth;
+        el.style.width = width + "px";
+                el.style.height = "fit-content";
+
+      }
+
+      const container = document.querySelector(".courseDetailsSection");
+      const sideMenu = document.querySelector(".courseDetailsContainer .sideMenu");
+      const other = document.querySelector(".courseDetailsContainer .otherCourseContainer");
+
+      if (!container || !sideMenu || !other) return;
+
+      const HEADER_OFFSET = 0;
+
+      function lockWidth(el) {
+        const rect = el.getBoundingClientRect();
+        el.style.width = rect.width + "px";
+        el.style.height = "fit-content";
+      }
+
+      lockWidth(sideMenu);
+      lockWidth(other);
+
+      // ----------------------------
+      // LEFT SIDEBAR PIN
+      // ----------------------------
+      const leftPin = ScrollTrigger.create({
+        trigger: container,
+        start: "-120px top",
+        end: () => `bottom-=${sideMenu.offsetHeight + HEADER_OFFSET} top`,
+        pin: sideMenu,
+        pinSpacing: false,
+        pinType: "transform",
+        invalidateOnRefresh: true,
+        onRefresh: () => refreshStyles(sideMenu)
+      });
+
+      // ----------------------------
+      // RIGHT SIDEBAR PIN
+      // ----------------------------
+      const rightPin = ScrollTrigger.create({
+        trigger: container,
+        start: "-120px top",
+        end: () => `bottom-=${other.offsetHeight + HEADER_OFFSET} top`,
+        pin: other,
+        pinSpacing: false,
+        pinType: "transform",
+        invalidateOnRefresh: true,
+        onRefresh: () => refreshStyles(other)
+      });
+
+      // Resize handling
+      const onResize = () => {
+        lockWidth(sideMenu);
+        lockWidth(other);
+        ScrollTrigger.refresh();
+      };
+
+      window.addEventListener("resize", onResize);
+
+      // 🔥 Cleanup when leaving desktop
+      return () => {
+        leftPin.kill();
+        rightPin.kill();
+        window.removeEventListener("resize", onResize);
+        gsap.set([sideMenu, other], { clearProps: "all" });
+      };
+    },
+
+    // =============================
+    // MOBILE / TABLET (<1024px)
+    // =============================
+    "(max-width: 1023px)": () => {
+      const sideMenu = document.querySelector(".courseDetailsContainer .sideMenu");
+      const other = document.querySelector(".courseDetailsContainer .otherCourseContainer");
+      gsap.set([sideMenu, other], { clearProps: "all" });
+    }
+
+  });
+
+});

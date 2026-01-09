@@ -116,7 +116,7 @@
                     <div class="course overlayWrapper socWrapper">
                         <div class="courseBG bgLeft backgroundWrapper">
                             <div class="overlay"></div>
- <video 
+                            <video 
                                 src="{{ asset('videos/SOFC.mp4') }}"
                                 autoplay
                                 muted
@@ -255,7 +255,7 @@
         <div class="homeAnnouncementWrapper sectionWrapper">
             <div class="homeAnnouncementHeader">
                 <div class="headerContent">
-                    <h1 class = "main-header">Recent Announcements</h1>
+                    <h1 class = "main-header headerHomeAnnouncement">Recent Announcements</h1>
                   
                 </div>
                 <div class="headerLink">

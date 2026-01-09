@@ -30,15 +30,14 @@
 
         <div class="mainContent courseContent boxImgWrapper">
             @forelse ($courses as $index => $course)
-            <div class="card" data-tag = "{{$course->type}}">
+            <a href="/courseDetails/{{ $course->id }}" class="card" data-tag = "{{$course->type}}">
                 <img src="{{ asset('storage/' . $course->image) }}" alt="">
                 <div class="cardContent">
                     <span class="coursePreHeader">{{ $course->type }}</span>
                     <h1>{{ $course->name }}</h1>
                     <p class = "multi-truncate">{{ $course->description }}</p>
-                    <a href="/courseDetails/{{ $course->id }}"><span class="material-symbols-outlined">expand_circle_right</span>Read More</a>
                 </div>
-            </div>
+        </a>
             @empty
                 <p>No courses found.</p>
             @endforelse

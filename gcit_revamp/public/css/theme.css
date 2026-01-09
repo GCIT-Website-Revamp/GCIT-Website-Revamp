@@ -93,7 +93,7 @@ html, body {
     width: 100%;
     font-family: var(--font-text);
     font-size: var(--font-size-md);
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     overflow-y: auto; /* ✅ allow vertical scrolling */
 
 }
@@ -107,8 +107,11 @@ html, body {
 } */
 
 
-
-ul li{
+.pin-spacer{
+    inset: 0 !important;
+    /* pointer-events: none;  */
+}
+ul li, ol li{
         list-style-position: inside;
 
 }

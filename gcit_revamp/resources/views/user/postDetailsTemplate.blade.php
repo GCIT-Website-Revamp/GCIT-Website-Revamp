@@ -49,7 +49,10 @@
 </div>
 <div class="pageContentWrapper">
     <div class="section">
-        <div class="sectionHeader">
+        
+            <div class="postWrapper">
+            <div class="post">
+                <div class="sectionHeader">
             @if($event)
                     <h1 class = "main-header">{{ $event->name }}</h1>
             @endif
@@ -60,8 +63,6 @@
                     <h1 class = "main-header">{{ $project->name }}</h1>
             @endif        
                 </div>
-            <div class="postWrapper">
-            <div class="post">
                 @if($event)
                 <img src="{{ asset('storage/' . $event->image) }}" alt="">
                 <p>{!! $event->description !!}</p>
@@ -124,10 +125,10 @@
 
                 @if($latestProjects)
                     @forelse ($latestProjects as $index => $item)
-                    <div href="/post/project/{{ $item->id }}" class="suggestion">
+                    <a href="/post/project/{{ $item->id }}" class="suggestion">
                         <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
                         <h1>{{ $item->name }}</h1>
-                    </div>
+                    </a>
                     @empty
                     @endforelse
                 @endif

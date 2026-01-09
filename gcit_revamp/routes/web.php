@@ -284,7 +284,7 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 });
 
 Route::get('/', function () {
-    $bsc = Course::where('type', '=', 'School of Computer Science')->orderBy('name', 'ASC')->get();
+    $bsc = Course::where('type', '=', 'School of Future Computing')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
     $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "true")->take(5)->get();
     $events = Event::orderBy('date', 'desc')->where('display', '=', "true")->get();
@@ -497,7 +497,7 @@ Route::get('/contactUs', function () {
 })->name('contact');
 
 Route::get('/homepage', function () {
-    $bsc = Course::where('type', '=', 'School of Computer Science')->orderBy('name', 'ASC')->get();
+    $bsc = Course::where('type', '=', 'School of Future Computing')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
     $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "true")->take(5)->get();
     $events = Event::orderBy('date', 'desc')->where('display', '=', "true")->get();

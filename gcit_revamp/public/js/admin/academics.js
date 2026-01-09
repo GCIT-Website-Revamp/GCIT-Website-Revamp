@@ -118,7 +118,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
                 <label for="courseType">Type</label>
                 <select class="form-control" id="courseType">
                     <option value="" disabled selected>Select Degree</option>
-                    <option value="School of Computer Science">School of Computer Science</option>
+                    <option value="School of Future Computing">School of Future Computing</option>
                     <option value="School of Interactive Design and Development">School of Interactive Design and Development</option>
                 </select>
             </div>
@@ -407,7 +407,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                     <label for="courseType">Type</label>
                     <select class="form-control" id="courseType">
                         <option value="" disabled selected>Select Degree</option>
-                        <option value="School of Computer Science"  ${this.dataset.courseType === "School of Computer Science" ? "selected" : ""}>School of Computer Science</option>
+                        <option value="School of Future Computing"  ${this.dataset.courseType === "School of Future Computing" ? "selected" : ""}>School of Future Computing</option>
                         <option value="School of Interactive Design and Development" ${this.dataset.courseType === "School of Interactive Design and Development" ? "selected" : ""}>School of Interactive Design and Development</option>
                     </select>
                 </div>

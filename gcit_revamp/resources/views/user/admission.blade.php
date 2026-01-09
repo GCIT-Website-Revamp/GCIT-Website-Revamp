@@ -164,7 +164,7 @@
                                 Applicants are encouraged to review official RUB admission announcements for programme-specific details
                                 and annual updates.
                             </p>
-
+                            <br>
                             <p>
                                 GCIT reserves the right to update admission criteria in alignment with RUB policies and institutional governance.
                             </p>

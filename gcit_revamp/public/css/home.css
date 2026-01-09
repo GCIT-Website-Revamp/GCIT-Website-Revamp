@@ -1554,7 +1554,9 @@ display: block;
     align-items: center;
     transform: unset;
    }
-
+    .courseContent{
+        padding: 0 !important;
+    }
    .leftBtn{
     transform: rotate(180deg) !important;
    }

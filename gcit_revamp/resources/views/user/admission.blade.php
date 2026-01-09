@@ -45,6 +45,7 @@
                                     <div class="circle"></div>
                                     <h1>Our Next Intake</h1>
                                 </div>
+                                <a href="#intake">Upcoming Intakes</a>
                             
                             </div>
                             <div class="menuSection">

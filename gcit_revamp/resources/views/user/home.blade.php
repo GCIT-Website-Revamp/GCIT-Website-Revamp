@@ -104,7 +104,7 @@
                 </div>
                 <div class="cardContent">
                     <h1>Technopreneurship Mindset </h1>
-                    <p>Guided by the ICE Model (Inspire–Challenge–Empower) and rooted in GNH values, we nurture developers to think with entrepreneurial vision and purpose.</p>
+                    <p>A Paradigm that integrates technology into an Entrepreneurial learning framework for enabling effective Start-Ups & Unicorns. We drive vibrant and sustainable start-ups for the economy of adaptability, resilience and strategic pivoting.</p>
                 </div>
             </div>
         </div>
@@ -296,7 +296,7 @@
         <div class="homeEventWrapper sectionWrapper">
             <div class="eventMessage">
                 <h1 class = "main-header">News & Events</h1>
-                <p>Stay up to date with the latest happenings at GCIT — from student achievements and research showcases to innovation challenges, collaborations, and campus celebrations. Discover how our community continues to shape Bhutan’s digital future.</p>
+                <p>Stay synchronized with the latest happenings at GCIT, encompassing student achievements, learning initiatives, campus celebrations, and the strategic collaborations driving our shared digital future.</p>
                 <a href="/news&events">Explore More</a>
             </div>
             @foreach ($events as $item)

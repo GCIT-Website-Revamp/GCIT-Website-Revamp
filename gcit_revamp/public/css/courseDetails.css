@@ -275,6 +275,15 @@
     .otherCourseContainer .header h1 {
         width: 60%;
     }
+    .courseDetailsSection {
+    position: relative;
+    padding: 0 36px;
+}
+.courseContentContainer .bannerContent{
+
+    padding: 0 36px !important;
+}
+
 }
 
 @media screen and (max-width: 1024px) {

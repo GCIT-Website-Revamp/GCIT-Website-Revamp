@@ -822,6 +822,9 @@ font-size: 32px;}
     display: flex;
     flex-wrap: wrap;
 }
+.homeEventWrapper > :nth-child(n+10) {
+  display: none;
+}
 
 .homeEventWrapper > *{
     width: calc(33.333%);
@@ -1587,7 +1590,7 @@ display: block;
 }
 
 @media (max-width: 800px) {
-  .homeEventWrapper .event:nth-of-type(n+8) {
+  .homeEventWrapper .event:nth-of-type(n+7) {
     display: none;
   }
 

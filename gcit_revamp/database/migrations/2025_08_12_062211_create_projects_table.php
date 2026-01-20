@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('display')->nullable();
             $table->string('highlight')->nullable();
             $table->string('guide');
+            $table->string('type');
             $table->text('description');
             $table->text('developers');
             $table->text('image');

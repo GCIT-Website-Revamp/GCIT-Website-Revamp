@@ -51,6 +51,7 @@ class ProjectController extends Controller
                 'name' => 'required',
                 'guide' => 'required',
                 'description' => 'required',
+                'type' => 'required',
                 'display' => 'sometimes',
                 'highlight' => 'sometimes',
                 'developers' => 'required',
@@ -71,6 +72,7 @@ class ProjectController extends Controller
             $project->display = $request->display;
             $project->highlight = $request->highlight;
             $project->guide = $request->guide;
+            $project->type = $request->type;
             $project->description = $request->description;
             $project->developers = $request->developers;
             $project->year = $request->year;
@@ -154,6 +156,7 @@ class ProjectController extends Controller
                 'name' => 'required',
                 'guide' => 'required',
                 'description' => 'required',
+                'type' => 'required',
                 'display' => 'sometimes',
                 'highlight' => 'sometimes',
                 'developers' => 'required',
@@ -173,6 +176,7 @@ class ProjectController extends Controller
             $project->display = $request->display;
             $project->highlight = $request->highlight;
             $project->guide = $request->guide;
+            $project->type = $request->type;
             $project->description = $request->description;
             $project->developers = $request->developers;
             $project->year = $request->year;

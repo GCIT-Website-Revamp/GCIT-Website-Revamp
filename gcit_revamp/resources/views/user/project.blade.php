@@ -84,6 +84,7 @@
                             <img src="{{ asset('storage/' . $item->image) }}" alt="">
                             <div class="cardContent">
                                 <h1>{{ $item->name }}</h1>
+                                <p>{{ $item->type }}</p>
                                 <p class = "multi-truncate">{!! Str::limit($item->description, 250) !!}</p>
                             </div>
                         </a>

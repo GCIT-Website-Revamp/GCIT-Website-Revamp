@@ -121,7 +121,14 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
                 <label for="name">Project Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
-
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select class="form-control" id="type" name="type">
+                    <option value="" disabled selected>Select Type</option>
+                    <option value="Start-Up">Start-Up</option>
+                    <option value="Capstone Project">Capstone Project</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="year">Year</label>
                 <input type="number" class="form-control" id="year" name="year" required>
@@ -157,7 +164,7 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
             <div class="form-group" style="margin-left:19px;">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
-                    Display in the site (Project Page)
+                    Hide in the site (Project Page)
                 </label>
             </div>
             <div class="form-group" style="margin-left:19px;">
@@ -264,7 +271,7 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
 document.addEventListener('click', function (e) {
     const editBtn = e.target.closest('.edit-project-btn');
     if (editBtn) {
-        const { id, name, year, guide, developers, description, image } = editBtn.dataset;
+        const { id, name, year, guide, developers, description, image, type } = editBtn.dataset;
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Project';
 
@@ -274,7 +281,14 @@ document.addEventListener('click', function (e) {
                     <label>Project Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="${name}" required>
                 </div>
-
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select class="form-control" id="type" name="type">
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="Start-Up" ${type === "Start-Up" ? "selected" : ""}>Start-Up</option>
+                        <option value="Capstone Project" ${type === "Capstone Project" ? "selected" : ""}>Capstone Project</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Year</label>
                     <input type="number" class="form-control" id="year" name="year" value="${year}" required>
@@ -325,7 +339,7 @@ document.addEventListener('click', function (e) {
                 <div class="form-group" style="margin-left:19px;">
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input" id="display" name="display" value="true" ${editBtn.dataset.display == "true" ? "checked" : ""}>
-                        Display in the site (Project Page)
+                        Hide in the site (Project Page)
                     </label>
                 </div>
                 <div class="form-group" style="margin-left:19px;">

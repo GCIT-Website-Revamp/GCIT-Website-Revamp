@@ -72,8 +72,9 @@
                     <div class="courseDetailsWrapper">
 
                         <div class="courseHeaderWrapper">
-                            <h1>{{ $course->header }}</h1>
-                            <p>{!! nl2br(e($course->description)) !!}</p>
+                            <h1>{{ $course->header }}</h1><br>
+                            <h1>{{ $course->header2 }}</h1>
+                            <p>{!! $course->description !!}</p>
 
                         </div>
                         <div class="courseDetailContent whythisprogram" id="why">
@@ -82,7 +83,7 @@
                                 <h1>Why This Program? <span class="material-symbols-outlined">keyboard_arrow_right</span>
                                 </h1>
                             </label>
-                            <p>{!! nl2br(e($course->why)) !!}</p>
+                            <p>{!! $course->why !!}</p>
                         </div>
                         <div class="courseDetailContent whatwouldilearn" id="learnSection">
                             <input type="checkbox" id="learn">
@@ -91,7 +92,7 @@
                                 </h1>
                             </label>
 
-                            <p>{!! nl2br(e($course->what)) !!}</p>
+                            <p>{!! $course->what !!}</p>
                         </div>
                         <div class="courseDetailContent programstructure" id="structureSection">
                             <input type="checkbox" id="structure">
@@ -100,7 +101,7 @@
                                 </h1>
                             </label>
 
-                            <p>{!! nl2br(e($course->structure)) !!}</p>
+                            <p>{!! $course->structure !!}</p>
                         </div>
                         <div class="courseDetailContent careerprospects" id="careerSection">
                             <input type="checkbox" id="career">
@@ -109,7 +110,7 @@
                                         class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                             </label>
 
-                            <p>{!! nl2br(e($course->career)) !!}</p>
+                            <p>{!! $course->career !!}</p>
                         </div>
 
 
@@ -131,7 +132,7 @@
                             <p>
                                 @foreach ($groupedModules[1][1] ?? [] as $module)
                                     <strong>{{ $module->name }}</strong><br>
-                                    {{ $module->description }}<br><br>
+                                    {!! $module->description !!}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -146,7 +147,7 @@
                             <p>
                                 @foreach ($groupedModules[1][2] ?? [] as $module)
                                     <strong>{{ $module->name }}</strong><br>
-                                    {{ $module->description }}<br><br>
+                                   {!! $module->description !!}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -161,7 +162,7 @@
                             <p>
                                 @foreach ($groupedModules[2][1] ?? [] as $module)
                                     <strong>{{ $module->name }}</strong><br>
-                                    {{ $module->description }}<br><br>
+                                   {!! $module->description !!}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -176,7 +177,7 @@
                             <p>
                                 @foreach ($groupedModules[2][2] ?? [] as $module)
                                     <strong>{{ $module->name }}</strong><br>
-                                    {{ $module->description }}<br><br>
+                                   {!! $module->description !!}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -191,7 +192,7 @@
                             <p>
                                 @foreach ($groupedModules[3][1] ?? [] as $module)
                                     <strong>{{ $module->name }}</strong><br>
-                                    {{ $module->description }}<br><br>
+                                   {!! $module->description !!}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -207,7 +208,7 @@
                             <p>
                                 @foreach ($groupedModules[3][2] ?? [] as $module)
                                     <strong>{{ $module->name }}</strong><br>
-                                    {{ $module->description }}<br><br>
+                                   {!! $module->description !!}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -222,7 +223,7 @@
                             <p>
                                 @foreach ($groupedModules[4][1] ?? [] as $module)
                                     <strong>{{ $module->name }}</strong><br>
-                                    {{ $module->description }}<br><br>
+                                   {!! $module->description !!}<br><br>
                                 @endforeach
                             </p>
                         </div>
@@ -237,7 +238,7 @@
                             <p>
                                @foreach ($groupedModules[4][2] ?? [] as $module)
                                     <strong>{{ $module->name }}</strong><br>
-                                    {{ $module->description }}<br><br>
+                                   {!! $module->description !!}<br><br>
                                 @endforeach
                             </p>
                         </div>

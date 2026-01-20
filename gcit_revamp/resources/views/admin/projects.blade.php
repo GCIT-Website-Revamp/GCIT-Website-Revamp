@@ -144,6 +144,7 @@
                                                    data-display="{{ $project->display }}" data-highlight="{{ $project->highlight }}"
                                                    data-developers="{{ $project->developers }}"
                                                    data-description="{{ $project->description }}"
+                                                   data-type="{{ $project->type }}"
                                                    data-image="{{ asset('storage/' . $project->image) }}"
                                                    data-images='@json($project->images)'>Edit</button>
                                                 <button type="button" class="btn btn-danger delete-project-btn"

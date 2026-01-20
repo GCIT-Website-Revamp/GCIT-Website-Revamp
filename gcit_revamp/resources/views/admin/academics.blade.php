@@ -81,14 +81,15 @@
                                        <tr>
                                           <td>{{ $courses->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $course->name }}</td>
-                                          <td style="max-width: 340px;">{!! nl2br(e(Str::limit($course->description, 200))) !!}</td>
-                                          <td style="max-width: 340px;">{!! nl2br(e(Str::limit($course->structure, 200))) !!}</td>
+                                          <td style="max-width: 340px;">{!! Str::limit($course->description, 200) !!}</td>
+                                          <td style="max-width: 340px;">{!! Str::limit($course->structure, 200) !!}</td>
                                           <td>
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-course-btn"
                                                    data-course-id="{{ $course->id }}"
                                                    data-course-name="{{ $course->name }}"
                                                    data-course-header="{{ $course->header }}"
+                                                   data-course-header2="{{ $course->header2 }}"
                                                    data-course-type="{{ $course->type }}"
                                                    data-course-why="{{ $course->why }}"
                                                    data-course-what="{{ $course->what }}"
@@ -153,7 +154,7 @@
                                        <tr>
                                           <td>{{ $modules->firstItem() + $index ?? $loop->iteration }}</td>
                                           <td>{{ $module->name }}</td>
-                                          <td style="max-width: 470px;">{!! nl2br(e(Str::limit($module->description, 200))) !!}</td>
+                                          <td style="max-width: 470px;">{!! Str::limit($module->description, 200) !!}</td>
                                           <td>
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-module-btn"
@@ -215,6 +216,7 @@
    </div>
    <!-- jQuery -->
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
    <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
    <script src="{{ asset('js/admin/popper.min.js') }}"></script>
    <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>

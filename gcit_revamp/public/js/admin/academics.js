@@ -9,6 +9,54 @@ window.Loader = {
     }
 };
 
+/* =========================
+   CKEDITOR (FOR ALL TEXTAREAS)
+   ========================= */
+const CKEDITORS = new Map(); // key: textarea element, value: editor instance
+
+function initCkEditors(scope = document) {
+    const textareas = scope.querySelectorAll('textarea');
+
+    textareas.forEach(textarea => {
+        if (CKEDITORS.has(textarea)) return;
+
+        ClassicEditor
+            .create(textarea, {
+                ckfinder: {
+                    uploadUrl: '/ckeditor/upload?_token=' + csrf
+                },
+                image: {
+                    upload: {
+                        types: ['jpeg', 'png', 'jpg', 'gif', 'webp']
+                    }
+                }
+            })
+            .then(editor => {
+                CKEDITORS.set(textarea, editor);
+            })
+            .catch(err => console.error('CKEditor init error:', err));
+    });
+}
+
+function getCkData(textareaId) {
+    const el = document.getElementById(textareaId);
+    if (!el) return "";
+
+    const editor = CKEDITORS.get(el);
+    return editor ? editor.getData() : el.value;
+}
+
+function destroyCkEditors() {
+    CKEDITORS.forEach(editor => editor.destroy());
+    CKEDITORS.clear();
+}
+
+document.getElementById('myModal')?.addEventListener('hidden.bs.modal', destroyCkEditors);
+
+
+/* =========================
+   MODULE SEARCH (UNCHANGED)
+   ========================= */
 document.addEventListener('DOMContentLoaded', () => {
 
     const moduleSearchInput = document.getElementById('moduleSearch');
@@ -111,7 +159,11 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
 
             <div class="form-group">
                 <label>Header</label>
-                <textarea class="form-control" id="header" rows="2" required></textarea>
+                <input type="text" class="form-control" id="header" rows="2" required>
+            </div>
+            <div class="form-group">
+                <label>Header 2</label>
+                <input type="text" class="form-control" id="header2" rows="2" required>
             </div>
 
             <div class="form-group">
@@ -160,18 +212,23 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
         <button type="submit" class="btn btn-success" id="addCourse">Add Course</button>
     `;
 
+    // INIT CKEDITOR FOR ALL TEXTAREAS IN MODAL
+    initCkEditors(document.getElementById('myModal'));
+
     // HANDLE SUBMIT
     document.getElementById('addCourse').addEventListener('click', function () {
 
         let formData = new FormData();
         formData.append("name", document.getElementById('name').value);
-        formData.append("description", document.getElementById('description').value);
-        formData.append("why", document.getElementById('why').value);
-        formData.append("what", document.getElementById('what').value);
-        formData.append("structure", document.getElementById('structure').value);
-        formData.append("career", document.getElementById('career').value);
+        formData.append("header", document.getElementById('header').value);
+        formData.append("header2", document.getElementById('header2').value);
+        // textarea -> CKEditor data
+        formData.append("description", getCkData("description"));
+        formData.append("why", getCkData("why"));
+        formData.append("what", getCkData("what"));
+        formData.append("structure", getCkData("structure"));
+        formData.append("career", getCkData("career"));
         formData.append("type", document.getElementById("courseType").value);
-        formData.append("header", document.getElementById("header").value);
         let imageFile = document.getElementById('courseImage').files[0];
         formData.append("image", imageFile);
 
@@ -211,6 +268,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
     new bootstrap.Modal(document.getElementById('myModal')).show();
 });
 
+
 // =====================
 // Add Module Modal Logic
 // =====================
@@ -236,6 +294,9 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
             </div>
         </form>
     `;
+
+    // INIT CKEDITOR FOR ALL TEXTAREAS IN MODAL
+    initCkEditors(document.getElementById('myModal'));
 
     // Fetch courses and display as checkboxes
     fetch('/api/course')
@@ -326,7 +387,8 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
         const payload = {
             name: document.getElementById('name').value,
             course_id: coursesData,
-            description: document.getElementById('description').value
+            // textarea -> CKEditor data
+            description: getCkData("description")
         };
 
         Swal.fire({
@@ -400,7 +462,11 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
 
                 <div class="form-group">
                     <label>Header</label>
-                    <textarea class="form-control" id="header" rows="2" required>${this.dataset.courseHeader}</textarea>
+                    <input type="text" class="form-control" id="header" rows="2" value="${this.dataset.courseHeader}" required>
+                </div>
+                <div class="form-group">
+                    <label>Header 2</label>
+                    <input type="text" class="form-control" id="header2" rows="2" value="${this.dataset.courseHeader2}" required>
                 </div>
 
                 <div class="form-group">
@@ -450,18 +516,24 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
             <button type="submit" class="btn btn-success" id="updateCourse">Update Course</button>
         `;
 
+        // INIT CKEDITOR FOR ALL TEXTAREAS IN MODAL
+        initCkEditors(document.getElementById('myModal'));
+
         // Handle Update
         document.getElementById('updateCourse').addEventListener('click', function () {
 
             let formData = new FormData();
             formData.append("name", document.getElementById('name').value);
-            formData.append("description", document.getElementById('description').value);
-            formData.append("why", document.getElementById('why').value);
-            formData.append("what", document.getElementById('what').value);
-            formData.append("structure", document.getElementById('structure').value);
-            formData.append("career", document.getElementById('career').value);
+            formData.append("header", document.getElementById('header').value);
+            formData.append("header2", document.getElementById('header2').value);
+            // textarea -> CKEditor data
+            formData.append("description", getCkData("description"));
+            formData.append("why", getCkData("why"));
+            formData.append("what", getCkData("what"));
+            formData.append("structure", getCkData("structure"));
+            formData.append("career", getCkData("career"));
+
             formData.append("type", document.getElementById("courseType").value);
-            formData.append("header", document.getElementById("header").value);
             let newImage = document.getElementById('courseImage').files[0];
             if (newImage) {
                 formData.append("image", newImage);
@@ -565,6 +637,7 @@ document.querySelectorAll('.delete-course-btn').forEach(button => {
     });
 });
 
+
 // =============================
 // Edit Module Button (Updated to Match Add Module)
 // =============================
@@ -602,6 +675,9 @@ document.addEventListener('click', function (e) {
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-success" id="updateModule">Update Module</button>
         `;
+
+        // INIT CKEDITOR FOR ALL TEXTAREAS IN MODAL
+        initCkEditors(document.getElementById('myModal'));
 
         // Fetch courses and create checkboxes
         fetch('/api/course')
@@ -683,7 +759,8 @@ document.addEventListener('click', function (e) {
 
             const payload = {
                 name: document.getElementById('name').value,
-                description: document.getElementById('description').value,
+                // textarea -> CKEditor data
+                description: getCkData("description"),
                 course_id: coursesData
             };
 

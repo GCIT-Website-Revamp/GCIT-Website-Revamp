@@ -286,19 +286,19 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
 Route::get('/', function () {
     $bsc = Course::where('type', '=', 'School of Future Computing')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
-    $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "true")->take(5)->get();
-    $events = Event::orderBy('date', 'desc')->where('display', '=', "true")->get();
+    $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "false")->take(5)->get();
+    $events = Event::orderBy('date', 'desc')->where('highlight', '=', "true")->get();
     $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
     return view('user.home', compact('bsc','sidd', 'announcements', 'events', 'projects'));
 });
 
 Route::get('/news&events', function () {
-    $events = Event::orderBy('date', 'desc')->where('display', '=', "true")->get();
+    $events = Event::orderBy('date', 'desc')->where('display', '=', "false")->get();
     return view('user.eventsTemplate', compact('events'));
 });
 
 Route::get('/announcements', function () {
-    $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "true")->get();
+    $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "false")->get();
     return view('user.announcementTemplate', compact('announcements'));
 });
 
@@ -333,7 +333,7 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
 
         // Latest events
         $latestEvents = Event::orderBy('date', 'desc')
-            ->where('display', '=', "true")
+            ->where('display', '=', "false")
             ->take(3)
             ->get();
     }
@@ -350,7 +350,7 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
 
         // Latest announcements
         $latestAnnouncements = Announcement::orderBy('date', 'desc')
-            ->where('display', '=', "true")
+            ->where('display', '=', "false")
             ->take(3)
             ->get();
     }
@@ -367,7 +367,7 @@ Route::get('/post/{type}/{id}', function ($type, $id) {
 
         // Latest projects
         $latestProjects = Project::orderBy('created_at', 'desc')
-            ->where('display', '=', "true")
+            ->where('display', '=', "false")
             ->take(3)
             ->get();
     }
@@ -482,7 +482,7 @@ Route::get('/resources/{type}', function ($type) {
     return view('user.resources', compact('resources', 'courses'));
 });
 Route::get('/project', function () {
-    $projects = Project::orderBy('created_at', 'desc')->where('display', '=', "true")->get();
+    $projects = Project::orderBy('created_at', 'desc')->where('display', '=', "false")->get();
     return view('user.project', compact('projects'));
 });
 
@@ -499,8 +499,8 @@ Route::get('/contactUs', function () {
 Route::get('/homepage', function () {
     $bsc = Course::where('type', '=', 'School of Future Computing')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
-    $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "true")->take(5)->get();
-    $events = Event::orderBy('date', 'desc')->where('display', '=', "true")->get();
+    $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "false")->take(5)->get();
+    $events = Event::orderBy('date', 'desc')->where('highlight', '=', "true")->get();
     $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
     return view('user.homeTemplate', compact('bsc','sidd', 'announcements', 'events', 'projects'));
 });

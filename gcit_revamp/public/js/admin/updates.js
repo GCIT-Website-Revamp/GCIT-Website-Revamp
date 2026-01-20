@@ -267,7 +267,7 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
                 <div class="form-group" style="margin-left:19px;">
                     <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" id="display" value="true">
-                    Display in the site (Event Page)
+                    Hide in the site (Event Page)
                     </label>
                 </div>
                 <div class="form-group" style="margin-left:19px;">
@@ -368,7 +368,7 @@ document.addEventListener('click', function (e) {
                         <div class="form-group" style="margin-left:19px;">
                             <label class="form-check-label">
                             <input type="checkbox" id="display" class="form-check-input" ${editBtn.dataset.eventDisplay == "true" ? "checked" : ""}>
-                            Display in the site (Event Page)
+                            Hide in the site (Event Page)
                             </label>
                         </div>
 
@@ -517,7 +517,7 @@ document.getElementById('addAnnouncementBtn').addEventListener('click', () => {
                 <div class="form-group" style="margin-left:19px;">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" id="display" name="display" value="true">
-                    Display in the site
+                    Hide in the site (Announcement Page)
                 </label>
             </form>
         `,
@@ -603,7 +603,7 @@ document.addEventListener('click', function (e) {
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" id="display" name="display" value="true"
                             ${editBtn.dataset.announcemnetDisplay == "true" ? "checked" : ""}>
-                            Display in the site
+                            Hide in the site (Announcement Page)
                         </label>
                     </form>
                 `,

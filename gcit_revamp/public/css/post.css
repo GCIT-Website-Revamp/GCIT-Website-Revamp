@@ -1,4 +1,4 @@
-.postWrapper{
+.postWrapper {
     display: flex;
     justify-content: space-between;
     gap: clamp(20px, 4vw, 60px);
@@ -7,23 +7,23 @@
     position: relative;
     /* margin-top: 1rem; */
 }
-.postWrapper > .post> .sectionHeader{
+.postWrapper > .post > .sectionHeader {
     margin-bottom: 1rem;
 }
 
-.post{
+.post {
     width: 65%;
     min-width: 0;
 }
 
-.post img{
+.post img {
     width: 100%;
     height: auto;
     object-fit: cover;
     margin-bottom: 40px;
 }
 
-.post .btnWrapper{
+.post .btnWrapper {
     width: 100%;
     display: flex;
     margin-top: 3rem;
@@ -31,7 +31,9 @@
     justify-content: space-between;
 }
 
-.post p,  ol,  li{
+.post p,
+ol,
+li {
     font-weight: 300;
     margin-bottom: 2rem;
 }
@@ -42,17 +44,15 @@ li {
 }
 
 li ul {
-    padding-left: 1.2rem;   /* reduce indent */
+    padding-left: 1.2rem; /* reduce indent */
 }
 
 li ul li {
-    margin-left: 0;         /* remove extra browser auto-offset */
+    margin-left: 0; /* remove extra browser auto-offset */
 }
 
-
-
-.btnWrapper button{
-    height: 50px; 
+.btnWrapper button {
+    height: 50px;
     width: clamp(150px, 5vw, 200px);
     display: flex;
     font-weight: 600;
@@ -65,12 +65,11 @@ li ul li {
     background-color: var(--color-primary);
 }
 
-.btnWrapper .left span{
+.btnWrapper .left span {
     transform: rotate(180deg);
-
 }
 
-.suggestionWrapper{
+.suggestionWrapper {
     display: flex;
     width: 35%;
     position: sticky;
@@ -81,7 +80,7 @@ li ul li {
     flex-direction: column;
 }
 
-.suggestionWrapper > *{
+.suggestionWrapper > * {
     padding-bottom: 1rem;
     margin-bottom: 1rem;
     border-bottom: 1px solid #e6e6e6; /* divider */
@@ -92,91 +91,91 @@ li ul li {
     margin-bottom: 0;
     padding-bottom: 0;
 }
-.suggestion{
+.suggestion {
     width: 100%;
     text-decoration: none;
     padding: 1rem;
     padding-top: 1rem;
 }
-.suggestion > *{
+.suggestion > * {
     font-weight: 400;
     color: #606060;
 }
-.suggestion:hover{
-    background-color: #FAFAFA;
+.suggestion:hover {
+    background-color: #fafafa;
     /* border-bottom: none; */
 }
-.suggestion h1{
+.suggestion h1 {
     font-size: 16px;
     font-weight: 500;
     padding: 1rem 0;
 }
 
-.suggestion a{
+.suggestion a {
     text-decoration: none;
     color: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 0.5rem
+    gap: 0.5rem;
 }
 
-.suggestion a:hover{
-    color: var(--color-primary)
+.suggestion a:hover {
+    color: var(--color-primary);
 }
 
 .post figure.table {
-  margin: 1.5rem 0;
-  width: 100%;
-  overflow-x: auto;
+    margin: 1.5rem 0;
+    width: 100%;
+    overflow-x: auto;
 }
 
 .post table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.95rem;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
 }
 
 .post th,
 .post td {
-  padding: 0.6rem 0.75rem;
-  border: 1px solid #e0e0e0;
-  text-align: left;
-  vertical-align: top;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    vertical-align: top;
 }
 
 .post thead th {
-  background: #f6f7f9;
-  font-weight: 600;
+    background: #f6f7f9;
+    font-weight: 600;
 }
 
 .post ul,
 .post ol {
-  padding-left: 1.4rem;
-  margin: 1rem 0 1.5rem;
+    padding-left: 1.4rem;
+    margin: 1rem 0 1.5rem;
 }
 
 .post li {
-  margin: 0.4rem 0;
+    margin: 0.4rem 0;
 }
 
 .post ul,
 .post ol {
-  padding-left: 1.4rem;
-  margin: 1rem 0 1.5rem;
+    padding-left: 1.4rem;
+    margin: 1rem 0 1.5rem;
 }
 
 .post li {
-  margin: 0.4rem 0;
+    margin: 0.4rem 0;
 }
 
 .post p {
-  margin: 0.8rem 0;
+    margin: 0.8rem 0;
 }
 
 .post p[style] {
-  transform: none !important;
-  opacity: 1 !important;
+    transform: none !important;
+    opacity: 1 !important;
 }
 
 .post .btnWrapper:has(> a > .right):not(:has(> a > .left)) {
@@ -188,20 +187,19 @@ li ul li {
     justify-content: flex-start;
 }
 @media (max-width: 1023px) {
-  .postWrapper {
-    flex-direction: column;
-  }
+    .postWrapper {
+        flex-direction: column;
+    }
 
-  .suggestionWrapper {
-    width: 100%;
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-  }
+    .suggestionWrapper {
+        width: 100%;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+    }
 }
 
 @media (max-width: 1024px) {
-
     .postWrapper {
         flex-direction: column;
     }
@@ -217,7 +215,6 @@ li ul li {
 }
 
 @media (max-width: 768px) {
-
     .post img {
         /* height: 260px; */
         margin-bottom: 1.5rem;
@@ -231,7 +228,6 @@ li ul li {
         line-height: 1.6;
     }
 
-    
     .suggestionWrapper {
         gap: 1.5rem;
     }
@@ -242,7 +238,6 @@ li ul li {
 }
 
 @media (max-width: 480px) {
-
     .post img {
         /* height: 220px; */
     }

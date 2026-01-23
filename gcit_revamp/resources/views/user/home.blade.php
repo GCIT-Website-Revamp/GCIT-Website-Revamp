@@ -124,7 +124,7 @@
             <div class="header sectionWrapper">
                 <h1 class="main-header">Our 2 Anchoring Schools</h1>
             </div>
-            <div class="courseContent sectionWrapper">
+            <div class="courseContent" id="expandableCourseSection">
                 <div class="course overlayWrapper socWrapper">
                     <div class="courseBG bgLeft backgroundWrapper">
                         <div class="overlay"></div>
@@ -133,10 +133,15 @@
                     <input type="checkbox" id="socToggle" hidden>
                     <div class="courseCoverTitle">
                         <h1>School of Future Computing</h1>
-                        <!-- <p>Ready to become a web development wizard? Our Full Stack Development degree program offers a comprehensive education in the latest tools and technologies needed to design and develop complex web and mobile applications. You’ll cover both front-end and back-end development, gaining valuable skills in HTML, CSS, JavaScript, databases, and server-side languages like NodeJS and Java. Plus you’ll get hands-on experience with popular…</p> -->
-                        <div class="ctaBtn">
-                            <a href="/course">Learn More</a>
-                        </div>
+                        <div class="hiddenInfo">
+							<hr class="courseH1-divider">
+							<p>GCIT’s School of Future Computing (SFC) is a visionary Bachelor of Computer Science programme dedicated to preparing and graduating students for a world transformed by rapid technological evolution. We place strong emphasis in specialised pathways in AI & Fullstack Development, Blockchain Software Development and Cyber Security that are all grounded in modern software and computing technology stacks. Complementing these core tracks, our SFC offers innovative Smart City and Technopreneurship electives to broaden students’ perspectives and entrepreneurial capabilities. Empowering students to transform technical ideas into viable and smart start-ups is a strong commitment for GCIT, not just in nurturing talents but intellectual dialogues with the future. Students will also benefit from GCIT’s robust industry partners which provide access to exclusive project portfolios, mentorships, hackathons and recruitment opportunities. Beyond technical and skills-based mastery, the School of Future Computing’s curriculum enables ethics, governance and human-centered design ensuring our graduates will be responsible innovators capable of shaping inclusive, secure and leading sustainable digital futures. </p>
+							
+							<div class="ctaBtn">
+								<a href="/course">Learn More</a>
+							</div>
+						</div>
+                       
                     </div>
 
                 </div>
@@ -149,32 +154,20 @@
                     <input type="checkbox" id="siddToggle" hidden>
                     <div class="courseCoverTitle">
                         <h1>School of Interactive Design and Development</h1>
-                        <!-- <p>Get ready to elevate your design skills and create functional and visually stunning UI designs. Our program offers comprehensive guidance from experienced lecturers who will walk you through the entire UI Design Process, including wireframing, prototyping, and creating high-fidelity designs using industry-standard tools. Gain expertise in designing user-friendly and intuitive interfaces, building a portfolio of your own UI designs, and unlocking opportunities for UI-related careers worldwide.</p> -->
-                        <div class="ctaBtn">
-                            <a href="/course">Learn More</a>
-                        </div>
+                        <div class="hiddenInfo">
+							<hr class="courseH1-divider">
+							<p>GCIT’s School of Interactive Design and Development (SIDD) is a dynamic Bachelor program where artistry, technology and human-centered design converge to shape futuristic haptics, optics and kinematics digital experiences. The curriculum emphasises User Interface (UI) Design, User Experience (UX) research, Front-End Development and co-creation with Agentic AI for building intelligent applications and systems. Iterative prototyping, ethical designs and cross-disciplinary electives in Smart City and Technopreneurship will broaden learners’ perspectives and entrepreneurial capabilities in crafting engaging and transformative digital experiences of tomorrow. Beyond the classroom, students will actively participate and engage in creative problem solving, projects that mirror real-world industry practices and maintaining design and technical skills with professional-standard technology stacks. Students will also benefit from GCIT’s robust industry partnerships which provide access to exclusive full-semester internship, portfolio reviews, hackathons and recruitment opportunities. Our SIDD graduates remain forward thinking from the ability to build adaptive interfaces that evolve based on user behavior to designing game mechanics powered by multimodal models to crafting smart autonomous environments for immersive creations. </p>
+							
+							<div class="ctaBtn">
+								<a href="/course">Learn More</a>
+							</div>
+						</div>
+                       
                     </div>
 
                 </div>
             </div>
-            <div class="courseLinkContainer sectionWrapper">
-                <div class="courseLinkWrapper">
-                    @foreach ($bsc as $item)
-                        <a href="/courseDetails/{{ $item->id }}">{{ $item->name }} <span
-                                class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                    @endforeach
-                </div>
-                <div class="courseLinkWrapper">
-                    @if($sidd)
-                        <a href="/courseDetails/{{ $sidd->id }}">Frontend Engineer<span
-                                class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="/courseDetails/{{ $sidd->id }}">User Experience Research<span
-                                class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                        <a href="/courseDetails/{{ $sidd->id }}">User Interface Design<span
-                                class="material-symbols-outlined">keyboard_arrow_right</span></a>
-                    @endif
-                </div>
-            </div>
+           
         </div>
         <div class="messageWrapper sectionPadding">
             <div class="header">

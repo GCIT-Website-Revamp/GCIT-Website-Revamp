@@ -289,7 +289,13 @@
 
 .courseWrapper {
     transition: 0.3s all ease-in-out;
-    margin: clamp(60px, 10vw, 140px) 0;
+    margin: 0;
+    padding: 0;
+    /* Remove top padding - let header handle its own spacing */
+}
+.courseWrapper .header {
+    padding: clamp(60px, 10vw, 100px) var(--padding-sides) 0
+        var(--padding-sides);
 }
 .courseWrapper .header h1 {
     padding: 0 var(--padding-sides);
@@ -298,18 +304,32 @@
     margin-bottom: 0.5rem;
 }
 
+/* Full-width container for edge-to-edge backgrounds */
+#expandableCourseSection {
+    display: flex;
+    width: 100vw;
+    height: 90vh;
+    overflow: hidden;
+    position: relative;
+}
+
 .courseContent {
     display: flex;
     width: 100%;
     transition: 0.3s all ease-in-out;
-    padding: 0 var(--padding-sides);
+    /* No padding - full bleed backgrounds */
+}
+.course {
+    position: relative;
+    height: 100%;
+    flex: 1;
+    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: hidden;
+    cursor: pointer;
 }
 
-.course {
-    width: 50%;
-    height: 65vh;
-    position: relative;
-    transition: 0.3s all ease-in-out;
+.course:hover {
+    flex: 2.5;
 }
 
 .courseBG video {
@@ -354,28 +374,14 @@
     ) !important;
     height: 100%;
 }
-.socWrapper:hover {
-    width: 70% !important;
-}
-.socWrapper:hover ~ .siddWrapper {
-    width: 30% !important;
-}
-.siddWrapper:hover {
-    width: 70% !important;
-}
-
-.courseContent:hover .socWrapper:not(:hover) {
-    width: 30% !important;
-}
 .courseCoverTitle {
     position: absolute;
-    z-index: 20;
-    left: 30%;
-    width: 50%;
+    z-index: 100;
+    left: 50%;
     bottom: 10%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    transform: translateX(-50%);
+    width: 40%;
+    transition: all 0.4s ease;
 }
 
 .courseCoverTitle p {
@@ -396,32 +402,108 @@
     font-family: var(--font-Header);
     font-weight: 400;
     color: white;
-    width: 80%;
-    font-size: clamp(38px, 8vw, 48px);
-}
-
-.course:hover .courseCoverTitle {
-    left: var(--padding-sides);
-    bottom: 40%;
-    width: 80%;
+    width: 100%;
+    margin: 0;
+    line-height: 1.25;
+    text-align: left; /* Left-aligned by default */
+    font-size: clamp(24px, 4vw, 48px);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .courseCoverTitle .ctaBtn {
     padding-top: 1.5rem;
     opacity: 0;
     height: 0;
-    transform: translateY(10px);
 }
 
-.course:hover .courseCoverTitle p {
-    opacity: 1;
-    height: fit-content;
-    transform: translateY(0);
+.hiddenInfo {
+    max-height: 0;
+    opacity: 0;
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    transition:
+        max-height 0.6s ease-in-out,
+        opacity 0.4s ease-in-out 0.1s;
 }
-.course:hover .courseCoverTitle .ctaBtn {
+
+.hiddenInfo::-webkit-scrollbar {
+    display: none;
+}
+
+.hiddenInfo p {
+    font-family: var(--font-text);
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 0.5rem 0;
+    color: #f0f0f0;
+    text-align: justify;
+    display: block;
+}
+
+.hiddenInfo a {
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Hover: Expand and show glassmorphism, maintain center */
+.course:hover .courseCoverTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    padding: 2.5rem;
+    background: linear-gradient(
+        180deg,
+        rgba(221, 221, 221, 0.15),
+        rgba(103, 103, 103, 0.35)
+    );
+    backdrop-filter: blur(4px);
+    border-radius: 15px;
+    border: 1px solid rgba(211, 211, 211, 0.5);
+    box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Center-align title only when glass card is active */
+.course:hover .courseCoverTitle h1 {
+    text-align: center;
+}
+
+.course:hover .hiddenInfo {
+    max-height: 500px; /* Set specific max height instead of 100vh */
     opacity: 1;
-    transform: translateY(0);
+    overflow-y: auto;
+}
+.course:hover .hiddenInfo p {
+    opacity: 1;
     height: auto;
+    text-align: justify;
+    width: 100%;
+}
+.course:hover .hiddenInfo .ctaBtn {
+    opacity: 1;
+    height: auto;
+    text-align: center;
+}
+
+.course:hover .hiddenInfo .ctaBtn {
+    display: flex;
+    justify-content: flex-end;
+}
+.courseContent:hover .course:not(:hover) .backgroundWrapper {
+    filter: brightness(0.65);
+}
+
+.courseH1-divider {
+    border: none;
+    border-top: 2px solid var(--color-primary); /* Orange color */
+    margin: 1rem 0;
 }
 /* .course:hover .courseLinkWrapper{
    padding-left: 10%;
@@ -995,6 +1077,8 @@
 .headerHomeAnnouncement {
     padding-left: 1.5rem;
 }
+/* Moved to main course section above - line ~302 */
+
 @media (max-width: 1024px) {
     .heading-row .main-header {
         display: block;
@@ -1127,32 +1211,22 @@
         width: 100%;
     }
     .courseCoverTitle {
-        left: var(--padding-sides);
+        /* Maintain horizontal center, adjust vertical position for tablet */
         bottom: 5%;
-        width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
-        /* transform: translateY(-50%); */
-        width: 100%;
+        width: 85%;
     }
-    .socWrapper:hover {
-        width: 100% !important;
+    .course:hover .hiddenInfo{
+        height: 100%;
     }
-    .socWrapper:hover ~ .siddWrapper {
-        width: 100% !important;
-    }
-    .siddWrapper:hover {
-        width: 100% !important;
-    }
-
-    .courseContent:hover .socWrapper:not(:hover) {
-        width: 100% !important;
-    }
-
     .course:hover .courseCoverTitle {
-        left: var(--padding-sides);
-        top: 40%;
-        bottom: none;
-        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10%;
+        width: 85%;
+        padding: 1rem;
+        height: 80%;
     }
+
     .courseWrapper .header h1 {
         padding: 0;
     }
@@ -1164,7 +1238,6 @@
     }
     .course .courseCoverTitle .ctaBtn {
         opacity: 0;
-        /* transform: translateY(0); */
         height: 0;
     }
     /* .course:hover .courseLinkWrapper{
@@ -1374,7 +1447,6 @@
     .courseCoverTitle .ctaBtn {
         opacity: 0;
         height: 0;
-        transform: translateY(10px);
     }
     .socToggle:checked ~ .courseCoverTitle {
         bottom: 5%;
@@ -1425,24 +1497,7 @@
         width: 100% !important;
     } */
 
-    .course:hover .courseCoverTitle {
-        left: var(--padding-sides);
-        top: 40%;
-        width: 100%;
-    }
-    .course:hover .courseCoverTitle {
-        left: var(--padding-sides);
-        top: 40%;
-        bottom: none;
-        width: 100%;
-    }
-
-    .course:hover .courseCoverTitle {
-        left: var(--padding-sides);
-        top: 40%;
-        bottom: none;
-        width: 100%;
-    }
+    /* Removed duplicate conflicting rules - centering maintained by base styles */
 }
 @media (min-width: 1200px) {
     /* large desktops */
@@ -1555,5 +1610,28 @@
 @media (max-width: 800px) {
     .homeEventWrapper .event:nth-of-type(n + 7) {
         display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    #expandableCourseSection {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .course {
+        height: 85vh;
+        flex: none;
+    }
+
+    .course:hover {
+        flex: none;
+    }
+
+    .courseCoverTitle {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
     }
 }

@@ -48,25 +48,30 @@
 
     <div class="">
         <div class="section aboutGCIT sectionWrapper">
-            <div class="header">
-                <div class="heading-row">
-                    <h1 class="main-header">
-                        <span class="left">Discover <span class="green">GCIT: </span></span>
-                    </h1>
-                </div>
 
-                <div class="heading-row">
-                    <h1 class="main-header">
-                        <span class="left">The Intersection of<span class="orange"> Agentic Development, Wisdom </span>and
-                            <span class="orange">Innovation</span>
-                    </h1>
+            <div class="introHeader">
+                <div class="header">
+                    <div class="heading-row">
+                        <h1 class="main-header">
+                            <span class="left">Discover <span class="green">GCIT: </span></span>
+                        </h1>
+                    </div>
+
+                    <div class="heading-row">
+                        <h1 class="main-header">
+                            <span class="left">The Intersection of<span class="orange"> Agentic Development, Wisdom
+                                </span>and
+                                <span class="orange">Innovation</span>
+                        </h1>
+                    </div>
                 </div>
+                <p class="lightText">GCIT is more than an institution. It is a dynamic and creative technological
+                    environment
+                    where students and faculty members emerge as tech scientist and future leaders for the world. Rooted in
+                    Bhutanese values of the GNH culture, the college combines civilization, design and technology to prepare
+                    learners for a meaningful career and lifestyle for the contemporary digital reality.
+                </p>
             </div>
-            <p class="lightText">GCIT is more than an institution. It is a dynamic and creative technological environment
-                where students and faculty members emerge as tech scientist and future leaders for the world. Rooted in
-                Bhutanese values of the GNH culture, the college combines civilization, design and technology to prepare
-                learners for a meaningful career and lifestyle for the contemporary digital reality.
-            </p>
             <div class="ctaWrapper">
                 <div class="ctaBtn">
                     <a href="/about">Learn More</a>
@@ -99,7 +104,6 @@
                 </div>
                 <div class="cardContent">
                     <h1>Authentic Real-World Pedagogy
-
                     </h1>
                     <p>We integrate tangible industry challenges directly into our curriculum. Connecting learning to
                         real-life situations using meaningful applied projects that fosters critical thinking and practical
@@ -134,14 +138,27 @@
                     <div class="courseCoverTitle">
                         <h1>School of Future Computing</h1>
                         <div class="hiddenInfo">
-							<hr class="courseH1-divider">
-							<p>GCIT’s School of Future Computing (SFC) is a visionary Bachelor of Computer Science programme dedicated to preparing and graduating students for a world transformed by rapid technological evolution. We place strong emphasis in specialised pathways in AI & Fullstack Development, Blockchain Software Development and Cyber Security that are all grounded in modern software and computing technology stacks. Complementing these core tracks, our SFC offers innovative Smart City and Technopreneurship electives to broaden students’ perspectives and entrepreneurial capabilities. Empowering students to transform technical ideas into viable and smart start-ups is a strong commitment for GCIT, not just in nurturing talents but intellectual dialogues with the future. Students will also benefit from GCIT’s robust industry partners which provide access to exclusive project portfolios, mentorships, hackathons and recruitment opportunities. Beyond technical and skills-based mastery, the School of Future Computing’s curriculum enables ethics, governance and human-centered design ensuring our graduates will be responsible innovators capable of shaping inclusive, secure and leading sustainable digital futures. </p>
-							
-							<div class="ctaBtn">
-								<a href="/course">Learn More</a>
-							</div>
-						</div>
-                       
+                            <hr class="courseH1-divider">
+                            <p>GCIT’s School of Future Computing (SFC) is a visionary Bachelor of Computer Science programme
+                                dedicated to preparing and graduating students for a world transformed by rapid
+                                technological evolution. We place strong emphasis in specialised pathways in AI & Fullstack
+                                Development, Blockchain Software Development and Cyber Security that are all grounded in
+                                modern software and computing technology stacks. Complementing these core tracks, our SFC
+                                offers innovative Smart City and Technopreneurship electives to broaden students’
+                                perspectives and entrepreneurial capabilities. Empowering students to transform technical
+                                ideas into viable and smart start-ups is a strong commitment for GCIT, not just in nurturing
+                                talents but intellectual dialogues with the future. Students will also benefit from GCIT’s
+                                robust industry partners which provide access to exclusive project portfolios, mentorships,
+                                hackathons and recruitment opportunities. Beyond technical and skills-based mastery, the
+                                School of Future Computing’s curriculum enables ethics, governance and human-centered design
+                                ensuring our graduates will be responsible innovators capable of shaping inclusive, secure
+                                and leading sustainable digital futures. </p>
+
+                            <div class="ctaBtn">
+                                <a href="/course">Learn More</a>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -155,52 +172,87 @@
                     <div class="courseCoverTitle">
                         <h1>School of Interactive Design and Development</h1>
                         <div class="hiddenInfo">
-							<hr class="courseH1-divider">
-							<p>GCIT’s School of Interactive Design and Development (SIDD) is a dynamic Bachelor program where artistry, technology and human-centered design converge to shape futuristic haptics, optics and kinematics digital experiences. The curriculum emphasises User Interface (UI) Design, User Experience (UX) research, Front-End Development and co-creation with Agentic AI for building intelligent applications and systems. Iterative prototyping, ethical designs and cross-disciplinary electives in Smart City and Technopreneurship will broaden learners’ perspectives and entrepreneurial capabilities in crafting engaging and transformative digital experiences of tomorrow. Beyond the classroom, students will actively participate and engage in creative problem solving, projects that mirror real-world industry practices and maintaining design and technical skills with professional-standard technology stacks. Students will also benefit from GCIT’s robust industry partnerships which provide access to exclusive full-semester internship, portfolio reviews, hackathons and recruitment opportunities. Our SIDD graduates remain forward thinking from the ability to build adaptive interfaces that evolve based on user behavior to designing game mechanics powered by multimodal models to crafting smart autonomous environments for immersive creations. </p>
-							
-							<div class="ctaBtn">
-								<a href="/course">Learn More</a>
-							</div>
-						</div>
-                       
+                            <hr class="courseH1-divider">
+                            <p>GCIT’s School of Interactive Design and Development (SIDD) is a dynamic Bachelor program
+                                where artistry, technology and human-centered design converge to shape futuristic haptics,
+                                optics and kinematics digital experiences. The curriculum emphasises User Interface (UI)
+                                Design, User Experience (UX) research, Front-End Development and co-creation with Agentic AI
+                                for building intelligent applications and systems. Iterative prototyping, ethical designs
+                                and cross-disciplinary electives in Smart City and Technopreneurship will broaden learners’
+                                perspectives and entrepreneurial capabilities in crafting engaging and transformative
+                                digital experiences of tomorrow. Beyond the classroom, students will actively participate
+                                and engage in creative problem solving, projects that mirror real-world industry practices
+                                and maintaining design and technical skills with professional-standard technology stacks.
+                                Students will also benefit from GCIT’s robust industry partnerships which provide access to
+                                exclusive full-semester internship, portfolio reviews, hackathons and recruitment
+                                opportunities. Our SIDD graduates remain forward thinking from the ability to build adaptive
+                                interfaces that evolve based on user behavior to designing game mechanics powered by
+                                multimodal models to crafting smart autonomous environments for immersive creations. </p>
+
+                            <div class="ctaBtn">
+                                <a href="/course">Learn More</a>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
             </div>
-           
+
         </div>
         <div class="messageWrapper sectionPadding">
-            <div class="header">
-                <h1 class="main-header">A Message From the President</h1>
-            </div>
             <div class="messageContainer">
-                <div class="message">
-                    <div class="messageContent">
-                        <span>Kuzuzangpo la!</span>
-                        <p>Welcome to GCIT campus and thank you for your interest in Gyalpozhing College of Information
-                            Technology. We are a leading institution that specialises in modern education and we offer both
-                            the Computer Science and Interactive Design & Development Degree.
-                            <br><br>
-                            The uniqueness of GCIT is the way we have fun in teaching and nurturing future-ready students.
-                            We embrace disruptions and challenges through a transformative education experience that
-                            champions: Code, Hack, Develop, Design, Innovate and Gamify.
-                            <br><br>
+                <div class="messageContent" id="message-text-col">
+                    <h1 class="main-header">A Message From the President</h1>
+                    <h3 class="presidentName">Audrey Low</h3>
+                    <hr class="president-divider">
 
-                            As you navigate through our website, you will find detailed information about our courses,
-                            admission requirements, student development, personas of our faculty members and, among many
-                            other interesting highlights. Certainly, if you are our prospective student, parent or community
-                            stakeholder, we invite you to further explore and discover what GCIT has to offer.
-                            <br><br>
+                    <div class="messageTextContent">
+                        <div id="visible-message-text">
+                            <span class="greeting"><strong>Kuzuzangpo la!</strong></span>
 
-                            Add a tab or bookmark our website or if you have any questions and would like to connect with
-                            us, please do not hesitate to reach out to us.
-                        </p>
-                        <span class="presidentName">Audrey Low</span>
-                        <span class="presidentTitle">President, Gyalpozhing College of Information Technology</span>
+                            <p>Welcome to GCIT, a global institution situated within the Himalayas in Bhutan. The meteoric
+                                rise of computing with the emergence of Agentic Development, Decentralise Open Ecosystems
+                                and LLMs mark an exciting era in the revolution of design and technology education.</p>
+
+                            <p>At GCIT, we are a dedicated college formed as the intelligent twin of the Royal University of
+                                Bhutan to nurture faculty members and graduate students to be the future in Computer Science
+                                & Interactive Design and Development.</p>
+                        </div>
+
+                        <div id="expanded-message-content" class="message-expand-wrapper">
+                            <p>Our vision and purpose recognises that autonomous learning, smart pedagogies along with
+                                experiential knowledge will be the norm in lifelong global education. We continue to strive
+                                by teaching with cognitive interactions and true to life experiences, focusing on advancing
+                                tech in service to a hyper-connected society. You will find that GCIT's curriculum is deeply
+                                integrated in students' active exploration and their ongoing prospective careers. Together
+                                with our staff, students and industry pioneers, we also conduct applied research where
+                                computing and technology is the conduit for planetary stewardship, economic vitality and
+                                symbiosis with humanity.</p>
+
+                            <p>As you navigate through our website, you will find detailed information about our courses,
+                                admission requirements, student development, personas of our faculty members and, among many
+                                other interesting highlights. Certainly, if you are our prospective student, parent or
+                                stakeholder, we invite you to further explore with GCIT, our achievements, our growing
+                                infrastructure of new labs & facilities and our unyielding committment to paving the way for
+                                intellectual exchange and strategic international partnerships.</p>
+
+                            <p>Click the star icon or bookmark our handle as your favourite digital URL giving you quick
+                                access to staying in touch with us. If you have any queries and would like to connect with
+                                GCIT, please do not hesitate to reach out to us at <a href="mailto:info.gcit@rub.edu.bt"
+                                    style="color:var(--color-primary); text-decoration: underline;">info.gcit@rub.edu.bt</a>.
+                            </p>
+
+                            <p><strong>Kadrinche la.</strong></p>
+                        </div>
                     </div>
+
+                    <button type="button" id="message-toggle-btn" class="readMoreBtn">Read More</button>
                 </div>
-                <div class="presidentImg">
-                    <img src="{{ asset('images/staff/president.png') }}" alt="">
+
+                <!-- Right side: President image -->
+                <div class="presidentImgWrapper" id="message-img-col">
+                    <img src="{{ asset('images/staff/president.png') }}" alt="President Audrey Low" id="president-img">
                 </div>
             </div>
         </div>
@@ -304,7 +356,7 @@
                 </div>
             </div>
         </div>
-        <div class="homeEventWrapper sectionWrapper">
+        <div class="homeEventWrapper">
             <div class="eventMessage">
                 <h1 class="main-header">News & Events</h1>
                 <p>Stay synchronized with the latest happenings at GCIT, encompassing student achievements, learning

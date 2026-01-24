@@ -170,15 +170,23 @@
 .aboutGCIT {
     padding-top: clamp(60px, 10vw, 120px);
 }
+
+.introWrapper {
+    width: fit-content;
+    display: inline-block;
+}
 .aboutGCIT .header {
     display: flex;
+    width: fit-content;
     flex-direction: column;
     gap: 0.3rem;
     margin-bottom: 0.5rem;
 }
 
+.heading-row {
+}
 .heading-row .main-header {
-    display: grid;
+    display: block;
     grid-template-columns: minmax(140px, auto) 1fr;
     align-items: baseline;
     font-weight: 500 !important;
@@ -194,8 +202,7 @@
     white-space: normal;
 }
 .aboutGCIT p {
-    max-width: 65ch;
-    width: 100%;
+    max-width: 110ch;
     line-height: 1.5;
 }
 
@@ -218,13 +225,30 @@
 }
 
 .cardWrapper .card {
-    width: calc(
-        calc(100% - calc(var(--padding-sides) + var(--padding-sides))) / 3
-    );
-    padding: 0 clamp(1rem, 1vw, 30px);
+    width: calc((100% - 4rem) / 3);
+
+    padding: 40px 1.8rem !important;
     background-color: #fafafa;
-    height: 450px;
+    min-height: 500px;
+
+    height: 500px;
     padding-top: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: linear-gradient(
+        180deg,
+        rgb(255 255 255 / 15%) 0%,
+        rgb(254 254 254 / 35%) 100%
+    );
+    border-radius: 10px;
+    border: 1px solid #e0e0e0; /* Light grey border */
+    box-shadow: 0 10px 15px 0 rgb(162 162 162 / 30%);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 .homeProjectImgWrapper {
     height: 100%;
@@ -244,11 +268,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1rem; /* Add spacing below icon */
+    background-color: transparent; /* Ensure transparent background */
 }
-
+/* Target the video/image elements directly */
+.iconWrapper video,
+.iconWrapper img {
+    background-color: transparent !important;
+    mix-blend-mode: normal; /* or try 'multiply' or 'darken' */
+}
 .cardWrapper .card .cardContent {
     display: flex;
     flex-direction: column;
+    text-align: center; /* Center align text */
+
     /* gap: 1.5rem; */
 }
 .homeSlide {
@@ -259,12 +292,11 @@
 }
 .cardWrapper .card .cardContent h1 {
     font-weight: 400;
-    min-height: 80px;
-    align-items: center;
-    display: flex;
-    font-family: "Kumbh sans";
-    color: #606060;
-    font-size: clamp(20px, 0.8vw, 32px);
+    min-height: 60px;
+    color: var(--color-text-light);
+
+    font-family: var(--font-Header);
+    font-size: clamp(20px, 1.5vw, 24px);
 }
 .cardWrapper .card .cardContent h2 {
     font-weight: 400;
@@ -276,6 +308,9 @@
     font-weight: 300;
     /* font-style: italic; */
     color: var(--color-text-light);
+    text-align: justify; /* Justified text as shown in image */
+    font-size: clamp(14px, 1vw, 16px);
+
     line-height: 150%;
 }
 @keyframes slide {
@@ -459,6 +494,10 @@
     justify-content: center;
     width: 85%;
     padding: 2.5rem;
+    left: 50%;
+    bottom: unset;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background: linear-gradient(
         180deg,
         rgba(221, 221, 221, 0.15),
@@ -473,6 +512,7 @@
 /* Center-align title only when glass card is active */
 .course:hover .courseCoverTitle h1 {
     text-align: center;
+    font-size: var(--font-size-header);
 }
 
 .course:hover .hiddenInfo {
@@ -536,72 +576,130 @@
     gap: 2rem;
     padding-left: 15%;
 }
-
 .messageWrapper {
-    padding: 3rem var(--padding-sides) 10rem var(--padding-sides);
-    background-color: #f3f3f3;
-}
-
-.messageWrapper .header h1 {
     width: 100%;
-    text-align: center;
-    padding: 2rem;
+    background-color: #f4f4f4;
+    padding: clamp(60px, 10vw, 100px) var(--padding-sides);
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .messageContainer {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    align-items: flex-start; /* needed */
-    position: relative;
-    justify-content: center;
-    gap: 20px;
-}
-.messageWrapper .message {
-    background-color: white;
-    padding: 2rem;
-    width: 50%;
-    display: flex;
+    flex-direction: row;
+
     justify-content: space-between;
+    gap: clamp(40px, 5vw, 80px);
+    align-items: center;
+    position: relative;
 }
 
-.messageContainer .presidentImg {
-    padding-top: 3rem;
-    position: sticky;
-    top: calc(141px);
-}
-.messageContainer .presidentImg img {
-    height: 450px;
-    width: 400px;
-    object-fit: cover;
-    border-radius: 5px;
+/* --- LEFT SIDE: TEXT CONTENT --- */
+.messageContent {
+    flex: 1;
+    min-width: 300px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.message .quote {
-    transform: translateY(-2rem);
-    width: 40%;
+.messageContent .main-header {
+    font-family: var(--font-Header);
+    font-weight: 400;
+    color: #606060;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
 }
 
-.messageContent span {
-    font-weight: 500;
-    margin-bottom: 1.5rem;
+.messageContent h3.presidentName {
+    font-size: clamp(16px, 1.2vw, 18px);
+    font-weight: 400;
+    color: #8a8a8a;
+    margin: 0.5rem 0;
+    letter-spacing: 0.25px;
+}
+
+.president-divider {
+    height: 3px;
+    width: 60px;
+    background-color: var(--color-primary, #F58123);
+    margin: 1rem 0 1.5rem 0;
+    border: none;
     display: block;
 }
 
-.messageContent p {
-    line-height: 150%;
+.messageTextContent {
+    line-height: 1.7;
+    font-size: clamp(14px, 1vw, 16px);
     font-weight: 300;
-    width: 80%;
+    color: #606060;
+    margin-bottom: 1.5rem;
+    text-align: justify;
 }
-.messageContent {
-    padding: 1rem 3rem;
+
+.messageTextContent .greeting {
+    display: block;
+    margin-bottom: 1rem;
 }
-.messageContent .presidentName {
-    font-size: clamp(16px, 2vw, 20px);
-    margin-top: 2rem;
-    margin-bottom: 0;
+
+.messageTextContent p {
+    margin-bottom: 1rem;
 }
-.messageContent .presidentTitle {
-    font-size: 14px;
+
+.messageTextContent p strong {
+    font-weight: 500;
+    color: #333;
 }
+
+/* EXPANDABLE WRAPPER */
+.message-expand-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+.message-expand-wrapper.open {
+    opacity: 1;
+}
+
+/* READ MORE BUTTON */
+.readMoreBtn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: var(--color-secondary, #74B444);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    font-size: clamp(14px, 1vw, 16px);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.readMoreBtn:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(116, 180, 68, 0.3);
+}
+
+/* --- RIGHT SIDE: IMAGE --- */
+.presidentImgWrapper {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.presidentImgWrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    display: block;
+}
+
 
 .homeProjectWrapper {
     display: flex;
@@ -886,8 +984,9 @@
     color: var(--color-secondary);
 }
 .homeEventWrapper {
-    padding: 200px var(--padding-sides) 40px var(--padding-sides);
+    /* padding: 200px var(--padding-sides) 40px var(--padding-sides); */
     display: flex;
+    margin-top: 100px;
     flex-wrap: wrap;
 }
 .homeEventWrapper > :nth-child(n + 10) {
@@ -1215,7 +1314,7 @@
         bottom: 5%;
         width: 85%;
     }
-    .course:hover .hiddenInfo{
+    .course:hover .hiddenInfo {
         height: 100%;
     }
     .course:hover .courseCoverTitle {
@@ -1517,7 +1616,7 @@
         width: 100%;
     }
     .homeEventWrapper {
-        padding: 140px 0;
+        padding: 0 !important;
     }
 
     .homeEventWrapper > * {

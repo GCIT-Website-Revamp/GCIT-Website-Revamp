@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-<div class="pageContentWrapper ">
+<div class="pageContentWrapper detailsWrapper">
     <div class="">
         <div class="postWrapper departmentWrapper">
             <div class="post">

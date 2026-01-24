@@ -21,7 +21,7 @@
         </div>
     </div>
 </div>
-<div class="pageContentWrapper">
+<div class="pageContentWrapper detailsWrapper">
     <div class="eventsWrapper">
         <button class="filterToggle">
             <span class="material-symbols-outlined">filter_list</span>
@@ -36,7 +36,7 @@
             <a href="/post/announcement/{{ $announcement->id }}" class="card" data-tag = "{{$announcement->category}}">
                 <div class="cardContent">
                     <h1>{{ $announcement->name }}</h1>
-                    <p class = "multi-truncate">{!! Str::limit($announcement->description,80) !!}</p>
+                    <p class = "multi-truncate">{!! Str::limit($announcement->description,150) !!}</p>
                     <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($announcement->date)->format('F d, Y') }}</span>
                     
                 </div>

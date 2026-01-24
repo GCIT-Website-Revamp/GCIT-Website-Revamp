@@ -24,7 +24,7 @@
     </div>
 
     <!-- Contact Content -->
-    <div class="pageContentWrapper contactPageWrapper">
+    <div class="pageContentWrapper contactPageWrapper detailsWrapper">
 
         <!-- Contact Cards Grid -->
       

@@ -1,8 +1,8 @@
-.otherDepartment{
+.otherDepartment {
     width: 20%;
 }
 
-.departmentWrapper span{
+.departmentWrapper span {
     display: block;
     font-family: var(--font-Header);
     font-size: clamp(18px, 4vw, 28px);
@@ -10,12 +10,18 @@
     padding: 2rem 0 1rem 0;
 }
 
-.postWrapper p{
+.departmentWrapper .staffProfileWrapper {
+    width: 100%;
+    padding-top: 1.5rem;
+}
+.departmentWrapper .staff {
+    width: calc(33% - calc(40px / 3)) !important;
+}
+.postWrapper p {
     line-height: 150%;
 }
 
 @media (max-width: 1024px) {
-
     .departmentWrapper {
         flex-direction: column;
     }
@@ -24,12 +30,9 @@
     .otherDepartment {
         width: 100%;
     }
-
- 
 }
 
 @media (max-width: 768px) {
-
     .postWrapper p {
         font-size: 0.95rem;
     }
@@ -50,7 +53,6 @@
 }
 
 @media (max-width: 480px) {
-
     .departmentWrapper span {
         font-size: 1rem;
     }
@@ -58,7 +60,9 @@
     .postWrapper p {
         line-height: 1.6;
     }
-
+    .departmentWrapper .staff {
+        width: 100% !important;
+    }
     .otherDepartment h1 {
         font-size: 1.1rem;
     }

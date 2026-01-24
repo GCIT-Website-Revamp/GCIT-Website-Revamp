@@ -21,7 +21,7 @@
         </div>
     </div>
 </div>
-<div class="pageContentWrapper">
+<div class="pageContentWrapper detailsWrapper">
     <div class="section eventsWrapper">
        
         <div class="mainContent courseContent">

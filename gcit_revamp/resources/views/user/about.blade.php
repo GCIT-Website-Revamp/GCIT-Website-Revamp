@@ -23,11 +23,7 @@
             <div class="aboutDetails">
                 @if($overview)
                 <img src="{{ asset('storage/' . $overview->image) }}" alt="">
-                <p>{!! $overview->description !!}</p>
-                @endif
-                </div>
-            </div>
-            <div class="mottoWrapper">
+                 <div class="mottoWrapper">
                 <img src="{{asset('images/&.png')}}" alt="" class="underlay">
                 <div class="visionWrapper">
                     @if($overview)
@@ -42,6 +38,11 @@
                     @endif
                 </div>
             </div>
+                <p>{!! $overview->description !!}</p>
+                @endif
+                </div>
+            </div>
+           
         </div>
     <div class="otherCourseContainer paddingContainer otherDepartment">
                  <div class="header">

@@ -15,23 +15,26 @@
                 </label>
                 <div class="dropDownContent">
                     <a href="/about">Institutional Overview</a>
+                    <a href="/announcements">Announcements</a>
+                    <a href="/news&events">News & Events</a>
                     <label>Support & Services</label>
-                    <a class = "subLink" href="/department/Finance">Finance</a>
-                    <a class = "subLink" href="/department/Human Resources & Administration">Human Resources & Administration</a>
-                    <a class = "subLink" href="/department/Information & Communication Technology">Information & Communication Technology</a>
-                    <a class = "subLink" href="/department/School Affairs">School Affairs</a>
-                    <a class = "subLink" href="/department/Student Affairs">Student Affairs</a>
+                    <a class="subLink" href="/department/Finance">Finance</a>
+                    <a class="subLink" href="/department/Human Resources & Administration">Human Resources &
+                        Administration</a>
+                    <a class="subLink" href="/department/Information & Communication Technology">Information &
+                        Communication Technology</a>
+                    <a class="subLink" href="/department/School Affairs">School Affairs</a>
+                    <a class="subLink" href="/department/Student Affairs">Student Affairs</a>
                 </div>
             </div>
 
             <!-- INITIATIVE -->
             <div class="dropDownWrapper">
                 <label class="dropDownLink">
-                    Initiative <span class="material-symbols-outlined">arrow_drop_down</span>
+                    Impact <span class="material-symbols-outlined">arrow_drop_down</span>
                 </label>
                 <div class="dropDownContent">
-                    <a href="/announcements">Announcements</a>
-                    <a href="/news&events">News & Events</a>
+                  
                     <a href="/project">Industry Projects</a>
                 </div>
             </div>
@@ -41,22 +44,26 @@
                 <label class="dropDownLink">
                     Study <span class="material-symbols-outlined">arrow_drop_down</span>
                 </label>
-                <div class="dropDownContent">
+                <div class="dropDownContent CourseDropDown">
                     <a href="/admission">Admissions</a>
                     <label>Courses</label>
-                    <a href="/course" class = "subLink">School of Future Computing</a>
-                    <a href="/course" class = "subLink">School of Interactive Design & Development</a>
-                    <a href="/course" class = "subLink">Electives</a>
+                    <a href="/course" class="subLink">School of Future Computing</a>
+                    <a href="/course" class="subLink">School of Interactive Design & Development</a>
+                    <a href="/course" class="subLink">Speculative Electives</a>
                     <label>Student Services</label>
-                    <a href="/clubs" class = "subLink">Clubs</a>
-                    <a href="/resources/ICT" class = "subLink">ICT</a>
-                    <a href="/resources/Student-Welfare" class = "subLink">Student Welfare</a>                </div>
+                    <a href="/clubs" class="subLink">Clubs</a>
+                    <a href="/resources/ICT" class="subLink">ICT</a>
+                    <a href="/resources/Student-Welfare" class="subLink">Student Welfare</a>
+                </div>
             </div>
 
             <!-- SEARCH -->
             <div class="searchWrapper">
                 <input type="text" class="searchInput" placeholder="Search..." data-search-input>
-                <span class="material-symbols-outlined searchIcon">search</span>
+                <div class="searchIconWrapper">
+
+                    <span class="material-symbols-outlined searchIcon">search</span>
+                </div>
             </div>
 
         </div>
@@ -88,7 +95,7 @@
         </div>
         <div class="miniNavContent">
             <label for="miniNavToggle" class="toggleSpan">
-                <span class="material-symbols-outlined">menu</span>
+                <span class="material-symbols-outlined">apps</span>
             </label>
         </div>
     </div>
@@ -115,7 +122,7 @@
     <div class="miniNavBody">
         <div class="miniLinkWrapper">
             <label for="miniAbout">About GCIT <span class="material-symbols-outlined">chevron_right</span></label>
-            <label for="miniInitiative">Initiative <span class="material-symbols-outlined">chevron_right</span></label>
+            <label for="miniInitiative">Impact <span class="material-symbols-outlined">chevron_right</span></label>
             <label for="miniStudy">Study <span class="material-symbols-outlined">chevron_right</span></label>
         </div>
 
@@ -147,7 +154,9 @@
         <label>Student Services</label>
         <a href="/clubs">Clubs<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/resources/ICT">ICT<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/resources/Student-Welfare">Student Welfare<span class="material-symbols-outlined">chevron_right</span></a>    </div>
+        <a href="/resources/Student-Welfare">Student Welfare<span
+                class="material-symbols-outlined">chevron_right</span></a>
+    </div>
 </div>
 
 <!-- ABOUT GCIT -->
@@ -160,12 +169,19 @@
     <div class="subMiniLinkWrapper">
         <h1>About GCIT</h1>
         <a href="/about">Institutional Overview<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/announcements">Announcements<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/news&events">News & Events<span class="material-symbols-outlined">chevron_right</span></a>
         <label>Support & Services</label>
         <a href="/department/Finance">Finance<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/department/Human Resources & Administration">Human Resources & Administration<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/department/Information & Communication Technology">Information & Communication Technology<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/department/School Affairs">School Affairs<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/department/Student Affairs">Student Affairs<span class="material-symbols-outlined">chevron_right</span></a>    </div>
+        <a href="/department/Human Resources & Administration">Human Resources & Administration<span
+                class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/department/Information & Communication Technology">Information & Communication Technology<span
+                class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/department/School Affairs">School Affairs<span
+                class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/department/Student Affairs">Student Affairs<span
+                class="material-symbols-outlined">chevron_right</span></a>
+    </div>
 </div>
 
 <!-- INITIATIVE -->
@@ -176,9 +192,8 @@
         </label>
     </div>
     <div class="subMiniLinkWrapper">
-        <h1>Initiative</h1>
-        <a href="/announcements">Announcements<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/news&events">News & Events<span class="material-symbols-outlined">chevron_right</span></a>
+        <h1>Impact</h1>
+       
         <a href="/project">Industry Projects<span class="material-symbols-outlined">chevron_right</span></a>
     </div>
 </div>

@@ -301,7 +301,6 @@
     }
     .courseDetailsSection {
         position: relative;
-        padding: 0 36px;
     }
     .courseContentBanner {
         padding: 0 36px !important;
@@ -322,7 +321,8 @@
         position: fixed;
         top: 50%;
         left: 0;
-        height: 70vh;
+        height: fit-content;
+        max-height: 70vh;
         width: fit-content;
         z-index: 10000;
         padding-right: 2rem;

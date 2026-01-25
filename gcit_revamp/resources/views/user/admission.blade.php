@@ -46,7 +46,7 @@
         <label for="courseMenuToggle" class="courseMenuBtn">
             <span class="material-symbols-outlined">menu</span>
         </label>
-        <div class="">
+        <div class="section sectionPadding">
             <div class="courseDetailsSection">
                 <div class="courseDetailsContainer">
                         

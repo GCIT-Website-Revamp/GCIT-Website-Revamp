@@ -434,12 +434,16 @@ body.filter-open .pageContentWrapper {
 
 }
 
-@media (min-width: 992px) {
+@media (max-width: 768px) {
     /* desktops */
+    .sectionPadding{
+        padding: 0 36px !important;
+    }
 }
 
-@media (min-width: 1200px) {
+@media (max-width: 480px) {
     /* large desktops */
+    
 }
 
 @media (min-width: 1400px) {

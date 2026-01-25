@@ -200,7 +200,7 @@
     position: relative;
     min-width: 280px;
     height: fit-content;
-
+    transition: none !important; /* Prevent jitter/slide when switching to sticky */
 }
 .filterColumn {
     width: 320px;

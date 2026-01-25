@@ -27,13 +27,13 @@
                 <img src="{{asset('images/&.png')}}" alt="" class="underlay">
                 <div class="visionWrapper">
                     @if($overview)
-                    <h1>Vision</h1>
+                    <h1>VISION</h1>
                     <p>{{$overview->vision}}</p>
                     @endif
                 </div>
                 <div class="missionWrapper">
                     @if($overview)
-                    <h1>Mission</h1>
+                    <h1>MISSION</h1>
                     <p>{{$overview->mission}}</p>
                     @endif
                 </div>

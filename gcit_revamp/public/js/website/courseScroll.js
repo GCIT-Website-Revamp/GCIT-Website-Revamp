@@ -197,97 +197,154 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // }
 
+
 document.addEventListener("DOMContentLoaded", () => {
+    /* =========================================================
+       UNIFIED STICKY SIDEBAR LOGIC (SPACER PATTERN)
+       Fixes layout shifts and width issues by creating a physical spacer
+       in the DOM that holds the space when the sidebar becomes fixed.
+    ========================================================= */
 
-  gsap.registerPlugin(ScrollTrigger);
+    const DESKTOP_BREAKPOINT = 1024;
+    const NAV_OFFSET = 120; 
 
-  ScrollTrigger.matchMedia({
+    /**
+     * Applies sticky behavior using a spacer element
+     * @param {string} sidebarSelector Selector for the sidebar
+     * @param {string} containerSelector Selector for the parent/wrapper
+     */
+    function initStickySidebar(sidebarSelector, containerSelector) {
+        const sidebar = document.querySelector(sidebarSelector);
+        const container = document.querySelector(containerSelector);
 
-    // =============================
-    // DESKTOP ONLY (>=1024px)
-    // =============================
-    "(min-width: 1024px)": () => {
+        if (!sidebar || !container) return;
+        if (!container.contains(sidebar)) return;
 
-      function refreshStyles(el) {
-        el.style.width = "auto"; // Reset first
-        const width = el.offsetWidth;
-        el.style.width = width + "px";
-                el.style.height = "fit-content";
+        // Create spacer if not exists
+        let spacer = sidebar.previousElementSibling;
+        if (!spacer || !spacer.classList.contains('sticky-spacer')) {
+            spacer = document.createElement('div');
+            // Copy classes to match layout rules (grid/flex)
+            spacer.className = sidebar.className + ' sticky-spacer';
+            spacer.style.display = 'none'; // Hidden by default
+            spacer.style.pointerEvents = 'none';
+            spacer.style.visibility = 'hidden';
+            spacer.innerHTML = '&nbsp;'; 
+             
+            // IMPORTANT: Copy critical layout styles once
+            const computed = window.getComputedStyle(sidebar);
+            spacer.style.flex = computed.flex;
+            spacer.style.flexGrow = computed.flexGrow;
+            spacer.style.flexShrink = computed.flexShrink;
+            spacer.style.flexBasis = computed.flexBasis;
+            spacer.style.margin = computed.margin;
+            spacer.style.padding = computed.padding;
+            
+            sidebar.parentNode.insertBefore(spacer, sidebar);
+        }
 
-      }
+        function reset() {
+            sidebar.style.position = "";
+            sidebar.style.top = "";
+            sidebar.style.left = "";
+            sidebar.style.width = "";
+            sidebar.style.height = "";
+            
+            spacer.style.display = "none";
+        }
 
-      const container = document.querySelector(".courseDetailsSection");
-      const sideMenu = document.querySelector(".courseDetailsContainer .sideMenu");
-      const other = document.querySelector(".courseDetailsContainer .otherCourseContainer");
+        function clamp() {
+            if (window.innerWidth < DESKTOP_BREAKPOINT) {
+                reset();
+                return;
+            }
 
-      if (!container || !sideMenu || !other) return;
+            // 1. MEASURE PHASE
+            const isFixed = sidebar.style.position === "fixed" || sidebar.style.position === "absolute";
+            // Ensure spacer is visible for measurement so it holds the flex slot
+            if (isFixed) {
+                spacer.style.display = ""; 
+                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
+            }
+            const measureEl = isFixed ? spacer : sidebar;
+            const rect = measureEl.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            
+            // Calculate boundaries
+            const sidebarHeight = sidebar.offsetHeight;
+            const start = containerRect.top <= NAV_OFFSET;
+            // Stop point: when sidebar bottom hits container bottom
+            // containerRect.bottom is position of container bottom relative to viewport top
+            // we want to stop when (containerRect.bottom) < (sidebarHeight + NAV_OFFSET)
+            const end = containerRect.bottom <= sidebarHeight + NAV_OFFSET;
 
-      const HEADER_OFFSET = 0;
+            if (!start) {
+                // CASE: TOP (Default)
+                reset();
+            } 
+            else if (end) {
+                // CASE: BOTTOM (Absolute at bottom)
+                // We keep spacer visible to hold slot
+                spacer.style.display = "";
+                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
+                spacer.style.width = rect.width + "px";
+                spacer.style.height = sidebarHeight + "px";
+                
+                sidebar.style.position = "absolute";
+                sidebar.style.top = (container.offsetHeight - sidebarHeight) + "px";
+                sidebar.style.left = "auto"; // Relative to container, likely 0 if flex? 
+                // Wait, absolute positioning is relative to positioned ancestor.
+                // Assuming container has position: relative? 
+                // If not, this might break. Let's ensure container is relative.
+                const style = window.getComputedStyle(container);
+                if (style.position === 'static') container.style.position = 'relative';
 
-      function lockWidth(el) {
-        const rect = el.getBoundingClientRect();
-        el.style.width = rect.width + "px";
-        el.style.height = "fit-content";
-      }
+                // We need to match the horizontal position
+                // Absolute left 0 works if it's the only child or we know where it goes.
+                // But in flex row, "left: auto" might work if we have a spacer?
+                // Actually, if we use spacer, "left: auto" usually sits on top of spacer? No.
+                // Safest is to use the spacer's offsetLeft
+                sidebar.style.left = measureEl.offsetLeft + "px";
+                sidebar.style.width = rect.width + "px";
+            } 
+            else {
+                // CASE: FIXED (Sticky)
+                spacer.style.display = "";
+                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
+                spacer.style.width = rect.width + "px";
+                spacer.style.height = sidebarHeight + "px";
+                
+                // Copy computed styles that affect layout
+                const computed = window.getComputedStyle(measureEl);
+                spacer.style.marginTop = computed.marginTop;
+                spacer.style.marginBottom = computed.marginBottom;
+                spacer.style.marginLeft = computed.marginLeft;
+                spacer.style.marginRight = computed.marginRight;
 
-      lockWidth(sideMenu);
-      lockWidth(other);
+                sidebar.style.position = "fixed";
+                sidebar.style.top = NAV_OFFSET + "px";
+                sidebar.style.left = rect.left + "px";
+                sidebar.style.width = rect.width + "px";
+            }
+        }
 
-      // ----------------------------
-      // LEFT SIDEBAR PIN
-      // ----------------------------
-      const leftPin = ScrollTrigger.create({
-        trigger: container,
-        start: "-120px top",
-        end: () => `bottom-=${sideMenu.offsetHeight + HEADER_OFFSET} top`,
-        pin: sideMenu,
-        pinSpacing: false,
-        pinType: "transform",
-        invalidateOnRefresh: true,
-        onRefresh: () => refreshStyles(sideMenu)
-      });
-
-      // ----------------------------
-      // RIGHT SIDEBAR PIN
-      // ----------------------------
-      const rightPin = ScrollTrigger.create({
-        trigger: container,
-        start: "-120px top",
-        end: () => `bottom-=${other.offsetHeight + HEADER_OFFSET} top`,
-        pin: other,
-        pinSpacing: false,
-        pinType: "transform",
-        invalidateOnRefresh: true,
-        onRefresh: () => refreshStyles(other)
-      });
-
-      // Resize handling
-      const onResize = () => {
-        lockWidth(sideMenu);
-        lockWidth(other);
-        ScrollTrigger.refresh();
-      };
-
-      window.addEventListener("resize", onResize);
-
-      // 🔥 Cleanup when leaving desktop
-      return () => {
-        leftPin.kill();
-        rightPin.kill();
-        window.removeEventListener("resize", onResize);
-        gsap.set([sideMenu, other], { clearProps: "all" });
-      };
-    },
-
-    // =============================
-    // MOBILE / TABLET (<1024px)
-    // =============================
-    "(max-width: 1023px)": () => {
-      const sideMenu = document.querySelector(".courseDetailsContainer .sideMenu");
-      const other = document.querySelector(".courseDetailsContainer .otherCourseContainer");
-      gsap.set([sideMenu, other], { clearProps: "all" });
+        window.addEventListener("scroll", clamp, { passive: true });
+        window.addEventListener("resize", () => {
+             reset(); // Force reset to re-measure natural layout
+             setTimeout(clamp, 50);
+        });
+        
+        // Initial run
+        clamp();
     }
 
-  });
+    // 1. Admissions & Course Details (Left Sidebar)
+    initStickySidebar(".sideMenu", ".courseDetailsContainer");
 
+    // 2. Admissions & Course Details (Right Sidebar)
+    initStickySidebar(".otherCourseContainer", ".courseDetailsContainer");
+
+    // 3. Institutional Overview (Right Sidebar)
+    initStickySidebar(".otherCourseContainer", ".aboutContentWrapper");
 });
+

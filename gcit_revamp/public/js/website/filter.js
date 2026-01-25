@@ -294,39 +294,88 @@ function applyFilters() {
   });
 
 });
+/**
+ * Events Page - Sticky Filter Sidebar
+ * Uses custom positioning to maintain layout integrity within flex container
+ * Note: GSAP pin not used here as it breaks the flex layout structure
+ */
 document.addEventListener("DOMContentLoaded", () => {
+  const DESKTOP_BREAKPOINT = 1024;
   const filter = document.querySelector(".filterWrapper");
-  const section = document.querySelector(".eventsWrapper");
+  const column = document.querySelector(".filterColumn");
+  const section = document.querySelector(".eventsWrapper") || document.querySelector(".facultyWrapper");
 
-  if (!filter || !section) return;
+  if (!filter || !section || !column) return;
 
   const NAV_OFFSET = 86;
 
+  function resetFilter() {
+    filter.style.position = "";
+    filter.style.top = "";
+    filter.style.left = "";
+    filter.style.width = "";
+  }
+
   function clampFilter() {
+    // Only apply on desktop
+    if (window.innerWidth < DESKTOP_BREAKPOINT) {
+      resetFilter();
+      return;
+    }
+
     const sectionRect = section.getBoundingClientRect();
     const filterHeight = filter.offsetHeight;
+    const columnRect = column.getBoundingClientRect();
 
     const start = sectionRect.top <= NAV_OFFSET;
-    const end =
-      sectionRect.bottom <= filterHeight + NAV_OFFSET;
+    const end = sectionRect.bottom <= filterHeight + NAV_OFFSET;
 
     if (!start) {
-      filter.style.position = "absolute";
+      // Before sticky starts - relative position
+      filter.style.position = "relative";
       filter.style.top = "0";
-    }
-    else if (end) {
-      filter.style.position = "absolute";
-      filter.style.top =
-        section.offsetHeight - filterHeight + "px";
+      filter.style.width = "";
+      
+      // Unlock parent dimensions
+      column.style.minWidth = "";
+      column.style.minHeight = "";
     }
     else {
-      filter.style.position = "fixed";
-      filter.style.top = NAV_OFFSET + "px";
+      // Active sticky state (either fixed or absolute at bottom)
+      
+      // 🔒 Lock parent dimensions ONLY if not already locked
+      // This prevents the "collapse" shift when child becomes fixed
+      if (!column.style.minWidth) {
+         column.style.minWidth = columnRect.width + "px";
+         column.style.minHeight = columnRect.height + "px";
+      }
+
+      // Ensure filter keeps the same width as its parent
+      filter.style.width = columnRect.width + "px";
+
+      if (end) {
+        // Stop at section bottom - absolute position
+        filter.style.position = "absolute";
+        filter.style.top = section.offsetHeight - filterHeight + "px";
+      }
+      else {
+        // Sticky state - fixed position
+        filter.style.position = "fixed";
+        filter.style.top = NAV_OFFSET + "px";
+      }
     }
   }
 
-  window.addEventListener("scroll", clampFilter);
-  window.addEventListener("resize", clampFilter);
+  window.addEventListener("scroll", clampFilter, { passive: true });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth < DESKTOP_BREAKPOINT) {
+      resetFilter();
+    } else {
+      clampFilter();
+    }
+  });
+  
+  // Initial run
   clampFilter();
 });
 

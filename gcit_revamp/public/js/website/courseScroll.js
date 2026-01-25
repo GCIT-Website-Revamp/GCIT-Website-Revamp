@@ -220,6 +220,22 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!sidebar || !container) return;
         if (!container.contains(sidebar)) return;
 
+        // 🔒 Lock the original position ONCE when sidebar is in natural flow
+        let lockedLeft = null;
+        let lockedWidth = null;
+
+        function lockPosition() {
+            // Only lock when sidebar is in natural flow (not fixed/absolute)
+            if (sidebar.style.position === "" || sidebar.style.position === "relative" || sidebar.style.position === "static") {
+                const rect = sidebar.getBoundingClientRect();
+                lockedLeft = rect.left;
+                lockedWidth = rect.width;
+            }
+        }
+
+        // Capture initial position
+        lockPosition();
+
         // Create spacer if not exists
         let spacer = sidebar.previousElementSibling;
         if (!spacer || !spacer.classList.contains('sticky-spacer')) {
@@ -261,21 +277,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 1. MEASURE PHASE
             const isFixed = sidebar.style.position === "fixed" || sidebar.style.position === "absolute";
+            
+            // If not fixed yet, continuously update the locked position
+            if (!isFixed) {
+                lockPosition();
+            }
+            
             // Ensure spacer is visible for measurement so it holds the flex slot
             if (isFixed) {
                 spacer.style.display = ""; 
                 if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
             }
-            const measureEl = isFixed ? spacer : sidebar;
-            const rect = measureEl.getBoundingClientRect();
+            
             const containerRect = container.getBoundingClientRect();
             
             // Calculate boundaries
             const sidebarHeight = sidebar.offsetHeight;
             const start = containerRect.top <= NAV_OFFSET;
             // Stop point: when sidebar bottom hits container bottom
-            // containerRect.bottom is position of container bottom relative to viewport top
-            // we want to stop when (containerRect.bottom) < (sidebarHeight + NAV_OFFSET)
             const end = containerRect.bottom <= sidebarHeight + NAV_OFFSET;
 
             if (!start) {
@@ -284,38 +303,31 @@ document.addEventListener("DOMContentLoaded", () => {
             } 
             else if (end) {
                 // CASE: BOTTOM (Absolute at bottom)
-                // We keep spacer visible to hold slot
                 spacer.style.display = "";
                 if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
-                spacer.style.width = rect.width + "px";
+                spacer.style.width = lockedWidth + "px";
                 spacer.style.height = sidebarHeight + "px";
                 
                 sidebar.style.position = "absolute";
                 sidebar.style.top = (container.offsetHeight - sidebarHeight) + "px";
-                sidebar.style.left = "auto"; // Relative to container, likely 0 if flex? 
-                // Wait, absolute positioning is relative to positioned ancestor.
-                // Assuming container has position: relative? 
-                // If not, this might break. Let's ensure container is relative.
+                
+                // Ensure container is positioned
                 const style = window.getComputedStyle(container);
                 if (style.position === 'static') container.style.position = 'relative';
 
-                // We need to match the horizontal position
-                // Absolute left 0 works if it's the only child or we know where it goes.
-                // But in flex row, "left: auto" might work if we have a spacer?
-                // Actually, if we use spacer, "left: auto" usually sits on top of spacer? No.
-                // Safest is to use the spacer's offsetLeft
-                sidebar.style.left = measureEl.offsetLeft + "px";
-                sidebar.style.width = rect.width + "px";
+                // Use spacer's offsetLeft for absolute positioning
+                sidebar.style.left = spacer.offsetLeft + "px";
+                sidebar.style.width = lockedWidth + "px";
             } 
             else {
                 // CASE: FIXED (Sticky)
                 spacer.style.display = "";
                 if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
-                spacer.style.width = rect.width + "px";
+                spacer.style.width = lockedWidth + "px";
                 spacer.style.height = sidebarHeight + "px";
                 
                 // Copy computed styles that affect layout
-                const computed = window.getComputedStyle(measureEl);
+                const computed = window.getComputedStyle(spacer);
                 spacer.style.marginTop = computed.marginTop;
                 spacer.style.marginBottom = computed.marginBottom;
                 spacer.style.marginLeft = computed.marginLeft;
@@ -323,15 +335,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 sidebar.style.position = "fixed";
                 sidebar.style.top = NAV_OFFSET + "px";
-                sidebar.style.left = rect.left + "px";
-                sidebar.style.width = rect.width + "px";
+                // 🔑 Use the LOCKED left position to prevent jumping
+                sidebar.style.left = lockedLeft + "px";
+                sidebar.style.width = lockedWidth + "px";
             }
         }
 
         window.addEventListener("scroll", clamp, { passive: true });
         window.addEventListener("resize", () => {
              reset(); // Force reset to re-measure natural layout
-             setTimeout(clamp, 50);
+             lockedLeft = null; // Reset locked position on resize
+             lockedWidth = null;
+             setTimeout(() => {
+                 lockPosition();
+                 clamp();
+             }, 50);
         });
         
         // Initial run

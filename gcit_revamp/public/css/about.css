@@ -42,6 +42,7 @@
 }
 .aboutContentWrapper .otherCourseContainer{
     width: 30%;
+    transition: unset;
 }
 .aboutDetailsWrapper{
     position: relative;

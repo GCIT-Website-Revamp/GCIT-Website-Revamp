@@ -31,7 +31,7 @@
             <!-- INITIATIVE -->
             <div class="dropDownWrapper">
                 <label class="dropDownLink">
-                    Impact <span class="material-symbols-outlined">arrow_drop_down</span>
+                    Tech Impact <span class="material-symbols-outlined">arrow_drop_down</span>
                 </label>
                 <div class="dropDownContent">
                   
@@ -122,7 +122,7 @@
     <div class="miniNavBody">
         <div class="miniLinkWrapper">
             <label for="miniAbout">About GCIT <span class="material-symbols-outlined">chevron_right</span></label>
-            <label for="miniInitiative">Impact <span class="material-symbols-outlined">chevron_right</span></label>
+            <label for="miniInitiative">Tech Impact <span class="material-symbols-outlined">chevron_right</span></label>
             <label for="miniStudy">Study <span class="material-symbols-outlined">chevron_right</span></label>
         </div>
 
@@ -197,7 +197,7 @@
         </label>
     </div>
     <div class="subMiniLinkWrapper">
-        <h1>Impact</h1>
+        <h1>Tech Impact</h1>
        
         <a href="/project">Industry Projects<span class="material-symbols-outlined">chevron_right</span></a>
     </div>

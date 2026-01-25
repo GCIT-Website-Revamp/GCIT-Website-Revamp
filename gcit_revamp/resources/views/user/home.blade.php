@@ -100,6 +100,7 @@
             </div>
             <div class="card">
                 <div class="iconWrapper">
+                    <!-- <video src="{{ asset('videos/Pegadogy.webm') }}" autoplay muted loop playsinline preload="metadata"> -->
                     <x-icons.circuit />
                 </div>
                 <div class="cardContent">

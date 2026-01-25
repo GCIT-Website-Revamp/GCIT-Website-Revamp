@@ -278,4 +278,43 @@ gsap.config({ nullTargetWarn: false });
             ease: "power1.inOut"
         }
     );
+
+if (document.querySelector(".courseWrapper")) {
+  const startBg = "#ffffff";
+  const endBg = "#000f09ff";
+
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: ".courseWrapper",
+      start: "top 30%",
+      end: "bottom 30%",
+      scrub: 0.6,
+    }
+  })
+  // background goes dark
+  .to("body", {
+    backgroundColor: endBg,
+    ease: "power1.out"
+  }, 0)
+
+  // header turns white
+  .to(".courseWrapper .main-header", {
+    color: "#ffffff",
+    ease: "power1.out"
+  }, 0)
+
+  // background returns to white
+  .to("body", {
+    backgroundColor: startBg,
+    ease: "power1.out"
+  })
+
+  // header returns to original color
+  .to(".courseWrapper .main-header", {
+    color: "",
+    ease: "power1.out"
+  });
+}
+
+
 });

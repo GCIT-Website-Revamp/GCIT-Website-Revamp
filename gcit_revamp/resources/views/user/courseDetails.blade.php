@@ -58,21 +58,17 @@
                             <div class="circle"></div>
                             <h1>Course Modules</h1>
                         </div>
-                        <a href="#year1sem1Section">Year I Sem I</a>
-                        <a href="#year1sem2Section">Year I Sem II</a>
-                        <a href="#year2sem1Section">Year II Sem I</a>
-                        <a href="#year2sem2Section">Year II Sem II</a>
-                        <a href="#year3sem1Section">Year III Sem I</a>
-                        <a href="#year3sem2Section">Year III Sem II</a>
-                        <a href="#year4sem1Section">Year IV Sem I</a>
-                        <a href="#year4sem2Section">Year IV Sem II</a>
+                        <a href="#year1Section">Year I</a>
+                        <a href="#year2Section">Year II</a>
+                        <a href="#year3Section">Year III</a>
+                        <a href="#year4Section">Year IV</a>
                     </div>
                 </div>
                 <div class="courseDetails">
                     <div class="courseDetailsWrapper">
 
                         <div class="courseHeaderWrapper">
-                            <h1>{{ $course->header }}</h1><br>
+                            <h1 class = "orange">{{ $course->header }}</h1><br>
                             <h1>{{ $course->header2 }}</h1>
                             <p>{!! $course->description !!}</p>
 
@@ -122,127 +118,154 @@
                                 complete 480 credits to be eligible for the award of a Bachelor of Computer Science
                                 ({{ $course->name }}).</p>
                         </div>
-                        <!-- YEAR I — SEM I -->
-                        <div class="courseDetailContent moduleDropdown" id="year1sem1Section">
-                            <input type="checkbox" id="year1sem1">
-                            <label for="year1sem1">
-                                <h1>Year I, Sem I <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
+                        
+                        <!-- YEAR I -->
+                        <div class="courseDetailContent moduleDropdown" id="year1Section">
+                            <input type="checkbox" id="year1">
+                            <label for="year1">
+                                <h1>Year I <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                             </label>
 
-                            <p>
-                                @foreach ($groupedModules[1][1] ?? [] as $module)
-                                    <strong>{{ $module->name }}</strong><br>
-                                    {!! $module->description !!}<br><br>
-                                @endforeach
-                            </p>
+                            <div class="toggle-content">
+                                <div class="module-table-wrapper">
+                                    <table class="course-module-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 80%;">Module Title</th>
+                                                <th style="width: 20%;">Credit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- SEMESTER 1 -->
+                                            <tr class="semester-row"><td colspan="2">Semester 1</td></tr>
+                                            <tr><td><strong>Fundamentals of Programming</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Front End Web Development</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Fundamentals of Computing</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Modern Database Design</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Dzongkha Communication</strong></td><td>12</td></tr>
+                                            
+                                            <!-- SEMESTER 2 -->
+                                            <tr class="semester-row"><td colspan="2">Semester 2</td></tr>
+                                            <tr><td><strong>Back End Web Development with API Integration</strong></td><td>12</td></tr>
+                                            <tr><td><strong>User Interactions Design</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Mathematics for Programming I - Discrete Structures</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Essentials for Networkings & Automation</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Academic Skills</strong></td><td>12</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- YEAR I — SEM II -->
-                        <div class="courseDetailContent moduleDropdown" id="year1sem2Section">
-                            <input type="checkbox" id="year1sem2">
-                            <label for="year1sem2">
-                                <h1>Year I, Sem II <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
+                        <!-- YEAR II -->
+                        <div class="courseDetailContent moduleDropdown" id="year2Section">
+                            <input type="checkbox" id="year2">
+                            <label for="year2">
+                                <h1>Year II <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                             </label>
 
-                            <p>
-                                @foreach ($groupedModules[1][2] ?? [] as $module)
-                                    <strong>{{ $module->name }}</strong><br>
-                                   {!! $module->description !!}<br><br>
-                                @endforeach
-                            </p>
+                            <div class="toggle-content">
+                                <div class="module-table-wrapper">
+                                    <table class="course-module-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 80%;">Module Title</th>
+                                                <th style="width: 20%;">Credit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- SEMESTER 1 -->
+                                            <tr class="semester-row"><td colspan="2">Semester 1</td></tr>
+                                            <tr><td><strong>Applied Data Structures and Algorithms</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Data Analytics and Visualisation</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Agile Software Engineering Practices</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Mathematics for Programming II - Statistics and Probability</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Introduction to Research</strong></td><td>12</td></tr>
+                                            
+                                            <!-- SEMESTER 2 -->
+                                            <tr class="semester-row"><td colspan="2">Semester 2</td></tr>
+                                            <tr><td><strong>Traditional AI and Machine Learning</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Front End Web Development with Partner API</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Mathematics for Programming III - Linear Algebra</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Ethics in Computing & Interactive Design</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Project I</strong></td><td>12</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- YEAR II — SEM I -->
-                        <div class="courseDetailContent moduleDropdown" id="year2sem1Section">
-                            <input type="checkbox" id="year2sem1">
-                            <label for="year2sem1">
-                                <h1>Year II, Sem I <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
+                        <!-- YEAR III -->
+                        <div class="courseDetailContent moduleDropdown" id="year3Section">
+                            <input type="checkbox" id="year3">
+                            <label for="year3">
+                                <h1>Year III <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                             </label>
 
-                            <p>
-                                @foreach ($groupedModules[2][1] ?? [] as $module)
-                                    <strong>{{ $module->name }}</strong><br>
-                                   {!! $module->description !!}<br><br>
-                                @endforeach
-                            </p>
+                            <div class="toggle-content">
+                                <div class="module-table-wrapper">
+                                    <table class="course-module-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 80%;">Module Title</th>
+                                                <th style="width: 20%;">Credit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- SEMESTER 1 -->
+                                            <tr class="semester-row"><td colspan="2">Semester 1</td></tr>
+                                            <tr><td><strong>Mathematics for Programming IV - Optimization</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Deep Learning</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Natural Language Processing</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Mobile Application Development</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Elective I: New Elective Basket</strong></td><td>12</td></tr>
+                                            
+                                            <!-- SEMESTER 2 -->
+                                            <tr class="semester-row"><td colspan="2">Semester 2</td></tr>
+                                            <tr><td><strong>Programming for Enterprise Systems</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Agentic AI Systems and Workflow Automation</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Elective II: New Elective Basket</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Project II</strong></td><td>24</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- YEAR II — SEM II -->
-                        <div class="courseDetailContent moduleDropdown" id="year2sem2Section">
-                            <input type="checkbox" id="year2sem2">
-                            <label for="year2sem2">
-                                <h1>Year II, Sem II <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
+                        <!-- YEAR IV -->
+                        <div class="courseDetailContent moduleDropdown" id="year4Section">
+                            <input type="checkbox" id="year4">
+                            <label for="year4">
+                                <h1>Year IV <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                             </label>
 
-                            <p>
-                                @foreach ($groupedModules[2][2] ?? [] as $module)
-                                    <strong>{{ $module->name }}</strong><br>
-                                   {!! $module->description !!}<br><br>
-                                @endforeach
-                            </p>
+                            <div class="toggle-content">
+                                <div class="module-table-wrapper">
+                                    <table class="course-module-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 80%;">Module Title</th>
+                                                <th style="width: 20%;">Credit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- SEMESTER 1 -->
+                                            <tr class="semester-row"><td colspan="2">Semester 1</td></tr>
+                                            <tr><td><strong>Big Data Analytics</strong></td><td>12</td></tr>
+                                            <tr><td><strong>DevSecOps for Development</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Professional Certification</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Competitive Programming</strong></td><td>12</td></tr>
+                                            <tr><td><strong>Elective III: New Elective Basket</strong></td><td>12</td></tr>
+                                            
+                                            <!-- SEMESTER 2 -->
+                                            <tr class="semester-row"><td colspan="2">Semester 2</td></tr>
+                                            <tr><td><strong>INDUSTRY FINAL YEAR PROJECT - MAJOR CORPORATE CAPSTONE</strong></td><td>48</td></tr>
+                                            <tr><td><strong>Advanced Analytical & Critical English Skills</strong></td><td>12</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-
-                        <!-- YEAR III — SEM I -->
-                        <div class="courseDetailContent moduleDropdown" id="year3sem1Section">
-                            <input type="checkbox" id="year3sem1">
-                            <label for="year3sem1">
-                                <h1>Year III, Sem I <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
-                            </label>
-
-                            <p>
-                                @foreach ($groupedModules[3][1] ?? [] as $module)
-                                    <strong>{{ $module->name }}</strong><br>
-                                   {!! $module->description !!}<br><br>
-                                @endforeach
-                            </p>
-                        </div>
-
-                        <!-- YEAR III — SEM II -->
-                        <div class="courseDetailContent moduleDropdown" id="year3sem2Section">
-                            <input type="checkbox" id="year3sem2">
-                            <label for="year3sem2">
-                                <h1>Year III, Sem II <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                                </h1>
-                            </label>
-
-                            <p>
-                                @foreach ($groupedModules[3][2] ?? [] as $module)
-                                    <strong>{{ $module->name }}</strong><br>
-                                   {!! $module->description !!}<br><br>
-                                @endforeach
-                            </p>
-                        </div>
-
-                        <!-- YEAR IV — SEM I -->
-                        <div class="courseDetailContent moduleDropdown" id="year4sem1Section">
-                            <input type="checkbox" id="year4sem1">
-                            <label for="year4sem1">
-                                <h1>Year IV, Sem I <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
-                            </label>
-
-                            <p>
-                                @foreach ($groupedModules[4][1] ?? [] as $module)
-                                    <strong>{{ $module->name }}</strong><br>
-                                   {!! $module->description !!}<br><br>
-                                @endforeach
-                            </p>
-                        </div>
-
-                        <!-- YEAR IV — SEM II -->
-                        <div class="courseDetailContent moduleDropdown" id="year4sem2Section">
-                            <input type="checkbox" id="year4sem2">
-                            <label for="year4sem2">
-                                <h1>Year IV, Sem II <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
-                            </label>
-
-                            <p>
-                               @foreach ($groupedModules[4][2] ?? [] as $module)
-                                    <strong>{{ $module->name }}</strong><br>
-                                   {!! $module->description !!}<br><br>
-                                @endforeach
-                            </p>
-                        </div>
-
 
                     </div>
                 </div>

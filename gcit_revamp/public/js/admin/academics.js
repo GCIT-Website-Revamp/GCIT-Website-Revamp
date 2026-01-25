@@ -9,6 +9,21 @@ window.Loader = {
     }
 };
 
+function handleCourseTypeUI(typeSelect) {
+    const whyLabel = document.getElementById('whyLabel');
+    const careerGroup = document.getElementById('careerGroup');
+
+    if (!typeSelect || !whyLabel || !careerGroup) return;
+
+    if (typeSelect.value === 'Speculative Electives') {
+        careerGroup.style.display = 'none';
+        whyLabel.textContent = 'How This Track Empowers You?';
+    } else {
+        careerGroup.style.display = 'block';
+        whyLabel.textContent = 'Description (Why This Program?)';
+    }
+}
+
 /* =========================
    CKEDITOR (FOR ALL TEXTAREAS)
    ========================= */
@@ -98,10 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <tr>
                             <td>${index + 1}</td>
                             <td>${module.name}</td>
-                            <td>${module.year}</td>
-                            <td>${module.semester}</td>
                             <td style="max-width: 440px;">
-                                ${module.description.substring(0, 200)}...
+                                ${module.description}
                             </td>
                             <td style="max-width:80px;">
                                 <div class="action-buttons">
@@ -172,6 +185,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
                     <option value="" disabled selected>Select Degree</option>
                     <option value="School of Future Computing">School of Future Computing</option>
                     <option value="School of Interactive Design and Development">School of Interactive Design and Development</option>
+                    <option value="Speculative Electives">Speculative Electives</option>
                 </select>
             </div>
 
@@ -180,8 +194,8 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
                 <textarea class="form-control" id="description" rows="3" required></textarea>
             </div>
 
-            <div class="form-group">
-                <label>Description (Why This Program?)</label>
+            <div class="form-group" id="whyGroup">
+                <label id="whyLabel">Description (Why This Program?)</label>
                 <textarea class="form-control" id="why" rows="3" required></textarea>
             </div>
 
@@ -195,9 +209,9 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
                 <textarea class="form-control" id="structure" rows="3" required></textarea>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="careerGroup">
                 <label>Career Prospects</label>
-                <textarea class="form-control" id="career" rows="3" required></textarea>
+                <textarea class="form-control" id="career" rows="3"></textarea>
             </div>
 
             <div class="form-group">
@@ -211,6 +225,14 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-success" id="addCourse">Add Course</button>
     `;
+
+    const courseTypeSelect = document.getElementById('courseType');
+
+    handleCourseTypeUI(courseTypeSelect);
+
+    courseTypeSelect.addEventListener('change', function () {
+        handleCourseTypeUI(this);
+    });
 
     // INIT CKEDITOR FOR ALL TEXTAREAS IN MODAL
     initCkEditors(document.getElementById('myModal'));
@@ -289,8 +311,8 @@ document.getElementById('addModuleBtn').addEventListener('click', function () {
             </div>
 
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter module description..." required></textarea>
+                <label for="description">Credit</label>
+                <input class="form-control" type="text" id="description" name="description" placeholder="Enter module credit" required>
             </div>
         </form>
     `;
@@ -475,6 +497,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                         <option value="" disabled selected>Select Degree</option>
                         <option value="School of Future Computing"  ${this.dataset.courseType === "School of Future Computing" ? "selected" : ""}>School of Future Computing</option>
                         <option value="School of Interactive Design and Development" ${this.dataset.courseType === "School of Interactive Design and Development" ? "selected" : ""}>School of Interactive Design and Development</option>
+                        <option value="Speculative Electives" ${this.dataset.courseType === "Speculative Electives" ? "selected" : ""}>Speculative Electives</option>
                     </select>
                 </div>
 
@@ -483,8 +506,8 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                     <textarea class="form-control" id="description" rows="3" required>${this.dataset.courseDescription}</textarea>
                 </div>
 
-                <div class="form-group">
-                    <label>Description (Why This Program?)</label>
+                <div class="form-group" id="whyGroup">
+                    <label id="whyLabel">Description (Why This Program?)</label>
                     <textarea class="form-control" id="why" rows="3" required>${this.dataset.courseWhy}</textarea>
                 </div>
 
@@ -498,9 +521,9 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                     <textarea class="form-control" id="structure" rows="3" required>${this.dataset.courseStructure}</textarea>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="careerGroup">
                     <label>Career Prospects</label>
-                    <textarea class="form-control" id="career" rows="3" required>${this.dataset.courseCareer}</textarea>
+                    <textarea class="form-control" id="career" rows="3">${this.dataset.courseCareer}</textarea>
                 </div>
 
                 <div class="form-group">
@@ -515,6 +538,12 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-success" id="updateCourse">Update Course</button>
         `;
+
+        const courseTypeSelect = document.getElementById('courseType');
+        handleCourseTypeUI(courseTypeSelect);
+        courseTypeSelect.addEventListener('change', function () {
+            handleCourseTypeUI(this);
+        });
 
         // INIT CKEDITOR FOR ALL TEXTAREAS IN MODAL
         initCkEditors(document.getElementById('myModal'));
@@ -665,8 +694,8 @@ document.addEventListener('click', function (e) {
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="4" required>${moduleDescription}</textarea>
+                    <label for="description">Credit</label>
+                    <input class="form-control" id="description" type="text" value="${moduleDescription}" required>
                 </div>
             </form>
         `;

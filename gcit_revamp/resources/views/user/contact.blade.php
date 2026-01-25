@@ -37,51 +37,51 @@
                     <p>Have a question? Fill out the form below and we'll get back to you as soon as possible.</p>
                 </div>
 
-                <form action="#" method="POST" class="contactForm">
+                <form id="contactForm" class="contactForm">
                     @csrf
 
                     <div class="formRow">
                         <div class="formGroup">
-                            <label for="first_name">First Name *</label>
-                            <input type="text" id="first_name" name="first_name" required>
+                            <label>First Name *</label>
+                            <input type="text" name="first_name" required>
                         </div>
                         <div class="formGroup">
-                            <label for="last_name">Last Name *</label>
-                            <input type="text" id="last_name" name="last_name" required>
+                            <label>Last Name *</label>
+                            <input type="text" name="last_name" required>
                         </div>
                     </div>
 
                     <div class="formRow">
                         <div class="formGroup">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
+                            <label>Email *</label>
+                            <input type="email" name="email" required>
                         </div>
                         <div class="formGroup">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
+                            <label>Contact Number</label>
+                            <input type="tel" name="contact_number">
                         </div>
                     </div>
 
                     <div class="formGroup">
-                        <label for="subject">Subject *</label>
-                        <select id="subject" name="subject" required>
-                            <option value="">Select a subject</option>
-                            <option value="admission">Admission Inquiry</option>
-                            <option value="general">General Information</option>
-                            <option value="technical">Technical Support</option>
-                            <option value="partnership">Partnership Opportunity</option>
+                        <label>Subject *</label>
+                        <select name="type" required>
+                            <option value="">Select a subject</option> 
+                            <option value="Admission Inquiry">Admission Inquiry</option> 
+                            <option value="General Information">General Information</option> 
+                            <option value="Technical Support">Technical Support</option> 
+                            <option value="Partnership Opportunity">Partnership Opportunity</option>
+                            <option value="Campus Complaints">Campus Complaints</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
 
                     <div class="formGroup">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
+                        <label>Message *</label>
+                        <textarea name="message" required></textarea>
                     </div>
 
                     <button type="submit" class="submitBtn">
                         Send Message
-                        <span class="material-symbols-outlined">send</span>
                     </button>
                 </form>
             </div>
@@ -115,5 +115,51 @@
         </div>
 
     </div>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const form = this;
+            const formData = new FormData(form);
+            formData.append('status', 'Unread');
+
+            fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(async response => {
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw data;
+                }
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Message Sent!',
+                    text: 'We will get back to you shortly.',
+                });
+
+                form.reset();
+            })
+            .catch(error => {
+                let message = 'Something went wrong. Please try again.';
+                if (error.errors) {
+                    message = Object.values(error.errors)
+                        .map(err => err[0])
+                        .join('\n');
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops!',
+                    text: message,
+                });
+            });
+        });
+    </script>
 
 @endsection

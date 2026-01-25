@@ -74,6 +74,14 @@
             gap: 15px;
          }
       }
+      .contact-row {
+         cursor: pointer; /* pointer cursor */
+         transition: background-color 0.2s; /* smooth hover effect */
+      }
+
+      .contact-row:hover {
+         background-color: #f1f1f1; /* light gray background on hover */
+      }
    </style>
 </head>
 
@@ -117,6 +125,7 @@
                                        <th>#</th>
                                        <th>Name</th>
                                        <th>Email</th>
+                                       <th>Type</th>
                                        <th>Message</th>
                                        <th>Status</th>
                                        <th>Action</th>
@@ -124,19 +133,30 @@
                                  </thead>
                                  <tbody>
                                     @forelse ($contacts as $index => $contact)
-                                       <tr>
-                                          <td style="max-width: 10px;">
+                                       <tr class="contact-row"
+                                             data-first-name="{{ $contact->first_name }}"
+                                             data-last-name="{{ $contact->last_name }}"
+                                             data-email="{{ $contact->email }}"
+                                             data-type="{{ $contact->type }}"
+                                             data-contact-number="{{ $contact->contact_number }}"
+                                             data-message="{{ $contact->message }}"
+                                             data-status="{{ $contact->status }}">
+                                          <td style="max-width: 8px;">
                                              {{ $contacts->firstItem() + $index ?? $loop->iteration }}</td>
-                                          <td style="max-width: 10px;">{{ $contact->name }}</td>
-                                          <td style="max-width: 10px;">{{ $contact->email }}</td>
-                                          <td style="max-width: 210px;">{{ $contact->message }}</td>
+                                          <td style="max-width: 10px;">{{ $contact->first_name." ".$contact->last_name }}</td>
+                                          <td style="max-width: 15px;">{{ $contact->email }}</td>
+                                          <td style="max-width: 10px;">{{ $contact->type }}</td>
+                                          <td style="max-width: 210px;">{!! nl2br(e(Str::limit($contact->message, 100))) !!}</td>
                                           <td style="max-width: 10px;">{{ $contact->status }}</td>
-                                          <td style="max-width: 80px;">
+                                          <td style="max-width: 100px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-contact-btn"
                                                    data-contact-id="{{ $contact->id }}"
-                                                   data-contact-name="{{ $contact->name }}"
+                                                   data-contact-first_name="{{ $contact->first_name }}"
+                                                   data-contact-last_name="{{ $contact->last_name }}"
                                                    data-contact-email="{{ $contact->email }}"
+                                                   data-contact-type="{{ $contact->type }}"
+                                                    data-contact-contact_number="{{ $contact->contact_number }}"
                                                    data-contact-message="{{ $contact->message }}"
                                                    data-contact-status="{{ $contact->status }}">
                                                    Update Status

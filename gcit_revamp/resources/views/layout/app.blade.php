@@ -46,7 +46,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis/dist/lenis.min.js"></script>
 <script src="https://kit.fontawesome.com/8d21368d12.js" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type = "module" src = "{{ asset('js/website/animation.icon.js') }}"></script>
 <script type = "module" src = "{{ asset('js/website/animation.smoothscroll.js') }}"></script>
 <script src = "{{ asset('js/website/nav.js') }}"></script>

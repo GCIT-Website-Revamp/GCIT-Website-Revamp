@@ -45,10 +45,13 @@ class ContactController extends Controller
     {
         try {
             $rules = [
-                'name' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
                 'email' => 'required',
+                'contact_number' => 'sometimes',
                 'message' => 'required',
-                'status' => 'required'
+                'status' => 'required',
+                'type' => 'required'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -60,10 +63,13 @@ class ContactController extends Controller
             }
 
             $contact = new Contact();
-            $contact->name = $request->name;
+            $contact->first_name = $request->first_name;
+            $contact->last_name = $request->last_name;
             $contact->email = $request->email;
+            $contact->contact_number = $request->contact_number;
             $contact->message = $request->message;
             $contact->status = $request->status;
+            $contact->type = $request->type;
             $contact->save();
 
             return response()->json([
@@ -105,10 +111,13 @@ class ContactController extends Controller
             $contact = Contact::findOrFail($id);
 
             $rules = [
-                'name' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
                 'email' => 'required',
+                'contact_number' => 'sometimes',
                 'message' => 'required',
-                'status' => 'required'
+                'status' => 'required',
+                'type' => 'required'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -119,16 +128,19 @@ class ContactController extends Controller
                 ], 422);
             }
 
-            $contact->name = $request->name;
+            $contact->first_name = $request->first_name;
+            $contact->last_name = $request->last_name;
             $contact->email = $request->email;
+            $contact->contact_number = $request->contact_number;
             $contact->message = $request->message;
             $contact->status = $request->status;
+            $contact->type = $request->type;
             $contact->save();
             activity()
                 ->causedBy(Auth::user())
                 ->performedOn($contact)
                 ->withProperties([
-                    'name' => $contact->name,
+                    'email' => $contact->email,
                     'id' => $contact->id
                 ])
                 ->log('Updated a contact detail');

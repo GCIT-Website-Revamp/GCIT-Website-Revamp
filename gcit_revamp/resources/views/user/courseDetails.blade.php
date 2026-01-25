@@ -51,7 +51,9 @@
                         <a href="#why">Why This Program?</a>
                         <a href="#learnSection">What Would I Learn?</a>
                         <a href="#structureSection">Program Structure</a>
+                        @if($course->type != "Speculative Electives")
                         <a href="#careerSection">Your Career Prospects</a>
+                        @endif
                     </div>
                     <div class="menuSection">
                         <div class="header">
@@ -76,7 +78,12 @@
                         <div class="courseDetailContent whythisprogram" id="why">
                             <input type="checkbox" id="whyProgram">
                             <label for="whyProgram">
-                                <h1>Why This Program? <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                @if($course->type != "Speculative Electives")
+                                    <h1>Why This Program? <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                @else
+                                    <h1>How This Track Empower You? <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                @endif
+                                
                                 </h1>
                             </label>
                             <p>{!! $course->why !!}</p>
@@ -99,6 +106,7 @@
 
                             <p>{!! $course->structure !!}</p>
                         </div>
+                        @if($course->type != "Speculative Electives")
                         <div class="courseDetailContent careerprospects" id="careerSection">
                             <input type="checkbox" id="career">
                             <label for="career">
@@ -108,6 +116,7 @@
 
                             <p>{!! $course->career !!}</p>
                         </div>
+                        @endif
 
 
                     </div>
@@ -138,19 +147,33 @@
                                         <tbody>
                                             <!-- SEMESTER 1 -->
                                             <tr class="semester-row"><td colspan="2">Semester 1</td></tr>
-                                            <tr><td><strong>Fundamentals of Programming</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Front End Web Development</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Fundamentals of Computing</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Modern Database Design</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Dzongkha Communication</strong></td><td>12</td></tr>
+                                            @if(isset($groupedModules[1][1]))
+                                                @foreach($groupedModules[1][1] as $module)
+                                                    <tr>
+                                                        <td><strong>{{ $module->name }}</strong></td>
+                                                        <td>{{ $module->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                                    <td colspan="2">No modules available</td>
+                                                </tr>
+                                            @endif
                                             
                                             <!-- SEMESTER 2 -->
                                             <tr class="semester-row"><td colspan="2">Semester 2</td></tr>
-                                            <tr><td><strong>Back End Web Development with API Integration</strong></td><td>12</td></tr>
-                                            <tr><td><strong>User Interactions Design</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Mathematics for Programming I - Discrete Structures</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Essentials for Networkings & Automation</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Academic Skills</strong></td><td>12</td></tr>
+                                            @if(isset($groupedModules[1][2]))
+                                                @foreach($groupedModules[1][2] as $module)
+                                                    <tr>
+                                                        <td><strong>{{ $module->name }}</strong></td>
+                                                        <td>{{ $module->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                                    <td colspan="2">No modules available</td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -176,19 +199,33 @@
                                         <tbody>
                                             <!-- SEMESTER 1 -->
                                             <tr class="semester-row"><td colspan="2">Semester 1</td></tr>
-                                            <tr><td><strong>Applied Data Structures and Algorithms</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Data Analytics and Visualisation</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Agile Software Engineering Practices</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Mathematics for Programming II - Statistics and Probability</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Introduction to Research</strong></td><td>12</td></tr>
+                                            @if(isset($groupedModules[2][1]))
+                                                @foreach($groupedModules[2][1] as $module)
+                                                    <tr>
+                                                        <td><strong>{{ $module->name }}</strong></td>
+                                                        <td>{{ $module->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                                    <td colspan="2">No modules available</td>
+                                                </tr>
+                                            @endif
                                             
                                             <!-- SEMESTER 2 -->
                                             <tr class="semester-row"><td colspan="2">Semester 2</td></tr>
-                                            <tr><td><strong>Traditional AI and Machine Learning</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Front End Web Development with Partner API</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Mathematics for Programming III - Linear Algebra</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Ethics in Computing & Interactive Design</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Project I</strong></td><td>12</td></tr>
+                                            @if(isset($groupedModules[2][2]))
+                                                @foreach($groupedModules[2][2] as $module)
+                                                    <tr>
+                                                        <td><strong>{{ $module->name }}</strong></td>
+                                                        <td>{{ $module->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                                    <td colspan="2">No modules available</td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -214,18 +251,33 @@
                                         <tbody>
                                             <!-- SEMESTER 1 -->
                                             <tr class="semester-row"><td colspan="2">Semester 1</td></tr>
-                                            <tr><td><strong>Mathematics for Programming IV - Optimization</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Deep Learning</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Natural Language Processing</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Mobile Application Development</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Elective I: New Elective Basket</strong></td><td>12</td></tr>
+                                            @if(isset($groupedModules[3][1]))
+                                                @foreach($groupedModules[3][1] as $module)
+                                                    <tr>
+                                                        <td><strong>{{ $module->name }}</strong></td>
+                                                        <td>{{ $module->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                                    <td colspan="2">No modules available</td>
+                                                </tr>
+                                            @endif
                                             
                                             <!-- SEMESTER 2 -->
                                             <tr class="semester-row"><td colspan="2">Semester 2</td></tr>
-                                            <tr><td><strong>Programming for Enterprise Systems</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Agentic AI Systems and Workflow Automation</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Elective II: New Elective Basket</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Project II</strong></td><td>24</td></tr>
+                                            @if(isset($groupedModules[3][2]))
+                                                @foreach($groupedModules[3][2] as $module)
+                                                    <tr>
+                                                        <td><strong>{{ $module->name }}</strong></td>
+                                                        <td>{{ $module->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                                    <td colspan="2">No modules available</td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -251,16 +303,33 @@
                                         <tbody>
                                             <!-- SEMESTER 1 -->
                                             <tr class="semester-row"><td colspan="2">Semester 1</td></tr>
-                                            <tr><td><strong>Big Data Analytics</strong></td><td>12</td></tr>
-                                            <tr><td><strong>DevSecOps for Development</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Professional Certification</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Competitive Programming</strong></td><td>12</td></tr>
-                                            <tr><td><strong>Elective III: New Elective Basket</strong></td><td>12</td></tr>
+                                            @if(isset($groupedModules[4][1]))
+                                                @foreach($groupedModules[4][1] as $module)
+                                                    <tr>
+                                                        <td><strong>{{ $module->name }}</strong></td>
+                                                        <td>{{ $module->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                                    <td colspan="2">No modules available</td>
+                                                </tr>
+                                            @endif
                                             
                                             <!-- SEMESTER 2 -->
                                             <tr class="semester-row"><td colspan="2">Semester 2</td></tr>
-                                            <tr><td><strong>INDUSTRY FINAL YEAR PROJECT - MAJOR CORPORATE CAPSTONE</strong></td><td>48</td></tr>
-                                            <tr><td><strong>Advanced Analytical & Critical English Skills</strong></td><td>12</td></tr>
+                                            @if(isset($groupedModules[4][2]))
+                                                @foreach($groupedModules[4][2] as $module)
+                                                    <tr>
+                                                        <td><strong>{{ $module->name }}</strong></td>
+                                                        <td>{{ $module->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                            <tr>
+                                                    <td colspan="2">No modules available</td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>

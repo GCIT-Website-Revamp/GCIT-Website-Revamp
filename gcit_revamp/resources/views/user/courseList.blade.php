@@ -42,8 +42,8 @@
                 </div>
                 <div class="otherContent">
                     <h1>Other Schools</h1>
-                    <a href="/courseDetails/soc">School of Future Computing</a>
-                    <a href="/courseDetails/electives">Speculative Electives</a>
+                    <a href="/course/soc">School of Future Computing</a>
+                    <a href="/course/electives">Speculative Electives</a>
                 </div>
             </div>
         </div>

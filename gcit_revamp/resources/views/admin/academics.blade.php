@@ -145,7 +145,7 @@
                                     <tr>
                                        <th>#</th>
                                        <th>Module</th>
-                                       <th>Description</th>
+                                       <th>Credit</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
@@ -153,9 +153,9 @@
                                     @forelse ($modules as $index => $module)
                                        <tr>
                                           <td>{{ $modules->firstItem() + $index ?? $loop->iteration }}</td>
-                                          <td>{{ $module->name }}</td>
-                                          <td style="max-width: 470px;">{!! Str::limit($module->description, 200) !!}</td>
-                                          <td>
+                                          <td style="max-width: 470px;">{{ $module->name }}</td>
+                                          <td style="max-width: 100px;">{{ $module->description }}</td>
+                                          <td style="max-width: 100px;">
                                              <div class="action-buttons">
                                                 <button type="button" class="btn btn-success edit-module-btn"
                                                    data-module-id="{{ $module->id }}"

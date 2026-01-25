@@ -310,6 +310,10 @@ Route::get('/course/sidd', function () {
     $courses = Course::where('type', '=', 'School of Interactive Design and Development')->orderBy('name', 'ASC')->get();
     return view('user.courseList', compact('courses'));
 });
+Route::get('/course/electives', function () {
+    $courses = Course::where('type', '=', 'Speculative Electives')->orderBy('name', 'ASC')->get();
+    return view('user.electives', compact('courses'));
+});
 Route::get('/search', function () {
     return view('user.search');
 });

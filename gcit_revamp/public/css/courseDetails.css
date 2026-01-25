@@ -129,7 +129,11 @@
 #structure:checked ~ p,
 #career:checked ~ p,
 #learn:checked ~ p,
-#whyProgram:checked ~ p {
+#whyProgram:checked ~ p,
+#structure:checked ~ ul,
+#career:checked ~ ul,
+#learn:checked ~ ul,
+#whyprogram:checked ~ ul {
     height: fit-content;
     opacity: 1;
     transform: translateY(0);

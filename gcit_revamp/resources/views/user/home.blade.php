@@ -157,7 +157,7 @@
                                 and leading sustainable digital futures. </p>
 
                             <div class="ctaBtn">
-                                <a href="/course">Learn More</a>
+                                <a href="/course/soc">Learn More</a>
                             </div>
                         </div>
 
@@ -193,7 +193,7 @@
                                 multimodal models to crafting smart autonomous environments for immersive creations. </p>
 
                             <div class="ctaBtn">
-                                <a href="/course">Learn More</a>
+                                <a href="/course/sidd">Learn More</a>
                             </div>
                         </div>
 

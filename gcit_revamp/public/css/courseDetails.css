@@ -98,7 +98,7 @@
     padding: 1rem;
 }
 
-.courseDetailContent p {
+.courseDetailContent p, .courseDetailContent ul {
     height: 0;
     overflow: hidden;
     opacity: 0;
@@ -133,7 +133,7 @@
 #structure:checked ~ ul,
 #career:checked ~ ul,
 #learn:checked ~ ul,
-#whyprogram:checked ~ ul {
+#whyProgram:checked ~ ul {
     height: fit-content;
     opacity: 1;
     transform: translateY(0);

@@ -44,9 +44,9 @@
                 <div class="dropDownContent">
                     <a href="/admission">Admissions</a>
                     <label>Courses</label>
-                    <a href="/course" class = "subLink">School of Future Computing</a>
-                    <a href="/course" class = "subLink">School of Interactive Design & Development</a>
-                    <a href="/course" class = "subLink">Electives</a>
+                    <a href="/course/soc" class = "subLink">School of Future Computing</a>
+                    <a href="/course/sidd" class = "subLink">School of Interactive Design & Development</a>
+                    <!-- <a href="/course" class = "subLink">Electives</a> -->
                     <label>Student Services</label>
                     <a href="/clubs" class = "subLink">Clubs</a>
                     <a href="/resources/ICT" class = "subLink">ICT</a>

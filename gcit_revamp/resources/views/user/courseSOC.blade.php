@@ -16,7 +16,7 @@
             <a>Study</a>
         </div>
         <div class="contentWrapper">
-            <h1>School of Interactive Design and Development</h1>
+            <h1>School of Future Computing</h1>
         </div>
     </div>
 </div>

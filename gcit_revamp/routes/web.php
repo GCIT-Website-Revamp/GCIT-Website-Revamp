@@ -302,8 +302,12 @@ Route::get('/announcements', function () {
     return view('user.announcementTemplate', compact('announcements'));
 });
 
-Route::get('/course', function () {
-    $courses = Course::orderBy('name', 'ASC')->get();
+Route::get('/course/soc', function () {
+    $courses = Course::where('type', '=', 'School of Future Computing')->orderBy('name', 'ASC')->get();
+    return view('user.courseSOC', compact('courses'));
+});
+Route::get('/course/sidd', function () {
+    $courses = Course::where('type', '=', 'School of Interactive Design and Development')->orderBy('name', 'ASC')->get();
     return view('user.courseList', compact('courses'));
 });
 Route::get('/search', function () {

@@ -1,5 +1,55 @@
 const csrf = document.querySelector('input[name="_token"]').value;
 
+document.querySelectorAll('.contact-row').forEach(btn => {
+    btn.addEventListener('click', function () {
+
+        const firstName = this.dataset.firstName || '';
+        const lastName = this.dataset.lastName || '';
+        const email = this.dataset.email || '';
+        const contactNumber = this.dataset.contactNumber || '—';
+        const type = this.dataset.type || '';
+        const message = this.dataset.message || '';
+
+        document.querySelector('#myModal .modal-title').textContent = 'Contact Details';
+
+        document.querySelector('#myModal .modal-body').innerHTML = `
+        <form id="editClubForm" autocomplete="off">
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" value="${firstName}" readOnly>
+            </div>
+
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" value="${lastName}" readOnly>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" value="${email}" readOnly>
+            </div>
+
+            <div class="form-group">
+                <label>Contact Number</label>
+                <input type="tel" class="form-control" value="${contactNumber}" readOnly>
+            </div>
+
+            <div class="form-group">
+                <label>Type</label>
+                <input type="text" class="form-control" value="${type}" readOnly>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" rows="10" id="edit_club_description" readOnly>${message}</textarea>
+            </div>
+
+            
+        </form>
+        `;
+        new bootstrap.Modal(document.getElementById('myModal')).show();
+    });
+});
 // =====================
 // Update Contact Status
 // =====================

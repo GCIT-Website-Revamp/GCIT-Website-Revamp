@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="pageContentWrapper courseContentContainer">
+    <div class="pageContentWrapper courseContentContainer detailsWrapper">
         <input type="checkbox" id="courseMenuToggle" hidden>
 
 <label for="courseMenuToggle" class="courseMenuBtn">

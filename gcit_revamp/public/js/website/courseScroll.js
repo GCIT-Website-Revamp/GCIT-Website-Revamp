@@ -197,97 +197,172 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // }
 
+
 document.addEventListener("DOMContentLoaded", () => {
+    /* =========================================================
+       UNIFIED STICKY SIDEBAR LOGIC (SPACER PATTERN)
+       Fixes layout shifts and width issues by creating a physical spacer
+       in the DOM that holds the space when the sidebar becomes fixed.
+    ========================================================= */
 
-  gsap.registerPlugin(ScrollTrigger);
+    const DESKTOP_BREAKPOINT = 1024;
+    const NAV_OFFSET = 120; 
 
-  ScrollTrigger.matchMedia({
+    /**
+     * Applies sticky behavior using a spacer element
+     * @param {string} sidebarSelector Selector for the sidebar
+     * @param {string} containerSelector Selector for the parent/wrapper
+     */
+    function initStickySidebar(sidebarSelector, containerSelector) {
+        const sidebar = document.querySelector(sidebarSelector);
+        const container = document.querySelector(containerSelector);
 
-    // =============================
-    // DESKTOP ONLY (>=1024px)
-    // =============================
-    "(min-width: 1024px)": () => {
+        if (!sidebar || !container) return;
+        if (!container.contains(sidebar)) return;
 
-      function refreshStyles(el) {
-        el.style.width = "auto"; // Reset first
-        const width = el.offsetWidth;
-        el.style.width = width + "px";
-                el.style.height = "fit-content";
+        // 🔒 Lock the original position ONCE when sidebar is in natural flow
+        let lockedLeft = null;
+        let lockedWidth = null;
 
-      }
+        function lockPosition() {
+            // Only lock when sidebar is in natural flow (not fixed/absolute)
+            if (sidebar.style.position === "" || sidebar.style.position === "relative" || sidebar.style.position === "static") {
+                const rect = sidebar.getBoundingClientRect();
+                lockedLeft = rect.left;
+                lockedWidth = rect.width;
+            }
+        }
 
-      const container = document.querySelector(".courseDetailsSection");
-      const sideMenu = document.querySelector(".courseDetailsContainer .sideMenu");
-      const other = document.querySelector(".courseDetailsContainer .otherCourseContainer");
+        // Capture initial position
+        lockPosition();
 
-      if (!container || !sideMenu || !other) return;
+        // Create spacer if not exists
+        let spacer = sidebar.previousElementSibling;
+        if (!spacer || !spacer.classList.contains('sticky-spacer')) {
+            spacer = document.createElement('div');
+            // Copy classes to match layout rules (grid/flex)
+            spacer.className = sidebar.className + ' sticky-spacer';
+            spacer.style.display = 'none'; // Hidden by default
+            spacer.style.pointerEvents = 'none';
+            spacer.style.visibility = 'hidden';
+            spacer.innerHTML = '&nbsp;'; 
+             
+            // IMPORTANT: Copy critical layout styles once
+            const computed = window.getComputedStyle(sidebar);
+            spacer.style.flex = computed.flex;
+            spacer.style.flexGrow = computed.flexGrow;
+            spacer.style.flexShrink = computed.flexShrink;
+            spacer.style.flexBasis = computed.flexBasis;
+            spacer.style.margin = computed.margin;
+            spacer.style.padding = computed.padding;
+            
+            sidebar.parentNode.insertBefore(spacer, sidebar);
+        }
 
-      const HEADER_OFFSET = 0;
+        function reset() {
+            sidebar.style.position = "";
+            sidebar.style.top = "";
+            sidebar.style.left = "";
+            sidebar.style.width = "";
+            sidebar.style.height = "";
+            
+            spacer.style.display = "none";
+        }
 
-      function lockWidth(el) {
-        const rect = el.getBoundingClientRect();
-        el.style.width = rect.width + "px";
-        el.style.height = "fit-content";
-      }
+        function clamp() {
+            if (window.innerWidth < DESKTOP_BREAKPOINT) {
+                reset();
+                return;
+            }
 
-      lockWidth(sideMenu);
-      lockWidth(other);
+            // 1. MEASURE PHASE
+            const isFixed = sidebar.style.position === "fixed" || sidebar.style.position === "absolute";
+            
+            // If not fixed yet, continuously update the locked position
+            if (!isFixed) {
+                lockPosition();
+            }
+            
+            // Ensure spacer is visible for measurement so it holds the flex slot
+            if (isFixed) {
+                spacer.style.display = ""; 
+                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
+            }
+            
+            const containerRect = container.getBoundingClientRect();
+            
+            // Calculate boundaries
+            const sidebarHeight = sidebar.offsetHeight;
+            const start = containerRect.top <= NAV_OFFSET;
+            // Stop point: when sidebar bottom hits container bottom
+            const end = containerRect.bottom <= sidebarHeight + NAV_OFFSET;
 
-      // ----------------------------
-      // LEFT SIDEBAR PIN
-      // ----------------------------
-      const leftPin = ScrollTrigger.create({
-        trigger: container,
-        start: "-120px top",
-        end: () => `bottom-=${sideMenu.offsetHeight + HEADER_OFFSET} top`,
-        pin: sideMenu,
-        pinSpacing: false,
-        pinType: "transform",
-        invalidateOnRefresh: true,
-        onRefresh: () => refreshStyles(sideMenu)
-      });
+            if (!start) {
+                // CASE: TOP (Default)
+                reset();
+            } 
+            else if (end) {
+                // CASE: BOTTOM (Absolute at bottom)
+                spacer.style.display = "";
+                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
+                spacer.style.width = lockedWidth + "px";
+                spacer.style.height = sidebarHeight + "px";
+                
+                sidebar.style.position = "absolute";
+                sidebar.style.top = (container.offsetHeight - sidebarHeight) + "px";
+                
+                // Ensure container is positioned
+                const style = window.getComputedStyle(container);
+                if (style.position === 'static') container.style.position = 'relative';
 
-      // ----------------------------
-      // RIGHT SIDEBAR PIN
-      // ----------------------------
-      const rightPin = ScrollTrigger.create({
-        trigger: container,
-        start: "-120px top",
-        end: () => `bottom-=${other.offsetHeight + HEADER_OFFSET} top`,
-        pin: other,
-        pinSpacing: false,
-        pinType: "transform",
-        invalidateOnRefresh: true,
-        onRefresh: () => refreshStyles(other)
-      });
+                // Use spacer's offsetLeft for absolute positioning
+                sidebar.style.left = spacer.offsetLeft + "px";
+                sidebar.style.width = lockedWidth + "px";
+            } 
+            else {
+                // CASE: FIXED (Sticky)
+                spacer.style.display = "";
+                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
+                spacer.style.width = lockedWidth + "px";
+                spacer.style.height = sidebarHeight + "px";
+                
+                // Copy computed styles that affect layout
+                const computed = window.getComputedStyle(spacer);
+                spacer.style.marginTop = computed.marginTop;
+                spacer.style.marginBottom = computed.marginBottom;
+                spacer.style.marginLeft = computed.marginLeft;
+                spacer.style.marginRight = computed.marginRight;
 
-      // Resize handling
-      const onResize = () => {
-        lockWidth(sideMenu);
-        lockWidth(other);
-        ScrollTrigger.refresh();
-      };
+                sidebar.style.position = "fixed";
+                sidebar.style.top = NAV_OFFSET + "px";
+                // 🔑 Use the LOCKED left position to prevent jumping
+                sidebar.style.left = lockedLeft + "px";
+                sidebar.style.width = lockedWidth + "px";
+            }
+        }
 
-      window.addEventListener("resize", onResize);
-
-      // 🔥 Cleanup when leaving desktop
-      return () => {
-        leftPin.kill();
-        rightPin.kill();
-        window.removeEventListener("resize", onResize);
-        gsap.set([sideMenu, other], { clearProps: "all" });
-      };
-    },
-
-    // =============================
-    // MOBILE / TABLET (<1024px)
-    // =============================
-    "(max-width: 1023px)": () => {
-      const sideMenu = document.querySelector(".courseDetailsContainer .sideMenu");
-      const other = document.querySelector(".courseDetailsContainer .otherCourseContainer");
-      gsap.set([sideMenu, other], { clearProps: "all" });
+        window.addEventListener("scroll", clamp, { passive: true });
+        window.addEventListener("resize", () => {
+             reset(); // Force reset to re-measure natural layout
+             lockedLeft = null; // Reset locked position on resize
+             lockedWidth = null;
+             setTimeout(() => {
+                 lockPosition();
+                 clamp();
+             }, 50);
+        });
+        
+        // Initial run
+        clamp();
     }
 
-  });
+    // 1. Admissions & Course Details (Left Sidebar)
+    initStickySidebar(".sideMenu", ".courseDetailsContainer");
 
+    // 2. Admissions & Course Details (Right Sidebar)
+    initStickySidebar(".otherCourseContainer", ".courseDetailsContainer");
+
+    // 3. Institutional Overview (Right Sidebar)
+    initStickySidebar(".otherCourseContainer", ".aboutContentWrapper");
 });
+

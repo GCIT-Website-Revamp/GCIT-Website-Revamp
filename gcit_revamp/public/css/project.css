@@ -194,6 +194,7 @@
     }
     .aboutGCIT.section {
     padding: clamp(60px, 10vw, 120px) var(--padding-sides) !important;
+    padding-bottom: 60px !important;
     }
     .projectHeaderWrapper{
         position: relative;

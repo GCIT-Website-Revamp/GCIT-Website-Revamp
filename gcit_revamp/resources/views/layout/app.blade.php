@@ -59,6 +59,7 @@
 <script src = "{{ asset('js/website/filter.js') }}"></script>
 <script type = "module" src = "{{ asset('js/website/projectPageSlider.js') }}"></script>
 <script type = "module" src = "{{ asset('js/website/post.js') }}"></script>
+<script type = "module" src = "{{ asset('js/website/postScroll.js') }}"></script>
 
 <div class="filterOverlay"></div>
 <div class="heroVideoModal" aria-hidden="true">

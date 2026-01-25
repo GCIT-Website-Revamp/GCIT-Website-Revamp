@@ -71,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <div class="sectionWrapper eventsWrapper noPadding">
+        <div class="sectionWrapper eventsWrapper noPadding detailsWrapper">
 
             <div class="section eventsWrapper paddingContainer">
                 <button class="filterToggle">

@@ -72,7 +72,7 @@ li ul li {
 .suggestionWrapper {
     display: flex;
     width: 35%;
-    position: sticky;
+    position: relative; /* JS handles sticky via GSAP ScrollTrigger */
     top: 0;
     width: 320px;
     transition: none;
@@ -83,7 +83,16 @@ li ul li {
 .suggestionWrapper > * {
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #e6e6e6; /* divider */
+}
+.suggestionWrapper > *::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 95%;
+    height: 1px;
+    background-color: #e6e6e6;
+    transform: translateX(-50%);
 }
 
 .suggestionWrapper > *:last-child {
@@ -96,6 +105,9 @@ li ul li {
     text-decoration: none;
     padding: 1rem;
     padding-top: 1rem;
+    margin-bottom: 1.7rem;
+    padding-bottom: 1.7rem;
+    border-radius: 10px;
 }
 .suggestion > * {
     font-weight: 400;
@@ -103,6 +115,7 @@ li ul li {
 }
 .suggestion:hover {
     background-color: #fafafa;
+
     /* border-bottom: none; */
 }
 .suggestion h1 {
@@ -149,11 +162,6 @@ li ul li {
     font-weight: 600;
 }
 
-.post ul,
-.post ol {
-    padding-left: 1.4rem;
-    margin: 1rem 0 1.5rem;
-}
 
 .post li {
     margin: 0.4rem 0;
@@ -161,8 +169,7 @@ li ul li {
 
 .post ul,
 .post ol {
-    padding-left: 1.4rem;
-    margin: 1rem 0 1.5rem;
+    margin: .5rem 0 1.5rem 0;
 }
 
 .post li {

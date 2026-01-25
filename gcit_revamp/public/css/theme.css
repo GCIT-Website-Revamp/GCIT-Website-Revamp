@@ -93,8 +93,8 @@ html, body {
     width: 100%;
     font-family: var(--font-text);
     font-size: var(--font-size-md);
-    /* overflow-x: hidden; */
-    overflow-y: auto; /* ✅ allow vertical scrolling */
+    overflow-x: hidden;
+    overflow-y: auto; 
 
 }
 
@@ -139,8 +139,9 @@ p{
 .sectionWrapper{
     max-width: 1600px;
     margin: 0px auto;
+
     padding-inline: 1.5rem;
-    /* padding: 0 var(--padding-sides); */
+    padding: 0 var(--padding-sides);
 }
 /* ================================
    BUTTONS
@@ -320,9 +321,11 @@ p{
     padding: 0 var(--padding-sides);
 }
 .pageContentWrapper{
-    padding: clamp(60px, 10vw, 140px) 0;
+    padding: clamp(60px, 10vw, 140px) var(--padding-sides);
 }
-
+.detailsWrapper{
+    padding-top: clamp(40px, 10vw, 90px);
+}
 .lightText{
     font-size:clamp(14px, 1vw, 16px);
     font-weight: var(--font-weight-light);
@@ -378,7 +381,7 @@ body.filter-open {
 .pageContentWrapper{
     max-width:1600px;
     margin: 0 auto;        /* centers horizontally */
-    padding-inline: 1.5rem;/* prevents edge touching on small screens */
+    /* padding-inline: 1.5rem;prevents edge touching on small screens */
     min-height: 600px;
 }
 

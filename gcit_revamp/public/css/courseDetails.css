@@ -1,11 +1,10 @@
-.pageBannerWrapper .bannerContent h2{
+.pageBannerWrapper .bannerContent h2 {
     font-family: var(--font-Header);
     font-size: clamp(18px, 4vw, 24px);
     font-weight: 400;
 }
 
-
-.courseDetailsContainer{
+.courseDetailsContainer {
     display: flex;
     justify-content: space-between;
     gap: clamp(20px, 4vw, 60px);
@@ -14,55 +13,56 @@
     position: relative;
 }
 
-.courseDetailsContainer .sideMenu{
-    background-color: #F3F3F3;
-    width: 20% ;
+.courseDetailsContainer .sideMenu {
+    background-color: #f3f3f3;
+    width: 20%;
     padding: clamp(20px, 5vw, 50px) clamp(10px, 3vw, 20px);
     height: fit-content;
-    
-    /* position: sticky; */
-    top: calc(141px + 3rem);
+    transition: none !important; /* Prevent jitter from global transition */
+
+    /* Sticky behavior handled by courseScroll.js via GSAP */
+    top: 0;
 }
 
-.courseDetailsContainer .sideMenu h1{
+.courseDetailsContainer .sideMenu h1 {
     font-size: 16px;
     font-weight: 700;
-    color: #4D4D4D;
+    color: #4d4d4d;
 }
 
-.courseDetailsContainer .sideMenu .header{
+.courseDetailsContainer .sideMenu .header {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.courseDetailsContainer .sideMenu .circle{
+.courseDetailsContainer .sideMenu .circle {
     width: 7px;
-    height: 7px; 
+    height: 7px;
     border-radius: 10px;
     background-color: var(--color-secondary);
 }
 
-.courseDetailsContainer .sideMenu a{
+.courseDetailsContainer .sideMenu a {
     text-decoration: none;
-    color: #4D4D4D;
+    color: #4d4d4d;
     margin-left: calc(1rem + 7px);
 }
-.courseDetailsContainer .sideMenu a:hover{
+.courseDetailsContainer .sideMenu a:hover {
     color: var(--color-secondary);
 }
 
-.courseDetailsContainer .menuSection{
+.courseDetailsContainer .menuSection {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 2rem;
 }
-.courseDetailsContainer .courseDetails{
+.courseDetailsContainer .courseDetails {
     width: 50%;
 }
 
-.courseDetailsContainer .otherCourseContainer{
+.courseDetailsContainer .otherCourseContainer {
     width: 30%;
     transition: none !important;
 }
@@ -72,11 +72,10 @@
     gap: clamp(20px, 4vw, 60px);
 }
 
-
-.courseDetailsWrapper .courseHeaderWrapper{
+.courseDetailsWrapper .courseHeaderWrapper {
     margin-bottom: 2rem;
 }
-.courseDetailsWrapper .courseHeaderWrapper h1{
+.courseDetailsWrapper .courseHeaderWrapper h1 {
     font-size: clamp(22px, 7vw, 58px);
     color: var(--color-secondary);
     width: 80%;
@@ -84,29 +83,29 @@
     font-weight: 700;
 }
 
-.courseDetailsWrapper p{
+.courseDetailsWrapper p {
     line-height: 150%;
 }
-.courseDetailsWrapper{
+.courseDetailsWrapper {
     gap: 1rem;
     display: flex;
     flex-direction: column;
 }
 
-.courseDetailContent{
-    border: 1px solid #CECECE;
+.courseDetailContent {
+    border: 1px solid #cecece;
     border-radius: 10px;
     padding: 1rem;
 }
 
-.courseDetailContent p{
+.courseDetailContent p {
     height: 0;
     overflow: hidden;
     opacity: 0;
     transform: translateY(10px);
 }
 
-.courseDetailContent h1{
+.courseDetailContent h1 {
     font-size: clamp(16px, 2vw, 20px);
     font-weight: 700;
     color: var(--color-primary);
@@ -115,87 +114,91 @@
     border-bottom: 1px solid #d4d4d400;
     align-items: center;
 }
-.courseDetailContent span{
-    transform: rotate(90deg)
+.courseDetailContent span {
+    transform: rotate(90deg);
 }
 
-.courseDetailContent:hover{
+.courseDetailContent:hover {
     cursor: pointer;
 }
 
-.courseDetailContent input{
+.courseDetailContent input {
     display: none;
 }
 
-#structure:checked ~ p, #career:checked ~ p, #learn:checked ~ p,  #whyProgram:checked ~ p{
+#structure:checked ~ p,
+#career:checked ~ p,
+#learn:checked ~ p,
+#whyProgram:checked ~ p {
     height: fit-content;
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
-#structure:checked ~  label h1, #career:checked ~  label h1, #learn:checked ~  label h1,  #whyProgram:checked ~ label  h1{
-   padding-bottom: 1rem;
-   border-bottom: 1px solid #d4d4d4;
-   margin-bottom: 1rem;
+#structure:checked ~ label h1,
+#career:checked ~ label h1,
+#learn:checked ~ label h1,
+#whyProgram:checked ~ label h1 {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #d4d4d4;
+    margin-bottom: 1rem;
 }
 
-.mt-3 .courseHeaderWrapper h1{
+.mt-3 .courseHeaderWrapper h1 {
     font-size: clamp(20px, 4vw, 40px);
 }
 
-.courseDetailContent input:checked ~ p{
-     height: fit-content;
+.courseDetailContent input:checked ~ p {
+    height: fit-content;
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
-.courseDetailContent input:checked ~ label h1{
-   padding-bottom: 1rem;
-   border-bottom: 1px solid #d4d4d4;
-   margin-bottom: 1rem;
+.courseDetailContent input:checked ~ label h1 {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #d4d4d4;
+    margin-bottom: 1rem;
 }
-.section{
+.section {
     overflow: visible;
 }
-.otherCourseContainer{
-    /* position: sticky; */
-    top: calc(141px + 3rem);
+.otherCourseContainer {
+    /* Sticky behavior handled by courseScroll.js via GSAP */
+    top: 0;
     height: 50vh;
 }
-.otherCourseContainer .header h1{
+.otherCourseContainer .header h1 {
     font-size: clamp(14px, 2vw, 16px);
     font-weight: 400;
     min-width: 50%;
     width: fit-content;
-    color: #4D4D4D;
+    color: #4d4d4d;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #4D4D4D;
+    border-bottom: 1px solid #4d4d4d;
 }
 
-.otherCourseContainer .otherContent h1{
+.otherCourseContainer .otherContent h1 {
     font-size: clamp(16px, 2vw, 18px);
     color: #585858;
     font-weight: 500;
-
 }
 
-.otherContent{
+.otherContent {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-   
 }
 
-.otherContent a{
+.otherContent a {
     text-decoration: none;
     font-weight: 300;
     color: #585858;
 }
-.otherContent a:hover{
+.otherContent a:hover {
     color: var(--color-secondary);
 }
-.admissionImg{
+.admissionImg {
     width: 100%;
     height: 400px;
     margin: 1rem 0;
@@ -207,12 +210,12 @@
     top: 30%;
     left: 0;
     z-index: 1100;
-    background: #F3F3F3 ;
+    background: #f3f3f3;
     color: #3a3a3a;
     padding: 0.6rem 0.4rem;
 }
 
-.menuHeader{
+.menuHeader {
     display: none;
     padding: 1rem;
     border-bottom: 1px solid grey;
@@ -220,11 +223,10 @@
     margin-bottom: 1rem;
 }
 
-.menuHeader label{
+.menuHeader label {
     display: flex;
     gap: 1rem;
     align-items: center;
-
 }
 
 /* 
@@ -237,53 +239,56 @@
     scroll-margin-top: 170px;
 } */
 
-.courseDetailContent input[type="checkbox"] + label h1 span.material-symbols-outlined {
+.courseDetailContent
+    input[type="checkbox"]
+    + label
+    h1
+    span.material-symbols-outlined {
     display: inline-block;
     transition: transform 0.25s ease-in-out;
 }
 
 /* When accordion is open */
-.courseDetailContent input[type="checkbox"]:checked + label h1 span.material-symbols-outlined {
+.courseDetailContent
+    input[type="checkbox"]:checked
+    + label
+    h1
+    span.material-symbols-outlined {
     transform: rotate(270deg); /* rotate UP */
 }
 .courseDetailsContainer {
-  position: relative; /* REQUIRED */
+    position: relative; /* REQUIRED */
 }
 
 @media (min-width: 1025px) {
-  .courseDetailsContainer {
-    position: relative;
-    align-items: flex-start;
-  }
+    .courseDetailsContainer {
+        position: relative;
+        align-items: flex-start;
+        padding: 0 var(--padding-sides)
+    }
 
-  .courseDetailsContainer .sideMenu {
-    /* position: relative; JS controls this */
-    width: 260px;       /* HARD LIMIT */
-    max-width: 260px;
-    transition: unset;
-    flex-shrink: 0;
-  }
+    .courseDetailsContainer .sideMenu {
+        /* position: relative; JS controls this */
+        width: 260px; /* HARD LIMIT */
+        max-width: 260px;
+        transition: unset;
+        flex-shrink: 0;
+    }
 
-  .sideMenuSpacer {
-    width: 260px;
-    flex-shrink: 0;
-  }
+    .sideMenuSpacer {
+        width: 260px;
+        flex-shrink: 0;
+    }
 }
 
-
-@media screen and (max-width: 480px) {   
+@media screen and (max-width: 480px) {
     .otherCourseContainer .header h1 {
         width: 60%;
     }
-    .courseDetailsSection {
-    position: relative;
-    padding: 0 36px;
-}
-.courseContentContainer .bannerContent{
 
-    padding: 0 36px !important;
-}
-
+    .courseContentContainer .bannerContent {
+        padding: 0 36px !important;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -294,11 +299,14 @@
     .courseDetailsContainer .courseDetails {
         width: 100%;
     }
-}
-
-@media screen and (max-width: 1024px) {
-
-    .courseMenuBtn {
+    .courseDetailsSection {
+        position: relative;
+        padding: 0 36px;
+    }
+    .courseContentBanner {
+        padding: 0 36px !important;
+    }
+      .courseMenuBtn {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
@@ -307,7 +315,7 @@
         justify-content: center;
         width: 2.5rem;
     }
-    .menuHeader{
+    .menuHeader {
         display: flex;
     }
     .courseDetailsContainer .sideMenu {
@@ -328,13 +336,16 @@
     #courseMenuToggle:checked ~ .section .sideMenu {
         transform: translate(0, -50%);
     }
-}
-
-@media screen and (max-width: 1024px) {
-    .courseDetailsContainer .otherCourseContainer {
+     .courseDetailsContainer .otherCourseContainer {
         position: static;
         width: 100%;
         margin-top: 3rem;
     }
 }
 
+@media screen and (max-width: 768px) {
+    .otherCourseContainer .header h1 {
+        min-width: 30%;
+    }
+  
+}

@@ -21,7 +21,7 @@
         </div>
     </div>
 </div>
-<div class="pageContentWrapper">
+<div class="pageContentWrapper detailsWrapper">
     <div class="eventsWrapper">
          <button class="filterToggle">
             <span class="material-symbols-outlined">filter_list</span>

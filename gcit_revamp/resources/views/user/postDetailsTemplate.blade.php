@@ -47,8 +47,8 @@
         @endif -->
     </div>
 </div>
-<div class="pageContentWrapper">
-    <div class="section">
+<div class="pageContentWrapper detailsWrapper">
+    <div class="">
         
             <div class="postWrapper">
             <div class="post">

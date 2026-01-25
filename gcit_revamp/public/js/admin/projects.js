@@ -215,6 +215,8 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
         const form = document.getElementById('addProjectForm');
         const formData = new FormData(form);
         formData.append('description', window.ictEditorInstance.getData());
+        formData.append("display", document.getElementById("display").checked ? "true" : "false");
+        formData.append("highlight", document.getElementById("highlight").checked ? "true" : "false");
 
         Swal.fire({
             title: "Add Project?",
@@ -419,6 +421,8 @@ document.addEventListener('click', function (e) {
             const form = document.getElementById('editProjectForm');
             const formData = new FormData(form);
             formData.append('description', window.ictEditorInstance.getData());
+            formData.append("display", document.getElementById("display").checked ? "true" : "false");
+            formData.append("highlight", document.getElementById("highlight").checked ? "true" : "false");
             formData.append("_method", 'PUT');
 
             Swal.fire({

@@ -31,7 +31,7 @@
                         <div class="cardContent">
                             <span class="coursePreHeader">{{ $course->type }}</span>
                             <h1>{{ $course->name }}</h1>
-                            <p class="multi-truncate">{!! $course->description !!}</p>
+                            <p class="multi-truncate">{!! Str::limit(strip_tags($course->description), 300) !!}</p>
                         </div>
                     </a>
                 @empty

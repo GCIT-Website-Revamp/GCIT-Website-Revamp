@@ -12,15 +12,18 @@ window.Loader = {
 function handleCourseTypeUI(typeSelect) {
     const whyLabel = document.getElementById('whyLabel');
     const careerGroup = document.getElementById('careerGroup');
+    const structure = document.getElementById('structureLabel');
 
     if (!typeSelect || !whyLabel || !careerGroup) return;
 
     if (typeSelect.value === 'Speculative Electives') {
         careerGroup.style.display = 'none';
         whyLabel.textContent = 'How This Track Empowers You?';
+        structure.textContent = 'Track Modules';
     } else {
         careerGroup.style.display = 'block';
         whyLabel.textContent = 'Description (Why This Program?)';
+        structure.textContent = 'Program Structure';
     }
 }
 
@@ -205,7 +208,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
             </div>
 
             <div class="form-group">
-                <label>Program Structure</label>
+                <label id="structureLabel">Program Structure</label>
                 <textarea class="form-control" id="structure" rows="3" required></textarea>
             </div>
 
@@ -517,7 +520,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                 </div>
 
                 <div class="form-group">
-                    <label>Program Structure</label>
+                    <label id="structureLabel">Program Structure</label>
                     <textarea class="form-control" id="structure" rows="3" required>${this.dataset.courseStructure}</textarea>
                 </div>
 

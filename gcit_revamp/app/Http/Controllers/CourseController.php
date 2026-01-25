@@ -55,7 +55,7 @@ class CourseController extends Controller
                 'structure' => 'required',
                 'career' => 'nullable|string',
                 'header' => 'required',
-                'header2' => 'required'
+                'header2' => 'sometimes'
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -148,7 +148,7 @@ class CourseController extends Controller
                 'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'career' => 'nullable|string',
                 'header' => 'required',
-                'header2' => 'required'
+                'header2' => 'sometimes'
             ];
 
             $validator = Validator::make($request->all(), $rules);

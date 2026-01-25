@@ -49,8 +49,13 @@
                             <h1>About Course</h1>
                         </div>
                         <a href="#why">Why This Program?</a>
+                        @if($course->type != "Speculative Electives")
                         <a href="#learnSection">What Would I Learn?</a>
                         <a href="#structureSection">Program Structure</a>
+                        @else
+                        <a href="#learnSection">How This Track Empower You?</a>
+                        <a href="#structureSection">Track Modules</a>
+                        @endif
                         @if($course->type != "Speculative Electives")
                         <a href="#careerSection">Your Career Prospects</a>
                         @endif
@@ -100,7 +105,11 @@
                         <div class="courseDetailContent programstructure" id="structureSection">
                             <input type="checkbox" id="structure">
                             <label for="structure">
+                                @if($course->type != "Speculative Electives")
                                 <h1>Program Structure <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                @else
+                                <h1>Track Modules <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                @endif
                                 </h1>
                             </label>
 

@@ -287,32 +287,32 @@ if (document.querySelector(".courseWrapper")) {
     scrollTrigger: {
       trigger: ".courseWrapper",
       start: "top 30%",
-      end: "bottom 30%",
-      scrub: 0.6,
+      end: "bottom 0%",
+      scrub: 0,
     }
   })
   // background goes dark
   .to("body", {
     backgroundColor: endBg,
-    ease: "power1.out"
+    ease: "none"
   }, 0)
 
   // header turns white
   .to(".courseWrapper .main-header", {
     color: "#ffffff",
-    ease: "power1.out"
+    ease: "none"
   }, 0)
 
   // background returns to white
   .to("body", {
     backgroundColor: startBg,
-    ease: "power1.out"
+    ease: "none"
   })
 
   // header returns to original color
   .to(".courseWrapper .main-header", {
     color: "",
-    ease: "power1.out"
+    ease: "none"
   });
 }
 

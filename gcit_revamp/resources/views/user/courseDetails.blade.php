@@ -1,3 +1,4 @@
+
 @extends('layout.app')
 
 @section('title', 'Home')
@@ -31,7 +32,7 @@
     <span class="material-symbols-outlined">menu</span>
 
 </label>
-        <div class="section">
+        <div class="section sectionPadding">
             <div class="courseDetailsSection">
                 
                 <div class="courseDetailsContainer">

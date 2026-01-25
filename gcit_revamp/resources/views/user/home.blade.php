@@ -137,8 +137,9 @@
                     <input type="checkbox" id="socToggle" hidden>
                     <div class="courseCoverTitle">
                         <h1>School of Future Computing</h1>
+                        <hr class="courseH1-divider">
                         <div class="hiddenInfo">
-                            <hr class="courseH1-divider">
+                            
                             <p>GCIT’s School of Future Computing (SFC) is a visionary Bachelor of Computer Science programme
                                 dedicated to preparing and graduating students for a world transformed by rapid
                                 technological evolution. We place strong emphasis in specialised pathways in AI & Fullstack
@@ -171,8 +172,9 @@
                     <input type="checkbox" id="siddToggle" hidden>
                     <div class="courseCoverTitle">
                         <h1>School of Interactive Design and Development</h1>
+                        <hr class="courseH1-divider">
                         <div class="hiddenInfo">
-                            <hr class="courseH1-divider">
+                            
                             <p>GCIT’s School of Interactive Design and Development (SIDD) is a dynamic Bachelor program
                                 where artistry, technology and human-centered design converge to shape futuristic haptics,
                                 optics and kinematics digital experiences. The curriculum emphasises User Interface (UI)

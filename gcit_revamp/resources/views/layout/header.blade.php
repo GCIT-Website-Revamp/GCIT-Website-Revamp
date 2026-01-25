@@ -14,7 +14,7 @@
                     About GCIT <span class="material-symbols-outlined">arrow_drop_down</span>
                 </label>
                 <div class="dropDownContent">
-                    <a href="/about">Institutional Overview</a>
+                    <a href="/about">Overview</a>
                     <a href="/announcements">Announcements</a>
                     <a href="/news&events">News & Events</a>
                     <label>Support & Services</label>
@@ -150,7 +150,12 @@
     <div class="subMiniLinkWrapper">
         <h1>Study</h1>
         <a href="/admission">Admissions<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/course">Courses<span class="material-symbols-outlined">chevron_right</span></a>
+        
+        <label>Courses</label>
+        <a href="/course/soc">School of Future Computing<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/course/sidd">School of Interactive Design & Development<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/course/electives">Speculative Electives<span class="material-symbols-outlined">chevron_right</span></a>
+
         <label>Student Services</label>
         <a href="/clubs">Clubs<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/resources/ICT">ICT<span class="material-symbols-outlined">chevron_right</span></a>
@@ -168,7 +173,7 @@
     </div>
     <div class="subMiniLinkWrapper">
         <h1>About GCIT</h1>
-        <a href="/about">Institutional Overview<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/about">Overview<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/announcements">Announcements<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/news&events">News & Events<span class="material-symbols-outlined">chevron_right</span></a>
         <label>Support & Services</label>

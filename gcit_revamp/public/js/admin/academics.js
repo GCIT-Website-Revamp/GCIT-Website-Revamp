@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>${index + 1}</td>
                             <td>${module.name}</td>
                             <td style="max-width: 440px;">
-                                ${module.description}...
+                                ${module.description}
                             </td>
                             <td style="max-width:80px;">
                                 <div class="action-buttons">

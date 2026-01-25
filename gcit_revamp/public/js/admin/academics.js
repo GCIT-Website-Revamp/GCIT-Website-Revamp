@@ -113,10 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <tr>
                             <td>${index + 1}</td>
                             <td>${module.name}</td>
-                            <td>${module.year}</td>
-                            <td>${module.semester}</td>
                             <td style="max-width: 440px;">
-                                ${module.description.substring(0, 200)}...
+                                ${module.description}...
                             </td>
                             <td style="max-width:80px;">
                                 <div class="action-buttons">
@@ -696,7 +694,7 @@ document.addEventListener('click', function (e) {
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">Credit</label>
                     <input class="form-control" id="description" type="text" value="${moduleDescription}" required>
                 </div>
             </form>

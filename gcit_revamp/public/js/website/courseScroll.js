@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const OFFSET = 170; // sticky header height
 
     const sections = document.querySelectorAll(
-        "#why-this-program, #what-would-i-learn, #program-structure, #career-prospects, \
-         #year1-sem1, #year1-sem2, #year2-sem1, #year2-sem2, \
-         #year3-sem1, #year3-sem2, #year4-sem1, #year4-sem2"
+        "#why, #learnSection, #structureSection, #careerSection, \
+         #year1Section, #year2Section, #year3Section, #year4Section, \
+         #intake-overview, #intake-timeline, #gcit-available, #gcit-eligibility, \
+         #joint-available, #joint-eligibility, #documents, #enquiries"
     );
 
     const menuLinks = document.querySelectorAll(".sideMenu a[href^='#']");
@@ -220,41 +221,39 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!sidebar || !container) return;
         if (!container.contains(sidebar)) return;
 
-        // 🔒 Lock the original position ONCE when sidebar is in natural flow
+        // 🔒 Lock dimensions BEFORE transition to prevent layout shifts
         let lockedLeft = null;
         let lockedWidth = null;
+        let lockedMainContentWidth = null;
+        
+        // Find sibling main content (the flex sibling that might expand)
+        const mainContent = container.querySelector('.aboutContent, .courseDetailContent, .mainContent');
 
-        function lockPosition() {
+        function lockDimensions() {
             // Only lock when sidebar is in natural flow (not fixed/absolute)
             if (sidebar.style.position === "" || sidebar.style.position === "relative" || sidebar.style.position === "static") {
                 const rect = sidebar.getBoundingClientRect();
                 lockedLeft = rect.left;
                 lockedWidth = rect.width;
+                
+                // Also lock main content width to prevent expansion
+                if (mainContent) {
+                    lockedMainContentWidth = mainContent.getBoundingClientRect().width;
+                }
             }
         }
 
-        // Capture initial position
-        lockPosition();
+        // Capture initial dimensions
+        lockDimensions();
 
         // Create spacer if not exists
         let spacer = sidebar.previousElementSibling;
         if (!spacer || !spacer.classList.contains('sticky-spacer')) {
             spacer = document.createElement('div');
-            // Copy classes to match layout rules (grid/flex)
-            spacer.className = sidebar.className + ' sticky-spacer';
-            spacer.style.display = 'none'; // Hidden by default
+            spacer.className = 'sticky-spacer';
+            spacer.style.display = 'none';
             spacer.style.pointerEvents = 'none';
-            spacer.style.visibility = 'hidden';
-            spacer.innerHTML = '&nbsp;'; 
-             
-            // IMPORTANT: Copy critical layout styles once
-            const computed = window.getComputedStyle(sidebar);
-            spacer.style.flex = computed.flex;
-            spacer.style.flexGrow = computed.flexGrow;
-            spacer.style.flexShrink = computed.flexShrink;
-            spacer.style.flexBasis = computed.flexBasis;
-            spacer.style.margin = computed.margin;
-            spacer.style.padding = computed.padding;
+            spacer.style.boxSizing = 'border-box';
             
             sidebar.parentNode.insertBefore(spacer, sidebar);
         }
@@ -267,6 +266,18 @@ document.addEventListener("DOMContentLoaded", () => {
             sidebar.style.height = "";
             
             spacer.style.display = "none";
+            spacer.style.width = "";
+            spacer.style.height = "";
+            spacer.style.minWidth = "";
+            spacer.style.flexBasis = "";
+            spacer.style.flexShrink = "";
+            
+            // Reset main content width lock
+            if (mainContent) {
+                mainContent.style.width = "";
+                mainContent.style.maxWidth = "";
+                mainContent.style.flexBasis = "";
+            }
         }
 
         function clamp() {
@@ -275,79 +286,76 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 1. MEASURE PHASE
+            // 1. MEASURE PHASE - always update when in flow
             const isFixed = sidebar.style.position === "fixed" || sidebar.style.position === "absolute";
             
-            // If not fixed yet, continuously update the locked position
             if (!isFixed) {
-                lockPosition();
-            }
-            
-            // Ensure spacer is visible for measurement so it holds the flex slot
-            if (isFixed) {
-                spacer.style.display = ""; 
-                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
+                lockDimensions();
             }
             
             const containerRect = container.getBoundingClientRect();
-            
-            // Calculate boundaries
             const sidebarHeight = sidebar.offsetHeight;
             const start = containerRect.top <= NAV_OFFSET;
-            // Stop point: when sidebar bottom hits container bottom
             const end = containerRect.bottom <= sidebarHeight + NAV_OFFSET;
 
             if (!start) {
-                // CASE: TOP (Default)
+                // CASE: TOP (Default - in flow)
                 reset();
             } 
             else if (end) {
-                // CASE: BOTTOM (Absolute at bottom)
-                spacer.style.display = "";
-                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
-                spacer.style.width = lockedWidth + "px";
-                spacer.style.height = sidebarHeight + "px";
+                // CASE: BOTTOM (Absolute at bottom of container)
+                activateSpacer(sidebarHeight);
+                lockMainContentWidth();
                 
                 sidebar.style.position = "absolute";
                 sidebar.style.top = (container.offsetHeight - sidebarHeight) + "px";
                 
-                // Ensure container is positioned
                 const style = window.getComputedStyle(container);
                 if (style.position === 'static') container.style.position = 'relative';
 
-                // Use spacer's offsetLeft for absolute positioning
                 sidebar.style.left = spacer.offsetLeft + "px";
                 sidebar.style.width = lockedWidth + "px";
             } 
             else {
-                // CASE: FIXED (Sticky)
-                spacer.style.display = "";
-                if (window.getComputedStyle(spacer).display === 'none') spacer.style.display = 'block';
-                spacer.style.width = lockedWidth + "px";
-                spacer.style.height = sidebarHeight + "px";
-                
-                // Copy computed styles that affect layout
-                const computed = window.getComputedStyle(spacer);
-                spacer.style.marginTop = computed.marginTop;
-                spacer.style.marginBottom = computed.marginBottom;
-                spacer.style.marginLeft = computed.marginLeft;
-                spacer.style.marginRight = computed.marginRight;
+                // CASE: FIXED (Sticky in viewport)
+                activateSpacer(sidebarHeight);
+                lockMainContentWidth();
 
                 sidebar.style.position = "fixed";
                 sidebar.style.top = NAV_OFFSET + "px";
-                // 🔑 Use the LOCKED left position to prevent jumping
                 sidebar.style.left = lockedLeft + "px";
                 sidebar.style.width = lockedWidth + "px";
+            }
+        }
+        
+        function activateSpacer(sidebarHeight) {
+            // Make spacer visible and EXACTLY match locked sidebar dimensions
+            spacer.style.display = "block";
+            spacer.style.visibility = "hidden"; // Invisible but takes space
+            spacer.style.width = lockedWidth + "px";
+            spacer.style.minWidth = lockedWidth + "px";
+            spacer.style.height = sidebarHeight + "px";
+            spacer.style.flexBasis = lockedWidth + "px";
+            spacer.style.flexShrink = "0"; // Prevent shrinking
+            spacer.style.flexGrow = "0";   // Prevent growing
+        }
+        
+        function lockMainContentWidth() {
+            // Prevent main content from expanding when sidebar leaves flow
+            if (mainContent && lockedMainContentWidth) {
+                mainContent.style.width = lockedMainContentWidth + "px";
+                mainContent.style.maxWidth = lockedMainContentWidth + "px";
             }
         }
 
         window.addEventListener("scroll", clamp, { passive: true });
         window.addEventListener("resize", () => {
-             reset(); // Force reset to re-measure natural layout
-             lockedLeft = null; // Reset locked position on resize
+             reset();
+             lockedLeft = null;
              lockedWidth = null;
+             lockedMainContentWidth = null;
              setTimeout(() => {
-                 lockPosition();
+                 lockDimensions();
                  clamp();
              }, 50);
         });

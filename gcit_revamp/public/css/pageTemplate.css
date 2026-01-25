@@ -151,11 +151,15 @@
     width: calc(100% - 525px);
     flex-direction: column;
     text-decoration: none;
+    justify-content: center;
     color: #606060;
     position: relative;
     gap: 1.5rem;
 }
 
+.filter p{
+    text-align: left;
+}
 .clubContent{
     width: 100% !important;
 }

@@ -27,3 +27,7 @@
  .date *,.date{
         color: #999999 !important;
 }
+
+.cardContent p:empty{
+    display: none;
+}

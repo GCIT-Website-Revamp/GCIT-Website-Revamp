@@ -10,6 +10,7 @@
 
 .aboutContentWrapper{
     display: flex;
+    transition: unset;
     gap: clamp(20px, 4vw, 60px);
     padding-inline: 0 !important;
 }
@@ -38,6 +39,7 @@
 }
 .aboutContent{
     width: 80%;
+    transition: unset;
 
 }
 .aboutContentWrapper .otherCourseContainer{

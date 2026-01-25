@@ -84,12 +84,10 @@
                             <input type="checkbox" id="whyProgram">
                             <label for="whyProgram">
                                 @if($course->type != "Speculative Electives")
-                                    <h1>Why This Program? <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                    <h1>Why This Program? <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                                 @else
-                                    <h1>How This Track Empower You? <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                    <h1>How This Track Empower You? <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                                 @endif
-                                
-                                </h1>
                             </label>
                             <p>{!! $course->why !!}</p>
                         </div>
@@ -106,11 +104,10 @@
                             <input type="checkbox" id="structure">
                             <label for="structure">
                                 @if($course->type != "Speculative Electives")
-                                <h1>Program Structure <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                <h1>Program Structure <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                                 @else
-                                <h1>Track Modules <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                                <h1>Track Modules <span class="material-symbols-outlined">keyboard_arrow_right</span></h1>
                                 @endif
-                                </h1>
                             </label>
 
                             <p>{!! $course->structure !!}</p>

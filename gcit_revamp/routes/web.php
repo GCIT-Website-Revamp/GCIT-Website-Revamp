@@ -508,7 +508,7 @@ Route::get('/homepage', function () {
     $bsc = Course::where('type', '=', 'School of Future Computing')->orderBy('name', 'ASC')->get();
     $sidd = Course::where('type', '=', 'School of Interactive Design and Development')->first();
     $announcements = Announcement::orderBy('date', 'desc')->where('display', '=', "false")->take(5)->get();
-    $events = Event::orderBy('date', 'desc')->where('highlight', '=', "true")->get();
+    $events = Event::orderBy('date', 'desc')->where('display', '=', "false")->get();
     $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
     return view('user.homeTemplate', compact('bsc','sidd', 'announcements', 'events', 'projects'));
 });

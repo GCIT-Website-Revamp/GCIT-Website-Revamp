@@ -181,6 +181,7 @@ li ul li {
 .post p[style] {
     transform: none !important;
     opacity: 1 !important;
+    margin-bottom: 1.5rem;
 }
 
 .post .btnWrapper:has(> a > .right):not(:has(> a > .left)) {
@@ -229,7 +230,6 @@ li ul li {
     .post ol,
     .post li {
         font-size: 0.95rem;
-        margin-bottom: 1.5rem;
         line-height: 1.6;
     }
 

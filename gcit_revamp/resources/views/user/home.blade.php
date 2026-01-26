@@ -74,9 +74,9 @@
             </div>
             <div class="ctaWrapper">
                 <div class="ctaBtn">
-                    <a href="/about">Learn More</a>
+                    <a href="/about">Explore More</a>
                 </div>
-                <a href="https://www.rub.edu.bt/index.php/admission-criteria-and-tuition-fee-for-the-academic-year-2024/"
+                <a href="/admission"
                     class="secondaryCta">
                     Admissions
                     <span class="material-symbols-outlined">
@@ -369,7 +369,7 @@
                 <p>Stay synchronized with the latest happenings at GCIT, encompassing student achievements, learning
                     initiatives, campus celebrations, and the strategic collaborations driving our shared digital future.
                 </p>
-                <a href="/news&events">Explore More</a>
+                <a href="/news&events">Experience More</a>
             </div>
             @foreach ($events as $item)
                 <a class="event overlayWrapper" href="/post/events/{{ $item->id }}">

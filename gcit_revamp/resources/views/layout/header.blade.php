@@ -52,7 +52,7 @@
                     <a href="/course/electives" class="subLink">Speculative Electives</a>
                     <label>Student Services</label>
                     <a href="/clubs" class="subLink">Clubs</a>
-                    <a href="/resources/ICT" class="subLink">ICT</a>
+                    <!-- <a href="/resources/ICT" class="subLink">ICT</a> -->
                     <a href="/resources/Student-Welfare" class="subLink">Student Welfare</a>
                 </div>
             </div>

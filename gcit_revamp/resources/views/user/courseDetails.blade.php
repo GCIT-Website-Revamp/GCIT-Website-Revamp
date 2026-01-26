@@ -61,6 +61,7 @@
                         <a href="#careerSection">Your Career Prospects</a>
                         @endif
                     </div>
+                    @if($course->type != "Speculative Electives")
                     <div class="menuSection">
                         <div class="header">
                             <div class="circle"></div>
@@ -71,6 +72,7 @@
                         <a href="#year3Section">Year III</a>
                         <a href="#year4Section">Year IV</a>
                     </div>
+                    @endif
                 </div>
                 <div class="courseDetails">
                     <div class="courseDetailsWrapper">

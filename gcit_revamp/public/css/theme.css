@@ -98,7 +98,9 @@ html, body {
 
 }
 
-
+h2 {
+    margin-bottom: 1rem;
+}
 /* @media (min-width: 1024px){
  body{
     overflow-x: visible;

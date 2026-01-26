@@ -82,7 +82,7 @@ li ul li {
 
 .suggestionWrapper > * {
     padding-bottom: 1rem;
-    margin-bottom: 1rem;
+ 
 }
 .suggestionWrapper > *::after {
     content: "";
@@ -100,13 +100,14 @@ li ul li {
     margin-bottom: 0;
     padding-bottom: 0;
 }
+
+.suggestionWrapper > *:last-child::after {
+    width: 0;
+}
 .suggestion {
     width: 100%;
     text-decoration: none;
     padding: 1rem;
-    padding-top: 1rem;
-    margin-bottom: 1.7rem;
-    padding-bottom: 1.7rem;
     border-radius: 10px;
 }
 .suggestion > * {
@@ -176,9 +177,7 @@ li ul li {
     margin: 0.4rem 0;
 }
 
-.post p {
-    margin: 0.8rem 0;
-}
+
 
 .post p[style] {
     transform: none !important;

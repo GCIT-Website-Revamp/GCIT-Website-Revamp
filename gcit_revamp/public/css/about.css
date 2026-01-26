@@ -79,21 +79,21 @@
     width: 100%;
 }
 .mottoWrapper{
-    margin: 40px 0;
+    margin: 40px 0 60px 0;
     position: relative;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #c9c9c9;
 
 }
+
 .mottoWrapper .underlay{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 80%;
+    font-size: clamp(100px, 10vw, 300px);
     width: auto;
+    color: #F4F3F3;
     z-index: 0;
 }
 

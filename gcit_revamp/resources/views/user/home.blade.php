@@ -119,7 +119,7 @@
                 </div>
                 <div class="cardContent">
                     <h1>Technopreneurship Mindset </h1>
-                    <p>A Paradigm that integrates technology into an Entrepreneurial learning framework for enabling
+                    <p>Our Paradigm that integrates technology into an Entrepreneurial learning framework for enabling
                         effective Start-Ups & Unicorns. We drive vibrant and sustainable start-ups for the economy of
                         adaptability, resilience and strategic pivoting.</p>
                 </div>

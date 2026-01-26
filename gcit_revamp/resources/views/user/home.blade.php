@@ -88,7 +88,9 @@
         <div class="section cardWrapper sectionWrapper">
             <div class="card">
                 <div class="iconWrapper">
-                    <x-icons.connect />
+                    <video src="{{ asset('videos/Ecosystem.webm') }}" autoplay muted loop playsinline preload="metadata">
+
+                    <!-- <x-icons.connect /> -->
                 </div>
                 <div class="cardContent">
                     <h1>Tech Ecosystem & Interconnectivity</h1>
@@ -100,8 +102,8 @@
             </div>
             <div class="card">
                 <div class="iconWrapper">
-                    <!-- <video src="{{ asset('videos/Pegadogy.webm') }}" autoplay muted loop playsinline preload="metadata"> -->
-                    <x-icons.circuit />
+                    <video src="{{ asset('videos/Pegadogy.webm') }}" autoplay muted loop playsinline preload="metadata">
+                    <!-- <x-icons.circuit /> -->
                 </div>
                 <div class="cardContent">
                     <h1>Authentic Real-World Pedagogy
@@ -115,7 +117,9 @@
             </div>
             <div class="card">
                 <div class="iconWrapper">
-                    <x-icons.handshake />
+                    <video src="{{ asset('videos/Mindset.webm') }}" autoplay muted loop playsinline preload="metadata">
+
+                    <!-- <x-icons.handshake /> -->
                 </div>
                 <div class="cardContent">
                     <h1>Technopreneurship Mindset </h1>

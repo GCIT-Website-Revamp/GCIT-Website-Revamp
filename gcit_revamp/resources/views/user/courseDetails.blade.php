@@ -127,6 +127,7 @@
 
 
                     </div>
+                    @if($course->type != "Speculative Electives")
                     <div class="courseDetailsWrapper mt-3">
                         <div class="courseHeaderWrapper">
                             <h1>Course Modules </h1>
@@ -344,6 +345,7 @@
                         </div>
 
                     </div>
+                    @endif
                 </div>
                 <div class="otherCourseContainer">
                     <div class="header">

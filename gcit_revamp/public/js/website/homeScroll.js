@@ -286,8 +286,9 @@ if (document.querySelector(".courseWrapper")) {
   gsap.timeline({
     scrollTrigger: {
       trigger: ".courseWrapper",
+      endTrigger: ".messageWrapper",
       start: "top 30%",
-      end: "bottom 0%",
+      end: "bottom 90%",
       scrub: 0,
     }
   })
@@ -302,6 +303,18 @@ if (document.querySelector(".courseWrapper")) {
     color: "#ffffff",
     ease: "none"
   }, 0)
+  
+  // Message section text turns white
+  .to([".messageWrapper .main-header", ".messageWrapper .presidentName", ".messageWrapper p", ".messageWrapper span"], {
+    color: "#ffffff",
+    ease: "none"
+  }, 0)
+  
+  // Message section background becomes transparent to show dark body
+  .to(".messageWrapper", {
+    backgroundColor: "transparent",
+    ease: "none"
+  }, 0)
 
   // background returns to white
   .to("body", {
@@ -312,6 +325,18 @@ if (document.querySelector(".courseWrapper")) {
   // header returns to original color
   .to(".courseWrapper .main-header", {
     color: "",
+    ease: "none"
+  })
+  
+  // Message section text returns to original
+  .to([".messageWrapper .main-header", ".messageWrapper .presidentName", ".messageWrapper p", ".messageWrapper span"], {
+    color: "", // clear inline style to revert to CSS
+    ease: "none"
+  })
+  
+  // Message section background reverts
+  .to(".messageWrapper", {
+    backgroundColor: "",
     ease: "none"
   });
 }

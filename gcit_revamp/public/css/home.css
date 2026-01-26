@@ -906,10 +906,30 @@
     display: flex;
     gap: 30px;
     margin-top: 2rem;
+    align-items: stretch; /* 🔑 THIS */
+
+}
+.homeAnnouncementContent .suggestionWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1
+}
+
+.homeAnnouncementContent .suggestionWrapper .suggestion {
+    flex: 1; /* Grow to fill space */
+    padding-bottom: 0 !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.messageWrapper, .messageWrapper *{
+    transition: unset;
 }
 .homeAnnouncementContent {
     display: flex;
     gap: 30px;
+    height: fit-content;
     margin-top: 2rem;
 }
 
@@ -930,7 +950,8 @@
     position: relative;
     padding: 1.5rem;
     flex-direction: column;
-    height: 50%;
+    flex: 1; /* Stretch to fill space properly */
+    height: auto;
     justify-content: center;
     background: #fafafa;
     overflow: hidden;

@@ -43,7 +43,7 @@
                 </div>
                 <div class="otherContent">
                     <h1>Other Schools</h1>
-                    <a href="/course/soc">School of Future Computing</a>
+                    <a href="/course/sidd">School of Interactive Design & Development</a>
                     <a href="/course/electives">Speculative Electives</a>
                 </div>
             </div>

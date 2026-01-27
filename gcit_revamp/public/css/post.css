@@ -11,6 +11,11 @@
     margin-bottom: 1rem;
 }
 
+ul ul, ol ol, ul ol, ol ul {
+    margin-left: 20px; /* or your preferred indentation */
+    display: block;
+}
+
 .post {
     width: 65%;
     min-width: 0;

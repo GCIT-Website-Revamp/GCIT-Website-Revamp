@@ -108,6 +108,11 @@ h2 {
     
 } */
 
+ul ul, ol ol, ul ol, ol ul {
+    margin-left: 20px; /* or your preferred indentation */
+    display: block;
+}
+
 p:empty{
     display: none;
 }

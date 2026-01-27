@@ -135,7 +135,7 @@
     opacity: 1;
 }
 .announcementContent a{
-    width: 70% !important;
+    width: 85% !important;
 }
 
 .mainContent .card img{
@@ -405,6 +405,9 @@
     /* .pageBannerWrapper .bannerContent p{
         width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
     } */
+     .announcementContent a{
+    width: 100% !important;
+}
      .card{
         min-width: unset !important;
      }

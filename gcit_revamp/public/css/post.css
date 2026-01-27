@@ -11,9 +11,13 @@
     margin-bottom: 1rem;
 }
 
-ul ul, ol ol, ul ol, ol ul {
-    margin-left: 20px; /* or your preferred indentation */
-    display: block;
+* {
+    list-style-type: disc !important;
+}
+ul ul, ol ol {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .post {

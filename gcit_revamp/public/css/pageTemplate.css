@@ -408,7 +408,13 @@
     .pageBannerWrapper .bannerContent {
         width: 100%;
     }
-
+    .pageBannerWrapper {
+        min-height: auto;
+        padding-bottom: 2.5rem;
+    }
+    .pageBannerWrapper .bannerContent {
+        bottom: unset;
+    }
     .pageBannerWrapper .overlay {
         position: absolute;
         inset: 0;

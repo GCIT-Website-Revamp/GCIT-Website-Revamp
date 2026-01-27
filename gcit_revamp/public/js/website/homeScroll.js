@@ -1,3 +1,5 @@
+// import { createStickyPin } from './stickyHelper.js';
+
 document.addEventListener("DOMContentLoaded", () => {
 gsap.config({ nullTargetWarn: false });
 
@@ -288,7 +290,7 @@ if (document.querySelector(".courseWrapper")) {
       trigger: ".courseWrapper",
       endTrigger: ".messageWrapper",
       start: "top 30%",
-      end: "bottom 90%",
+      end: "bottom 95%",
       scrub: 0,
     }
   })
@@ -341,5 +343,22 @@ if (document.querySelector(".courseWrapper")) {
   });
 }
 
+// Read More Button Logic
+const messageBtn = document.getElementById('message-toggle-btn');
+const messageContent = document.querySelector('.message-expand-wrapper');
+
+if (messageBtn && messageContent) {
+    messageBtn.addEventListener('click', () => {
+        messageContent.classList.toggle('open');
+
+        if (messageContent.classList.contains('open')) {
+            messageContent.style.maxHeight = messageContent.scrollHeight + "px";
+            messageBtn.textContent = "Read Less";
+        } else {
+            messageContent.style.maxHeight = null;
+            messageBtn.textContent = "Read More";
+        }
+    });
+}
 
 });

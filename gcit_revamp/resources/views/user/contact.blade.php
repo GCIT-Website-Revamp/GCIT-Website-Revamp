@@ -30,7 +30,7 @@
       
 
         <!-- Contact Form Section -->
-        <div class="sectionWrapper contactFormSection">
+        <div class="contactFormSection">
             <div class="formContainer">
                 <div class="formHeader">
                     <h2 class="main-header">Send Us a Message</h2>

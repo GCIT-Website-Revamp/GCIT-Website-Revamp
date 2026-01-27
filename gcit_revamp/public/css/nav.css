@@ -7,6 +7,7 @@
 nav {
     position: fixed;
     top: 0;
+    
     left: 0;
     width: 100%;
     z-index: 9999;
@@ -14,11 +15,17 @@ nav {
     background-color: var(--color-bg);
     min-height: 75px;
 }
-
+nav .fullsize{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 
 .navContent {
     display: flex;
+    max-width: 1600px;
+    width: 100%;
     justify-content: space-between;
     align-items: flex-end;
     position: relative; /* needed for dropdowns */
@@ -72,6 +79,8 @@ nav {
 }
 .subNav {
     height: 25px;
+    display: flex;
+    justify-content: center;
     background-color: var(--color-primary);
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -122,8 +131,11 @@ nav {
 .subLinkWrapper {
     display: flex;
     align-items: center;
+    max-width: 1600px;
+    width: 100%;
     justify-content: flex-end;
     height: 100%;
+
     gap: 2rem;
 }
 
@@ -249,6 +261,32 @@ nav.mini, .miniTopNav, .miniSubLinkContainer {
     display: flex;
     transition: none;
 }
+nav.mini{
+    flex-direction: column;
+}
+nav.mini .miniSubNavBar{
+    background-color: var(--color-primary);
+}
+
+nav.mini .miniSubNavBar .miniSubLinkWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px var(--padding-sides)
+}
+nav.mini .miniSubNavBar .miniSubLinkWrapper a{
+    color: white;
+    transition: 0.3s all ease-in-out;
+    font-size: 12px;
+    text-decoration: none;
+}
+nav.mini .miniSubNavBar .miniSubLinkWrapper a:hover{
+    color: var(--color-secondary-light);
+}
+
+
+
+
 nav.mini h1, .miniTopNav h1{
     transition: none;
 
@@ -264,8 +302,9 @@ nav.mini h1, .miniTopNav h1{
     flex-direction: column;
     right: 0;
     height: 100vh;
+    background-color: var(--color-primary);
     width: 100%;
-    background-color: white;
+    color: white;
     z-index: 999999999;
     transform: translateX(-100%); /* ✅ hidden via transform */
     will-change: transform;
@@ -332,7 +371,7 @@ nav.mini h1, .miniTopNav h1{
     gap: 2rem;
 }
 .miniQuickLinkWrapper h1{
-    color: rgb(24, 24, 24);
+    color: white;
     transition: none;
     font-size: var(--font-size-s);
     font-weight: 600;
@@ -340,7 +379,7 @@ nav.mini h1, .miniTopNav h1{
 }
 .miniQuickLinkWrapper a{
     text-decoration: none;
-    color: rgb(73, 73, 73);
+    color: white;
     transition: color 0.3s ease-in-out;
     /* color: black; */
 }
@@ -370,13 +409,14 @@ nav.mini h1, .miniTopNav h1{
 }
 .backWrapper span{
     transition: all 0.3s ease-in-out;
+    color: white;
 }
 .backWrapper span:hover{
     cursor: pointer;
-    color: var(--color-secondary)
+    color: var(--color-secondary-light)
 }
 .subMiniLinkWrapper{
-    padding: 1rem var(--padding-sides);
+    padding: 1rem var(--padding-sides) 5rem var(--padding-sides);
     display: flex;
     flex-direction: column;
     gap: 42px;
@@ -401,7 +441,7 @@ nav.mini h1, .miniTopNav h1{
     padding: .3rem 0;
     font-size: 20px;
     transition: none;
-    color: var(--color-secondary);
+    color: var(--color-secondary-light);
 }
 .miniSubLinkContainer {
     position: fixed;              /* ✅ OUT OF FLOW */
@@ -418,19 +458,23 @@ nav.mini h1, .miniTopNav h1{
     margin-bottom: 1rem;
     transition: none;
     font-size: 24px;
+    color: white;
+
 }
 .miniSubLinkContainer{
     display: flex;
     flex-direction: column;
+    background-color: var(--color-primary);
     gap: 1rem;
 }
 .miniSubLinkContainer a{
     font-size: 20px;
     text-decoration: none;
+    color: white;
+
     display: flex;
     width: 100%;
     transition: color 0.3s ease-in-out;
-    color: black;
     justify-content: space-between;
     align-items: center;
 }
@@ -438,13 +482,14 @@ nav.mini h1, .miniTopNav h1{
     text-decoration: none;
     display: flex;
     width: 100%;
+    color: white;
+
     transition: color 0.3s ease-in-out;
-    color: black;
     justify-content: space-between;
     align-items: center;
 }
 .miniSubLinkContainer a:hover{
-   color: var(--color-secondary)
+   color: var(--color-secondary-light)
 }
 .miniTopNav .searchContainer{
     padding: 0 var(--padding-sides);
@@ -504,6 +549,10 @@ nav.mini h1, .miniTopNav h1{
     nav.fullSize {
         display: block;
     }
+    nav .navContentContainer{
+        display: flex;
+        justify-content: center;
+    }
     nav.mini, .miniTopNav, .miniSubLinkContainer{
         display: none !important;
     }
@@ -519,11 +568,19 @@ nav.mini h1, .miniTopNav h1{
 }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
     /* large desktops */
+    .subLinkWrapper{
+    padding: 0 var(--padding-sides);
+
+    }
 }
 
-@media (min-width: 1400px) {
+@media (max-width: 768px) {
     /* 2K monitors */
+     .sectionPaddingDetails.section{
+        padding-left:  36px !important;
+        padding-right:  36px !important;
+    }
 }
 

@@ -191,9 +191,11 @@ footer .linkWrapper a:hover{
 
 @media (max-width: 480px) {
   footer{
-    padding: 40px 1rem 25px;
+    padding: 40px 0;
   }
-  
+  .logoContentWrapper, footer .linkWrapper{
+    width: 100%;
+  }
 .linkWrapper .dash{
   display: block;
 }
@@ -231,7 +233,7 @@ footer .linkWrapper a:hover{
     justify-content: flex-start;
   }
   .copyRight p{
-    font-size: 8.5px;
+    font-size: 12px;
   }
 
   .copyRight{

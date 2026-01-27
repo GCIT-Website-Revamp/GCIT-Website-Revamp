@@ -350,17 +350,15 @@
     padding: 2rem 1.5rem;
     overflow-y: auto;
     box-shadow: -10px 0 30px rgba(0,0,0,0.15);
-
-    /* IMPORTANT: remove any transform here */
-    transform: none;
-    /* pointer-events: none; */
-    
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
   }
   .mainContent{
     width: 100%;
   }
   .filterWrapper.active{
     pointer-events: auto;
+    transform: translateX(0);
   }
     .filterToggle {
         display: inline-flex;
@@ -405,6 +403,9 @@
     /* .pageBannerWrapper .bannerContent p{
         width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
     } */
+     .card{
+        min-width: unset !important;
+     }
     .pageBannerWrapper .bannerContent {
         width: 100%;
     }
@@ -422,6 +423,9 @@
     .filterWrapper {
         width: 100%;
         max-width: none;
+    }
+    .eventsWrapper.section{
+        padding: 0 !important;
     }
 
 }

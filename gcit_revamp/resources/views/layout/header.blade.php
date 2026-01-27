@@ -167,7 +167,6 @@
 
         <label>Student Services</label>
         <a href="/clubs">Clubs<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/resources/ICT">ICT<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/resources/Student-Welfare">Student Welfare<span
                 class="material-symbols-outlined">chevron_right</span></a>
     </div>

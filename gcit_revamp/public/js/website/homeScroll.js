@@ -290,7 +290,7 @@ if (document.querySelector(".courseWrapper")) {
       trigger: ".courseWrapper",
       endTrigger: ".messageWrapper",
       start: "top 30%",
-      end: "bottom 95%",
+      end: "bottom 70%",
       scrub: 0,
     }
   })
@@ -306,11 +306,7 @@ if (document.querySelector(".courseWrapper")) {
     ease: "none"
   }, 0)
   
-  // Message section text turns white
-  .to([".messageWrapper .main-header", ".messageWrapper .presidentName", ".messageWrapper p", ".messageWrapper span"], {
-    color: "#ffffff",
-    ease: "none"
-  }, 0)
+  
   
   // Message section background becomes transparent to show dark body
   .to(".messageWrapper", {
@@ -329,12 +325,7 @@ if (document.querySelector(".courseWrapper")) {
     color: "",
     ease: "none"
   })
-  
-  // Message section text returns to original
-  .to([".messageWrapper .main-header", ".messageWrapper .presidentName", ".messageWrapper p", ".messageWrapper span"], {
-    color: "", // clear inline style to revert to CSS
-    ease: "none"
-  })
+
   
   // Message section background reverts
   .to(".messageWrapper", {

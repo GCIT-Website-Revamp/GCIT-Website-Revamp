@@ -182,11 +182,13 @@ window.addEventListener("resize", () => {
 
   function openFilter() {
     column.classList.add("active");
+    filter.classList.add("active");
     document.body.classList.add("filter-open");
   }
 
   function closeFilter() {
     column.classList.remove("active");
+    filter.classList.remove("active");
     document.body.classList.remove("filter-open");
   }
 

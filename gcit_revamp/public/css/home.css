@@ -1671,7 +1671,7 @@
         height: 400px;
     }
     .iconWrapper * {
-        height: 85%;
+        /* height: 85%; */
     }
     .courseLinkContainer {
         flex-direction: column;

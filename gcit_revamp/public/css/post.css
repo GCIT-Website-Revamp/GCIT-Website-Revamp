@@ -11,15 +11,6 @@
     margin-bottom: 1rem;
 }
 
-* {
-    list-style-type: disc !important;
-}
-ul ul, ol ol {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
 .post {
     width: 65%;
     min-width: 0;

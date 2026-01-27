@@ -15,11 +15,11 @@
     padding-inline: 0 !important;
 }
 .aboutHeader h1{
-    font-size: var(--font-size-header);
+    font-size: clamp(24px, 4vw, 48px)
+;
     font-weight: 400;
     font-family: var(--font-Header);
     color: var(--color-primary);
-    width: 90%;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #E0E0E0;
 }
@@ -64,6 +64,7 @@
 .aboutDetails{
     position: relative;
     z-index: 10;;
+    padding-bottom: 80px;
 }
 
 .aboutDetails img{
@@ -78,7 +79,7 @@
     width: 100%;
 }
 .mottoWrapper{
-    margin: 80px 0 60px 0;
+    margin: 60px 0 60px 0;
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -203,9 +204,10 @@
     }
 
     .mottoWrapper .underlay {
-        height: 150px;
+        height: 50px;
         width: 100%;
         display: flex;
+        align-items: center;
         padding: 0;
         margin: 0;
         justify-content: center;

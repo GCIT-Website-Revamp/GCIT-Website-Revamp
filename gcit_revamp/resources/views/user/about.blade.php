@@ -16,7 +16,7 @@
     <div class="aboutContentWrapper sectionWrapper">
         <div class="aboutContent">
             <div class="aboutHeader">
-                <h1>Institutional Overview</h1>
+                <h1>Overview</h1>
                 <br>
             </div>
             <div class="aboutDetailsWrapper">

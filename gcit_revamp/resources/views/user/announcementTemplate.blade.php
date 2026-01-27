@@ -41,7 +41,7 @@
                                 <span class="date"><span
                                     class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($announcement->date)->format('F d, Y') }}</span>
                             <h1>{{ $announcement->name }}</h1>
-                            <p class="multi-truncate">{!! Str::limit($announcement->description, 70) !!}</p>
+                            <p class="multi-truncate">{!! Str::limit($announcement->description, 120) !!}</p>
                         
 
                         </div>

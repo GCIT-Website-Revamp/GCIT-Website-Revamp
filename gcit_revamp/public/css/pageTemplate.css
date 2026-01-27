@@ -135,7 +135,7 @@
     opacity: 1;
 }
 .announcementContent a{
-    width: 70%;
+    width: 70% !important;
 }
 
 .mainContent .card img{

@@ -16,10 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const TOP_OFFSET = 100; // Offset from top when sticky
 
-      // Lock width to prevent layout shift when pinned
+      // Lock width more precisely to prevent layout shift
       function lockWidth(el) {
         const rect = el.getBoundingClientRect();
-        el.style.width = rect.width + "px";
+        const computedStyle = window.getComputedStyle(el);
+        
+        // Get the exact width
+        const width = rect.width;
+        
+        // Apply locked dimensions and prevent any flex changes
+        el.style.width = width + "px";
+        el.style.minWidth = width + "px";
+        el.style.maxWidth = width + "px";
+        el.style.flexShrink = "0";
+        el.style.flexGrow = "0";
         el.style.height = "fit-content";
       }
 
@@ -28,24 +38,41 @@ document.addEventListener("DOMContentLoaded", () => {
       // Create pin for suggestion sidebar
       const suggestionPin = ScrollTrigger.create({
         trigger: container,
-        start: `-${TOP_OFFSET}px top`,
+        start: `top-=${TOP_OFFSET}px top`,
         end: () => `bottom-=${suggestion.offsetHeight + TOP_OFFSET} top`,
         pin: suggestion,
         pinSpacing: false,
         pinType: "fixed",
         invalidateOnRefresh: true,
-        onRefresh: () => lockWidth(suggestion)
+        anticipatePin: 1, // Prevents jumping by anticipating the pin
+        onRefresh: () => {
+          // Only re-measure if not currently pinned
+          if (!suggestionPin.isActive) {
+            lockWidth(suggestion);
+          }
+        }
       });
 
-      // Handle resize
+      // Handle resize with debounce
+      let resizeTimer;
       const onResize = () => {
-        lockWidth(suggestion);
-        ScrollTrigger.refresh();
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          // Temporarily clear styles to get accurate measurements
+          const wasActive = suggestionPin.isActive;
+          if (wasActive) {
+            gsap.set(suggestion, { clearProps: "position,top,left,width,minWidth,maxWidth" });
+          }
+          
+          lockWidth(suggestion);
+          ScrollTrigger.refresh();
+        }, 100);
       };
       window.addEventListener("resize", onResize);
 
       // Cleanup when leaving desktop
       return () => {
+        clearTimeout(resizeTimer);
         suggestionPin.kill();
         window.removeEventListener("resize", onResize);
         gsap.set(suggestion, { clearProps: "all" });

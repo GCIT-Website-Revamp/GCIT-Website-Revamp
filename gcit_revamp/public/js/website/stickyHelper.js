@@ -79,7 +79,7 @@ function createStickyPin(options) {
             end: () => `bottom-=${el.offsetHeight + topOffset} top`,
             pin: el,
             pinSpacing: pinSpacing,
-            pinType: 'transform',
+            pinType: 'fixed',
             invalidateOnRefresh: true,
             onRefresh: () => {
                 lockWidth(el);

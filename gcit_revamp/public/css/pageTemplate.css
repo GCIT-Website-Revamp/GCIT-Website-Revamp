@@ -134,7 +134,9 @@
  .cardAnnouncement .card:hover::after {
     opacity: 1;
 }
-
+.announcementContent a{
+    width: 70%;
+}
 
 .mainContent .card img{
     height: 350px;

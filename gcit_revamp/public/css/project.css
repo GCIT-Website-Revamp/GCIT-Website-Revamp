@@ -159,9 +159,7 @@
 .btnWrapper a{
     text-decoration: none;
 }
-.projectListBanner{
-    margin-bottom: clamp(60px, 8vw, 120px);
-}
+
 
 .mainContent .card .cardImage {
     height: 350px;

@@ -1,73 +1,78 @@
 <!-- ===================== DESKTOP NAV ===================== -->
 <nav class="fullSize">
-    <div class="navContent wrapper">
-        <div class="logoWrapper">
-            <a href="/">
-                <img src="{{ asset('images/logo/logo2.png') }}" alt="GCIT Logo">
-            </a>
+    <div class="navContentContainer">
+
+        <div class="navContent wrapper">
+            <div class="logoWrapper">
+                <a href="/">
+                    <img src="{{ asset('images/logo/logo2.png') }}" alt="GCIT Logo">
+                </a>
+            </div>
+
+            <div class="linkWrapper">
+                <!-- ABOUT GCIT -->
+                <div class="dropDownWrapper">
+                    <label class="dropDownLink">
+                        About GCIT <span class="material-symbols-outlined">arrow_drop_down</span>
+                    </label>
+                    <div class="dropDownContent">
+                        <a href="/about">Overview</a>
+                        <a href="/announcements">Announcements</a>
+                        <a href="/news&events">News & Events</a>
+                        <label>Support & Services</label>
+                        <a class="subLink" href="/department/Finance">Finance</a>
+                        <a class="subLink" href="/department/Human Resources & Administration">Human Resources &
+                            Administration</a>
+                        <a class="subLink" href="/department/Information & Communication Technology">Information &
+                            Communication Technology</a>
+                        <a class="subLink" href="/department/School Affairs">School Affairs</a>
+                        <a class="subLink" href="/department/Student Affairs">Student Affairs</a>
+                    </div>
+                </div>
+
+                <!-- INITIATIVE -->
+                <div class="dropDownWrapper">
+                    <label class="dropDownLink">
+                        Tech Impact <span class="material-symbols-outlined">arrow_drop_down</span>
+                    </label>
+                    <div class="dropDownContent">
+
+                        <a href="/project">Industry Projects</a>
+                    </div>
+                </div>
+
+                <!-- STUDY -->
+                <div class="dropDownWrapper">
+                    <label class="dropDownLink">
+                        Study <span class="material-symbols-outlined">arrow_drop_down</span>
+                    </label>
+                    <div class="dropDownContent CourseDropDown">
+                        <a href="/admission">Admissions</a>
+                        <label>Courses</label>
+                        <a href="/course/soc" class="subLink">School of Future Computing</a>
+                        <a href="/course/sidd" class="subLink">School of Interactive Design & Development</a>
+                        <a href="/course/electives" class="subLink">Speculative Electives</a>
+                        <label>Student Services</label>
+                        <a href="/clubs" class="subLink">Clubs</a>
+                        <!-- <a href="/resources/ICT" class="subLink">ICT</a> -->
+                        <a href="/resources/Student-Welfare" class="subLink">Student Welfare</a>
+                    </div>
+                </div>
+
+                <!-- SEARCH -->
+                <div class="searchWrapper">
+                    <input type="text" class="searchInput" placeholder="Search..." data-search-input>
+                    <div class="searchIconWrapper">
+
+                        <span class="material-symbols-outlined searchIcon">search</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <div class="linkWrapper">
-            <!-- ABOUT GCIT -->
-            <div class="dropDownWrapper">
-                <label class="dropDownLink">
-                    About GCIT <span class="material-symbols-outlined">arrow_drop_down</span>
-                </label>
-                <div class="dropDownContent">
-                    <a href="/about">Overview</a>
-                    <a href="/announcements">Announcements</a>
-                    <a href="/news&events">News & Events</a>
-                    <label>Support & Services</label>
-                    <a class="subLink" href="/department/Finance">Finance</a>
-                    <a class="subLink" href="/department/Human Resources & Administration">Human Resources &
-                        Administration</a>
-                    <a class="subLink" href="/department/Information & Communication Technology">Information &
-                        Communication Technology</a>
-                    <a class="subLink" href="/department/School Affairs">School Affairs</a>
-                    <a class="subLink" href="/department/Student Affairs">Student Affairs</a>
-                </div>
-            </div>
-
-            <!-- INITIATIVE -->
-            <div class="dropDownWrapper">
-                <label class="dropDownLink">
-                    Tech Impact <span class="material-symbols-outlined">arrow_drop_down</span>
-                </label>
-                <div class="dropDownContent">
-                  
-                    <a href="/project">Industry Projects</a>
-                </div>
-            </div>
-
-            <!-- STUDY -->
-            <div class="dropDownWrapper">
-                <label class="dropDownLink">
-                    Study <span class="material-symbols-outlined">arrow_drop_down</span>
-                </label>
-                <div class="dropDownContent CourseDropDown">
-                    <a href="/admission">Admissions</a>
-                    <label>Courses</label>
-                    <a href="/course/soc" class="subLink">School of Future Computing</a>
-                    <a href="/course/sidd" class="subLink">School of Interactive Design & Development</a>
-                    <a href="/course/electives" class="subLink">Speculative Electives</a>
-                    <label>Student Services</label>
-                    <a href="/clubs" class="subLink">Clubs</a>
-                    <!-- <a href="/resources/ICT" class="subLink">ICT</a> -->
-                    <a href="/resources/Student-Welfare" class="subLink">Student Welfare</a>
-                </div>
-            </div>
-
-            <!-- SEARCH -->
-            <div class="searchWrapper">
-                <input type="text" class="searchInput" placeholder="Search..." data-search-input>
-                <div class="searchIconWrapper">
-
-                    <span class="material-symbols-outlined searchIcon">search</span>
-                </div>
-            </div>
-
-        </div>
     </div>
+
 
     <!-- Dropdown extender -->
     <div class="dropDownExtender"></div>
@@ -99,6 +104,13 @@
             </label>
         </div>
     </div>
+    <div class="miniSubNavBar">
+         <div class="miniSubLinkWrapper font-xs">
+            <a href="https://ceta.gcit.edu.bt/">CETA</a>
+            <a href="/contactUs">Contact Us</a>
+            <a href="/faculty">Faculty</a>
+        </div>
+    </div>
 </nav>
 
 <!-- ===================== MOBILE OVERLAY ===================== -->
@@ -126,12 +138,7 @@
             <label for="miniStudy">Study <span class="material-symbols-outlined">chevron_right</span></label>
         </div>
 
-        <div class="miniQuickLinkWrapper">
-            <!-- <a href="">Alumni</a> -->
-            <a href="https://ceta.gcit.edu.bt/">CETA</a>
-            <a href="/contactUs">Contact Us</a>
-            <a href="/faculty">Faculty</a>
-        </div>
+      
     </div>
 </div>
 
@@ -150,11 +157,13 @@
     <div class="subMiniLinkWrapper">
         <h1>Study</h1>
         <a href="/admission">Admissions<span class="material-symbols-outlined">chevron_right</span></a>
-        
+
         <label>Courses</label>
         <a href="/course/soc">School of Future Computing<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/course/sidd">School of Interactive Design & Development<span class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/course/electives">Speculative Electives<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/course/sidd">School of Interactive Design & Development<span
+                class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/course/electives">Speculative Electives<span
+                class="material-symbols-outlined">chevron_right</span></a>
 
         <label>Student Services</label>
         <a href="/clubs">Clubs<span class="material-symbols-outlined">chevron_right</span></a>
@@ -198,7 +207,7 @@
     </div>
     <div class="subMiniLinkWrapper">
         <h1>Tech Impact</h1>
-       
+
         <a href="/project">Industry Projects<span class="material-symbols-outlined">chevron_right</span></a>
     </div>
 </div>

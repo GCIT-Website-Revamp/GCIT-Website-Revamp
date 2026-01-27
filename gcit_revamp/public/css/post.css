@@ -70,12 +70,10 @@ li ul li {
 
 .suggestionWrapper {
     display: flex;
-    width: 35%;
+    width: auto;
     position: relative; /* JS handles sticky via GSAP ScrollTrigger */
     top: 0;
-    width: 320px;
     transition: none;
-    min-width: 320px;
     flex-direction: column;
 }
 

@@ -78,7 +78,7 @@
                     <div class="courseDetailsWrapper">
 
                         <div class="courseHeaderWrapper">
-                            <h1 class = "orange">{{ $course->header }}</h1><br>
+                            <h1 class = "orange">{{ $course->header }}</h1>
                             <h1>{{ $course->header2 }}</h1>
                             <p>{!! $course->description !!}</p>
 

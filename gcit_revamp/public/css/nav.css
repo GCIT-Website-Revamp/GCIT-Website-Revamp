@@ -271,7 +271,8 @@ nav.mini .miniSubNavBar{
 nav.mini .miniSubNavBar .miniSubLinkWrapper{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 1rem;
     padding: 5px var(--padding-sides)
 }
 nav.mini .miniSubNavBar .miniSubLinkWrapper a{

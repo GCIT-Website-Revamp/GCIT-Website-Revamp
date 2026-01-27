@@ -91,15 +91,15 @@
         <div class="section sectionWrapper quickLinksSection">
             <h2 class="main-header">Looking for Something Specific?</h2>
             <div class="quickLinksGrid">
-                <a href="/admissions" class="quickLinkCard">
+                <a href="/admission" class="quickLinkCard">
                     <span class="material-symbols-outlined">school</span>
                     <h3>Admissions</h3>
                     <p>Learn about our programs and application process</p>
                 </a>
-                <a href="/programs" class="quickLinkCard">
+                <a href="/project" class="quickLinkCard">
                     <span class="material-symbols-outlined">menu_book</span>
-                    <h3>Programs</h3>
-                    <p>Explore our degree offerings</p>
+                    <h3>Industry Projects</h3>
+                    <p>Explore our Project Catalog</p>
                 </a>
                 <a href="/about" class="quickLinkCard">
                     <span class="material-symbols-outlined">info</span>

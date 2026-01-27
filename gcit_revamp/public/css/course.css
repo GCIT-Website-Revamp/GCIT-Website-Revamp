@@ -23,3 +23,10 @@
     box-shadow: none;
   }
 }
+@media (max-width: 480px) {
+ .courseContent .cardContent{
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
+}
+
+}

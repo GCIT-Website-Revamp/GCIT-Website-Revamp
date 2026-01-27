@@ -170,8 +170,8 @@
 @media (max-width: 768px) {
 
     .preAboutHeader {
-        padding: 20px var(--padding-sides);
-        margin-top: 80px;
+        padding: 20px var(--padding-sides) 10px var(--padding-sides);
+        margin-top: 91px;
     }
 
     .aboutHeader {

@@ -226,7 +226,7 @@
         /* gap: 1rem; */
     }
     .mainContent .card .cardContent{
-        gap: 1rem;
+        gap: .5rem;
     }
     .courseContent .card img{
         width: 50% !important;

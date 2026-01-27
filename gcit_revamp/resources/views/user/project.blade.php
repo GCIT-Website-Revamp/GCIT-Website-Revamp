@@ -14,7 +14,7 @@
                     <div class="breadCrumbs">
                         <a href="/">Home</a>
                         <span class="material-symbols-outlined">keyboard_arrow_right</span>
-                        <a>Initiatives</a>
+                        <a>Tech Impact</a>
                     </div>
                     <div class="contentWrapper">
                         <h1>Industry Projects</h1>

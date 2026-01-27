@@ -364,6 +364,9 @@
     .otherCourseContainer .header h1 {
         min-width: 30%;
     }
+     .courseContentBanner {
+        padding-top: 7px !important;
+    }
 }
 
 .orange {

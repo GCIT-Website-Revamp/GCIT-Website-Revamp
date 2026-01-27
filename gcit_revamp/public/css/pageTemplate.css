@@ -292,7 +292,7 @@
 @media (max-width: 1023px) {
   .filterColumn {
     position: fixed;
-    top: 80px;
+    top: 91px;
     right: 0;
     height: calc(100vh - 80px);
     width: 70vw;
@@ -416,6 +416,7 @@
     }
     .pageBannerWrapper {
         min-height: auto;
+        margin-top: 91px;
         padding-bottom: 2.5rem;
     }
     .pageBannerWrapper .bannerContent {
@@ -479,7 +480,7 @@
         bottom: 0;
     }
     .mainContent .card .cardContent{
-        padding: 1rem;
+        padding: 1.3rem;
         width: 100%;
     }
     .courseContent .coursePreHeader{

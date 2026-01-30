@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            //
-            $table->string('type')->after('guide');
+        Schema::create('finteches', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('description');
+            $table->json('roles');
+            $table->timestamps();
         });
     }
 
@@ -22,9 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            //
-            $table->dropColumn('type');
-        });
+        Schema::dropIfExists('finteches');
     }
 };

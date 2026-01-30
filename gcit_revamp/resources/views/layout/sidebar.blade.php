@@ -21,48 +21,53 @@
             <li class="active">
                 <a href="dashboard"><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
             </li>
-            <li><a href="projects"><i class="fa fa-folder-open white_color"></i> <span>Projects</span></a>
+            
             </li>
-            <li><a href="media"><i class="fa fa-image white_color"></i> <span>Media Gallery</span></a>
             </li>
             <li>
                 <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                        class="fa fa-graduation-cap white_color"></i> <span>Student Services</span></a>
+                        class="fa fa-graduation-cap white_color"></i> <span>About GCIT</span></a>
                 <ul class="collapse list-unstyled" id="element">
                     <!-- <li><a href="admission">> <span>Admission</span></a></li> -->
+                     <li>
+                        <a href="overview">> <span>Overview</span></a>
+                    </li>
+                    <li><a href="updates">> <span>Updates</span></a>
+                    <li>
+                        <a href="services">> <span>Support & Services</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#impact" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                        class="fa fa-folder-open white_color"></i> <span>Tech Impact</span></a>
+                <ul class="collapse list-unstyled" id="impact">
+                    <li><a href="projects">> <span>Projects</span></a>
+                    <li><a href="fintech">> <span>GCITxBIL Fintech Innovation Lab</span></a></li>
+                    <li><a href="kstudio">> <span>K Studio</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#study" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                        class="fa fa-book white_color"></i> <span>Study</span></a>
+                <ul class="collapse list-unstyled" id="study">
+                    <li><a href="academics">> <span>Courses</span></a>
                     <li><a href="clubs">> <span>Clubs</span></a></li>
-                    <li><a href="ict">> <span>ICT</span></a></li>
                     <li><a href="student-welfare">> <span>Student Welfare</span></a></li>
                 </ul>
             </li>
-            <li><a href="academics"><i class="fa fa-book white_color"></i> <span>Academics</span></a></li>
             <li>
-                <a href="teams"><i class="fa fa-users white_color"></i> <span>Staffs</span></a>
+                <a href="teams"><i class="fa fa-users white_color"></i> <span>Faculty</span></a>
             </li>
             <li>
                 <a href="contact">
                     <i class="fa fa-paper-plane white_color"></i> <span>Inquiries</span></a>
             </li>
-            <li class="active">
-                <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                        class="fa fa-briefcase white_color"></i>
-                    <span>Support and Services</span></a>
-                <ul class="collapse list-unstyled" id="additional_page">
-                    <li>
-                        <a href="overview">> <span>Institutional Overview</span></a>
-                    </li>
-                    <li>
-                        <a href="services">> <span>Other Services</span></a>
-                    </li>
-                    <!-- <li>
-                        <a href="calendar">> <span>Calendar</span></a>
-                    </li> -->
-                </ul>
-            </li>
+            <li>
+                <a href="media"><i class="fa fa-image white_color"></i> <span>Media Gallery</span></a>
             </li>
             <li><a href="users"><i class="fa fa-user white_color"></i> <span>Users</span></a>
             </li>
-            <li><a href="updates"><i class="fa fa-calendar white_color"></i> <span>Updates</span></a>
             </li>
             <li><a href="logs"><i class="fa fa-list-ul white_color"></i> <span>Logs</span></a>
             </li>

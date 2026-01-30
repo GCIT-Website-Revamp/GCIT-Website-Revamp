@@ -273,7 +273,7 @@ document.getElementById('addEventBtn').addEventListener('click', () => {
                 <div class="form-group" style="margin-left:19px;">
                     <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" id="highlight" value="true">
-                    Display in highlights (Home Page)
+                    Display in herobanner (Home Page)
                     </label>
                 </div>
             </form>
@@ -375,7 +375,7 @@ document.addEventListener('click', function (e) {
                         <div class="form-group" style="margin-left:19px;">
                             <label class="form-check-label">
                             <input type="checkbox" id="highlight" class="form-check-input" ${editBtn.dataset.eventHighlight == "true" ? "checked" : ""}>
-                            Display in highlights (Home Page)
+                            Display in herobanner (Home Page)
                             </label>
                         </div>
 

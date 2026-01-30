@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Fintech;
+use App\Models\Studio;
 use App\Models\Media;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -33,7 +35,9 @@ use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\ICTController;
 use App\Http\Controllers\WelfareController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\SearchController;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\FintechController;
+use App\Http\Controllers\StudioController;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
 Route::middleware('web')->group(function () {
     //search
@@ -161,6 +165,20 @@ Route::middleware('web')->group(function () {
     Route::post('/api/media', [MediaController::class, 'createMedia'])->name('createMedia');
     Route::delete('/api/media/{media}', [MediaController::class, 'deleteMedia'])->name('deleteMedia');
     Route::put('/api/media/{media}', [MediaController::class, 'updatemedia'])->name('updatemedia');
+
+    // Fintech API Routes
+    Route::get('/api/fintech', [FintechController::class, 'getAllFintechs'])->name('getAllFintechs');
+    Route::get('/api/fintech/{fintech}', [FintechController::class, 'getFintech'])->name('getFintech');
+    Route::post('/api/fintech', [FintechController::class, 'createFintech'])->name('createFintech');
+    Route::delete('/api/fintech/{fintech}', [FintechController::class, 'deleteFintech'])->name('deleteFintech');
+    Route::put('/api/fintech/{fintech}', [FintechController::class, 'updateFintech'])->name('updateFintech');
+
+    // Studio API Routes
+    Route::get('/api/studio', [StudioController::class, 'getAllStudios'])->name('getAllStudios');
+    Route::get('/api/studio/{studio}', [StudioController::class, 'getStudio'])->name('getStudio');
+    Route::post('/api/studio', [StudioController::class, 'createStudio'])->name('createStudio');
+    Route::delete('/api/studio/{studio}', [StudioController::class, 'deleteStudio'])->name('deleteStudio');
+    Route::put('/api/studio/{studio}', [StudioController::class, 'updateStudio'])->name('updateStudio');
 });
 
 Route::get('/admin', function () {
@@ -246,9 +264,40 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
         return view('admin.overview', compact('overview'));
     });
 
-    Route::get('/ict', function () {
-        $ict = ICT::orderBy('created_at', 'desc')->first();
-        return view('admin.ict', compact('ict'));
+    Route::get('/fintech', function () {
+       $fintech = Fintech::orderBy('created_at', 'desc')->first();
+       if ($fintech) {
+            $fintech->roles = collect($fintech->roles)->map(function ($role) {
+                $team = Team::find($role['team_id']);
+                if ($team) {
+                    $role['team_name'] = $team->name;
+                    $role['image'] = $team->image;
+                } else {
+                    $role['team_name'] = null;
+                    $role['users'] = [];
+                }
+                return $role;
+            });
+        }
+        return view('admin.fintech', compact('fintech'));
+    });
+
+    Route::get('/kstudio', function () {
+       $studio = Studio::orderBy('created_at', 'desc')->first();
+       if ($studio) {
+            $studio->roles = collect($studio->roles)->map(function ($role) {
+                $team = Team::find($role['team_id']);
+                if ($team) {
+                    $role['team_name'] = $team->name;
+                    $role['image'] = $team->image;
+                } else {
+                    $role['team_name'] = null;
+                    $role['users'] = [];
+                }
+                return $role;
+            });
+        }
+        return view('admin.kstudio', compact('studio'));
     });
 
     Route::get('/student-welfare', function () {
@@ -271,13 +320,6 @@ Route::middleware(['web','auth'])->prefix('admin')->group(function () {
     });
 
     Route::get('/logs', function () {
-        activity()
-        ->causedBy(Auth::user())
-        ->withProperties([
-            'ip' => request()->ip(),
-            'url' => request()->fullUrl(),
-        ])
-        ->log('Viewed action logs');
         $logs = Activity::orderBy('created_at', 'desc')->with('causer')->paginate(50);
         return view('admin.logs', compact('logs'));
     });

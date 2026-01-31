@@ -6,7 +6,7 @@
             </div>
             <div class="addressWrapper">
                 <div class="address">
-                    <p>Gyalpozhing College of Information Technology</p>
+                    <p>GCIT</p>
                     <p>Royal University of Bhutan</p>
                     <p>Chamjekha, Thimphu, Bhutan</p>
                 </div>
@@ -22,7 +22,7 @@
 
             <div class="linkContainer">
                 <h1>Quick Links</h1>
-                <a>Admissions 2026</a>
+                <a href = "/admission">Admissions</a>
                 <a href="https://tech.gov.bt/">GovTech</a>
                 <a href="https://www.citizenservices.gov.bt/g2cportal/ListOfLifeEventComponent">G2C</a>
                 <a href="https://education.gov.bt/">MoESD</a>
@@ -33,39 +33,44 @@
 
             <div class="linkContainer">
                 <h1>E-Services</h1>
-                <a>CCA</a>
-                <a>ICT Desk</a>
-                <a>Moodle VLE</a>
-                <a>RUB IMS</a>
-                <a>RUB Mail</a>
+                <a href = "https://cca.gcit.edu.bt/">CCA</a>
+                <a href = "https://ims.rub.edu.bt/public/auth/view-login">RUB IMS</a>
+                <a href = "http://mail.rub.edu.bt/">RUB Mail</a>
             </div>
 
             <div class="linkContainer">
                 <h1>Downloads</h1>
-                <a>Forms</a>
-                <a>Stress Management</a>
+                <a href = "https://forms.gle/wYpLd2ZaMtFDcrCa7">Class Trip Form</a>
             </div>
 
         </div>
     </div>
     <div class="subContentWrapper sectionWrapper">
         <div class="socialWrapper">
-            <a href=""><i class="fa-brands fa-instagram"></i></a>
-            <a href=""><i class="fa-brands fa-linkedin"></i></a>
-            <a href=""><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.linkedin.com/company/gyalpozhingcollegeit/"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/GCIT.Bhutan"><i class="fa-brands fa-facebook"></i></a>
         </div>
         <div class="copyRight">
             <div class="dash"></div>
-            <p>
-                Copyright © Gyalpozhing College of Information Technology
-                <span id="currentYear">2025</span>.
+            <p class='desktop'>
+                Copyright © GCIT
+                <span class="currentYear">2025</span>.
+                All Rights Reserved.
+            </p>
+            <p class="mobile">
+                Copyright © GCIT
+                <span class="currentYear">2025</span>.
+                <br>
                 All Rights Reserved.
             </p>
         </div>
     </div>
     <script>
-  document.getElementById("currentYear").textContent = new Date().getFullYear();
-</script>
+        document.querySelectorAll(".currentYear").forEach(element => {
+            element.textContent = new Date().getFullYear();
+        });
+
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 

@@ -16,7 +16,7 @@
                 <a>Student Services</a>
             </div>
             <div class="contentWrapper">
-                <h1>Clubs</h1>
+                <h1>CCA Clubs</h1>
                 <p>GCIT offers future-focused programs that combine strong technical foundations with creative
                     problem-solving. Each course is designed to bridge theory with practice, preparing students to innovate
                     in fields such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology,
@@ -52,7 +52,7 @@
                 </div>
                 <div class="otherContent">
                     <h1>Other Services</h1>
-                    <a href="/clubs">Clubs</a>
+                    <a href="/clubs">CCA Clubs</a>
                     <a href="/resources/ICT">ICT</a>
                     <a href="/resources/Student-Welfare">Student Welfare</a>
                 </div>

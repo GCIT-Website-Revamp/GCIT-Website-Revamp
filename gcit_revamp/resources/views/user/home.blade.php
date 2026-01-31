@@ -117,7 +117,7 @@
             </div>
             <div class="card">
                 <div class="iconWrapper">
-                    <video src="{{ asset('videos/Mindset.webm') }}" autoplay muted loop playsinline preload="metadata">
+                    <video src="{{ asset('videos/MindsetFAFAFA2.webm') }}" autoplay muted loop playsinline preload="metadata">
 
                     <!-- <x-icons.handshake /> -->
                 </div>
@@ -384,4 +384,18 @@
             @endforeach
         </div>
     </div>
+    <script>
+        document.querySelectorAll('.course .hiddenInfo p').forEach(p => {
+        p.addEventListener('scroll', function() {
+            const isScrolledToBottom = this.scrollHeight - this.scrollTop <= this.clientHeight + 1;
+            
+            if (isScrolledToBottom) {
+                this.classList.add('scrolled-to-bottom');
+            } else {
+                this.classList.remove('scrolled-to-bottom');
+            }
+        });
+    });
+</script>
 @endsection
+

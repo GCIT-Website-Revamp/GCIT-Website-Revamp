@@ -96,7 +96,7 @@
                   <div class="row column_title">
                      <div class="col-md-12">
                         <div class="page_title">
-                           <h2>Clubs</h2>
+                           <h2>CCA Clubs</h2>
                         </div>
                      </div>
                   </div>
@@ -106,7 +106,7 @@
                         <div class="full graph_head">
                            <div class="d-flex justify-content-between align-items-center">
                               <div class="heading1 margin_0">
-                                 <h2>Clubs and Roles</h2>
+                                 <h2>CCA Clubs and Roles</h2>
                               </div>
                               <div>
                                  <button id="addClubBtn" type="button" class="btn btn-success" data-bs-toggle="modal"

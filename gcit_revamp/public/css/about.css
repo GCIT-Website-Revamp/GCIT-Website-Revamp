@@ -199,7 +199,8 @@
  
 
     .mottoWrapper {
-        margin: 60px 0;
+        margin: 3rem 0;
+        padding-bottom: 3rem;
         gap: 3rem;
     }
 

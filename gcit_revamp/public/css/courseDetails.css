@@ -16,10 +16,11 @@
 .courseDetailsContainer .sideMenu {
     background-color: #f3f3f3;
     width: 20%;
-    padding: clamp(20px, 5vw, 50px) 0 clamp(20px, 5vw, 50px) clamp(10px, 3vw, 20px) ;
+    padding: clamp(20px, 5vw, 50px)  clamp(16px, 2vw, 30px) ;
     height: fit-content;
-    transition: none !important; /* Prevent jitter from global transition */
-
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     /* Sticky behavior handled by courseScroll.js via GSAP */
     top: 0;
 }
@@ -46,6 +47,7 @@
 .courseDetailsContainer .sideMenu a {
     text-decoration: none;
     color: #4d4d4d;
+    width: fit-content;
     margin-left: calc(1rem + 7px);
 }
 .courseDetailsContainer .sideMenu a:hover {
@@ -56,7 +58,6 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 2rem;
 }
 .courseDetailsContainer .courseDetails {
     width: 50%;
@@ -171,6 +172,16 @@
     transform: translateY(0);
 }
 
+.course-module-table th:nth-child(1),
+.course-module-table td:nth-child(1) {
+    width: 85%;
+}
+
+.course-module-table th:nth-child(2),
+.course-module-table td:nth-child(2) {
+    width: 15%;
+    text-align: center;
+}
 .courseDetailContent input:checked ~ label h1 {
     padding-bottom: 1rem;
     border-bottom: 1px solid #d4d4d4;
@@ -227,9 +238,8 @@
     top: 30%;
     left: 0;
     z-index: 1100;
-    background: #f3f3f3;
-    color: #3a3a3a;
-    padding: 0.6rem 0.4rem;
+    background: #C2C2C2;
+    padding: 0.6rem 0
 }
 
 .menuHeader {
@@ -286,8 +296,7 @@
 
     .courseDetailsContainer .sideMenu {
         /* position: relative; JS controls this */
-        width: 260px; /* HARD LIMIT */
-        max-width: 260px;
+        width: fit-content; 
         transition: unset;
         flex-shrink: 0;
     }
@@ -303,9 +312,7 @@
         width: 60%;
     }
 
-    .courseContentContainer .bannerContent {
-        padding: 0 36px !important;
-    }
+   
 }
 
 @media screen and (max-width: 1024px) {
@@ -319,17 +326,23 @@
     .courseDetailsSection {
         position: relative;
     }
-    .courseContentBanner {
-        padding: 0 36px !important;
-    }
-      .courseMenuBtn {
+   
+    .courseMenuBtn {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
+        height: 50px;
         justify-content: center;
-        width: 2.5rem;
+        width: 20px;
+    }
+    .courseMenuBtn span{
+        width: 20px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        color: #707070;
     }
     .menuHeader {
         display: flex;
@@ -360,13 +373,17 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
     .otherCourseContainer .header h1 {
         min-width: 30%;
     }
      .courseContentBanner {
         padding-top: 7px !important;
     }
+    .courseDetailsContainer .sideMenu{
+        transition: none !important; /* Prevent jitter from global transition */
+    }
+
 }
 
 .orange {

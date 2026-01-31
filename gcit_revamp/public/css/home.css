@@ -41,7 +41,7 @@
 }
 
 .contentContainr {
-    /* max-width: 1600px; */
+    max-width: 1600px;
     margin: 0 auto;
     height: 100%;
     width: 100%;
@@ -51,9 +51,11 @@
 .contentSlider {
     position: absolute;
     bottom: clamp(20px, 4vw, 35px);
-    left: var(--padding-sides);
+    left: 50%;
     display: flex;
-    /* max-width: 1600px; */
+    transform: translateX(-50%);
+    align-self: center;
+    max-width: 1600px;
     justify-content: center;
     align-items: center;
     gap: 2rem;
@@ -238,7 +240,7 @@
     flex-direction: column;
     align-items: center;
 
-    background: #FAFAFA;
+    background: #fafafa;
     border-radius: 10px;
     border: 1px solid #e0e0e0; /* Light grey border */
     box-shadow: 0 10px 15px 0 rgb(162 162 162 / 30%);
@@ -630,7 +632,7 @@
 .president-divider {
     height: 3px;
     width: 60px;
-    background-color: var(--color-primary, #F58123);
+    background-color: var(--color-primary, #f58123);
     margin: 1rem 0 1.5rem 0;
     border: none;
     display: block;
@@ -664,7 +666,9 @@
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    transition:
+        max-height 0.8s ease-in-out,
+        opacity 0.8s ease-in-out;
 }
 
 .message-expand-wrapper.open {
@@ -675,7 +679,7 @@
 .readMoreBtn {
     display: inline-block;
     padding: 0.8rem 2rem;
-    background-color: var(--color-secondary, #74B444);
+    background-color: var(--color-secondary, #74b444);
     color: white;
     text-decoration: none;
     border: none;
@@ -695,6 +699,7 @@
 /* --- RIGHT SIDE: IMAGE --- */
 .presidentImgWrapper {
     flex: 0 0 40%;
+    align-self: flex-start;
     display: flex;
     justify-content: center;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
@@ -707,7 +712,6 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     display: block;
 }
-
 
 .homeProjectWrapper {
     display: flex;
@@ -904,12 +908,11 @@
     gap: 30px;
     margin-top: 2rem;
     align-items: stretch; /* 🔑 THIS */
-
 }
 .homeAnnouncementContent .suggestionWrapper {
     display: flex;
     flex-direction: column;
-    flex: 1
+    flex: 1;
 }
 
 .homeAnnouncementContent .suggestionWrapper .suggestion {
@@ -920,7 +923,8 @@
     flex-direction: column;
     justify-content: center;
 }
-.messageWrapper, .messageWrapper *{
+.messageWrapper,
+.messageWrapper * {
     transition: unset;
 }
 .homeAnnouncementContent {
@@ -1215,6 +1219,12 @@
 .headerHomeAnnouncement {
     padding-left: 1.5rem;
 }
+.message-expand-wrapper {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+}
+
 /* Moved to main course section above - line ~302 */
 
 @media (max-width: 1024px) {
@@ -1283,6 +1293,12 @@
         height: calc(100vh - 104px);
     }
 }
+
+@media (max-width: 100px) {
+    .heroBannerWrapper {
+        margin-top: 80px;
+    }
+}
 @media (min-width: 1600px) {
     /* tablets */
     .heroBannerWrapper {
@@ -1304,9 +1320,7 @@
     .aboutGCIT p {
         max-width: none !important;
     }
-    .heroBannerWrapper {
-        margin-top: 80px;
-    }
+
     .cardWrapper {
         flex-direction: column;
     }
@@ -1356,7 +1370,6 @@
     .course:hover .hiddenInfo {
         height: 100%;
     }
-   
 
     .courseWrapper .header h1 {
         padding: 0;
@@ -1367,9 +1380,37 @@
         width: calc(100% - calc(var(--padding-sides) + var(--padding-sides)));
         /* transform: translateY(0); */
     }
+    .course:hover .hiddenInfo p {
+        height: 300px;
+        overflow: auto;
+        position: relative;
+    }
+
+
     .course .courseCoverTitle .ctaBtn {
         opacity: 0;
         height: 0;
+        position: relative;
+    }
+    .course:hover .hiddenInfo .ctaBtn::before {
+    content: '▼'; /* or use an icon font/SVG */
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: opacity 0.3s ease-in-out;
+    animation: bounce 2s infinite;
+    pointer-events: none;
+    }
+    .hiddenInfo .scrolled-to-bottom ~ .ctaBtn::before{
+        opacity: 0 !important;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translate(-50%, 0); }
+        50% { transform: translate(-50%, 5px); }
     }
     /* .course:hover .courseLinkWrapper{
     padding-left: 10%;
@@ -1427,7 +1468,7 @@
 
     .messageContent span {
         margin: 1rem 0;
-        font-weight: 600
+        font-weight: 600;
     }
     .presidentTitle {
         margin: 0 !important;
@@ -1562,7 +1603,6 @@
     .contentSlider {
         gap: 0.75rem;
     }
- 
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1706,10 +1746,10 @@
     .leftBtn {
         transform: rotate(180deg) !important;
     }
-    .course:hover .courseCoverTitle{
+    .course:hover .courseCoverTitle {
         padding: 16px;
     }
-    .course:hover{
+    .course:hover {
         height: 100vh;
     }
 }
@@ -1755,14 +1795,23 @@
     }
 
     .course {
-        height: 50vh;
+        height: 40vh;
         flex: none;
     }
 
     .course:hover {
         flex: none;
-        height: 85vh;
+        height: 67vh;
     }
-
-   
+}
+@media (min-width: 1600px) {
+    .contentSlider {
+        padding: 0 var(--padding-sides);
+    }
+    .leftBtn {
+        left: 1%;
+    }
+    .rightBtn {
+        right: 1%;
+    }
 }

@@ -85,10 +85,7 @@
                     </button>
                 </form>
             </div>
-        </div>
-
-        <!-- Quick Links Section -->
-        <div class="section sectionWrapper quickLinksSection">
+             <div class="quickLinksSection">
             <h2 class="main-header">Looking for Something Specific?</h2>
             <div class="quickLinksGrid">
                 <a href="/admission" class="quickLinkCard">
@@ -113,6 +110,10 @@
                 </a>
             </div>
         </div>
+        </div>
+
+        <!-- Quick Links Section -->
+       
 
     </div>
     <script>

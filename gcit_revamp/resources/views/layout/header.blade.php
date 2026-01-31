@@ -53,7 +53,7 @@
                         <a href="/course/sidd" class="subLink">School of Interactive Design & Development</a>
                         <a href="/course/electives" class="subLink">Speculative Electives</a>
                         <label>Student Services</label>
-                        <a href="/clubs" class="subLink">Clubs</a>
+                        <a href="/clubs" class="subLink">CCA Clubs</a>
                         <!-- <a href="/resources/ICT" class="subLink">ICT</a> -->
                         <a href="/resources/Student-Welfare" class="subLink">Student Welfare</a>
                     </div>
@@ -78,12 +78,14 @@
     <div class="dropDownExtender"></div>
 
     <!-- Sub navigation -->
-    <div class="wrapper subNav">
-        <div class="subLinkWrapper font-xs">
-            <!-- <a href="">Alumni</a> -->
-            <a href="https://ceta.gcit.edu.bt/">CETA</a>
-            <a href="/contactUs">Contact Us</a>
-            <a href="/faculty">Faculty</a>
+    <div class=" subNav">
+        <div class="subLinkContainer wrapper">
+            <div class="subLinkWrapper font-xs">
+                <!-- <a href="">Alumni</a> -->
+                <a href="https://ceta.gcit.edu.bt/">CETA</a>
+                <a href="/contactUs">Contact Us</a>
+                <a href="/faculty">Faculty</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -166,7 +168,7 @@
                 class="material-symbols-outlined">chevron_right</span></a>
 
         <label>Student Services</label>
-        <a href="/clubs">Clubs<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/clubs">CCA Clubs<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/resources/Student-Welfare">Student Welfare<span
                 class="material-symbols-outlined">chevron_right</span></a>
     </div>

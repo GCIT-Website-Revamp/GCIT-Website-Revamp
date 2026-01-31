@@ -155,16 +155,25 @@
 /* --- Contact Form Section --- */
 .contactFormSection {
     background: white;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+    max-width: 1600px;
     margin-bottom: 100px;
 }
 
 .formContainer {
-    max-width: 800px;
-    margin: 2rem auto;
+    width: 60%;
+    padding: 3rem var(--padding-sides);
+    background-color: #f4f4f4;
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
+    height: fit-content;
 }
 
 .formHeader {
-    text-align: center;
+    text-align: left;
     margin-bottom: 3rem;
 }
 
@@ -173,7 +182,8 @@
     font-size: clamp(28px, 3.5vw, 36px);
     font-weight: 400;
     color: #606060;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    height: 50px;
 }
 
 .formHeader p {
@@ -277,16 +287,15 @@
 
 /* --- Quick Links Section --- */
 .quickLinksSection {
-    padding: clamp(60px, 8vw, 100px) var(--padding-sides);
-    text-align: center;
+    text-align: left;
 }
 
 .quickLinksSection .main-header {
     font-family: var(--font-Header);
-    font-size: clamp(28px, 3.5vw, 36px);
+    font-size: var(--font-size-xl);
     font-weight: 400;
     color: #606060;
-    margin-bottom: 3rem;
+    margin-top: 50px;
 }
 
 .quickLinksGrid {
@@ -338,7 +347,12 @@
     .contactGrid {
         grid-template-columns: 1fr;
     }
-    
+    .contactFormSection{
+        flex-direction: column;
+    }
+    .formContainer{
+        width: 100%;
+    }
     .formRow {
         grid-template-columns: 1fr;
     }

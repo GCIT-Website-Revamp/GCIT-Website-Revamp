@@ -10,24 +10,37 @@
         <img src="{{ asset('images/pageBanner.png') }}" alt="">
     </div>
     <div class="bannerContent sectionWrapper">
-        <div class="breadCrumbs">
+       
+        @if($event)
+         <div class="breadCrumbs">
             <a href="/">Home</a>
             <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            <a>Initiatives</a>
+            <a>Overview</a>
         </div>
-        @if($event)
             <div class="contentWrapper">
                 <h1>News & Events</h1>
             </div>
         @endif
         @if($announcement)
+         <div class="breadCrumbs">
+            <a href="/">Home</a>
+            <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            <a>Overview</a>
+        </div>
             <div class="contentWrapper">
                 <h1>Announcements</h1>
             </div>
         @endif
          @if($project)
+          <div class="breadCrumbs">
+            <a href="/">Home</a>
+            <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            <a>Tech Impact</a>
+            <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            <a href = "/project">Industry Projects</a>
+        </div>
             <div class="contentWrapper">
-                <h1>Projects</h1>
+                <h1>Industry Projects</h1>
             </div>
         @endif
         <!-- @if($event)

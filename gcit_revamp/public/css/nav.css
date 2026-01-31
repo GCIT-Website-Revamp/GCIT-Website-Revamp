@@ -127,11 +127,13 @@ nav .fullsize{
     border-radius: 6px;
     background-color: var(--color-secondary);
 }
-
+.subLinkContainer{
+    width: 100%;
+    max-width: 1600px;
+}
 .subLinkWrapper {
     display: flex;
     align-items: center;
-    max-width: 1600px;
     width: 100%;
     justify-content: flex-end;
     height: 100%;
@@ -388,12 +390,13 @@ nav.mini h1, .miniTopNav h1{
     color: var(--color-secondary-light);
 }
 .toggleSpan{
+    color: white !important;
     transition: color 0.3s ease-in-out;
 
 }
 .toggleSpan:hover{
     cursor: pointer;
-    color: var(--color-secondary)
+    color: var(--color-secondary) !important;
 }
 
 .backWrapper{
@@ -570,11 +573,7 @@ nav.mini h1, .miniTopNav h1{
 }
 
 @media (min-width: 1600px) {
-    /* large desktops */
-    .subLinkWrapper{
-    padding: 0 var(--padding-sides);
-
-    }
+  
 }
 
 @media (max-width: 768px) {

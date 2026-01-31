@@ -310,6 +310,9 @@ p{
     text-transform: uppercase;
     font-size: clamp(0.8rem, 0.5vw + 0.6rem, 1rem);
 }
+.mobile{
+    display: none;
+}
 
 .backgroundWrapper{
     position: relative;
@@ -431,6 +434,9 @@ body.filter-open .pageContentWrapper {
     font-family: "Roboto" !important;
     font-weight: 500 !important;
 }
+.courseWrapper, .messageWrapper{
+    transition: unset !important; 
+}
 
 
 @media (min-width: 576px) {
@@ -459,7 +465,12 @@ body.filter-open .pageContentWrapper {
 
 @media (max-width: 480px) {
     /* large desktops */
-    
+      .desktop{
+        display: none
+    }
+    .mobile{
+        display: block;
+    }
 }
 
 @media (min-width: 1400px) {

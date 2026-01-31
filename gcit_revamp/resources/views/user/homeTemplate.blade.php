@@ -190,7 +190,7 @@
 
                         Add a tab or bookmark our website or if you have any questions and would like to connect with us, please do not hesitate to reach out to us.</p>
                         <span class = "presidentName">Audrey Low</span>
-                        <span class = "presidentTitle">President, Gyalpozhing College of Information Technology</span>
+                        <span class = "presidentTitle">President, GCIT</span>
                     </div>
                 </div>
                 <div class="presidentImg">

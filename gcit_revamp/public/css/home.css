@@ -1168,7 +1168,7 @@
 }
 
 .mobilePRJSlider {
-    display: none;
+    display: none !important;
 }
 
 .heroVideoModal {
@@ -1766,13 +1766,13 @@
 
     .mobilePRJSlider {
         height: 150px;
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
     .desktopPRJSlider {
-        display: none;
+        display: none !important;
     }
     .mobilePRJSlider {
         /* display: block; */

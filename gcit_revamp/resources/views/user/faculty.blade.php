@@ -29,7 +29,7 @@
         <div class="facultyWrapper">
             <div class="staffProfileWrapper">
                 @foreach ($faculties as $faculty)
-                    <div class="staff" data-tags='@json(json_decode($faculty->category, true))'>
+                    <div class="staff" data-tags='@json($faculty->category)'>
                         <img src="{{ asset('storage/' . $faculty->image) }}" alt="">
                         <div class="staffDescription">
                             <h1>{{ $faculty->title }}</h1>

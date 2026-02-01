@@ -29,6 +29,12 @@
    .table-responsive-sm {
       overflow-x: auto;
    }
+   
+   figure.image img {
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+}
 
    .table td,
    .table th {

@@ -34,6 +34,12 @@
    .table th {
       vertical-align: middle;
    }
+   
+   figure.image img {
+      max-width: 800px;
+      width: 100%;
+      height: auto;
+   }
 
    .action-buttons {
       display: flex;

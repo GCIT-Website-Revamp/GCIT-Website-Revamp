@@ -29,7 +29,7 @@
         <div class="facultyWrapper">
             <div class="staffProfileWrapper">
                 @foreach ($faculties as $faculty)
-                    <div class="staff">
+                    <div class="staff" data-tags='@json(json_decode($faculty->category, true))'>
                         <img src="{{ asset('storage/' . $faculty->image) }}" alt="">
                         <div class="staffDescription">
                             <h1>{{ $faculty->title }}</h1>
@@ -49,24 +49,28 @@
                             </div>
                             <div class="filterContainer">
                                 <div class="filter">
-                                    <input type="checkbox">
-                                    <p>Blockchain Department</p>
-                                </div>
-                                <div class="filter">
-                                    <input type="checkbox">
+                                    <input type="checkbox" value="AI Department">
                                     <p>AI Department</p>
                                 </div>
                                 <div class="filter">
-                                    <input type="checkbox">
+                                    <input type="checkbox" value="Blockchain Department">
+                                    <p>Blockchain Department</p>
+                                </div>
+                                <div class="filter">
+                                    <input type="checkbox" value="Fullstack Department">
                                     <p>Fullstack Department</p>
                                 </div>
                                 <div class="filter">
-                                    <input type="checkbox">
+                                    <input type="checkbox" value="Cyber Department">
                                     <p>Cyber Department</p>
                                 </div>
                                 <div class="filter">
-                                    <input type="checkbox">
+                                    <input type="checkbox" value="Interactive Design & Development">
                                     <p>Interactive Design & Development</p>
+                                </div>
+                                <div class="filter">
+                                    <input type="checkbox" value="Faculty Leadership Team">
+                                    <p>Faculty Leadership Team</p>
                                 </div>
                             </div>
                         </div>

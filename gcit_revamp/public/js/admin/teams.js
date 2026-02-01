@@ -12,7 +12,6 @@ window.Loader = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-
     const teamSearchInput = document.getElementById('teamSearch');
     if (!teamSearchInput) return;
 
@@ -48,6 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 data.data.forEach((team, index) => {
+                    // Format departments for display (assuming departments are stored as comma-separated string)
+                    const departments = team.departments || team.department || '';
+                    const departmentDisplay = departments.split(',').map(dept => 
+                        `<span class="badge bg-primary me-1">${dept.trim()}</span>`
+                    ).join('');
+                    
                     teamTableBody.innerHTML += `
                         <tr>
                             <td>${index + 1}</td>
@@ -61,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     data-id="${team.id}"
                                     data-name="${team.name}"
                                     data-type="${team.type}"
-                                    data-category="${team.category || ''}"
+                                    data-departments="${team.departments ?? []}"
                                     data-title="${team.title || ''}"
                                     data-qualifications="${team.qualification || ''}"
                                     data-description="${team.description || ''}"
@@ -93,6 +98,49 @@ function formatErrors(errors) {
         .join("\n");
 }
 
+// Department options array
+const DEPARTMENT_OPTIONS = [
+    'AI Department', 
+    'Blockchain Department',
+    'Cyber Department',
+    'Fullstack Department',
+    'Interactive Design & Development',
+    'Faculty Leadership Team'
+];
+
+function generateDepartmentCheckboxes(selectedDepartments = []) {
+    let selectedArray = [];
+
+    if (Array.isArray(selectedDepartments)) {
+        selectedArray = selectedDepartments;
+    } else if (typeof selectedDepartments === 'string') {
+        selectedArray = selectedDepartments
+            .split(',')
+            .map(d => d.trim())
+            .filter(Boolean);
+    }
+
+    return DEPARTMENT_OPTIONS.map(department => `
+        <div class="form-check mb-2">
+            <input class="form-check-input department-checkbox"
+                   type="checkbox"
+                   value="${department}"
+                   id="dept-${department.replace(/\s+/g, '-').toLowerCase()}"
+                   ${selectedArray.includes(department) ? 'checked' : ''}>
+            <label class="form-check-label" for="dept-${department.replace(/\s+/g, '-').toLowerCase()}">
+                ${department}
+            </label>
+        </div>
+    `).join('');
+}
+
+// Helper function to get selected departments
+function getSelectedDepartments() {
+    return Array.from(
+        document.querySelectorAll('.department-checkbox:checked')
+    ).map(cb => cb.value);
+}
+
 // =====================================
 // Add Team
 // =====================================
@@ -120,15 +168,12 @@ document.getElementById('addTeamBtn').addEventListener('click', function () {
             </select>
         </div>
 
-        <div class="form-group" id="department" style="display:none;">
-            <label for="teamDepartment">Department</label>
-            <select class="form-control" id="teamDepartment">
-                <option value="" disabled selected>Select Department</option>
-                <option value="Blockchain Department">Blockchain Department</option>
-                <option value="AI & Fullstack Department">AI & Fullstack Department</option>
-                <option value="Cyber Department">Cyber Department</option>
-                <option value="Interactive Design & Development">Interactive Design & Development</option>
-            </select>
+        <div class="form-group" id="departmentGroup" style="display:none;">
+            <label>Departments</label>
+            <div class="border rounded p-3 bg-light" id="departmentCheckboxes">
+                ${generateDepartmentCheckboxes()}
+            </div>
+            <small class="form-text text-muted">Select one or more departments</small>
         </div>
 
         <!-- Title field (hidden initially) -->
@@ -173,7 +218,12 @@ document.addEventListener('click', function (e) {
         const type = editBtn.dataset.type;
         const description = editBtn.dataset.description;
         const image = editBtn.dataset.image;
-        const department = editBtn.dataset.department;
+        let departments = [];
+        try {
+            departments = JSON.parse(editBtn.dataset.departments || '[]');
+        } catch (e) {
+            departments = [];
+        }
 
         document.querySelector('#myModal .modal-title').textContent = 'Edit Team';
 
@@ -197,15 +247,12 @@ document.addEventListener('click', function (e) {
             </select>
         </div>
 
-        <div class="form-group" id="department" style="display:${type === "Academic" ? "block" : "none"};">
-            <label for="teamDepartment">Department</label>
-            <select class="form-control" id="teamDepartment">
-                <option value="Blockchain Department" ${department === "Blockchain Department" ? "selected" : ""}>Blockchain Department</option>
-                <option value="Fullstack Department" ${department === "Fullstack Department" ? "selected" : ""}>Fullstack Department</option>
-                <option value="AI Department" ${department === "AI Department" ? "selected" : ""}>AI Department</option>
-                <option value="Cyber Department" ${department === "Cyber Department" ? "selected" : ""}>Cyber Department</option>
-                <option value="Interactive Design & Development" ${department === "Interactive Design & Development" ? "selected" : ""}>Interactive Design & Development</option>
-            </select>
+        <div class="form-group" id="departmentGroup" style="display:${type === "Academic" ? "block" : "none"};">
+            <label>Departments</label>
+            <div class="border rounded p-3 bg-light" id="departmentCheckboxes">
+                ${generateDepartmentCheckboxes(departments)}
+            </div>
+            <small class="form-text text-muted">Select one or more departments</small>
         </div>
 
         <div class="form-group" id="titleGroup" style="display:${type === "Academic" ? "block" : "none"};">
@@ -247,7 +294,10 @@ function saveOrUpdateTeam(isEdit = false, id = null) {
     formData.append("name", document.getElementById("teamName").value);
     formData.append("description", document.getElementById("teamDescription").value);
     formData.append("type", document.getElementById("teamType").value);
-    formData.append("category", document.getElementById("teamDepartment").value);
+    
+    // Get selected departments (only for Academic type)
+    formData.append("category", JSON.stringify(getSelectedDepartments()));
+    
     formData.append("title", document.getElementById("teamTitle").value);
     formData.append("qualification", document.getElementById("teamQualifications").value);
     if (isEdit) {
@@ -359,7 +409,7 @@ document.addEventListener('click', function (e) {
 function attachTypeToggle() {
     const typeSelect = document.getElementById("teamType");
     const titleGroup = document.getElementById("titleGroup");
-    const department = document.getElementById("department");
+    const departmentGroup = document.getElementById("departmentGroup");
     const qualifications = document.getElementById("qualificationsGroup");
 
     if (!typeSelect) return; // safety
@@ -367,13 +417,14 @@ function attachTypeToggle() {
     typeSelect.addEventListener("change", function () {
         if (this.value === "Academic") {
             titleGroup.style.display = "block";
-            department.style.display = "block";
+            departmentGroup.style.display = "block";
             qualifications.style.display = "block";
         } else {
             titleGroup.style.display = "none";
             document.getElementById("teamTitle").value = "";
-            department.style.display = "none";
-            document.getElementById("teamDepartment").value = "";
+            departmentGroup.style.display = "none";
+            // Uncheck all checkboxes for non-academic
+            document.querySelectorAll('.department-checkbox').forEach(cb => cb.checked = false);
             qualifications.style.display = "none";
             document.getElementById("teamQualifications").value = "";
         }

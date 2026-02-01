@@ -46,7 +46,16 @@ document.getElementById('addFintechBtn')?.addEventListener('click', function () 
     `;
 
     ClassicEditor
-        .create(document.querySelector('#description'))
+        .create(document.querySelector('#description'), {
+            ckfinder: {
+                uploadUrl: '/ckeditor/upload?_token=' + csrf
+            },
+            image: {
+                upload: {
+                    types: ['jpeg', 'png', 'jpg', 'gif', 'webp']
+                }
+            }
+        })
         .then(editor => window.ictEditorInstance = editor)
         .catch(err => console.error(err));
 
@@ -198,7 +207,16 @@ document.getElementById('editFintechBtn')?.addEventListener('click', function ()
         `;
 
         ClassicEditor
-            .create(document.querySelector('#description'))
+            .create(document.querySelector('#description'), {
+            ckfinder: {
+                uploadUrl: '/ckeditor/upload?_token=' + csrf
+            },
+            image: {
+                upload: {
+                    types: ['jpeg', 'png', 'jpg', 'gif', 'webp']
+                }
+            }
+        })
             .then(editor => window.ictEditorInstance = editor)
             .catch(err => console.error(err));
 

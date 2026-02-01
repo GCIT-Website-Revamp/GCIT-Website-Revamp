@@ -38,7 +38,7 @@
                     </div>
                     <div class="otherContent">
                         <h1>Other Services</h1>
-                            <a href="/clubs">Clubs</a>
+                            <a href="/clubs">CCA Clubs</a>
                             <a href="/resources/Student-Welfare">Student Welfare</a>
                     </div>
         </div>

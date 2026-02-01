@@ -453,7 +453,7 @@ Route::get('/courseDetails/{id}', function ($id) {
         $groupedModules[$meta['year']][$meta['semester']][] = $module;
     }
 
-    $otherCourses = Course::where('id', '!=', $id)->get();
+    $otherCourses = Course::where('id', '!=', $id)->orderBy('name', 'ASC')->get();
 
     return view(
         'user.courseDetails',

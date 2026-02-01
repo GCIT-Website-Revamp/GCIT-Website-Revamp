@@ -53,7 +53,6 @@
                 <div class="otherContent">
                     <h1>Other Services</h1>
                     <a href="/clubs">CCA Clubs</a>
-                    <a href="/resources/ICT">ICT</a>
                     <a href="/resources/Student-Welfare">Student Welfare</a>
                 </div>
             </div>

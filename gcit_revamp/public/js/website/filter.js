@@ -381,4 +381,30 @@ document.addEventListener("DOMContentLoaded", () => {
   clampFilter();
 });
 
-   
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".staffProfileWrapper .staff");
+  const checkboxes = document.querySelectorAll(".filterWrapper input[type='checkbox']");
+
+  if (!cards.length || !checkboxes.length) return;
+
+  function applyFilters() {
+    const active = Array.from(checkboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value.toLowerCase());
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const tags = JSON.parse(card.dataset.tags || "[]").map(t => t.toLowerCase());
+
+      const show = active.length === 0 || active.some(a => tags.includes(a));
+
+      card.style.display = show ? "flex" : "none";
+      if (show) visibleCount++;
+    });
+  }
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener("change", applyFilters);
+  });
+});

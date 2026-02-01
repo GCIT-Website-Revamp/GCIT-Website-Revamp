@@ -203,7 +203,7 @@ class TeamController extends Controller
                 ->orWhere('title', 'LIKE', "%{$q}%")
                 ->orWhere('qualification', 'LIKE', "%{$q}%")
                 ->orWhere('type', 'LIKE', "%{$q}%")
-                ->orWhere('category', 'LIKE', "%{$q}%")
+                ->orWhereJsonContains('category', $q)
                 ->orderBy('name', 'asc')
                 ->get();
 

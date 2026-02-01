@@ -46,7 +46,16 @@ document.getElementById('addStudioBtn')?.addEventListener('click', function () {
     `;
 
     ClassicEditor
-        .create(document.querySelector('#description'))
+        .create(document.querySelector('#description'), {
+            ckfinder: {
+                uploadUrl: '/ckeditor/upload?_token=' + csrf
+            },
+            image: {
+                upload: {
+                    types: ['jpeg', 'png', 'jpg', 'gif', 'webp']
+                }
+            }
+        })
         .then(editor => window.ictEditorInstance = editor)
         .catch(err => console.error(err));
 
@@ -198,9 +207,39 @@ document.getElementById('editStudioBtn')?.addEventListener('click', function () 
         `;
 
         ClassicEditor
-            .create(document.querySelector('#description'))
-            .then(editor => window.ictEditorInstance = editor)
-            .catch(err => console.error(err));
+        .create(document.querySelector('#description'), {
+            mediaEmbed: {
+                previewsInData: true,
+                removeProviders: [], // Allow all providers
+                extraProviders: [
+                    {
+                        name: 'customDrive',
+                        url: /^drive\.google\.com\/file\/d\/([^\/]+)\/view/,
+                        html: match => {
+                            const videoId = match[1];
+                            return `
+                                <iframe src="https://drive.google.com/file/d/${videoId}/preview" 
+                                        width="640" 
+                                        height="360" 
+                                        frameborder="0" 
+                                        allowfullscreen>
+                                </iframe>
+                            `;
+                        }
+                    }
+                ]
+            },
+            ckfinder: {
+                uploadUrl: '/ckeditor/upload?_token=' + csrf
+            },
+            image: {
+                upload: {
+                    types: ['jpeg', 'png', 'jpg', 'gif', 'webp']
+                }
+            }
+        })
+        .then(editor => window.ictEditorInstance = editor)
+        .catch(err => console.error(err));
 
         document.querySelector('#myModal .modal-footer').innerHTML = `
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

@@ -137,7 +137,7 @@
                                              <div class="action-buttons">
                                                 <button class="btn btn-success edit-btn" data-id="{{ $team->id }}"
                                                    data-name="{{ $team->name }}" data-service-id="{{ $team->service_id }}"
-                                                   data-type="{{ $team->type }}" data-department="{{ $team->category }}"
+                                                   data-type="{{ $team->type }}" data-departments='@json(json_decode($team->category, true))'
                                                    data-title="{{ $team->title }}" data-qualifications="{{ $team->qualification }}"
                                                    data-description="{{ $team->description }}"
                                                    data-image="{{ asset('storage/' . $team->image) }}">Edit</button>
@@ -168,7 +168,7 @@
          </div>
       </div>
       <div class="modal fade" id="myModal">
-         <div class="modal-dialog">
+         <div class="modal-dialog modal-md">
             <div class="modal-content">
                <!-- Modal Header -->
                <div class="modal-header">

@@ -317,10 +317,11 @@
                             <h1>More on Study</h1>
                         </div>
                         <div class="otherContent">
-                            <h1>Other Services</h1>
-                            <a href="/clubs">CCA Clubs</a>
+                            <h1>Schools</h1>
+                            <a href="/course/soc">School of Future Computing</a>
 
-                            <a href="/resources/Student-Welfare">Student Welfare</a>
+                            <a href="/course/sidd">School of Interactive Design & Development</a>
+                            <a href="/course/electives">Speculative Electives</a>
                         </div>
                     </div>
                 </div>

@@ -119,7 +119,7 @@
 <div class="miniTopNav" id="miniTopNav">
 
     <div class="closeWrapper">
-        <label for="miniNavToggle" class="toggleSpan">
+        <label for="miniNavToggle" class="toggleSpan closeSpan">
             <span class="material-symbols-outlined">close</span>
         </label>
     </div>

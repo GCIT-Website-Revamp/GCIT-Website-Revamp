@@ -390,9 +390,11 @@ nav.mini h1, .miniTopNav h1{
     color: var(--color-secondary-light);
 }
 .toggleSpan{
-    color: white !important;
     transition: color 0.3s ease-in-out;
 
+}
+.closeSpan{
+    color: white !important;
 }
 .toggleSpan:hover{
     cursor: pointer;

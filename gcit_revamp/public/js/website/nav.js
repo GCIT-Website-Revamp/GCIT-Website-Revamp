@@ -324,7 +324,7 @@ if (nav) {
             if (!isHidden) {
                 gsap.to(nav, {
                     y: "-100%",
-                    duration: 0.35,
+                    duration: 0.2,
                     ease: "power2.out"
                 });
                 isHidden = true;
@@ -333,7 +333,7 @@ if (nav) {
             if (isHidden) {
                 gsap.to(nav, {
                     y: 0,
-                    duration: 0.35,
+                    duration: 0.2,
                     ease: "power2.out"
                 });
                 isHidden = false;
@@ -357,7 +357,7 @@ let mobileHidden = false;
 function showMiniNav() {
     gsap.to(miniNav, {
         y: 0,
-        duration: 0.3,
+        duration: 0.2,
         ease: "power2.out"
     });
     mobileHidden = false;
@@ -366,7 +366,7 @@ function showMiniNav() {
 function hideMiniNav() {
     gsap.to(miniNav, {
         y: "-100%",
-        duration: 0.3,
+        duration: 0.2,
         ease: "power2.out"
     });
     mobileHidden = true;

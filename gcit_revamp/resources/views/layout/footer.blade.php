@@ -28,7 +28,7 @@
                 <a href="https://education.gov.bt/">MoESD</a>
                 <a href="https://www.moice.gov.bt/">MoICE</a>
                 <a href="https://rcsc.gov.bt/">RCSC</a>
-                <a href="https://rub.edu.bt">RUB</a>
+                <a href="https://www.rub.edu.bt/">RUB</a>
             </div>
 
             <div class="linkContainer">

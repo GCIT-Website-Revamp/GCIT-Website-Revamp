@@ -137,7 +137,7 @@
                                              <div class="action-buttons">
                                                 <button class="btn btn-success edit-btn" data-id="{{ $team->id }}"
                                                    data-name="{{ $team->name }}" data-service-id="{{ $team->service_id }}"
-                                                   data-type="{{ $team->type }}" data-departments='@json($team->category)'
+                                                   data-type="{{ $team->type }}" data-departments='@json(is_string($team->category) ? json_decode($team->category, true) : $team->category)'
                                                    data-title="{{ $team->title }}" data-qualifications="{{ $team->qualification }}"
                                                    data-description="{{ $team->description }}"
                                                    data-image="{{ asset('storage/' . $team->image) }}">Edit</button>

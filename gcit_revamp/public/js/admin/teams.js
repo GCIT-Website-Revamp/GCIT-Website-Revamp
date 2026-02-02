@@ -102,7 +102,7 @@ function formatErrors(errors) {
 const DEPARTMENT_OPTIONS = [
     'AI Department', 
     'Blockchain Department',
-    'Cyber Department',
+    'Cyber Security Department',
     'Fullstack Department',
     'Interactive Design & Development',
     'Faculty Leadership Team'

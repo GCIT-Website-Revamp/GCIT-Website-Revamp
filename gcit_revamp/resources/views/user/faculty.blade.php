@@ -29,7 +29,7 @@
         <div class="facultyWrapper">
             <div class="staffProfileWrapper">
                 @foreach ($faculties as $faculty)
-                    <div class="staff" data-tags='@json($faculty->category)'>
+                    <div class="staff" data-tags='@json(is_string($team->category) ? json_decode($team->category, true) : $team->category)'>
                         <img src="{{ asset('storage/' . $faculty->image) }}" alt="">
                         <div class="staffDescription">
                             <h1>{{ $faculty->title }}</h1>
@@ -61,8 +61,8 @@
                                     <p>Fullstack Department</p>
                                 </div>
                                 <div class="filter">
-                                    <input type="checkbox" value="Cyber Department">
-                                    <p>Cyber Department</p>
+                                    <input type="checkbox" value="Cyber Security Department">
+                                    <p>Cyber Security Department</p>
                                 </div>
                                 <div class="filter">
                                     <input type="checkbox" value="Interactive Design & Development">

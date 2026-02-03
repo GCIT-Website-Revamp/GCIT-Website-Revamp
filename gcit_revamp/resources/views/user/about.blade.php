@@ -50,10 +50,11 @@
             </div>
             <div class="otherContent">
                 <h1>Support & Services</h1>
-                <a href="/department/Finance">Finance</a>
-                <a href="/department/Human Resources & Administration">Human Resources & Administration</a>
-                <a href="/department/Information & Communication Technology">Information & Communication Technology</a>
-                <a href="/department/School Affairs">Student Welfare</a>
+                @if ($otherServices)
+                    @foreach ($otherServices as $item)
+                        <a href="/department/{{ $item->name }}">{{ $item->name }}</a>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

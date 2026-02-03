@@ -467,6 +467,7 @@ Route::get('/courseDetails/{id}', function ($id) {
 Route::get('/department/{type}', function ($type) {
     $courses = Course::orderBy('name', 'ASC')->get();
     $service = Services::where('name', '=', $type)->first();
+    $otherServices = Services::where('name', '!=', $type)->orderBy('name', 'ASC')->get();
     if ($service) {
         $service->roles = collect($service->roles)->map(function ($role) {
             $team = Team::find($role['team_id']);
@@ -481,7 +482,7 @@ Route::get('/department/{type}', function ($type) {
         });
     }
 
-    return view('user.departmentTemplate', compact('service', 'courses'));
+    return view('user.departmentTemplate', compact('service', 'courses', 'otherServices'));
 });
 Route::get('/faculty', function () {
     $faculties = Team::where('type', '=', 'Academic')->orderBy('title', 'asc')->get();
@@ -491,7 +492,8 @@ Route::get('/faculty', function () {
 Route::get('/about', function () {
     $overview = Overview::orderBy('created_at', 'desc')->first();
     $courses = Course::orderBy('name', 'asc')->get();
-    return view('user.about', compact('overview', 'courses'));
+    $otherServices = Services::orderBy('name', 'ASC')->get();
+    return view('user.about', compact('overview', 'courses', 'otherServices'));
 });
 
 Route::get('/clubs', function () {
@@ -502,6 +504,7 @@ Route::get('/clubs', function () {
 Route::get('/clubDetails/{id}', function ($id) {
     $courses = Course::orderBy('name', 'asc')->get();
     $club = Club::where('id', '=', $id)->first();
+    $otherClubs = Club::where('id', '!=', $id)->orderBy('name', 'ASC')->get();
     if ($club) {
         $club->roles = collect($club->roles)->map(function ($role) {
             $team = Team::find($role['team_id']);
@@ -516,7 +519,7 @@ Route::get('/clubDetails/{id}', function ($id) {
         });
     }
 
-    return view('user.clubDetails', compact('club','courses'));
+    return view('user.clubDetails', compact('club','courses', 'otherClubs'));
 });
 
 Route::get('/resources/{type}', function ($type) {

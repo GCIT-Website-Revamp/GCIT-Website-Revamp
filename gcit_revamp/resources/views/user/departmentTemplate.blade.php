@@ -49,12 +49,12 @@
                      <h1>More on Support & Services</h1>
                  </div>
                  <div class="otherContent">
-                     <h1>Other Departments</h1>
-                     <a href="/department/Finance">Finance</a>
-                        <a href="/department/Human Resources & Administration">Human Resources & Administration</a>
-                        <a href="/department/Information & Communication Technology">Information & Communication Technology</a>
-                        <a href="/department/School Affairs">School Affairs</a>
-                        <a href="/department/Student Affairs">Student Affairs</a>
+                    <h1>Other Departments</h1>
+                    @if ($otherServices)
+                        @foreach ($otherServices as $item)
+                            <a href="/department/{{ $item->name }}">Finance</a>
+                        @endforeach
+                    @endif
                  </div>
              </div>
         </div>

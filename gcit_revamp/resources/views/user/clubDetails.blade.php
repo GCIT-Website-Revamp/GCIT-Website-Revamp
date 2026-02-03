@@ -48,12 +48,15 @@
             
             <div class="otherCourseContainer otherDepartment">
                  <div class="header">
-                     <h1>More on Students</h1>
+                     <h1>More on CCA Clubs</h1>
                  </div>
                  <div class="otherContent">
-                     <h1>Other Services</h1>
-                       <a href="/clubs">CCA Clubs</a>
-                        <a href="/resources/Student-Welfare">Student Welfare</a>
+                     <h1>Other Clubs</h1>
+                     @if ($otherClubs)
+                        @foreach ($otherClubs as $item)
+                            <a href="/clubDetails/{{ $item->id }}">{{ $item->name }}</a>
+                        @endforeach
+                     @endif
                  </div>
              </div>
         </div>

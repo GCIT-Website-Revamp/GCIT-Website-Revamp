@@ -70,7 +70,8 @@ document.getElementById('addStudioBtn')?.addEventListener('click', function () {
     fetch('/api/team')
         .then(res => res.json())
         .then(data => {
-            teams = (data.data || []);
+            teams = (data.data || [])
+            .sort((a, b) => a.name.localeCompare(b.name));
             // Add initial role row after fetching teams
             addRoleRow();
         })
@@ -252,7 +253,8 @@ document.getElementById('editStudioBtn')?.addEventListener('click', function () 
         fetch('/api/team')
             .then(res => res.json())
             .then(data => {
-                teams = data.data || [];
+                teams = (data.data || [])
+                .sort((a, b) => a.name.localeCompare(b.name));
 
                 const renderRoleRow = (role = {}) => {
                     const options = teams.map(t => `

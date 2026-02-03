@@ -193,7 +193,8 @@ document.getElementById('addProjectBtn').addEventListener('click', function () {
     fetch('/api/team')
         .then(res => res.json())
         .then(data => {
-            teams = (data.data || []).filter(team => team.type === "Academic");
+            teams = (data.data || []).filter(team => team.type === "Academic")
+            .sort((a, b) => a.name.localeCompare(b.name));
 
             const guideSelect = document.getElementById('guide');
             if (guideSelect) {
@@ -392,7 +393,8 @@ document.addEventListener('click', function (e) {
         fetch('/api/team')
             .then(res => res.json())
             .then(data => {
-                const teams = (data.data || []).filter(team => team.type === "Academic");
+                const teams = (data.data || []).filter(team => team.type === "Academic")
+                .sort((a, b) => a.name.localeCompare(b.name));
                 const guideSelect = document.getElementById('guide');
 
                 if (!guideSelect) return;

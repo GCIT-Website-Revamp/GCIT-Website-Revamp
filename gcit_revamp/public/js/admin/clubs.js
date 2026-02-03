@@ -64,7 +64,8 @@ document.getElementById('addClubBtn').addEventListener('click', function () {
     fetch('/api/team')
         .then(res => res.json())
         .then(data => {
-            teams = data.data || [];
+            teams = (data.data || [])
+            .sort((a, b) => a.name.localeCompare(b.name));
             addRoleRow();
         });
 
@@ -204,7 +205,8 @@ document.querySelectorAll('.edit-club-btn').forEach(btn => {
         fetch('/api/team')
             .then(res => res.json())
             .then(data => {
-                teams = data.data || [];
+                teams = (data.data || [])
+                .sort((a, b) => a.name.localeCompare(b.name));
 
                 const renderRoleRow = (role = {}) => `
                     <div class="role-row d-flex gap-2 mb-2">

@@ -61,7 +61,8 @@ document.getElementById('addServiceBtn').addEventListener('click', function () {
     fetch('/api/team')
         .then(res => res.json())
         .then(data => {
-            teams = (data.data || []).filter(team => team.type === "Non-Academic");
+            teams = (data.data || []).filter(team => team.type === "Non-Academic")
+            .sort((a, b) => a.name.localeCompare(b.name));
             // Add initial role row after fetching teams
             addRoleRow();
         })
@@ -214,7 +215,8 @@ document.querySelectorAll('.edit-service-btn').forEach(button => {
         fetch('/api/team')
             .then(res => res.json())
             .then(data => {
-                teams = data.data || [];
+                teams = (data.data || []).filter(team => team.type === "Non-Academic")
+                .sort((a, b) => a.name.localeCompare(b.name));
 
                 const renderRoleRow = (role = {}) => {
                     const options = teams.map(t => `

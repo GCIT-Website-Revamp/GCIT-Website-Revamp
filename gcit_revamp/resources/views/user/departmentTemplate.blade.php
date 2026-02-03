@@ -52,7 +52,7 @@
                     <h1>Other Departments</h1>
                     @if ($otherServices)
                         @foreach ($otherServices as $item)
-                            <a href="/department/{{ $item->name }}">Finance</a>
+                            <a href="/department/{{ $item->name }}">{{ $item->name }}</a>
                         @endforeach
                     @endif
                  </div>

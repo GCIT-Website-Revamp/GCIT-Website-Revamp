@@ -62,20 +62,16 @@
                             </div>
                             <div class="filterContent">
                                 <div class="filterHeader">
-                                    <h1>Projects By Courses</h1>
+                                    <h1>Project Type</h1>
                                 </div>
                                 <div class="filterContainer">
                                     <div class="filter">
-                                        <input type="checkbox" value="Fullstack & AI">
-                                        <p>Fullstack & AI</p>
+                                        <input type="checkbox" value="Start-Up">
+                                        <p>Start-Up Project</p>
                                     </div>
                                     <div class="filter">
-                                        <input type="checkbox" value="Blockchain">
-                                        <p>Blockchain</p>
-                                    </div>
-                                    <div class="filter">
-                                        <input type="checkbox" value="Interactive Design & Development">
-                                        <p>Interactive Design & Development</p>
+                                        <input type="checkbox" value="Capstone Project">
+                                        <p>Capstone Project</p>
                                     </div>
                                 </div>
                             </div>

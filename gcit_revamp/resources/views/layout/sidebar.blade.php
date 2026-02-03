@@ -57,7 +57,7 @@
                 </ul>
             </li>
             <li>
-                <a href="teams"><i class="fa fa-users white_color"></i> <span>Faculty</span></a>
+                <a href="teams"><i class="fa fa-users white_color"></i> <span>Staffs</span></a>
             </li>
             <li>
                 <a href="contact">

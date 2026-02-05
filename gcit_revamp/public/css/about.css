@@ -95,6 +95,10 @@
     width: auto;
     color: #F4F3F3;
     z-index: 0;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mottoWrapper .visionWrapper h1,

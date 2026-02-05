@@ -2,7 +2,9 @@
     position: relative;
     height: calc(100vh - 86px);
     width: 100%;
-    margin-top: 104px;
+    background-color: #f6851ca9;
+    box-sizing:content-box;
+    padding-top: 104px;
 }
 
 .heroBannerWrapper .bannerContentWrapper {
@@ -737,7 +739,7 @@
     padding: 60px 60px 60px var(--padding-sides);
 }
 .homeProjectDetails .projectName {
-    height: 180px;
+    min-height: 180px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -772,6 +774,7 @@
 
 .homeProjectWrapper .prjSlider {
     display: flex;
+    width: 100%;
     align-items: center;
     gap: 1rem;
 }
@@ -779,7 +782,7 @@
 .homeProjectWrapper .homeSliderTrack {
     display: flex;
     overflow: hidden;
-    width: 400px; /* adjust as needed */
+    width: 80%; /* adjust as needed */
     position: relative;
 }
 
@@ -1235,6 +1238,9 @@
         display: block;
         row-gap: 0.3rem;
     }
+    .heroBannerWrapper{
+        padding-top: 91px;
+    }
 
     .heading-row .left {
         padding-right: 0;
@@ -1290,12 +1296,7 @@
     }
 }
 
-@media (min-width: 1000px) {
-    /* tablets */
-    .heroBannerWrapper {
-        height: calc(100vh - 104px);
-    }
-}
+
 
 @media (max-width: 100px) {
     .heroBannerWrapper {
@@ -1357,7 +1358,7 @@
     }
     .course {
         height: 50vh;
-        min-height: 450px;
+        min-height: 550px;
     }
     .courseContent {
         flex-direction: column;
@@ -1695,6 +1696,9 @@
     }
 }
 @media (max-width: 480px) {
+    .heroBannerWrapper {
+        padding-top: 91px;
+    }
     .homeEventWrapper {
         padding-bottom: 0;
     }
@@ -1806,13 +1810,5 @@
     }
 }
 @media (min-width: 1600px) {
-    .contentSlider {
-        padding: 0 var(--padding-sides);
-    }
-    .leftBtn {
-        left: 1%;
-    }
-    .rightBtn {
-        right: 1%;
-    }
+    
 }

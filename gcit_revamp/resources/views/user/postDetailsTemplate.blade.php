@@ -66,16 +66,18 @@
             <div class="postWrapper">
             <div class="post">
                 <div class="sectionHeader">
-            @if($event)
-                    <h1 class = "main-header">{{ $event->name }}</h1>
-            @endif
-            @if($announcement)
-                    <h1 class = "main-header">{{ $announcement->name }}</h1>
-            @endif
-            @if($project)
-                    <h1 class = "main-header">{{ $project->name }}</h1>
-            @endif        
+                    @if($event)
+                            <h1 class = "main-header">{{ $event->name }}</h1>
+                    @endif
+                    @if($announcement)
+                            <h1 class = "main-header">{{ $announcement->name }}</h1>
+                    @endif
+                    @if($project)
+                            <h1 class = "main-header">{{ $project->name }}</h1>
+                    @endif        
                 </div>
+                <span class="date"><span class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
+
                 @if($event)
                 <img src="{{ asset('storage/' . $event->image) }}" alt="">
                 <p>{!! $event->description !!}</p>

@@ -1,9 +1,10 @@
 .pageBannerWrapper{
     position: relative;
-    margin-top: 104px;
+    padding-top: calc(104px + 2rem);
+    box-sizing: content-box;
     min-height: 350px;
     display: flex;
-    padding-top: 2rem;
+    background-color: #76b444d0 ;
     justify-content: flex-end;
     padding-bottom: clamp(1.5rem, 3vw, 2.5rem)
 }
@@ -326,7 +327,7 @@
   pointer-events: none;
 }
  .pageBannerWrapper{
-    margin-top: 80px;
+    padding-top: 80px;
 }
   body.filter-open .filterColumn {
     pointer-events: auto;
@@ -400,6 +401,20 @@
     }
 }
 
+@media (max-width : 800px){
+      .mainContent .card, .cardAnnouncement .card {
+        flex-direction: column;
+    }
+    .mainContent .card img{
+    width: 100% !important;
+    max-width: unset;
+    height: auto;
+   }
+    .mainContent .card .cardContent{
+        padding: 1.3rem;
+        width: 100%;
+    }
+}
 @media (max-width: 768px) {
    
     /* .pageBannerWrapper .bannerContent p{
@@ -416,11 +431,12 @@
     }
     .pageBannerWrapper {
         min-height: auto;
-        margin-top: 91px;
+        padding-top: 91px;
         padding-bottom: 2.5rem;
     }
     .pageBannerWrapper .bannerContent {
         bottom: unset;
+        padding-top: 2rem;
     }
     .pageBannerWrapper .overlay {
         position: absolute;
@@ -464,9 +480,7 @@
         font-size: 0.95rem;
         line-height: 1.5;
     }
-    .mainContent .card, .cardAnnouncement .card {
-        flex-direction: column;
-    }
+  
 
     .breadCrumbs {
         font-size: 0.85rem;

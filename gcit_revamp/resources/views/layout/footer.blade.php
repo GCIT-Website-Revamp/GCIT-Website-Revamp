@@ -99,3 +99,12 @@
         });
     </script>
 </footer>
+<div class="mobileStickyFooterContainer">
+      <div class="socialWrapper">
+            <a href="https://www.linkedin.com/company/gyalpozhingcollegeit/"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/GCIT.Bhutan"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+        <div class="contactUs">
+            <a href="/contactUs">Contact Us</a>
+        </div>
+</div>

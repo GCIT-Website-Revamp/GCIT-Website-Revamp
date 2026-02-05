@@ -31,7 +31,7 @@
             <span class="material-symbols-outlined">
                 more_vert
             </span> </label>
-        <div class="section sectionPaddingDetails">
+        <div class="section">
             <div class="courseDetailsSection">
 
                 <div class="courseDetailsContainer">

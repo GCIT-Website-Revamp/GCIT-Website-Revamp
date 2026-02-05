@@ -28,10 +28,7 @@
                             research, and technology.</p>
                     </div>
                 </div>
-            </div>
-            <div class="">
-
-                <div class="contentSlider">
+                 <div class="contentSlider">
                     <div class="leftBtn">
                         <span class="material-symbols-outlined">expand_circle_right</span>
                     </div>
@@ -43,6 +40,8 @@
                     </div>
                 </div>
             </div>
+
+               
         </div>
     </div>
 

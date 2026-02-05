@@ -106,7 +106,9 @@ footer .linkWrapper a:hover{
 .linkWrapper .dash{
   display: none;
 }
-
+.mobileStickyFooterContainer{
+  display: none;
+}
 @media (max-width: 1024px) {
   .footerContentWrapper{
     flex-direction: column;
@@ -187,9 +189,56 @@ footer .linkWrapper a:hover{
   .dash{
     width: 100%;
   }
+  .footerContentWrapper{
+    align-items: flex-start;
+  }
+  footer * {
+    text-align: start !important;
+  }
+  .footer .linkWrapper{
+    align-items: flex-start !important;
+  }
+  footer .linkContainer{
+    align-items: flex-start;
+  }
+  .socialWrapper{
+    align-items: flex-start;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .copyRight{
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 480px) {
+  .mobileStickyFooterContainer{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    align-items: center;
+    padding: 0 var(--padding-sides);
+    left: 0;
+    height: 65px;
+    width: 100%;
+    background-color: var(--color-secondary);
+  }
+  .mobileStickyFooterContainer .contactUs{
+    width: fit-content;
+  }
+  .mobileStickyFooterContainer .socialWrapper{
+    width: fit-content;
+  }
+  .mobileStickyFooterContainer .contactUs a{
+    width: fit-content;
+    text-decoration: none;
+    color: white
+  }
+  .mobileStickyFooterContainer .contactUs a:hover{
+    color: var(--color-secondary-light)
+  }
   footer{
     padding: 40px 0;
   }
@@ -199,12 +248,7 @@ footer .linkWrapper a:hover{
 .linkWrapper .dash{
   display: block;
 }
-  .footerContentWrapper{
-    align-items: flex-start;
-  }
-  footer * {
-    text-align: start !important;
-  }
+  
 
   footer .linkWrapper h1{
     font-size: 13px;

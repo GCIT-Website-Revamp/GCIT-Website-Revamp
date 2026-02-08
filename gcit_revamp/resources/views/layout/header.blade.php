@@ -51,7 +51,7 @@
                         <label>Courses</label>
                         <a href="/course/soc" class="subLink">School of Future Computing</a>
                         <a href="/course/sidd" class="subLink">School of Interactive Design & Development</a>
-                        <a href="/course/electives" class="subLink">Speculative Electives</a>
+                        <a href="/course/electives" class="subLink">Specialty Electives</a>
                         <label>Student Services</label>
                         <a href="/clubs" class="subLink">CCA Clubs</a>
                         <!-- <a href="/resources/ICT" class="subLink">ICT</a> -->
@@ -164,7 +164,7 @@
         <a href="/course/soc">School of Future Computing<span class="material-symbols-outlined">chevron_right</span></a>
         <a href="/course/sidd">School of Interactive Design & Development<span
                 class="material-symbols-outlined">chevron_right</span></a>
-        <a href="/course/electives">Speculative Electives<span
+        <a href="/course/electives">Specialty Electives<span
                 class="material-symbols-outlined">chevron_right</span></a>
 
         <label>Student Services</label>

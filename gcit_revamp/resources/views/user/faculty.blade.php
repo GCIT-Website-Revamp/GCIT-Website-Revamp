@@ -16,7 +16,7 @@
         </div>
         <div class="contentWrapper ">
             <h1>Faculty</h1>
-            <p>GCIT offers specialized programs designed to equip students with both technical expertise and creative problem-solving skills. Courses span areas such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology, Cybersecurity, and Interactive Design & Development, providing hands-on learning experiences that prepare graduates to lead Bhutan’s digital future.</p>
+            <p>The Faculty comprises accomplished academic professionals dedicated to delivering high-quality, technology-focused education, applied research, and academic services in line with the College’s mandate and standards. Faculty members design and deliver industry-relevant curricula, mentor students, and foster innovation-driven learning through research, technopreneurship, and real-world projects. Organized across departments and schools, the Faculty promotes technological innovation, entrepreneurial thinking, and ethical practice. Through strong industry engagement and project-based learning, it supports the College’s vision of producing competent, innovative, and industry-ready graduates who contribute to national development and the digital economy.</p>
         </div>
     </div>
 </div>

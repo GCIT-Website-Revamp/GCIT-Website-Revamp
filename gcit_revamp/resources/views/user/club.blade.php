@@ -17,11 +17,11 @@
             </div>
             <div class="contentWrapper">
                 <h1>CCA Clubs</h1>
-                <p>GCIT offers future-focused programs that combine strong technical foundations with creative
-                    problem-solving. Each course is designed to bridge theory with practice, preparing students to innovate
-                    in fields such as Full Stack Development, Artificial Intelligence & Data Science, Blockchain Technology,
-                    Cybersecurity, and Interactive Design & Development — empowering them to drive Bhutan’s digital
-                    transformation.</p>
+                <p>At GCIT, Co-Curricular Activities (CCA) are at the heart of a vibrant and inclusive campus life. Through
+                    diverse clubs, societies, sports, creative platforms, and community initiatives, students explore their
+                    passions, build leadership skills, and grow beyond the classroom. These student-led and faculty-guided
+                    activities nurture creativity, teamwork, resilience, and well-being, shaping confident, socially
+                    responsible, and future-ready graduates.</p>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
 
             <div class="mainContent courseContent">
                 @forelse ($clubs as $index => $club)
-                    <a href="/clubDetails/{{ $club->id }}"class = "card">
+                    <a href="/clubDetails/{{ $club->id }}" class="card">
                         <div class="cardContent clubContent">
                             <h1>{{ $club->name }}</h1>
 
@@ -39,7 +39,7 @@
                                 {{ Str::limit(strip_tags($club->description), 550) }}
                             </p>
 
-                          
+
                         </div>
                     </a>
                 @empty

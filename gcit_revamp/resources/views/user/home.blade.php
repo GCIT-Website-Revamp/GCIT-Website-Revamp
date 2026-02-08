@@ -221,9 +221,7 @@
                                 rise of computing with the emergence of Agentic Development, Decentralise Open Ecosystems
                                 and LLMs mark an exciting era in the revolution of design and technology education.</p>
 
-                            <p>At GCIT, we are a dedicated college formed as the intelligent twin of the Royal University of
-                                Bhutan to nurture faculty members and graduate students to be the future in Computer Science
-                                & Interactive Design and Development.</p>
+                         
                         </div>
 
                         <div id="expanded-message-content" class="message-expand-wrapper">

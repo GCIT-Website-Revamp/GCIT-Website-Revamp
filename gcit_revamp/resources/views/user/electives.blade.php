@@ -16,7 +16,7 @@
                 <a>Study</a>
             </div>
             <div class="contentWrapper">
-                <h1>Speculative Electives</h1>
+                <h1>Specialty Electives</h1>
             </div>
         </div>
     </div>

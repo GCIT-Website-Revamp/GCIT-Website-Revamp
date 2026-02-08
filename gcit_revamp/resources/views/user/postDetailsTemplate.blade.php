@@ -78,8 +78,6 @@
                         @endif
                         @if($project)
                             <h1 class="main-header">{{ $project->name }}</h1>
-                            <span class="date"><span
-                                    class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($project->date)->format('F d, Y') }}</span>
                         @endif
                     </div>
 
@@ -148,8 +146,6 @@
                     @if($latestProjects)
                         @forelse ($latestProjects as $index => $item)
                             <a href="/post/project/{{ $item->id }}" class="suggestion">
-                                <span class="date"><span
-                                        class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
                                 <h1>{{ $item->name }}</h1>
                             </a>
                         @empty

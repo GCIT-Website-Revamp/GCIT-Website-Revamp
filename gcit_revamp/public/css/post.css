@@ -80,7 +80,7 @@ li ul li {
   display: none !important;
 }
 
-.announcementContent strong, .announcementContent strong > i{
+.announcementContent > strong, .announcementContent > strong > i{
     display: flex;
     flex-direction: column;
     gap: clamp(1rem, 2vw, 30px);

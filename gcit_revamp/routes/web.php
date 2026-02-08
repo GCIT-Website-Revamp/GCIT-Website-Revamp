@@ -560,3 +560,39 @@ Route::get('/homepage', function () {
     $projects = Project::orderBy('created_at', 'desc')->where('highlight', '=', "true")->get();
     return view('user.homeTemplate', compact('bsc','sidd', 'announcements', 'events', 'projects'));
 });
+
+Route::get('/fintech', function () {
+    $fintech = Fintech::orderBy('name', 'asc')->first();
+    if ($fintech) {
+        $fintech->roles = collect($fintech->roles)->map(function ($role) {
+            $team = Team::find($role['team_id']);
+            if ($team) {
+                $role['team_name'] = $team->name;
+                $role['image'] = $team->image;
+            } else {
+                $role['team_name'] = null;
+                $role['users'] = [];
+            }
+            return $role;
+        });
+    }
+    return view('user.fintech', compact('fintech'));
+});
+
+Route::get('/studio', function () {
+    $studio = Studio::orderBy('name', 'asc')->first();
+    if ($studio) {
+        $studio->roles = collect($studio->roles)->map(function ($role) {
+            $team = Team::find($role['team_id']);
+            if ($team) {
+                $role['team_name'] = $team->name;
+                $role['image'] = $team->image;
+            } else {
+                $role['team_name'] = null;
+                $role['users'] = [];
+            }
+            return $role;
+        });
+    }
+    return view('user.studio', compact('studio'));
+});

@@ -38,6 +38,8 @@
                     <div class="dropDownContent">
 
                         <a href="/project">Industry Projects</a>
+                        <a href="/fintech">GCITxBIL Fintech Innovation Lab</a>
+                        <a href="/studio">K Studio</a>
                     </div>
                 </div>
 

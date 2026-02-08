@@ -56,6 +56,9 @@ li ul li {
     margin-left: 0; /* remove extra browser auto-offset */
 }
 
+.post .date{
+    margin: 1.5rem 0;
+}
 .btnWrapper button {
     height: 50px;
     width: clamp(150px, 5vw, 200px);

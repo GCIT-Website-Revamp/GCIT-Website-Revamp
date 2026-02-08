@@ -1807,6 +1807,7 @@
     .course:hover {
         flex: none;
         height: 67vh;
+        min-height:600px;
     }
 }
 @media (min-width: 1600px) {

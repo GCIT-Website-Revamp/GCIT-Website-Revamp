@@ -213,6 +213,7 @@ footer .linkWrapper a:hover{
 }
 
 @media (max-width: 480px) {
+
   .mobileStickyFooterContainer{
     display: flex;
     justify-content: space-between;
@@ -223,7 +224,8 @@ footer .linkWrapper a:hover{
     left: 0;
     height: 65px;
     width: 100%;
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary);
+    z-index: 1001;
   }
   .mobileStickyFooterContainer .contactUs{
     width: fit-content;
@@ -248,7 +250,9 @@ footer .linkWrapper a:hover{
 .linkWrapper .dash{
   display: block;
 }
-  
+  .copyright{
+    margin-bottom: 65px;
+  }
 
   footer .linkWrapper h1{
     font-size: 13px;
@@ -258,8 +262,13 @@ footer .linkWrapper a:hover{
     font-size: 14px;
   }
 
-  .socialWrapper a{
+ .subContentWrapper{
+  margin-top: 1.5rem;
+  margin-bottom: 50px;
+ }
+  .subContentWrapper .socialWrapper a{
     font-size: 26px;
+    display: none;
   }
 
   .copyRight{

@@ -101,7 +101,7 @@
                   <div class="row column_title">
                      <div class="col-md-12">
                         <div class="page_title">
-                           <h2>K Studio</h2>
+                           <h2>Studio K</h2>
                         </div>
                      </div>
                   </div>
@@ -111,7 +111,7 @@
                         <div class="full graph_head">
                            <div class="d-flex justify-content-between align-items-center">
                               <div class="heading1 margin_0">
-                                 <h2>K Studio</h2>
+                                 <h2>Studio K</h2>
                               </div>
                               <div>
                                  @if ($studio)

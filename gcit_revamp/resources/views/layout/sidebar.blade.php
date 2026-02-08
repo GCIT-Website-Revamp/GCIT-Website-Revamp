@@ -44,7 +44,7 @@
                 <ul class="collapse list-unstyled" id="impact">
                     <li><a href="projects">> <span>Projects</span></a>
                     <li><a href="fintech">> <span>GCITxBIL Fintech Innovation Lab</span></a></li>
-                    <li><a href="kstudio">> <span>K Studio</span></a></li>
+                    <li><a href="kstudio">> <span>Studio K</span></a></li>
                 </ul>
             </li>
             <li>

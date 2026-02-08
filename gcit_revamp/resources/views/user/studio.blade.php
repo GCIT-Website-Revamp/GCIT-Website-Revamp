@@ -16,7 +16,7 @@
             <a>Tech Impact</a>
         </div>
         <div class="contentWrapper">
-            <h1>K Studio</h1>
+            <h1>Studio K</h1>
         </div>
     </div>
 </div>

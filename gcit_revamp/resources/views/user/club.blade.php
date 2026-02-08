@@ -30,14 +30,18 @@
 
             <div class="mainContent courseContent">
                 @forelse ($clubs as $index => $club)
-                    <div class="card">
-                    <img src="{{ asset('storage/' . $club->logo) }}" alt="">
-                    <a href="/clubDetails/{{ $club->id }}" class="cardContent">
-                        <h1>{{ $club->name }}</h1>
-                        <p class="multi-truncate">{!! Str::limit($club->description, 100) !!}</p>
-                      
+                    <a href="/clubDetails/{{ $club->id }}" class="card">
+                        <div class="cardContent clubContent">
+                            <h1>{{ $club->name }}</h1>
+
+
+                            <p class="multi-truncate">
+                                {{ Str::limit(strip_tags($club->description), 550) }}
+                            </p>
+
+
+                        </div>
                     </a>
-                </div>
                 @empty
                     <p>No clubs found.</p>
                 @endforelse

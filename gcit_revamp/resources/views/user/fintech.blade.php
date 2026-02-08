@@ -51,7 +51,7 @@
                  <div class="otherContent">
                     <h1>Other Tech Impacts</h1>
                     <a href="/project">Industry Projects</a>
-                    <a href="/studio">K Studio</a>
+                    <a href="/studio">Studio K</a>
                  </div>
              </div>
         </div>

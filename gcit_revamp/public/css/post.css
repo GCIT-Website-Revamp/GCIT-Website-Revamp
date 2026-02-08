@@ -195,7 +195,9 @@ li ul li {
     margin: 0.4rem 0;
 }
 
-
+.otherCourseContainer .header h1{
+    width: 100% !important;
+}
 
 .post p[style] {
     transform: none !important;

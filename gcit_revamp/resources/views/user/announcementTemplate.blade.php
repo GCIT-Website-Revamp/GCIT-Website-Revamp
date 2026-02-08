@@ -36,13 +36,12 @@
 
                 @forelse ($announcements as $index => $announcement)
                     <a href="/post/announcement/{{ $announcement->id }}" class="card" data-tag="{{$announcement->category}}">
-                        
+
                         <div class="cardContent">
-                                <span class="date"><span
+                            <span class="date"><span
                                     class="material-symbols-outlined">calendar_month</span>{{ \Carbon\Carbon::parse($announcement->date)->format('F d, Y') }}</span>
                             <h1>{{ $announcement->name }}</h1>
-                            <p class="multi-truncate">{!! Str::limit($announcement->description, 200) !!}</p>
-                        
+                            <p class="multi-truncate">{{ strip_tags(Str::limit($announcement->description, 200)) }}</p>
 
                         </div>
                     </a>

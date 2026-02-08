@@ -223,10 +223,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterWrapper = document.querySelector(".filterWrapper");
   const cards = document.querySelectorAll(".mainContent .card");
 
-  console.log("Cards found:", cards.length);
 
   if (!filterWrapper || !cards.length) {
-    console.warn("Filter or cards not found");
     return;
   }
 

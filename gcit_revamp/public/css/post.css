@@ -76,7 +76,19 @@ li ul li {
 .btnWrapper .left span {
     transform: rotate(180deg);
 }
+.cardContent p.multi-truncate ~ p ~ p  {
+  display: none !important;
+}
 
+.announcementContent strong, .announcementContent strong > i{
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 30px);
+}
+
+.otherCourseContainer{
+    transition: unset !important;
+}
 .suggestionWrapper {
     display: flex;
     width: auto;

@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let lockedMainContentWidth = null;
         
         // Find sibling main content (the flex sibling that might expand)
-        const mainContent = container.querySelector('.aboutContent, .courseDetailContent, .mainContent');
+        const mainContent = container.querySelector('.aboutContent, .courseDetailContent, .mainContent, .post');
 
         function lockDimensions() {
             // Only lock when sidebar is in natural flow (not fixed/absolute)
@@ -372,5 +372,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. Institutional Overview (Right Sidebar)
     initStickySidebar(".otherCourseContainer", ".aboutContentWrapper");
-});
 
+    // 4. Listings + Department Pages (Right Sidebar)
+    initStickySidebar(".otherCourseContainer", ".eventsWrapper");
+    initStickySidebar(".otherCourseContainer", ".departmentWrapper");
+});

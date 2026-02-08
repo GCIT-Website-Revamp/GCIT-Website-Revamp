@@ -194,6 +194,7 @@
     /* Sticky behavior handled by courseScroll.js via GSAP */
     top: 0;
     height: 50vh;
+    width: 320px;
 }
 .otherCourseContainer .header h1 {
     font-size: clamp(14px, 2vw, 16px);

@@ -29,7 +29,7 @@
                     <a href="/courseDetails/{{ $course->id }}" class="card" data-tag="{{$course->type}}">
                         <img src="{{ asset('storage/' . $course->image) }}" alt="">
                         <div class="cardContent">
-                            <span class="coursePreHeader">Specialty Electives</span>
+                            <span class="coursePreHeader">{{ $course->type }}</span>
                             <h1>{{ $course->name }}</h1>
                             <p class="multi-truncate">{!! Str::limit(strip_tags($course->description), 300) !!}</p>
                         </div>

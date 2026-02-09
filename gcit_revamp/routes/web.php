@@ -353,7 +353,7 @@ Route::get('/course/sidd', function () {
     return view('user.courseList', compact('courses'));
 });
 Route::get('/course/electives', function () {
-    $courses = Course::where('type', '=', 'Speculative Electives')->orderBy('name', 'ASC')->get();
+    $courses = Course::where('type', '=', 'Specialty Electives')->orderBy('name', 'ASC')->get();
     return view('user.electives', compact('courses'));
 });
 Route::get('/search', function () {

@@ -16,7 +16,7 @@ function handleCourseTypeUI(typeSelect) {
 
     if (!typeSelect || !whyLabel || !careerGroup) return;
 
-    if (typeSelect.value === 'Speculative Electives') {
+    if (typeSelect.value === 'Specialty Electives') {
         careerGroup.style.display = 'none';
         whyLabel.textContent = 'How This Track Empowers You?';
         structure.textContent = 'Track Modules';
@@ -188,7 +188,7 @@ document.getElementById('addCourseBtn').addEventListener('click', function () {
                     <option value="" disabled selected>Select Degree</option>
                     <option value="School of Future Computing">School of Future Computing</option>
                     <option value="School of Interactive Design and Development">School of Interactive Design and Development</option>
-                    <option value="Speculative Electives">Speculative Electives</option>
+                    <option value="Specialty Electives">Specialty Electives</option>
                 </select>
             </div>
 
@@ -500,7 +500,7 @@ document.querySelectorAll('.edit-course-btn').forEach(button => {
                         <option value="" disabled selected>Select Degree</option>
                         <option value="School of Future Computing"  ${this.dataset.courseType === "School of Future Computing" ? "selected" : ""}>School of Future Computing</option>
                         <option value="School of Interactive Design and Development" ${this.dataset.courseType === "School of Interactive Design and Development" ? "selected" : ""}>School of Interactive Design and Development</option>
-                        <option value="Speculative Electives" ${this.dataset.courseType === "Speculative Electives" ? "selected" : ""}>Speculative Electives</option>
+                        <option value="Specialty Electives" ${this.dataset.courseType === "Specialty Electives" ? "selected" : ""}>Specialty Electives</option>
                     </select>
                 </div>
 

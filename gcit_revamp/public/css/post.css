@@ -56,15 +56,15 @@ li ul li {
     margin-left: 0; /* remove extra browser auto-offset */
 }
 
-.media > div {
+figure.media > div {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;              /* height is controlled by padding */
+    padding-bottom: 56.25%;
+    height: 0;
     overflow: hidden;
 }
 
-.media > div > iframe {
+figure.media > div > iframe {
     position: absolute;
     top: 0;
     left: 0;

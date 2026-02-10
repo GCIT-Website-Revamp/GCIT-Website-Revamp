@@ -206,7 +206,8 @@ document.addEventListener("DOMContentLoaded", () => {
        in the DOM that holds the space when the sidebar becomes fixed.
     ========================================================= */
 
-    const DESKTOP_BREAKPOINT = 1024;
+    // Enable sticky only on widths > 1024px (disable at 1024 and below)
+    const DESKTOP_BREAKPOINT = 1025;
     const NAV_OFFSET = 120; 
 
     /**

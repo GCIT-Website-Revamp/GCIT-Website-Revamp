@@ -239,6 +239,9 @@ li ul li {
     .suggestionWrapper {
         margin-top: 4rem;
     }
+    .otherCourseContainer .header h1 {
+    width: 30% !important;
+    }
 }
 
 @media (max-width: 768px) {

@@ -210,7 +210,8 @@
     </div>
     <div class="subMiniLinkWrapper">
         <h1>Tech Impact</h1>
-
         <a href="/project">Industry Projects<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/fintech">GCITxBIL Fintech Innovation Lab<span class="material-symbols-outlined">chevron_right</span></a>
+        <a href="/studio">Studio K<span class="material-symbols-outlined">chevron_right</span></a>
     </div>
 </div>

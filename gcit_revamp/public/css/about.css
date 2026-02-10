@@ -135,7 +135,7 @@
 @media (max-width: 1024px) {
 
     .preAboutHeader {
-        padding: 80px var(--padding-sides);
+        padding-top:30px;
     }
 
     .aboutContentWrapper {

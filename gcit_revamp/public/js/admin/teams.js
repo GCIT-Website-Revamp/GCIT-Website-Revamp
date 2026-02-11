@@ -48,10 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 data.data.forEach((team, index) => {
                     // Format departments for display (assuming departments are stored as comma-separated string)
-                    const departments = team.departments || team.department || '';
-                    const departmentDisplay = departments.split(',').map(dept => 
-                        `<span class="badge bg-primary me-1">${dept.trim()}</span>`
-                    ).join('');
                     
                     teamTableBody.innerHTML += `
                         <tr>
@@ -66,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     data-id="${team.id}"
                                     data-name="${team.name}"
                                     data-type="${team.type}"
-                                    data-departments="${team.departments ?? []}"
+                                    data-departments='${team.category}'
                                     data-title="${team.title || ''}"
                                     data-qualifications="${team.qualification || ''}"
                                     data-description="${team.description || ''}"
@@ -168,6 +164,16 @@ document.getElementById('addTeamBtn').addEventListener('click', function () {
             </select>
         </div>
 
+        <div id="facultyCheck" class="mt-2 ms-3" style="display:none;">
+            <div class="mx-4">
+                <input class="form-check-input semester-radio ms-3"
+                type="checkbox"
+                name="Faculty Leadership Team"
+                value="Faculty Leadership Team">
+                <label>Faculty Leadership Team</label>
+            </div>
+        </div>
+
         <div class="form-group" id="departmentGroup" style="display:none;">
             <label>Departments</label>
             <div class="border rounded p-3 bg-light" id="departmentCheckboxes">
@@ -247,6 +253,17 @@ document.addEventListener('click', function (e) {
             </select>
         </div>
 
+        <div id="facultyCheck" style="display:${type === "Non-Academic" ? "block" : "none"};">
+            <div class="mx-4">
+                <input class="form-check-input" 
+                    type="checkbox"
+                    id="facultyLeadership"
+                    value="Faculty Leadership Team"
+                    ${departments.includes("Faculty Leadership Team") ? "checked" : ""}>
+                <label>Faculty Leadership Team</label>
+            </div>
+        </div>
+
         <div class="form-group" id="departmentGroup" style="display:${type === "Academic" ? "block" : "none"};">
             <label>Departments</label>
             <div class="border rounded p-3 bg-light" id="departmentCheckboxes">
@@ -296,7 +313,18 @@ function saveOrUpdateTeam(isEdit = false, id = null) {
     formData.append("type", document.getElementById("teamType").value);
     
     // Get selected departments (only for Academic type)
-    formData.append("category", JSON.stringify(getSelectedDepartments()));
+    const type = document.getElementById("teamType").value;
+    let category = [];
+    if (type === "Academic") {
+        category = getSelectedDepartments();
+    } 
+    else if (type === "Non-Academic") {
+        const facultyCheckbox = document.querySelector('#facultyCheck input[type="checkbox"]');
+        if (facultyCheckbox && facultyCheckbox.checked) {
+            category = ["Faculty Leadership Team"];
+        }
+    }
+    formData.append("category", JSON.stringify(category));
     
     formData.append("title", document.getElementById("teamTitle").value);
     formData.append("qualification", document.getElementById("teamQualifications").value);
@@ -411,22 +439,27 @@ function attachTypeToggle() {
     const titleGroup = document.getElementById("titleGroup");
     const departmentGroup = document.getElementById("departmentGroup");
     const qualifications = document.getElementById("qualificationsGroup");
+    const faculty = document.getElementById("facultyCheck");
 
-    if (!typeSelect) return; // safety
+    if (!typeSelect) return;
 
-    typeSelect.addEventListener("change", function () {
-        if (this.value === "Academic") {
+    function updateVisibility() {
+        if (typeSelect.value === "Academic") {
             titleGroup.style.display = "block";
             departmentGroup.style.display = "block";
             qualifications.style.display = "block";
-        } else {
+            faculty.style.display = "none";
+        } 
+        else if (typeSelect.value === "Non-Academic") {
             titleGroup.style.display = "none";
-            document.getElementById("teamTitle").value = "";
             departmentGroup.style.display = "none";
-            // Uncheck all checkboxes for non-academic
-            document.querySelectorAll('.department-checkbox').forEach(cb => cb.checked = false);
             qualifications.style.display = "none";
-            document.getElementById("teamQualifications").value = "";
+            faculty.style.display = "block";
         }
-    });
+    }
+
+    typeSelect.addEventListener("change", updateVisibility);
+
+    // 🔥 Important: run once when modal opens
+    updateVisibility();
 }

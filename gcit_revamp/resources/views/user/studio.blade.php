@@ -5,9 +5,9 @@
 @section('content')
 
 <div class="pageBannerWrapper">
-    <div class="backgroundWrapper">
+    <div class="backgroundWrapper noBgWrapper">
         <div class="overlay"></div>
-        <img src="{{ asset('images/pageBanner.png') }}" alt="">
+        <img src="{{ asset('images/StudioK.jpg') }}" alt="">
     </div>
     <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs ">

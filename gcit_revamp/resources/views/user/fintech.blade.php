@@ -4,10 +4,10 @@
 
 @section('content')
 
-<div class="pageBannerWrapper">
+<div class="pageBannerWrapper minBgWrapper">
     <div class="backgroundWrapper">
         <div class="overlay"></div>
-        <img src="{{ asset('images/pageBanner.png') }}" alt="">
+        <img src="{{ asset('images/BILxGCIT.jpg') }}" alt="">
     </div>
     <div class="bannerContent sectionWrapper">
         <div class="breadCrumbs ">

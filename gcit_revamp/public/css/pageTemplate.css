@@ -14,11 +14,17 @@
 .noBgWrapper .overlay {
     background: unset !important;
 }
+
 .minBgWrapper .overlay {
-    background: #76b44463 !important;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 70%,
+        rgba(0, 0, 0, 1) 100%
+    ) !important;
 }
+
 .minBgWrapper img,
-.noBgWrapper  img {
+.noBgWrapper img {
     transform: translateY(30px);
 }
 
@@ -404,9 +410,6 @@
     .mainContent .card,
     .cardAnnouncement .card {
         flex-direction: column;
-    }
-    .minBgWrapper .overlay {
-        background: #76b444cb !important;
     }
     .mainContent .card img {
         width: 100% !important;

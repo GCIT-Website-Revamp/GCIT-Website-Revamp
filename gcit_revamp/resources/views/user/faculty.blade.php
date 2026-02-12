@@ -50,15 +50,11 @@
                             <div class="filterContainer">
                                 <div class="filter">
                                     <input type="checkbox" value="AI Department">
-                                    <p>AI Department</p>
+                                    <p>AI & Fullstack Department</p>
                                 </div>
                                 <div class="filter">
                                     <input type="checkbox" value="Blockchain Department">
                                     <p>Blockchain Department</p>
-                                </div>
-                                <div class="filter">
-                                    <input type="checkbox" value="Fullstack Department">
-                                    <p>Fullstack Department</p>
                                 </div>
                                 <div class="filter">
                                     <input type="checkbox" value="Cyber Security Department">

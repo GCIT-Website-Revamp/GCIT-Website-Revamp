@@ -86,12 +86,13 @@
     justify-content: center;
     gap: 1rem;
     padding-bottom: 60px;
+    height: auto;
     border-bottom: 1px solid #c9c9c9;
 
 }
 
 .mottoWrapper .underlay{
-    font-size: clamp(100px, 10vw, 300px);
+    font-size: clamp(80px, 5vw, 300px);
     width: auto;
     color: #F4F3F3;
     z-index: 0;

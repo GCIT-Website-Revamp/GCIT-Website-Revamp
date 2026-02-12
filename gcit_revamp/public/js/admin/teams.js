@@ -96,10 +96,9 @@ function formatErrors(errors) {
 
 // Department options array
 const DEPARTMENT_OPTIONS = [
-    'AI Department', 
+    'AI & Fullstack Department', 
     'Blockchain Department',
     'Cyber Security Department',
-    'Fullstack Department',
     'Interactive Design & Development',
     'Faculty Leadership Team'
 ];

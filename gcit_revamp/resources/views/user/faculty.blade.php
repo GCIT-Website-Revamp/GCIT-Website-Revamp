@@ -49,7 +49,7 @@
                             </div>
                             <div class="filterContainer">
                                 <div class="filter">
-                                    <input type="checkbox" value="AI Department">
+                                    <input type="checkbox" value="AI & Fullstack Department">
                                     <p>AI & Fullstack Department</p>
                                 </div>
                                 <div class="filter">
